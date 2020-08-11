@@ -22,7 +22,8 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/border">
 
         <ImageView
             android:id="@+id/counselTapView"
@@ -46,7 +47,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:padding="5dp"
-            app:srcCompat="@drawable/ic_unchecked" />
+            app:srcCompat="@drawable/ic_addworry" />
 
         <ImageView
             android:id="@+id/myPageTapView"

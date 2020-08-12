@@ -4,25 +4,24 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import com.example.dayworry.model.implements.WorryRepoImpl
 import com.example.dayworry.model.repository.IWorryRepository
-import com.example.dayworry.retrofit.ApiService
-import com.example.dayworry.utils.Constants
-import com.example.dayworry.worry.worryList.buildlogic.WorryListViewModelFactory
+import io.realm.Realm
 
 class WorryDetailInjector(application: Application): AndroidViewModel(application) {
 
     val app: Application = application
 
-    private val httpCall: ApiService? =
-        com.example.dayworry.retrofit.RetrofitClient.getClient(Constants.API_BASE_URL)!!.create(
-            ApiService::class.java
-        )
+//    private val httpCall: ApiService? =
+//        com.example.dayworry.retrofit.RetrofitClient.getClient(Constants.API_BASE_URL)!!.create(
+//            ApiService::class.java
+//        )
 
-    private fun getDiaryRepository(): IWorryRepository {
-        return WorryRepoImpl(httpCall, app)
+    private fun getWorryRepository(): IWorryRepository {
+//        return WorryRepoImpl(httpCall, app)
+        return WorryRepoImpl(app)
     }
 
-    fun provideDiaryListViewModelFactory(): WorryListViewModelFactory =
-        WorryListViewModelFactory(
-            getDiaryRepository()
+    fun provideWorryDetailViewModelFactory(): WorryDetailViewModelFactory =
+        WorryDetailViewModelFactory(
+            getWorryRepository()
         )
 }

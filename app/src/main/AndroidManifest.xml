@@ -3,13 +3,14 @@
     package="com.example.dayworry">
 
     <application
+        android:name=".DayWorryApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AddWorryActivity"></activity>
+        <activity android:name=".worry.worryDetail.AddWorryActivity"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

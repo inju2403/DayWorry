@@ -1,9 +1,11 @@
 package com.example.dayworry.worry.worryList
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.dayworry.model.Worry
 import com.example.dayworry.model.repository.IWorryRepository
+import com.example.dayworry.utils.Constants
 
 class WorryListViewModel(
     private val repo: IWorryRepository
@@ -19,5 +21,7 @@ class WorryListViewModel(
     fun getWorrys() {
         worrys = repo.getWorrys()
         worryListLiveData.value = worrys
+//        Log.d(Constants.TAG, "getWorrys :ok")
     }
+
 }

@@ -22,11 +22,11 @@ class WorryDetailViewModel(
         worryLiveData.value = worry
     }
 
-    fun addOrUpdateDiary(worry: Worry)  {
+    fun addOrUpdateWorry(context: Context)  {
         repo.addOrUpdateWorry(worry)
     }
 
-    fun deleteDiary(id: String) {
+    fun deleteWorry(id: String) {
         repo.deleteWorry(id)
     }
 }

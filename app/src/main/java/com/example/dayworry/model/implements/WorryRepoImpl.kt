@@ -1,10 +1,9 @@
 package com.example.dayworry.model.implements
 
 import android.content.Context
+import android.util.Log
 import com.example.dayworry.model.Worry
 import com.example.dayworry.model.repository.IWorryRepository
-import com.example.dayworry.retrofit.ApiService
-import com.example.dayworry.retrofit.RetrofitClient
 import com.example.dayworry.utils.Constants
 import io.realm.Realm
 import io.realm.RealmResults
@@ -12,8 +11,8 @@ import io.realm.Sort
 import java.util.*
 
 class WorryRepoImpl(
-    val httpCall: ApiService?
-    = RetrofitClient.getClient(Constants.API_BASE_URL)!!.create(ApiService::class.java),
+//    val httpCall: ApiService?
+//    = RetrofitClient.getClient(Constants.API_BASE_URL)!!.create(ApiService::class.java),
     val context: Context
 ): IWorryRepository
 {
@@ -24,12 +23,11 @@ class WorryRepoImpl(
 //    }
 
     //local
-
     private val realm : Realm by lazy {
         Realm.getDefaultInstance()
     }
 
-    override fun getWorrys(): RealmResults<Worry> {
+    override fun getWorrys(): MutableList<Worry> {
         return realm.where(Worry::class.java)
             .sort("createdAt", Sort.DESCENDING)
             .findAll()
@@ -43,8 +41,6 @@ class WorryRepoImpl(
 
     override fun addOrUpdateWorry(worry : Worry)  {
         realm.executeTransaction {
-            worry.createdAt = Date()
-
             it.copyToRealmOrUpdate(worry)
         }
     }

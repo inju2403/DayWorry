@@ -3,16 +3,23 @@ package com.example.dayworry
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.lifecycle.ViewModelProvider
 import com.example.dayworry.counsel.CounselFragment
 import com.example.dayworry.mypage.MyPageFragment
-import com.example.dayworry.worry.WorryFragment
+import com.example.dayworry.worry.worryList.WorryListFragment
+import com.example.dayworry.worry.worryDetail.AddWorryActivity
+import com.example.dayworry.worry.worryList.WorryListViewModel
+import com.example.dayworry.worry.worryList.buildlogic.WorryListInjector
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
+    private var worryListViewModel: WorryListViewModel ?= null
+
     private val counselFragment = CounselFragment()
     private val myPageFragment = MyPageFragment()
-    private val worryFragment = WorryFragment()
+    private val worryFragment =
+        WorryListFragment()
 
     private val FRAG_COUNSEL = 0
     private val FRAG_WORRY = 1
@@ -30,9 +37,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        setViewModel()
         setFragment()
         setBottomBar()
     }
+
+    private fun setViewModel() {
+        worryListViewModel = application!!.let {
+            ViewModelProvider(viewModelStore, WorryListInjector(
+                this.application
+            ).provideWorryListViewModelFactory())
+                .get(WorryListViewModel::class.java)
+        }
+    }
+
 
     private fun setFragment() {
         val fragmentManager = supportFragmentManager

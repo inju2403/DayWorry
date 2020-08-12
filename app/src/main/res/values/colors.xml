@@ -9,6 +9,7 @@
     <color name="oliveColor">#808000</color>
     <color name="dimGreyColor">#696969</color>
     <color name="liteGreyColor">#909090</color>
+    <color name="superLiteGreyColor">#E5E5E5</color>
     <color name="redColor">#FFFF0000</color>
     <color name="blackColor">#FF000000</color>
     <color name="blueColor">#FF0000FF</color>

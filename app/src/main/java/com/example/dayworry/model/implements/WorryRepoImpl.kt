@@ -6,6 +6,10 @@ import com.example.dayworry.model.repository.IWorryRepository
 import com.example.dayworry.retrofit.ApiService
 import com.example.dayworry.retrofit.RetrofitClient
 import com.example.dayworry.utils.Constants
+import io.realm.Realm
+import io.realm.RealmResults
+import io.realm.Sort
+import java.util.*
 
 class WorryRepoImpl(
     val httpCall: ApiService?
@@ -13,10 +17,46 @@ class WorryRepoImpl(
     val context: Context
 ): IWorryRepository
 {
-    var tmpWorrys = mutableListOf<Worry>()
+//    var tmpWorrys = mutableListOf<Worry>()
+//
+//    override fun getWorrys(): MutableList<Worry> {
+//        return tmpWorrys
+//    }
 
-    override fun getWorrys(): MutableList<Worry> {
-        return tmpWorrys
+    //local
+
+    private val realm : Realm by lazy {
+        Realm.getDefaultInstance()
+    }
+
+    override fun getWorrys(): RealmResults<Worry> {
+        return realm.where(Worry::class.java)
+            .sort("createdAt", Sort.DESCENDING)
+            .findAll()
+    }
+
+    override fun getWorryByIdWorry(id : String) : Worry {
+        return realm.where(Worry::class.java)
+            .equalTo("id", id)
+            .findFirst() as Worry
+    }
+
+    override fun addOrUpdateWorry(worry : Worry)  {
+        realm.executeTransaction {
+            worry.createdAt = Date()
+
+            it.copyToRealmOrUpdate(worry)
+        }
+    }
+
+    override fun deleteWorry(id : String) {
+        realm.executeTransaction {
+            it.where(Worry::class.java)
+                .equalTo("id", id)
+                .findFirst()?.let {
+                    it?.deleteFromRealm()
+                }
+        }
     }
 
 }

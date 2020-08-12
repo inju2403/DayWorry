@@ -47,19 +47,19 @@ class WorryListFragment : Fragment() {
     }
 
     private fun setUpAdapter() {
-        listAdapter = WorryListAdapter()
+//        listAdapter = WorryListAdapter()
     }
 
     private fun observeViewModel() {
         worryListViewModel!!.let {
-            it.worryListLiveData.value?.let {
-                worryListView.layoutManager =
-                    LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
-
-                worryListView.adapter = listAdapter
-            }
-            it.worryListLiveData.observe(this,
+            it.worryListLiveData.observe(viewLifecycleOwner,
                 Observer {
+                    listAdapter = WorryListAdapter(it)
+
+                    worryListView.layoutManager =
+                        LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
+
+                    worryListView.adapter = listAdapter
                     listAdapter.notifyDataSetChanged()
                 }
             )
@@ -68,8 +68,8 @@ class WorryListFragment : Fragment() {
     }
     override fun onResume() {
         super.onResume()
-        worryListViewModel!!.getWorrys()
         listAdapter.notifyDataSetChanged()
+        worryListViewModel!!.getWorrys()
         Log.d(TAG,"리스트: ${worryListViewModel!!.worryListLiveData.value}")
     }
 

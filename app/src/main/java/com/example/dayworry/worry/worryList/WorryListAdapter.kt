@@ -9,8 +9,9 @@ import com.example.dayworry.model.Worry
 import kotlinx.android.synthetic.main.item_worry.view.*
 import java.util.*
 
-class WorryListAdapter
-    : ListAdapter<Worry, ItemViewHolder>(WorryDiffUtilCallback())
+class WorryListAdapter(private val list: MutableList<Worry>)
+//    : ListAdapter<Worry, ItemViewHolder>(WorryDiffUtilCallback())
+    : RecyclerView.Adapter<ItemViewHolder> ()
 {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
@@ -19,10 +20,16 @@ class WorryListAdapter
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        getItem(position).let {
-            var worryId = it?.id
-            holder.containerView.titleText.text = it.title
-            holder.containerView.contentText.text = it.content
-        }
+//        getItem(position).let {
+//            var worryId = it?.id
+//            holder.containerView.titleText.text = it.title
+//            holder.containerView.contentText.text = it.content
+//        }
+        holder.containerView.titleText.text = list[position].title
+        holder.containerView.contentText.text = list[position].content
+    }
+
+    override fun getItemCount(): Int {
+        return list.size
     }
 }

@@ -61,4 +61,7 @@ dependencies {
     def rxandroid_version = "2.0.2"
     implementation "io.reactivex.rxjava2:rxjava:$rxjava_version"
     implementation "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
+
+    //Sliding Up Panel
+    implementation 'com.sothree.slidinguppanel:library:3.4.0'
 }

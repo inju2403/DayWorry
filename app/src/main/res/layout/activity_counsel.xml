@@ -15,91 +15,67 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:umanoPanelHeight="68dp"
+        app:umanoPanelHeight="40dp"
         app:umanoShadowHeight="4dp">
 
-        <TextView
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/worryLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="Main Content"
-            android:textSize="16sp" />
+            android:layout_height="match_parent">
 
-        <TextView
+                <TextView
+                    android:id="@+id/counselActivityTitleText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginRight="32dp"
+                    android:text="괜찮겠죠 저?"
+                    android:textSize="25sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/counselActivityContentsText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginRight="32dp"
+                    android:text="이러한 일이 있었어요. 어떡할까요?"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/counselActivityTitleText" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/counselLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center|top"
-            android:text="The Awesome Sliding Up Panel"
-            android:textSize="16sp" />
+            android:layout_height="500dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/ic_addworry" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="20dp" />
+
+        </LinearLayout>
     </com.sothree.slidinguppanel.SlidingUpPanelLayout>
 
-<!--    <TextView-->
-<!--        android:id="@+id/counselActivityTitleText"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginStart="32dp"-->
-<!--        android:layout_marginLeft="32dp"-->
-<!--        android:layout_marginTop="40dp"-->
-<!--        android:layout_marginEnd="32dp"-->
-<!--        android:layout_marginRight="32dp"-->
-<!--        android:text="괜찮겠죠 저"-->
-<!--        android:textSize="25sp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
-
-<!--    <TextView-->
-<!--        android:id="@+id/counselActivityContentsText"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginStart="32dp"-->
-<!--        android:layout_marginLeft="32dp"-->
-<!--        android:layout_marginTop="40dp"-->
-<!--        android:layout_marginEnd="32dp"-->
-<!--        android:layout_marginRight="32dp"-->
-<!--        android:text="이러한 일이 있었어요. 어떡할까요?"-->
-<!--        android:textSize="20sp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/counselActivityTitleText" />-->
-
-<!--    <LinearLayout-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="40dp"-->
-<!--        android:layout_marginStart="8dp"-->
-<!--        android:layout_marginLeft="8dp"-->
-<!--        android:layout_marginEnd="8dp"-->
-<!--        android:layout_marginRight="8dp"-->
-<!--        android:layout_marginBottom="8dp"-->
-<!--        android:background="@drawable/border"-->
-<!--        android:orientation="horizontal"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent" >-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/anonymousText"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_weight="1"-->
-<!--            android:text="  익명" />-->
-
-<!--        <EditText-->
-<!--            android:id="@+id/editText"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_weight="1"-->
-<!--            android:ems="10"-->
-<!--            android:hint="  상담글을 입력하세요"-->
-<!--            android:background="@drawable/border"/>-->
-
-<!--        <Button-->
-<!--            android:id="@+id/button"-->
-<!--            android:background="@color/superLiteGreyColor"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_weight="1"-->
-<!--            android:text="게시" />-->
-<!--    </LinearLayout>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

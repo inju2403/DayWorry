@@ -4,10 +4,10 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.dayworry.R
 
-class CounselActivity : AppCompatActivity() {
+class CounselDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_counsel)
+        setContentView(R.layout.activity_counsel_detail)
     }
 }

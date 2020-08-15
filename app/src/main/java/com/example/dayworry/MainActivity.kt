@@ -4,7 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
-import com.example.dayworry.counsel.CounselFragment
+import com.example.dayworry.counsel.CounselListFragment
 import com.example.dayworry.mypage.MyPageFragment
 import com.example.dayworry.worry.worryList.WorryListFragment
 import com.example.dayworry.worry.worryDetail.AddWorryActivity
@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
 
     private var worryListViewModel: WorryListViewModel ?= null
 
-    private val counselFragment = CounselFragment()
+    private val counselFragment = CounselListFragment()
     private val myPageFragment = MyPageFragment()
     private val worryFragment =
         WorryListFragment()

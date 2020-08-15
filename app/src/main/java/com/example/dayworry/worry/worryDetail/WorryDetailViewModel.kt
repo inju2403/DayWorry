@@ -4,10 +4,10 @@ import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.dayworry.model.Worry
-import com.example.dayworry.model.repository.IWorryRepository
+import com.example.dayworry.model.repository.IDayWorryRepository
 
 class WorryDetailViewModel(
-    private val repo: IWorryRepository
+    private val repo: IDayWorryRepository
 ): ViewModel() {
 
     var worry = Worry()

@@ -2,9 +2,8 @@ package com.example.dayworry.worry.worryList.buildlogic
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import com.example.dayworry.model.implements.WorryRepoImpl
-import com.example.dayworry.model.repository.IWorryRepository
-import io.realm.Realm
+import com.example.dayworry.model.implements.DayWorryRepoImpl
+import com.example.dayworry.model.repository.IDayWorryRepository
 
 class WorryListInjector(application: Application): AndroidViewModel(application) {
 
@@ -14,9 +13,9 @@ class WorryListInjector(application: Application): AndroidViewModel(application)
 //            = com.example.dayworry.retrofit.RetrofitClient.getClient(API_BASE_URL)!!.create(ApiService::class.java)
 
 
-    private fun getWorryRepository(): IWorryRepository {
+    private fun getWorryRepository(): IDayWorryRepository {
 //        return WorryRepoImpl(httpCall, app)
-        return WorryRepoImpl(app)
+        return DayWorryRepoImpl(app)
     }
 
     fun provideWorryListViewModelFactory(): WorryListViewModelFactory =

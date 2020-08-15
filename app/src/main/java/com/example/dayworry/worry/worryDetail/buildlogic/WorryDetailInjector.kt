@@ -2,9 +2,8 @@ package com.example.dayworry.worry.worryDetail.buildlogic
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import com.example.dayworry.model.implements.WorryRepoImpl
-import com.example.dayworry.model.repository.IWorryRepository
-import io.realm.Realm
+import com.example.dayworry.model.implements.DayWorryRepoImpl
+import com.example.dayworry.model.repository.IDayWorryRepository
 
 class WorryDetailInjector(application: Application): AndroidViewModel(application) {
 
@@ -15,9 +14,9 @@ class WorryDetailInjector(application: Application): AndroidViewModel(applicatio
 //            ApiService::class.java
 //        )
 
-    private fun getWorryRepository(): IWorryRepository {
+    private fun getWorryRepository(): IDayWorryRepository {
 //        return WorryRepoImpl(httpCall, app)
-        return WorryRepoImpl(app)
+        return DayWorryRepoImpl(app)
     }
 
     fun provideWorryDetailViewModelFactory(): WorryDetailViewModelFactory =

@@ -2,11 +2,11 @@ package com.example.dayworry.worry.worryList.buildlogic
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.dayworry.model.repository.IWorryRepository
+import com.example.dayworry.model.repository.IDayWorryRepository
 import com.example.dayworry.worry.worryList.WorryListViewModel
 
 class WorryListViewModelFactory(
-    private val repo: IWorryRepository
+    private val repo: IDayWorryRepository
 ): ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")

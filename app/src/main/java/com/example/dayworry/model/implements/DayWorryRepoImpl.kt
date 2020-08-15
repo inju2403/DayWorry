@@ -1,20 +1,16 @@
 package com.example.dayworry.model.implements
 
 import android.content.Context
-import android.util.Log
 import com.example.dayworry.model.Worry
-import com.example.dayworry.model.repository.IWorryRepository
-import com.example.dayworry.utils.Constants
+import com.example.dayworry.model.repository.IDayWorryRepository
 import io.realm.Realm
-import io.realm.RealmResults
 import io.realm.Sort
-import java.util.*
 
-class WorryRepoImpl(
+class DayWorryRepoImpl(
 //    val httpCall: ApiService?
 //    = RetrofitClient.getClient(Constants.API_BASE_URL)!!.create(ApiService::class.java),
     val context: Context
-): IWorryRepository
+): IDayWorryRepository
 {
 //    var tmpWorrys = mutableListOf<Worry>()
 //

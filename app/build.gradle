@@ -64,4 +64,8 @@ dependencies {
 
     //Sliding Up Panel
     implementation 'com.sothree.slidinguppanel:library:3.4.0'
+
+    // ViewPager2 & DotsIndicator
+    implementation "androidx.viewpager2:viewpager2:1.0.0"
+    implementation 'com.tbuonomo.andrui:viewpagerdotsindicator:4.1.2'
 }

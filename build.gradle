@@ -21,7 +21,9 @@ allprojects {
     repositories {
         google()
         jcenter()
-        
+
+        //카카오 SDK 레파지토리 설정
+        maven { url 'https://devrepo.kakao.com/nexus/content/groups/public/' }
     }
 }
 

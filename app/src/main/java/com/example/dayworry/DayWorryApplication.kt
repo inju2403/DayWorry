@@ -10,6 +10,6 @@ class DayWorryApplication : Application() {
         Realm.init(this)
 
         // Kakao SDK 초기화
-        KakaoSdk.init(this, "{NATIVE_APP_KEY}")
+        KakaoSdk.init(this, "7092ff209929c21641987ead5b2bd0fc")
     }
 }

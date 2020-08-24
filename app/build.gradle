@@ -51,12 +51,19 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    //카카오 SDK 모듈 설정정
-   implementation "com.kakao.sdk:v2-user:2.0.1"
+    //카카오 SDK 모듈 설정
+    implementation "com.kakao.sdk:v2-user:2.0.1"
     implementation "com.kakao.sdk:v2-talk:2.0.1"
     implementation "com.kakao.sdk:v2-story:2.0.1"
     implementation "com.kakao.sdk:v2-link:2.0.1"
+
+    implementation "com.kakao.sdk:v2-user-rx:2.0.1"
+    implementation "com.kakao.sdk:v2-talk-rx:2.0.1"
+    implementation "com.kakao.sdk:v2-story-rx:2.0.1"
+    implementation "com.kakao.sdk:v2-link-rx:2.0.1"
     implementation "com.kakao.sdk:v2-navi:2.0.1"
+
+    implementation 'com.kakao.sdk:usermgmt:1.27.0'
 
     // retrofit
     def retrofit_version = "2.8.1"

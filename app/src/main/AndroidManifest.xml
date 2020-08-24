@@ -10,15 +10,30 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".counsel.CounselDetailActivity"
-            android:windowSoftInputMode="adjustResize"
-        ></activity>
-        <activity android:name=".worry.worryDetail.AddWorryActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".counsel.CounselDetailActivity"
+            android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".worry.worryDetail.AddWorryActivity" />
+        <activity android:name=".MainActivity">
+        </activity>
+        <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <!-- Redirect URI: "kakao{NATIVE_APP_KEY}://oauth“ -->
+                <data
+                    android:host="oauth"
+                    android:scheme="kakao7092ff209929c21641987ead5b2bd0fc" />
             </intent-filter>
         </activity>
     </application>

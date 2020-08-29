@@ -2,4 +2,5 @@
     <string name="app_name">DayWorry</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="kakao_native_app_key">7092ff209929c21641987ead5b2bd0fc</string>
 </resources>

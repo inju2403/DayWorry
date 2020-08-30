@@ -18,7 +18,10 @@ import kotlinx.android.synthetic.main.fragment_worry_list.*
 class WorryListFragment : Fragment() {
 
     private var worryListViewModel: WorryListViewModel ?= null
+
     private lateinit var listAdapter: WorryListAdapter
+    private lateinit var scrollListener: PaginationScrollListener
+    private lateinit var layoutManager: LinearLayoutManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,6 +50,11 @@ class WorryListFragment : Fragment() {
 
     private fun setUpAdapter() {
 //        listAdapter = WorryListAdapter()
+//        scrollListener = object : EndlessRecyclerViewScrollListener(linearLayoutManager) {
+//            override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
+//                requestPagingMovie(query, totalItemsCount + 1)
+//            }
+//        }
     }
 
     private fun observeViewModel() {
@@ -55,9 +63,18 @@ class WorryListFragment : Fragment() {
                 Observer {
                     listAdapter = WorryListAdapter(it)
 
-                    worryListView.layoutManager =
-                        LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
+                    layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
+                    worryListView.layoutManager = layoutManager
 
+                    scrollListener = object : PaginationScrollListener(layoutManager) {
+                        override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
+//                            requestPaging(query, totalItemsCount + 1)
+                            requestPaging()
+
+                        }
+                    }
+
+                    worryListView.addOnScrollListener(scrollListener)
                     worryListView.adapter = listAdapter
                     listAdapter.notifyDataSetChanged()
                 }
@@ -65,11 +82,17 @@ class WorryListFragment : Fragment() {
 
         }
     }
+
+    private fun requestPaging() {
+        worryListViewModel!!.getWorrys()
+        Log.d(TAG,"requestPaging")
+    }
+
     override fun onResume() {
         super.onResume()
         listAdapter.notifyDataSetChanged()
         worryListViewModel!!.getWorrys()
-        Log.d(TAG,"리스트: ${worryListViewModel!!.worryListLiveData.value}")
+//        Log.d(TAG,"리스트: ${worryListViewModel!!.worryListLiveData.value}")
     }
 
     override fun onDestroyView() {

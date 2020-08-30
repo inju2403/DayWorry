@@ -18,15 +18,19 @@ class DayWorryRepoImpl(
 //        return tmpWorrys
 //    }
 
+    var list = mutableListOf<Worry>()
+
     //local
     private val realm : Realm by lazy {
         Realm.getDefaultInstance()
     }
 
     override fun getWorrys(): MutableList<Worry> {
-        return realm.where(Worry::class.java)
+        var worry = realm.where(Worry::class.java)
             .sort("createdAt", Sort.DESCENDING)
-            .findAll()
+            .findFirst() as Worry
+        list.add(worry)
+        return list
     }
 
     override fun getWorryByIdWorry(id : String) : Worry {

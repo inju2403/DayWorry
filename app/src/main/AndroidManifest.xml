@@ -10,20 +10,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.inju.dayworry.login.LoginActivity">
-        </activity>
-        <activity
-            android:name="com.inju.dayworry.counsel.CounselDetailActivity"
-            android:windowSoftInputMode="adjustResize" />
-        <activity android:name="com.inju.dayworry.worry.worryDetail.AddWorryActivity" />
-        <activity android:name="com.inju.dayworry.MainActivity">
+        <activity android:name=".login.SetProfileActivity"></activity>
+        <activity android:name=".login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".counsel.CounselDetailActivity"
+            android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".worry.worryDetail.AddWorryActivity" />
+        <activity android:name=".MainActivity">
 
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity>
         <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />

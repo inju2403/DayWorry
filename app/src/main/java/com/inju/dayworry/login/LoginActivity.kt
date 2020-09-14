@@ -1,8 +1,10 @@
 package com.inju.dayworry.login
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.inju.dayworry.MainActivity
 import com.inju.dayworry.R
 import com.inju.dayworry.utils.Constants.TAG
 import com.kakao.sdk.auth.LoginClient
@@ -18,6 +20,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 
 
 class LoginActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -26,19 +29,23 @@ class LoginActivity : AppCompatActivity() {
 
         login_button.setOnClickListener {
 
+            //임시 라우팅
+            startActivity(Intent(this, SetProfileActivity::class.java))
+            finish()
+
             // 카카오톡이 설치되어 있으면 카카오톡으로 로그인, 아니면 카카오계정으로 로그인
-            Single.just(LoginClient.instance.isKakaoTalkLoginAvailable(this))
-                .flatMap { available ->
-                    if (available) LoginClient.rx.loginWithKakaoTalk(this)
-                    else LoginClient.rx.loginWithKakaoAccount(this)
-                }
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ token ->
-                    Log.i(TAG, "로그인 성공 ${token.accessToken}")
-                }, { error ->
-                    Log.e(TAG, "로그인 실패", error)
-                })
-                .addTo(disposables)
+//            Single.just(LoginClient.instance.isKakaoTalkLoginAvailable(this))
+//                .flatMap { available ->
+//                    if (available) LoginClient.rx.loginWithKakaoTalk(this)
+//                    else LoginClient.rx.loginWithKakaoAccount(this)
+//                }
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe({ token ->
+//                    Log.i(TAG, "로그인 성공 ${token.accessToken}")
+//                }, { error ->
+//                    Log.e(TAG, "로그인 실패", error)
+//                })
+//                .addTo(disposables)
         }
 
 //        // 로그아웃

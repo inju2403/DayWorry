@@ -18,8 +18,7 @@ class MainActivity : AppCompatActivity() {
 
     private val counselFragment = CounselListFragment()
     private val myPageFragment = MyPageFragment()
-    private val worryFragment =
-        WorryListFragment()
+    private val worryFragment = WorryListFragment()
 
     private val FRAG_COUNSEL = 0
     private val FRAG_WORRY = 1

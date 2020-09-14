@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import com.inju.dayworry.counsel.CounselListFragment
 import com.inju.dayworry.mypage.MyPageFragment
+import com.inju.dayworry.notification.NotiFragment
 import com.inju.dayworry.worry.worryList.WorryListFragment
 import com.inju.dayworry.worry.worryDetail.AddWorryActivity
 import com.inju.dayworry.worry.worryList.WorryListViewModel
@@ -19,16 +20,19 @@ class MainActivity : AppCompatActivity() {
     private val counselFragment = CounselListFragment()
     private val myPageFragment = MyPageFragment()
     private val worryFragment = WorryListFragment()
+    private val notiFragment = NotiFragment()
 
     private val FRAG_COUNSEL = 0
     private val FRAG_WORRY = 1
-    private val FRAG_MYPAGE = 2
+    private val FRAG_NOTIFICATION = 2
+    private val FRAG_MYPAGE = 3
 
     private val REQUEST_MAINACTIVITY_CODE = 100
     private val RETURN_OK = 101
 
     private var counselJudge = 1 //선택: 1, 미선택: 0
     private var worryJudge = 0
+    private var notiJudge = 0
     private var myPageJudge = 0
 
 
@@ -58,6 +62,9 @@ class MainActivity : AppCompatActivity() {
         fragmentManager.beginTransaction().add(R.id.contentFrame, myPageFragment).commit()
         fragmentManager.beginTransaction().hide(myPageFragment).commit()
 
+        fragmentManager.beginTransaction().add(R.id.contentFrame, notiFragment).commit()
+        fragmentManager.beginTransaction().hide(notiFragment).commit()
+
         fragmentManager.beginTransaction().add(R.id.contentFrame, worryFragment).commit()
         fragmentManager.beginTransaction().hide(worryFragment).commit()
     }
@@ -68,9 +75,11 @@ class MainActivity : AppCompatActivity() {
             if(counselJudge == 0) {
                 counselJudge = 1
                 worryJudge = 0
+                notiJudge = 0
                 myPageJudge = 0
                 counselTapView.setImageResource(R.drawable.ic_checked)
                 worryTapView.setImageResource(R.drawable.ic_unchecked)
+                notiTapView.setImageResource(R.drawable.ic_unchecked)
                 myPageTapView.setImageResource(R.drawable.ic_unchecked)
                 switchFragment(FRAG_COUNSEL)
             }
@@ -80,9 +89,11 @@ class MainActivity : AppCompatActivity() {
             if(worryJudge == 0) {
                 counselJudge = 0
                 worryJudge = 1
+                notiJudge = 0
                 myPageJudge = 0
                 counselTapView.setImageResource(R.drawable.ic_unchecked)
                 worryTapView.setImageResource(R.drawable.ic_checked)
+                notiTapView.setImageResource(R.drawable.ic_unchecked)
                 myPageTapView.setImageResource(R.drawable.ic_unchecked)
                 switchFragment(FRAG_WORRY)
             }
@@ -92,13 +103,29 @@ class MainActivity : AppCompatActivity() {
             startActivityForResult(Intent(this@MainActivity, AddWorryActivity::class.java), REQUEST_MAINACTIVITY_CODE)
         }
 
+        notiTapView.setOnClickListener {
+            if(notiJudge == 0) {
+                counselJudge = 0
+                worryJudge = 0
+                notiJudge = 1
+                myPageJudge = 0
+                counselTapView.setImageResource(R.drawable.ic_unchecked)
+                worryTapView.setImageResource(R.drawable.ic_unchecked)
+                notiTapView.setImageResource(R.drawable.ic_checked)
+                myPageTapView.setImageResource(R.drawable.ic_unchecked)
+                switchFragment(FRAG_NOTIFICATION)
+            }
+        }
+
         myPageTapView.setOnClickListener {
             if(myPageJudge == 0) {
                 counselJudge = 0
                 worryJudge = 0
+                notiJudge = 0
                 myPageJudge = 1
                 counselTapView.setImageResource(R.drawable.ic_unchecked)
                 worryTapView.setImageResource(R.drawable.ic_unchecked)
+                notiTapView.setImageResource(R.drawable.ic_unchecked)
                 myPageTapView.setImageResource(R.drawable.ic_checked)
                 switchFragment(FRAG_MYPAGE)
             }
@@ -111,16 +138,25 @@ class MainActivity : AppCompatActivity() {
             FRAG_COUNSEL -> {
                 fragmentManager.beginTransaction().show(counselFragment).commit()
                 fragmentManager.beginTransaction().hide(worryFragment).commit()
+                fragmentManager.beginTransaction().hide(notiFragment).commit()
                 fragmentManager.beginTransaction().hide(myPageFragment).commit()
             }
             FRAG_WORRY -> {
                 fragmentManager.beginTransaction().hide(counselFragment).commit()
                 fragmentManager.beginTransaction().show(worryFragment).commit()
+                fragmentManager.beginTransaction().hide(notiFragment).commit()
+                fragmentManager.beginTransaction().hide(myPageFragment).commit()
+            }
+            FRAG_NOTIFICATION -> {
+                fragmentManager.beginTransaction().hide(counselFragment).commit()
+                fragmentManager.beginTransaction().hide(worryFragment).commit()
+                fragmentManager.beginTransaction().show(notiFragment).commit()
                 fragmentManager.beginTransaction().hide(myPageFragment).commit()
             }
             FRAG_MYPAGE -> {
                 fragmentManager.beginTransaction().hide(counselFragment).commit()
                 fragmentManager.beginTransaction().hide(worryFragment).commit()
+                fragmentManager.beginTransaction().hide(notiFragment).commit()
                 fragmentManager.beginTransaction().show(myPageFragment).commit()
             }
         }
@@ -136,6 +172,7 @@ class MainActivity : AppCompatActivity() {
                 myPageJudge = 0
                 counselTapView.setImageResource(R.drawable.ic_unchecked)
                 worryTapView.setImageResource(R.drawable.ic_checked)
+                notiTapView.setImageResource(R.drawable.ic_unchecked)
                 myPageTapView.setImageResource(R.drawable.ic_unchecked)
                 switchFragment(FRAG_WORRY)
             }

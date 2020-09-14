@@ -50,6 +50,14 @@
             app:srcCompat="@drawable/ic_addworry" />
 
         <ImageView
+            android:id="@+id/notiTapView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="5dp"
+            app:srcCompat="@drawable/ic_unchecked" />
+
+        <ImageView
             android:id="@+id/myPageTapView"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"

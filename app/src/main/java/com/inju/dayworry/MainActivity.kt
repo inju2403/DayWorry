@@ -18,9 +18,9 @@ class MainActivity : AppCompatActivity() {
     private var worryListViewModel: WorryListViewModel ?= null
 
     private val counselFragment = CounselListFragment()
-    private val myPageFragment = MyPageFragment()
-    private val worryFragment = WorryListFragment()
+    private val worryListFragment = WorryListFragment()
     private val notiFragment = NotiFragment()
+    private val myPageFragment = MyPageFragment()
 
     private val FRAG_COUNSEL = 0
     private val FRAG_WORRY = 1
@@ -65,8 +65,8 @@ class MainActivity : AppCompatActivity() {
         fragmentManager.beginTransaction().add(R.id.contentFrame, notiFragment).commit()
         fragmentManager.beginTransaction().hide(notiFragment).commit()
 
-        fragmentManager.beginTransaction().add(R.id.contentFrame, worryFragment).commit()
-        fragmentManager.beginTransaction().hide(worryFragment).commit()
+        fragmentManager.beginTransaction().add(R.id.contentFrame, worryListFragment).commit()
+        fragmentManager.beginTransaction().hide(worryListFragment).commit()
     }
 
     private fun setBottomBar() {
@@ -137,25 +137,25 @@ class MainActivity : AppCompatActivity() {
         when (next) {
             FRAG_COUNSEL -> {
                 fragmentManager.beginTransaction().show(counselFragment).commit()
-                fragmentManager.beginTransaction().hide(worryFragment).commit()
+                fragmentManager.beginTransaction().hide(worryListFragment).commit()
                 fragmentManager.beginTransaction().hide(notiFragment).commit()
                 fragmentManager.beginTransaction().hide(myPageFragment).commit()
             }
             FRAG_WORRY -> {
                 fragmentManager.beginTransaction().hide(counselFragment).commit()
-                fragmentManager.beginTransaction().show(worryFragment).commit()
+                fragmentManager.beginTransaction().show(worryListFragment).commit()
                 fragmentManager.beginTransaction().hide(notiFragment).commit()
                 fragmentManager.beginTransaction().hide(myPageFragment).commit()
             }
             FRAG_NOTIFICATION -> {
                 fragmentManager.beginTransaction().hide(counselFragment).commit()
-                fragmentManager.beginTransaction().hide(worryFragment).commit()
+                fragmentManager.beginTransaction().hide(worryListFragment).commit()
                 fragmentManager.beginTransaction().show(notiFragment).commit()
                 fragmentManager.beginTransaction().hide(myPageFragment).commit()
             }
             FRAG_MYPAGE -> {
                 fragmentManager.beginTransaction().hide(counselFragment).commit()
-                fragmentManager.beginTransaction().hide(worryFragment).commit()
+                fragmentManager.beginTransaction().hide(worryListFragment).commit()
                 fragmentManager.beginTransaction().hide(notiFragment).commit()
                 fragmentManager.beginTransaction().show(myPageFragment).commit()
             }

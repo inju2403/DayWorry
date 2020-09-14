@@ -169,6 +169,7 @@ class MainActivity : AppCompatActivity() {
             if(resultCode == RETURN_OK) {
                 counselJudge = 0
                 worryJudge = 1
+                notiJudge = 0
                 myPageJudge = 0
                 counselTapView.setImageResource(R.drawable.ic_unchecked)
                 worryTapView.setImageResource(R.drawable.ic_checked)

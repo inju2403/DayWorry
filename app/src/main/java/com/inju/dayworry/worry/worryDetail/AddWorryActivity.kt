@@ -46,7 +46,7 @@ class AddWorryActivity : AppCompatActivity() {
     }
 
     private fun observeViewModel() {
-        worryDetailViewModel!!.worryLiveData.observe (this, Observer {
+        worryDetailViewModel!!.worry.observe (this, Observer {
             titleEdit.setText(it.title)
             contentEdit.setText(it.content)
         })
@@ -55,7 +55,7 @@ class AddWorryActivity : AppCompatActivity() {
     private fun setTextChangeListener() {
         titleEdit.addTextChangedListener(object: TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                worryDetailViewModel!!.worry.title = s.toString()
+                worryDetailViewModel!!.worry.value!!.title = s.toString()
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
@@ -64,7 +64,7 @@ class AddWorryActivity : AppCompatActivity() {
 
         contentEdit.addTextChangedListener(object: TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                worryDetailViewModel!!.worry.content = s.toString()
+                worryDetailViewModel!!.worry.value!!.content = s.toString()
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
@@ -99,7 +99,7 @@ class AddWorryActivity : AppCompatActivity() {
         finish()
     }
 
-    private fun worryLoading(worryId: String) {
-        worryDetailViewModel!!.getWorryByIdWorry(worryId)
+    private fun worryLoading(worryId: Long) {
+        worryDetailViewModel!!.getWorryById(worryId)
     }
 }

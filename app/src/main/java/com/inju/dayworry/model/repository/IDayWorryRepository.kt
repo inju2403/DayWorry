@@ -4,7 +4,7 @@ import com.inju.dayworry.model.pojo.Worry
 
 interface IDayWorryRepository {
     fun getWorrys(): MutableList<Worry>
-    fun getWorryByIdWorry(id : String): Worry
+    fun getWorryById(id : Long): Worry
     fun addOrUpdateWorry(worry : Worry)
-    fun deleteWorry(id: String)
+    fun deleteWorry(id: Long)
 }

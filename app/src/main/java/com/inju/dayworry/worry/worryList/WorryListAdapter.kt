@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.ListAdapter
 import com.inju.dayworry.R
 import com.inju.dayworry.model.pojo.Worry
+import kotlinx.android.synthetic.main.item_worry.view.*
 
 class WorryListAdapter(val event: MutableLiveData<WorryListEvent> = MutableLiveData()) : ListAdapter<Worry, ItemViewHolder>(
     WorryDiffUtilCallback())
@@ -19,14 +20,15 @@ class WorryListAdapter(val event: MutableLiveData<WorryListEvent> = MutableLiveD
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         getItem(position).let {
             var worryId = it?.post_id
-//            holder.containerView.summaryView.text = it.content
+            holder.containerView.title.text = it.title
+            holder.containerView.content.text = it.content
             holder.containerView.setOnClickListener {
                 event.value = WorryListEvent.OnWorryItemClick(worryId!!)
             }
 //            holder.containerView.yearView.text = "'${yearFormat.format(it.createdAt)}"
 //            holder.containerView.dateView.text = dateFormat.format(it.createdAt)
 //            holder.containerView.dayOfTheWeekView.text = weekdayFormat.format(it.createdAt)
-            holder.containerView.tag = it.post_id
+//            holder.containerView.tag = it.post_id
         }
     }
 

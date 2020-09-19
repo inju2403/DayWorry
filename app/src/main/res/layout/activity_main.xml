@@ -18,12 +18,12 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="56dp"
+        android:background="@color/darkNavyColor"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:background="@drawable/border">
+        app:layout_constraintStart_toStartOf="parent">
 
         <ImageView
             android:id="@+id/counselTapView"

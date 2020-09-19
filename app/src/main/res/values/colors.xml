@@ -9,7 +9,7 @@
     <color name="oliveColor">#808000</color>
     <color name="dimGreyColor">#696969</color>
     <color name="liteGreyColor">#909090</color>
-    <color name="superLiteGreyColor">#E5E5E5</color>
+    <color name="superLiteGreyColor">#cbcdd5</color>
     <color name="redColor">#FFFF0000</color>
     <color name="blackColor">#FF000000</color>
     <color name="blueColor">#FF0000FF</color>
@@ -17,4 +17,10 @@
     <color name="orangeColor">#FFA500</color>
     <color name="yellowColor">#FFFF00</color>
     <color name="forestGreenColor">#228B22</color>
+    <color name="whiteColor">#FFFFFF</color>
+
+    <color name="mainNavyColor">#303543</color>
+    <color name="darkNavyColor">#212530</color>
+    <color name="liteNavyColor">#505463</color>
+    <color name="crimsonColor">#ff493b</color>
 </resources>

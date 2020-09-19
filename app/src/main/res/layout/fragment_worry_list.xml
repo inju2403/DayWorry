@@ -9,7 +9,7 @@
         android:id="@+id/worryListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#FFFFFFFF"
+        android:background="@color/mainNavyColor"
         tools:listitem="@layout/item_worry" >
     </androidx.recyclerview.widget.RecyclerView>
 

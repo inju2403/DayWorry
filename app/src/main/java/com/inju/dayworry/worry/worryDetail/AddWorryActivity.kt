@@ -26,18 +26,33 @@ class AddWorryActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.title = ""
 
+        setViewModel()
+        observeViewModel()
+        setTextChangeListener()
+
+//        val worryId = intent.getStringExtra("WORRY_ID")
+//        if(worryId != null) {
+//            worryLoading(worryId)
+//        }
+    }
+
+    private fun setViewModel() {
         worryDetailViewModel = application!!.let {
             ViewModelProvider(this, WorryDetailInjector(
                 this.application
             ).provideWorryDetailViewModelFactory())
                 .get(WorryDetailViewModel::class.java)
         }
+    }
 
+    private fun observeViewModel() {
         worryDetailViewModel!!.worryLiveData.observe (this, Observer {
             titleEdit.setText(it.title)
             contentEdit.setText(it.content)
         })
+    }
 
+    private fun setTextChangeListener() {
         titleEdit.addTextChangedListener(object: TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 worryDetailViewModel!!.worry.title = s.toString()
@@ -55,12 +70,9 @@ class AddWorryActivity : AppCompatActivity() {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { }
         })
-//
-//        val worryId = intent.getStringExtra("WORRY_ID")
-//        if(worryId != null) {
-//            worryLoading(worryId)
-//        }
     }
+
+
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.add_worry_activity_toolbar_menu, menu)

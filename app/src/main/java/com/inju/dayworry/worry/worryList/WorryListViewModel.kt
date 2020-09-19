@@ -1,25 +1,37 @@
 package com.inju.dayworry.worry.worryList
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.inju.dayworry.model.Worry
+import com.inju.dayworry.model.pojo.Worry
 import com.inju.dayworry.model.repository.IDayWorryRepository
+import com.inju.dayworry.utils.BaseViewModel
+import kotlin.coroutines.CoroutineContext
 
 class WorryListViewModel(
-    private val repo: IDayWorryRepository
-): ViewModel() {
+    private val repo: IDayWorryRepository,
+    uiContext: CoroutineContext
+): BaseViewModel<WorryListEvent>(uiContext) {
 
-    var worrys: MutableList<Worry> = mutableListOf()
-    val worryListLiveData: MutableLiveData<MutableList<Worry>> by lazy {
-        MutableLiveData<MutableList<Worry>>().apply {
-            value = worrys
+    private val worryListState = MutableLiveData<List<Worry>>()
+    val worryList: LiveData<List<Worry>> get() = worryListState
+
+    fun getWorrys() {
+        worryListState.value = repo.getWorrys()
+//        Log.d(Constants.TAG, "getWorrys :ok")
+    }
+
+    private val editWorryState = MutableLiveData<Long>()
+    val editWorry: LiveData<Long> get() = editWorryState
+
+    override fun handleEvent(event: WorryListEvent) {
+        when (event) {
+            is WorryListEvent.OnStart -> getWorrys()
+            is WorryListEvent.OnWorryItemClick -> editWorry(event.worryId)
         }
     }
 
-    fun getWorrys() {
-        worrys = repo.getWorrys()
-        worryListLiveData.value = worrys
-//        Log.d(Constants.TAG, "getWorrys :ok")
+    private fun editWorry(worryId: Long) {
+        editWorryState.value = worryId
     }
 
 }

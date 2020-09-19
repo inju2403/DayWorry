@@ -3,7 +3,7 @@ package com.inju.dayworry.worry.worryDetail
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.inju.dayworry.model.Worry
+import com.inju.dayworry.model.pojo.Worry
 import com.inju.dayworry.model.repository.IDayWorryRepository
 
 class WorryDetailViewModel(

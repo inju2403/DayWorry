@@ -1,5 +1,6 @@
 package com.inju.dayworry.worry.worryList
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.inju.dayworry.R
 import com.inju.dayworry.utils.Constants.TAG
+import com.inju.dayworry.worry.worryDetail.WorryDetailActivity
 import com.inju.dayworry.worry.worryList.buildlogic.WorryListInjector
 import kotlinx.android.synthetic.main.fragment_worry_list.*
 
@@ -36,6 +38,7 @@ class WorryListFragment : Fragment() {
 
         setViewModel()
         setUpAdapter()
+        setLayoutManager()
         observeViewModel()
     }
 
@@ -49,48 +52,40 @@ class WorryListFragment : Fragment() {
     }
 
     private fun setUpAdapter() {
-//        listAdapter = WorryListAdapter()
-//        scrollListener = object : EndlessRecyclerViewScrollListener(linearLayoutManager) {
-//            override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
-//                requestPagingMovie(query, totalItemsCount + 1)
-//            }
-//        }
+        listAdapter = WorryListAdapter()
+        listAdapter.event.observe(
+            viewLifecycleOwner,
+            Observer {
+                worryListViewModel!!.handleEvent(it)
+            }
+        )
+        worryListView.adapter = listAdapter
+    }
+
+    private fun setLayoutManager() {
+        worryListView.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
     }
 
     private fun observeViewModel() {
         worryListViewModel!!.let {
-            it.worryListLiveData.observe(viewLifecycleOwner,
+            it.editWorry.observe(
+                viewLifecycleOwner,
                 Observer {
-                    listAdapter = WorryListAdapter(it)
-
-                    layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
-                    worryListView.layoutManager = layoutManager
-
-                    scrollListener = object : PaginationScrollListener(layoutManager) {
-                        override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
-//                            requestPaging(query, totalItemsCount + 1)
-                            requestPaging()
-
-                        }
+                    val intent = Intent(activity, WorryDetailActivity::class.java).apply {
+                        putExtra("WORRY_ID", it)
                     }
-
-                    worryListView.addOnScrollListener(scrollListener)
-                    worryListView.adapter = listAdapter
-                    listAdapter.notifyDataSetChanged()
+                    startActivity(intent)
                 }
             )
-
+            it.worryList.observe(viewLifecycleOwner,
+                Observer {
+                    listAdapter.submitList(it)
+                })
         }
-    }
-
-    private fun requestPaging() {
-        worryListViewModel!!.getWorrys()
-        Log.d(TAG,"requestPaging")
     }
 
     override fun onResume() {
         super.onResume()
-        listAdapter.notifyDataSetChanged()
         worryListViewModel!!.getWorrys()
 //        Log.d(TAG,"리스트: ${worryListViewModel!!.worryListLiveData.value}")
     }

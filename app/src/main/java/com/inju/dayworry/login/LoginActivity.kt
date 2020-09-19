@@ -29,12 +29,11 @@ import java.security.NoSuchAlgorithmException
 
 class LoginActivity : AppCompatActivity() {
 
+    private val disposables = CompositeDisposable()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-
-        val disposables = CompositeDisposable()
-
 
         login_button.setOnClickListener {
 
@@ -45,19 +44,7 @@ class LoginActivity : AppCompatActivity() {
 //            startActivity(Intent(this, SetProfileActivity::class.java))
 //            finish()
 
-            // 카카오톡이 설치되어 있으면 카카오톡으로 로그인, 아니면 카카오계정으로 로그인
-            Single.just(LoginClient.instance.isKakaoTalkLoginAvailable(this))
-                .flatMap { available ->
-                    if (available) LoginClient.rx.loginWithKakaoTalk(this)
-                    else LoginClient.rx.loginWithKakaoAccount(this)
-                }
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ token ->
-                    Log.i(TAG, "로그인 성공 ${token.accessToken}")
-                }, { error ->
-                    Log.e(TAG, "로그인 실패", error)
-                })
-//                .addTo(disposables)
+            tryLogin()
         }
 
 //        // 로그아웃
@@ -126,5 +113,25 @@ class LoginActivity : AppCompatActivity() {
         }
 
         return null
+    }
+
+    private fun tryLogin() {
+        // 카카오톡이 설치되어 있으면 카카오톡으로 로그인, 아니면 카카오계정으로 로그인
+        Single.just(LoginClient.instance.isKakaoTalkLoginAvailable(this))
+            .flatMap { available ->
+                if (available) LoginClient.rx.loginWithKakaoTalk(this)
+                else LoginClient.rx.loginWithKakaoAccount(this)
+            }
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ token ->
+                Log.i(TAG, "로그인 성공 ${token.accessToken}")
+
+                //이미 프로필 설정 한번 했는지에 대한 처리 필요요
+                startActivity(Intent(this, SetProfileActivity::class.java))
+                finish()
+            }, { error ->
+                Log.e(TAG, "로그인 실패", error)
+            })
+            .addTo(disposables)
     }
 }

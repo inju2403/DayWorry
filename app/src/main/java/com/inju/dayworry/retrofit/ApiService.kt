@@ -1,6 +1,6 @@
 package com.inju.dayworry.retrofit
 
-import com.inju.dayworry.model.Worry
+import com.inju.dayworry.model.pojo.Worry
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Header

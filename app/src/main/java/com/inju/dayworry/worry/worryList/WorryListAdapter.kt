@@ -2,14 +2,13 @@ package com.inju.dayworry.worry.worryList
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
+import androidx.lifecycle.MutableLiveData
+import androidx.recyclerview.widget.ListAdapter
 import com.inju.dayworry.R
-import com.inju.dayworry.model.Worry
-import kotlinx.android.synthetic.main.item_worry.view.*
+import com.inju.dayworry.model.pojo.Worry
 
-class WorryListAdapter(private val list: MutableList<Worry>)
-//    : ListAdapter<Worry, ItemViewHolder>(WorryDiffUtilCallback())
-    : RecyclerView.Adapter<ItemViewHolder> ()
+class WorryListAdapter(val event: MutableLiveData<WorryListEvent> = MutableLiveData()) : ListAdapter<Worry, ItemViewHolder>(
+    WorryDiffUtilCallback())
 {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
@@ -18,16 +17,20 @@ class WorryListAdapter(private val list: MutableList<Worry>)
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-//        getItem(position).let {
-//            var worryId = it?.id
-//            holder.containerView.titleText.text = it.title
-//            holder.containerView.contentText.text = it.content
-//        }
-        holder.containerView.titleText.text = list[position].title
-        holder.containerView.contentText.text = list[position].content
+        getItem(position).let {
+            var worryId = it?.post_id
+//            holder.containerView.summaryView.text = it.content
+            holder.containerView.setOnClickListener {
+                event.value = WorryListEvent.OnWorryItemClick(worryId!!)
+            }
+//            holder.containerView.yearView.text = "'${yearFormat.format(it.createdAt)}"
+//            holder.containerView.dateView.text = dateFormat.format(it.createdAt)
+//            holder.containerView.dayOfTheWeekView.text = weekdayFormat.format(it.createdAt)
+            holder.containerView.tag = it.post_id
+        }
     }
 
     override fun getItemCount(): Int {
-        return list.size
+        return super.getItemCount()
     }
 }

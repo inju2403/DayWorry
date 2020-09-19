@@ -1,7 +1,7 @@
 package com.inju.dayworry.model.implements
 
 import android.content.Context
-import com.inju.dayworry.model.Worry
+import com.inju.dayworry.model.pojo.Worry
 import com.inju.dayworry.model.repository.IDayWorryRepository
 import io.realm.Realm
 import io.realm.Sort
@@ -26,33 +26,34 @@ class DayWorryRepoImpl(
     }
 
     override fun getWorrys(): MutableList<Worry> {
-        var worry = realm.where(Worry::class.java)
-            .sort("createdAt", Sort.DESCENDING)
-            .findFirst() as Worry
-        list.add(worry)
+//        var worry = realm.where(Worry::class.java)
+//            .sort("createdAt", Sort.DESCENDING)
+//            .findFirst() as Worry
+//        list.add(worry)
         return list
     }
 
     override fun getWorryByIdWorry(id : String) : Worry {
-        return realm.where(Worry::class.java)
-            .equalTo("id", id)
-            .findFirst() as Worry
+//        return realm.where(Worry::class.java)
+//            .equalTo("id", id)
+//            .findFirst() as Worry
+        return Worry()
     }
 
     override fun addOrUpdateWorry(worry : Worry)  {
-        realm.executeTransaction {
-            it.copyToRealmOrUpdate(worry)
-        }
+//        realm.executeTransaction {
+//            it.copyToRealmOrUpdate(worry)
+//        }
     }
 
     override fun deleteWorry(id : String) {
-        realm.executeTransaction {
-            it.where(Worry::class.java)
-                .equalTo("id", id)
-                .findFirst()?.let {
-                    it?.deleteFromRealm()
-                }
-        }
+//        realm.executeTransaction {
+//            it.where(Worry::class.java)
+//                .equalTo("id", id)
+//                .findFirst()?.let {
+//                    it?.deleteFromRealm()
+//                }
+//        }
     }
 
 }

@@ -41,5 +41,5 @@ data class Worry (
 
     @SerializedName("expired")
     @Expose
-    var expired: Boolean = false,
+    var expired: Boolean = false
 )

@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.inju.dayworry.model.pojo.ContentsPOJO
 import com.inju.dayworry.model.pojo.Worry
 import com.inju.dayworry.model.repository.IDayWorryRepository
 
@@ -26,7 +27,8 @@ class WorryDetailViewModel(
     }
 
     fun addOrUpdateWorry(context: Context)  {
-        repo.addOrUpdateWorry(worry.value!!)
+        val contentsPOJO = ContentsPOJO(worry.value!!.title, worry.value!!.content)
+        repo.addOrUpdateWorry(contentsPOJO, worry.value!!.post_id)
     }
 
     fun deleteWorry(id: Long) {

@@ -18,5 +18,5 @@ data class Counsel (
 
     @SerializedName("comment_likes")
     @Expose
-    var comment_likes: Long = 0,
+    var comment_likes: Long = 0
 )

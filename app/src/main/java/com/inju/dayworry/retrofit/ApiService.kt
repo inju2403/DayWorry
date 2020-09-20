@@ -15,7 +15,7 @@ interface ApiService {
     fun getWorryById(@Path("id") id: Long, @Header("Authorization") Authorization: String): Single<Worry>
 
     @PUT("path/{id}/") //고민 수정
-    fun updateWorry(@Path("id") id: Long,
+    fun addOrUpdateWorry(@Path("id") id: Long,
                     @Body contentsPOJO: ContentsPOJO,
                     @Header("Authorization") Authorization: String): Response<Unit>
 

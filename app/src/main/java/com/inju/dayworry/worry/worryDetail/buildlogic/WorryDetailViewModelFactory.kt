@@ -4,6 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.inju.dayworry.model.repository.IDayWorryRepository
 import com.inju.dayworry.worry.worryDetail.WorryDetailViewModel
+import kotlinx.coroutines.Dispatchers
+import okhttp3.Dispatcher
 
 class WorryDetailViewModelFactory(
     private val repo: IDayWorryRepository
@@ -11,6 +13,6 @@ class WorryDetailViewModelFactory(
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return WorryDetailViewModel(repo) as T
+        return WorryDetailViewModel(repo, Dispatchers.Main) as T
     }
 }

@@ -40,6 +40,8 @@ class WorryListFragment : Fragment() {
         setUpAdapter()
         setLayoutManager()
         observeViewModel()
+        recycleviewBottomDetection()
+
     }
 
     private fun setViewModel() {
@@ -82,6 +84,24 @@ class WorryListFragment : Fragment() {
                     listAdapter.submitList(it)
                 })
         }
+    }
+
+    private fun recycleviewBottomDetection() {
+        worryListView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                var lastVisibleItemPosition =
+                    (recyclerView.layoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
+
+                var itemTotalCount = recyclerView.adapter!!.itemCount - 1
+                if (lastVisibleItemPosition == itemTotalCount) {
+                    //todo
+                    worryListViewModel!!.getWorrys()
+                }
+
+            }
+        })
     }
 
     override fun onResume() {

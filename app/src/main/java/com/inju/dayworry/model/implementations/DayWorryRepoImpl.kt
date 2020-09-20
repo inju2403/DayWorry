@@ -21,21 +21,21 @@ class DayWorryRepoImpl(
     val str = pref.getString("token", "").toString()
     val token = "JWT $str"
 
-    override fun getWorrys(): MutableList<Worry> {
-//        return httpCall?.getWorrys(token)!!
-        return mutableListOf<Worry>()
+    override suspend fun getWorrys(currentPage: Long, pageSize: Long): MutableList<Worry> {
+        return httpCall?.getWorrys(token, currentPage, pageSize)!!
+//        return mutableListOf<Worry>()
     }
 
-    override fun getWorryById(id : Long) : Worry {
-//        return httpCall?.getWorryById(id, token)!!
-        return Worry()
+    override suspend fun getWorryById(id : Long) : Worry {
+        return httpCall?.getWorryById(id, token)!!
+//        return Worry()
     }
 
-    override fun addOrUpdateWorry(contentsPOJO: ContentsPOJO, id: Long)  {
+    override suspend fun addOrUpdateWorry(contentsPOJO: ContentsPOJO, id: Long)  {
         httpCall?.addOrUpdateWorry(id, contentsPOJO, token)
     }
 
-    override fun deleteWorry(id : Long) {
+    override suspend fun deleteWorry(id : Long) {
         httpCall?.deleteWorry(id, token)
     }
 

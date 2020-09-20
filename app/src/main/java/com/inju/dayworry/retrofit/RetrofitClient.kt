@@ -32,10 +32,16 @@ object RetrofitClient {
 
             retrofitClient = Retrofit.Builder()
                 .baseUrl(baseUrl)
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(clientBuilder.build())
                 .build()
+
+//            retrofitClient = Retrofit.Builder()
+//                .baseUrl(baseUrl)
+//                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .client(clientBuilder.build())
+//                .build()
         }
 
         return retrofitClient

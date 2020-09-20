@@ -7,31 +7,29 @@ import androidx.lifecycle.ViewModel
 import com.inju.dayworry.model.pojo.ContentsPOJO
 import com.inju.dayworry.model.pojo.Worry
 import com.inju.dayworry.model.repository.IDayWorryRepository
+import com.inju.dayworry.utils.BaseViewModel
+import com.inju.dayworry.worry.worryList.WorryListEvent
+import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
 class WorryDetailViewModel(
-    private val repo: IDayWorryRepository
-): ViewModel() {
-
-//    var worry = Worry()
-//    val worryLiveData: MutableLiveData<Worry> by lazy {
-//        MutableLiveData<Worry>().apply {
-//            value = worry
-//        }
-//    }
+    private val repo: IDayWorryRepository,
+    uiContext: CoroutineContext
+): BaseViewModel<WorryDetailEvent>(uiContext) {
 
     private val worryState = MutableLiveData<Worry>()
     val worry: LiveData<Worry> get() = worryState
 
-    fun getWorryById(id: Long)  {
+    fun getWorryById(id: Long) = launch {
         worryState.value = repo.getWorryById(id)
     }
 
-    fun addOrUpdateWorry(context: Context)  {
+    fun addOrUpdateWorry(context: Context) = launch {
         val contentsPOJO = ContentsPOJO(worry.value!!.title, worry.value!!.content)
         repo.addOrUpdateWorry(contentsPOJO, worry.value!!.post_id)
     }
 
-    fun deleteWorry(id: Long) {
+    fun deleteWorry(id: Long) = launch {
         repo.deleteWorry(id)
     }
 
@@ -41,5 +39,9 @@ class WorryDetailViewModel(
 
     fun setWorryContent(newContent: String) {
         worryState.value?.content = newContent
+    }
+
+    override fun handleEvent(event: WorryDetailEvent) {
+        TODO("Not yet implemented")
     }
 }

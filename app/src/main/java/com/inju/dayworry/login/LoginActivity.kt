@@ -126,6 +126,8 @@ class LoginActivity : AppCompatActivity() {
             .subscribe({ token ->
                 Log.i(TAG, "로그인 성공 ${token.accessToken}")
 
+                // 우리 서버로 카카오 토큰 보내고 jwt 받는 로직 필요
+
                 //이미 프로필 설정 한번 했는지에 대한 처리 필요요
                 startActivity(Intent(this, SetProfileActivity::class.java))
                 finish()

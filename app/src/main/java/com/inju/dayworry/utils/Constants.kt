@@ -1,7 +1,7 @@
 package com.inju.dayworry.utils
 
 object Constants {
-    const val API_BASE_URL = "http:/"
+    const val API_BASE_URL = "https://www.naver.com/"
     const val TAG: String = "로그"
     const val PREFERENCE = "template.android.DayWorry"
     const val NUM_PAGES = 3

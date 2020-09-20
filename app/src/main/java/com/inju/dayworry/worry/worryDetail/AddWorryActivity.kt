@@ -53,9 +53,10 @@ class AddWorryActivity : AppCompatActivity() {
     }
 
     private fun setTextChangeListener() {
+
         titleEdit.addTextChangedListener(object: TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                worryDetailViewModel!!.worry.value!!.title = s.toString()
+                worryDetailViewModel!!.setWorryTitle(s.toString())
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
@@ -64,7 +65,7 @@ class AddWorryActivity : AppCompatActivity() {
 
         contentEdit.addTextChangedListener(object: TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                worryDetailViewModel!!.worry.value!!.content = s.toString()
+                worryDetailViewModel!!.setWorryContent(s.toString())
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }

@@ -34,4 +34,12 @@ class WorryDetailViewModel(
     fun deleteWorry(id: Long) {
         repo.deleteWorry(id)
     }
+
+    fun setWorryTitle(newTitle: String) {
+        worryState.value?.title = newTitle
+    }
+
+    fun setWorryContent(newContent: String) {
+        worryState.value?.content = newContent
+    }
 }

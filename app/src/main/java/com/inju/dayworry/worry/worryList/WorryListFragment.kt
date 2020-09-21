@@ -106,7 +106,7 @@ class WorryListFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        worryListViewModel!!.getWorrys()
+        worryListViewModel!!.InitWorrys()
 //        Log.d(TAG,"리스트: ${worryListViewModel!!.worryListLiveData.value}")
     }
 

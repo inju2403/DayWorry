@@ -19,7 +19,13 @@ class WorryListViewModel(
     private var currentPage: Long = 0
     private var pageSize: Long = 15
 
-    fun getWorrys() =launch {
+    fun InitWorrys() = launch {
+        // 고민글을 추가하고 다시 고민리스트로 가면 0 페이지부터 다시 부름
+        currentPage = 0
+        worryListState.value = repo.getWorrys(currentPage++, pageSize)
+    }
+
+    fun getWorrys() = launch {
         var newList = repo.getWorrys(currentPage++, pageSize)
         //새로 불러온 아이템들을 붙임
         for(item in newList) worryListState.value?.add(item)

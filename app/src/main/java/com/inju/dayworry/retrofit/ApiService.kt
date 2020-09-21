@@ -18,8 +18,9 @@ interface ApiService {
 
     @PUT("path/{id}/") //고민 수정
     suspend fun addOrUpdateWorry(@Path("id") id: Long,
-                     @Query("title") title: String,
-                     @Query("content") content: String,
+                    @Query("title") title: String,
+                    @Query("content") content: String,
+                    @Query("post_hashtag") post_hashtag: String,
                     @Header("Authorization") Authorization: String): Response<Unit>
 
     @DELETE("path/{id}/") //고민 삭제

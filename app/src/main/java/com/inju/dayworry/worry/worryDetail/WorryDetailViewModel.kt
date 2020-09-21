@@ -21,8 +21,8 @@ class WorryDetailViewModel(
         worryState.value = repo.getWorryById(id)
     }
 
-    fun addOrUpdateWorry(context: Context) = launch {
-        repo.addOrUpdateWorry(worry.value!!.title, worry.value!!.content, worry.value!!.post_id)
+    fun addOrUpdateWorry(context: Context, tag: String) = launch {
+        repo.addOrUpdateWorry(worry.value!!.title, worry.value!!.content, tag, worry.value!!.post_id)
     }
 
     fun deleteWorry(id: Long) = launch {

@@ -103,7 +103,7 @@ class AddWorryActivity : AppCompatActivity() {
     }
 
     private fun worryUpdateLoading() {
-        worryDetailViewModel!!.addOrUpdateWorry(this)
+        worryDetailViewModel!!.addOrUpdateWorry(this, tag!!)
         val intent = Intent()
         setResult(RESULT_OK, intent)
         finish()

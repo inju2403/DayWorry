@@ -30,8 +30,8 @@ class DayWorryRepoImpl(
 //        return Worry()
     }
 
-    override suspend fun addOrUpdateWorry(title: String, content: String, id: Long)  {
-        httpCall?.addOrUpdateWorry(id, title, content, token)
+    override suspend fun addOrUpdateWorry(title: String, content: String, tag: String, id: Long)  {
+        httpCall?.addOrUpdateWorry(id, title, content, tag, token)
     }
 
     override suspend fun deleteWorry(id : Long) {

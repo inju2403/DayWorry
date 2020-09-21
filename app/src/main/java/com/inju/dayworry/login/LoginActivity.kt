@@ -41,7 +41,7 @@ class LoginActivity : AppCompatActivity() {
 
         naver_login_button.setOnClickListener {
             //임시 라우팅
-            startActivity(Intent(this, MainActivity::class.java))
+            startActivity(Intent(this, SetProfileActivity::class.java))
             finish()
         }
 

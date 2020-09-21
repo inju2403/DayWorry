@@ -25,18 +25,18 @@ class SetTagFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        preBtn.setOnClickListener {
-            moveSetProfileFragment()
-        }
+//        preBtn.setOnClickListener {
+//            moveSetProfileFragment()
+//        }
 
         nextBtn.setOnClickListener {
             moveMainActivity()
         }
     }
 
-    private fun moveSetProfileFragment() {
-        (activity as SetProfileActivity).switchSetProfileFragment()
-    }
+//    private fun moveSetProfileFragment() {
+//        (activity as SetProfileActivity).switchSetProfileFragment()
+//    }
 
     private fun moveMainActivity() {
         startActivity(Intent(context, MainActivity::class.java))

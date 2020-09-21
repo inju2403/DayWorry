@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".counsel.counselList.CounselFragment1"
-    android:background="@color/liteBrownColor">
+    android:background="@color/liteNavyColor">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

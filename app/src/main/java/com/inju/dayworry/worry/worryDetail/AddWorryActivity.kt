@@ -25,6 +25,7 @@ class AddWorryActivity : AppCompatActivity() {
         setSupportActionBar(addWorryActivityToolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.title = ""
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_toolbar_cancel)
 
         setViewModel()
         observeViewModel()

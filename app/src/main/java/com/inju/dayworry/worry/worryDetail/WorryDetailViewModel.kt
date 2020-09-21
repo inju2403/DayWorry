@@ -3,12 +3,9 @@ package com.inju.dayworry.worry.worryDetail
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.inju.dayworry.model.pojo.ContentsPOJO
 import com.inju.dayworry.model.pojo.Worry
 import com.inju.dayworry.model.repository.IDayWorryRepository
 import com.inju.dayworry.utils.BaseViewModel
-import com.inju.dayworry.worry.worryList.WorryListEvent
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
@@ -25,8 +22,7 @@ class WorryDetailViewModel(
     }
 
     fun addOrUpdateWorry(context: Context) = launch {
-        val contentsPOJO = ContentsPOJO(worry.value!!.title, worry.value!!.content)
-        repo.addOrUpdateWorry(contentsPOJO, worry.value!!.post_id)
+        repo.addOrUpdateWorry(worry.value!!.title, worry.value!!.content, worry.value!!.post_id)
     }
 
     fun deleteWorry(id: Long) = launch {

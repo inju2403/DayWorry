@@ -14,14 +14,11 @@ import com.inju.dayworry.R
 import com.inju.dayworry.utils.Constants.TAG
 import com.kakao.sdk.auth.LoginClient
 import com.kakao.sdk.auth.rx
-import com.kakao.sdk.user.UserApiClient
-import com.kakao.sdk.user.rx
 import com.kakao.util.helper.Utility.getPackageInfo
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_login.*
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
@@ -35,16 +32,22 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        login_button.setOnClickListener {
-
+        kakao_login_button.setOnClickListener {
 //            var keyHash = getHashKey(this)
 //            Log.d(TAG, keyHash)
 
-            //임시 라우팅
-//            startActivity(Intent(this, SetProfileActivity::class.java))
-//            finish()
+            tryKaKaoLogin()
+        }
 
-            tryLogin()
+        naver_login_button.setOnClickListener {
+            //임시 라우팅
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        }
+
+        skipText.setOnClickListener {
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
         }
 
 //        // 로그아웃
@@ -82,6 +85,29 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
+    private fun tryKaKaoLogin() {
+        // 카카오톡이 설치되어 있으면 카카오톡으로 로그인, 아니면 카카오계정으로 로그인
+        Single.just(LoginClient.instance.isKakaoTalkLoginAvailable(this))
+            .flatMap { available ->
+                if (available) LoginClient.rx.loginWithKakaoTalk(this)
+                else LoginClient.rx.loginWithKakaoAccount(this)
+            }
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ token ->
+                Log.i(TAG, "로그인 성공 ${token.accessToken}")
+
+                // 우리 서버로 카카오 토큰 보내고 jwt 받는 로직 필요
+
+                //이미 프로필 설정 한번 했는지에 대한 처리 필요요
+                startActivity(Intent(this, SetProfileActivity::class.java))
+                finish()
+            }, { error ->
+                Log.e(TAG, "로그인 실패", error)
+            })
+            .addTo(disposables)
+    }
+
+
     fun getHashKey(context: Context): String? {
         try {
             if (Build.VERSION.SDK_INT >= 28) {
@@ -113,27 +139,5 @@ class LoginActivity : AppCompatActivity() {
         }
 
         return null
-    }
-
-    private fun tryLogin() {
-        // 카카오톡이 설치되어 있으면 카카오톡으로 로그인, 아니면 카카오계정으로 로그인
-        Single.just(LoginClient.instance.isKakaoTalkLoginAvailable(this))
-            .flatMap { available ->
-                if (available) LoginClient.rx.loginWithKakaoTalk(this)
-                else LoginClient.rx.loginWithKakaoAccount(this)
-            }
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ token ->
-                Log.i(TAG, "로그인 성공 ${token.accessToken}")
-
-                // 우리 서버로 카카오 토큰 보내고 jwt 받는 로직 필요
-
-                //이미 프로필 설정 한번 했는지에 대한 처리 필요요
-                startActivity(Intent(this, SetProfileActivity::class.java))
-                finish()
-            }, { error ->
-                Log.e(TAG, "로그인 실패", error)
-            })
-            .addTo(disposables)
     }
 }

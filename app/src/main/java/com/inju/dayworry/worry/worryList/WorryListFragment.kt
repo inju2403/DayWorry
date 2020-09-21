@@ -106,7 +106,9 @@ class WorryListFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        worryListViewModel!!.InitWorrys()
+
+        // 고민글을 추가하고 다시 고민리스트로 가면 0 페이지부터 다시 부름
+//        worryListViewModel!!.InitWorrys()
 //        Log.d(TAG,"리스트: ${worryListViewModel!!.worryListLiveData.value}")
     }
 

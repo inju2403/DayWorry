@@ -23,28 +23,44 @@
         android:id="@+id/loginText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
         android:layout_marginTop="232dp"
-        android:textSize="18sp"
         android:text="로그인"
-        android:textStyle="bold"
         android:textColor="@color/whiteColor"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/kakao_login_button"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/login_button"
-        android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:layout_marginLeft="20dp"
+    <ImageView
+        android:id="@+id/kakao_login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="276dp"
-        android:layout_marginRight="20dp"
-        android:background="@color/crimsonColor"
-        android:textColor="@color/whiteColor"
-        android:textStyle="bold"
-        android:text="카카오계정으로 로그인"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_kakao_login" />
+
+    <ImageView
+        android:id="@+id/naver_login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/kakao_login_button"
+        app:srcCompat="@drawable/ic_naver_login" />
+
+    <TextView
+        android:id="@+id/skipText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="다음에 할래요"
+        android:textSize="14sp"
+        android:textColor="@color/superLiteGreyColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/naver_login_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

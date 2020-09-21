@@ -28,42 +28,44 @@
         <ImageView
             android:id="@+id/counselTapView"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="9dp"
+            android:layout_marginLeft="34dp"
             android:layout_weight="1"
-            android:padding="5dp"
-            app:srcCompat="@drawable/ic_checked" />
+            app:srcCompat="@drawable/ic_home_checked" />
 
         <ImageView
             android:id="@+id/worryTapView"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:padding="5dp"
-            app:srcCompat="@drawable/ic_unchecked" />
+            android:layout_marginTop="9dp"
+            app:srcCompat="@drawable/ic_worry_list_unchecked" />
 
         <ImageView
             android:id="@+id/addTapView"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:padding="5dp"
-            app:srcCompat="@drawable/ic_addworry" />
+            android:layout_marginTop="9dp"
+            app:srcCompat="@drawable/ic_add_worry" />
 
         <ImageView
             android:id="@+id/notiTapView"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:padding="5dp"
-            app:srcCompat="@drawable/ic_unchecked" />
+            android:layout_marginTop="9dp"
+            app:srcCompat="@drawable/ic_noti_unchecked" />
 
         <ImageView
             android:id="@+id/myPageTapView"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:padding="5dp"
-            app:srcCompat="@drawable/ic_unchecked" />
+            android:layout_marginTop="9dp"
+            android:layout_marginRight="34dp"
+            app:srcCompat="@drawable/ic_mypage_uncheced" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

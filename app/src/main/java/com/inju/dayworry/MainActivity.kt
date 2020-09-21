@@ -77,10 +77,10 @@ class MainActivity : AppCompatActivity() {
                 worryJudge = 0
                 notiJudge = 0
                 myPageJudge = 0
-                counselTapView.setImageResource(R.drawable.ic_checked)
-                worryTapView.setImageResource(R.drawable.ic_unchecked)
-                notiTapView.setImageResource(R.drawable.ic_unchecked)
-                myPageTapView.setImageResource(R.drawable.ic_unchecked)
+                counselTapView.setImageResource(R.drawable.ic_home_checked)
+                worryTapView.setImageResource(R.drawable.ic_worry_list_unchecked)
+                notiTapView.setImageResource(R.drawable.ic_noti_unchecked)
+                myPageTapView.setImageResource(R.drawable.ic_mypage_uncheced)
                 switchFragment(FRAG_COUNSEL)
             }
         }
@@ -91,10 +91,10 @@ class MainActivity : AppCompatActivity() {
                 worryJudge = 1
                 notiJudge = 0
                 myPageJudge = 0
-                counselTapView.setImageResource(R.drawable.ic_unchecked)
-                worryTapView.setImageResource(R.drawable.ic_checked)
-                notiTapView.setImageResource(R.drawable.ic_unchecked)
-                myPageTapView.setImageResource(R.drawable.ic_unchecked)
+                counselTapView.setImageResource(R.drawable.ic_home_unchecked)
+                worryTapView.setImageResource(R.drawable.ic_worry_list_checked)
+                notiTapView.setImageResource(R.drawable.ic_noti_unchecked)
+                myPageTapView.setImageResource(R.drawable.ic_mypage_uncheced)
                 switchFragment(FRAG_WORRY)
             }
         }
@@ -109,10 +109,10 @@ class MainActivity : AppCompatActivity() {
                 worryJudge = 0
                 notiJudge = 1
                 myPageJudge = 0
-                counselTapView.setImageResource(R.drawable.ic_unchecked)
-                worryTapView.setImageResource(R.drawable.ic_unchecked)
-                notiTapView.setImageResource(R.drawable.ic_checked)
-                myPageTapView.setImageResource(R.drawable.ic_unchecked)
+                counselTapView.setImageResource(R.drawable.ic_home_unchecked)
+                worryTapView.setImageResource(R.drawable.ic_worry_list_unchecked)
+                notiTapView.setImageResource(R.drawable.ic_noti_checked)
+                myPageTapView.setImageResource(R.drawable.ic_mypage_uncheced)
                 switchFragment(FRAG_NOTIFICATION)
             }
         }
@@ -123,10 +123,10 @@ class MainActivity : AppCompatActivity() {
                 worryJudge = 0
                 notiJudge = 0
                 myPageJudge = 1
-                counselTapView.setImageResource(R.drawable.ic_unchecked)
-                worryTapView.setImageResource(R.drawable.ic_unchecked)
-                notiTapView.setImageResource(R.drawable.ic_unchecked)
-                myPageTapView.setImageResource(R.drawable.ic_checked)
+                counselTapView.setImageResource(R.drawable.ic_home_unchecked)
+                worryTapView.setImageResource(R.drawable.ic_worry_list_unchecked)
+                notiTapView.setImageResource(R.drawable.ic_noti_unchecked)
+                myPageTapView.setImageResource(R.drawable.ic_mypage_checed)
                 switchFragment(FRAG_MYPAGE)
             }
         }
@@ -171,10 +171,10 @@ class MainActivity : AppCompatActivity() {
                 worryJudge = 1
                 notiJudge = 0
                 myPageJudge = 0
-                counselTapView.setImageResource(R.drawable.ic_unchecked)
-                worryTapView.setImageResource(R.drawable.ic_checked)
-                notiTapView.setImageResource(R.drawable.ic_unchecked)
-                myPageTapView.setImageResource(R.drawable.ic_unchecked)
+                counselTapView.setImageResource(R.drawable.ic_home_unchecked)
+                worryTapView.setImageResource(R.drawable.ic_worry_list_unchecked)
+                notiTapView.setImageResource(R.drawable.ic_noti_unchecked)
+                myPageTapView.setImageResource(R.drawable.ic_mypage_uncheced)
                 switchFragment(FRAG_WORRY)
             }
         }

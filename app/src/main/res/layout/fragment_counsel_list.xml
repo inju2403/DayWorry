@@ -9,7 +9,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/counselFragmentConstraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/mainNavyColor">
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/counsel_list_view_pager"
@@ -33,7 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:alpha=".5"
-            android:background="#FFFFFF"
+            android:background="@color/mainNavyColor"
             app:layout_constraintBottom_toTopOf="@+id/dots_indicator"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -43,7 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             app:dotsColor="@color/liteGreyColor"
-            app:selectedDotColor="@color/midiumBrownColor"
+            app:selectedDotColor="@color/litePupleColor"
             app:dotsCornerRadius="8dp"
             app:dotsSize="8dp"
             app:dotsSpacing="4dp"

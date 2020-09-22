@@ -8,7 +8,6 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.inju.dayworry.R
@@ -20,7 +19,7 @@ class AddWorryActivity : AppCompatActivity() {
     private val RESULT_OK = 101
     private var worryDetailViewModel: WorryDetailViewModel? = null
 
-    private var tag: String? = null
+    private var hashTag: String? = null
 
     var litePupleColor = "#9689FC" // 텍스트 색상
     var superLiteGreyColor = "#cbcdd5" // 텍스트 색상
@@ -103,7 +102,7 @@ class AddWorryActivity : AppCompatActivity() {
     }
 
     private fun worryUpdateLoading() {
-        worryDetailViewModel!!.addOrUpdateWorry(this, tag!!)
+        worryDetailViewModel!!.addOrUpdateWorry(this, hashTag!!)
         val intent = Intent()
         setResult(RESULT_OK, intent)
         finish()
@@ -121,7 +120,7 @@ class AddWorryActivity : AppCompatActivity() {
                 dailyLiftBtn.setTextColor(Color.parseColor(superLiteGreyColor))
             }
             else {
-                tag = "일상"
+                hashTag = "일상"
                 resetBtnColor()
                 dailyLiftBtn.isSelected = true
                 dailyLiftBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
@@ -136,7 +135,7 @@ class AddWorryActivity : AppCompatActivity() {
                 familyBtn.setTextColor(Color.parseColor(superLiteGreyColor))
             }
             else {
-                tag = "가족"
+                hashTag = "가족"
                 resetBtnColor()
                 familyBtn.isSelected = true
                 familyBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
@@ -151,7 +150,7 @@ class AddWorryActivity : AppCompatActivity() {
                 friendBtn.setTextColor(Color.parseColor(superLiteGreyColor))
             }
             else {
-                tag = "친구"
+                hashTag = "친구"
                 resetBtnColor()
                 friendBtn.isSelected = true
                 friendBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
@@ -166,7 +165,7 @@ class AddWorryActivity : AppCompatActivity() {
                 dateBtn.setTextColor(Color.parseColor(superLiteGreyColor))
             }
             else {
-                tag = "연애"
+                hashTag = "연애"
                 resetBtnColor()
                 dateBtn.isSelected = true
                 dateBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
@@ -181,7 +180,7 @@ class AddWorryActivity : AppCompatActivity() {
                 schoolBtn.setTextColor(Color.parseColor(superLiteGreyColor))
             }
             else {
-                tag = "학교"
+                hashTag = "학교"
                 resetBtnColor()
                 schoolBtn.isSelected = true
                 schoolBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
@@ -196,7 +195,7 @@ class AddWorryActivity : AppCompatActivity() {
                 jobBtn.setTextColor(Color.parseColor(superLiteGreyColor))
             }
             else {
-                tag = "직장"
+                hashTag = "직장"
                 resetBtnColor()
                 jobBtn.isSelected = true
                 jobBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
@@ -211,7 +210,7 @@ class AddWorryActivity : AppCompatActivity() {
                 employmentBtn.setTextColor(Color.parseColor(superLiteGreyColor))
             }
             else {
-                tag = "취업"
+                hashTag = "취업"
                 resetBtnColor()
                 employmentBtn.isSelected = true
                 employmentBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
@@ -226,7 +225,7 @@ class AddWorryActivity : AppCompatActivity() {
                 courseBtn.setTextColor(Color.parseColor(superLiteGreyColor))
             }
             else {
-                tag = "진로"
+                hashTag = "진로"
                 resetBtnColor()
                 courseBtn.isSelected = true
                 courseBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
@@ -241,7 +240,7 @@ class AddWorryActivity : AppCompatActivity() {
                 moneyBtn.setTextColor(Color.parseColor(superLiteGreyColor))
             }
             else {
-                tag = "돈"
+                hashTag = "돈"
                 resetBtnColor()
                 moneyBtn.isSelected = true
                 moneyBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
@@ -256,7 +255,7 @@ class AddWorryActivity : AppCompatActivity() {
                 healthBtn.setTextColor(Color.parseColor(superLiteGreyColor))
             }
             else {
-                tag = "건강"
+                hashTag = "건강"
                 resetBtnColor()
                 healthBtn.isSelected = true
                 healthBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
@@ -271,7 +270,7 @@ class AddWorryActivity : AppCompatActivity() {
                 marriedBtn.setTextColor(Color.parseColor(superLiteGreyColor))
             }
             else {
-                tag = "기혼"
+                hashTag = "기혼"
                 resetBtnColor()
                 marriedBtn.isSelected = true
                 marriedBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
@@ -286,7 +285,7 @@ class AddWorryActivity : AppCompatActivity() {
                 infantBtn.setTextColor(Color.parseColor(superLiteGreyColor))
             }
             else {
-                tag = "육아"
+                hashTag = "육아"
                 resetBtnColor()
                 infantBtn.isSelected = true
                 infantBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)

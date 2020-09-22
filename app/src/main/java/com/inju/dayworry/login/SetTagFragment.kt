@@ -4,11 +4,11 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.Gravity
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.inju.dayworry.MainActivity
 import com.inju.dayworry.R
 import kotlinx.android.synthetic.main.fragment_set_profile.nextBtn
@@ -375,4 +375,6 @@ class SetTagFragment : Fragment() {
         toast.setGravity(Gravity.BOTTOM, 0,300)
         toast.show()
     }
+
+
 }

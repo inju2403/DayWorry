@@ -1,10 +1,8 @@
 package com.inju.dayworry.login
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.inju.dayworry.R
-import com.inju.dayworry.mypage.MyPageFragment
-import com.inju.dayworry.worry.worryList.WorryListFragment
 
 class SetProfileActivity : AppCompatActivity() {
 
@@ -16,6 +14,10 @@ class SetProfileActivity : AppCompatActivity() {
     val getSetTagFragment get() = setTagFragment
     val getFragmentManager get() = fragmentManager
 
+    val FRAG_PROFILE = 0
+    val FRAG_TAG = 1
+
+    var fragmentState: Int = FRAG_PROFILE
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,5 +40,13 @@ class SetProfileActivity : AppCompatActivity() {
     fun switchSetProfileFragment() {
         fragmentManager.beginTransaction().show(setProfileFragment).commit()
         fragmentManager.beginTransaction().hide(setTagFragment).commit()
+    }
+
+    override fun onBackPressed() {
+        if(fragmentState == FRAG_TAG) {
+            switchSetProfileFragment()
+            fragmentState = FRAG_PROFILE
+        }
+        else super.onBackPressed()
     }
 }

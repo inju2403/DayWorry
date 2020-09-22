@@ -23,6 +23,7 @@ class SetProfileFragment : Fragment() {
 
         nextBtn.setOnClickListener {
             moveSetTagFragment()
+            (activity as SetProfileActivity).fragmentState = (activity as SetProfileActivity).FRAG_TAG
         }
     }
 

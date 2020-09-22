@@ -5,10 +5,16 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/mainNavyColor</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/litePupleColor</item>
 
         <item name="android:windowActionBarOverlay">true</item>
         <item name="android:actionMenuTextColor">@color/superLiteGreyColor</item>
+
+        <item name="android:spinnerDropDownItemStyle">@style/mySpinnerItemStyle</item>
+    </style>
+
+    <style name="mySpinnerItemStyle" parent="@android:style/Widget.Holo.DropDownItem.Spinner">
+        <item name="android:textColor">@color/superLiteGreyColor</item>
     </style>
 
 </resources>

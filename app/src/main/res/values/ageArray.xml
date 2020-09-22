@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="연령">
+        <item>연령을 선택해주세요.</item>
+        <item>1~9</item>
+        <item>10~19</item>
+        <item>20~29</item>
+        <item>30~39</item>
+        <item>40~49</item>
+        <item>50~59</item>
+        <item>60~69</item>
+        <item>70~</item>
+    </string-array>
+</resources>

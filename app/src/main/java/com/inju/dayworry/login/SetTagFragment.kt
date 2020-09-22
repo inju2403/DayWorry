@@ -27,8 +27,8 @@ import kotlinx.android.synthetic.main.fragment_set_tag.schoolBtn
 
 class SetTagFragment : Fragment() {
 
-    var litePupleColor = "#9689FC" // 텍스트 색상
-    var superLiteGreyColor = "#cbcdd5" // 텍스트 색상
+    var litePupleColor = "#9689FC"
+    var superLiteGreyColor = "#cbcdd5"
     var darkNavyColor = "#2e3042"
     var liteNavyColor = "#535974"
     private var hashTag: MutableList<String> = mutableListOf()

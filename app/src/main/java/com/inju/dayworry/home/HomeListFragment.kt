@@ -1,25 +1,20 @@
-package com.inju.dayworry.counsel
+package com.inju.dayworry.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.inju.dayworry.R
-import com.inju.dayworry.counsel.counselList.CounselFragment1
-import com.inju.dayworry.counsel.counselList.CounselFragment2
-import com.inju.dayworry.counsel.counselList.CounselFragment3
-import com.inju.dayworry.counsel.counselList.viewPager.DepthPageTransformer
-import com.inju.dayworry.counsel.counselList.viewPager.ZoomOutPageTransformer
+import com.inju.dayworry.home.viewPager.ZoomOutPageTransformer
 import com.inju.dayworry.utils.Constants.NUM_PAGES
-import kotlinx.android.synthetic.main.fragment_counsel_list.*
+import kotlinx.android.synthetic.main.fragment_home_list.*
 
 //@RequiresApi(21)
-class CounselListFragment : Fragment() {
+class HomeListFragment : Fragment() {
 
     private lateinit var viewPager: ViewPager2
 
@@ -28,7 +23,7 @@ class CounselListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_counsel_list, container, false)
+        return inflater.inflate(R.layout.fragment_home_list, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -58,9 +53,9 @@ class CounselListFragment : Fragment() {
         override fun createFragment(position: Int): Fragment {
             lateinit var frag: Fragment
             when(position) {
-                0 -> frag = CounselFragment1()
-                1 -> frag = CounselFragment2()
-                2 -> frag = CounselFragment3()
+                0 -> frag = HomeFragment1()
+                1 -> frag = HomeFragment2()
+                2 -> frag = HomeFragment3()
             }
             return frag
         }

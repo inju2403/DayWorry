@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".counsel.CounselListFragment">
+    tools:context=".home.HomeListFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/counselFragmentConstraintLayout"
@@ -39,7 +39,7 @@
             app:dotsWidthFactor="2.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:progressMode="true"
+            app:progressMode="false"
             app:selectedDotColor="@color/litePupleColor" />
 
         <androidx.viewpager2.widget.ViewPager2

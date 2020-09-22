@@ -1,4 +1,4 @@
-package com.inju.dayworry.counsel.counselList.viewPager
+package com.inju.dayworry.home.viewPager
 
 import android.view.View
 import androidx.viewpager2.widget.ViewPager2

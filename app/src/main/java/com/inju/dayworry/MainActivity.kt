@@ -4,7 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
-import com.inju.dayworry.counsel.CounselListFragment
+import com.inju.dayworry.home.HomeListFragment
 import com.inju.dayworry.mypage.MyPageFragment
 import com.inju.dayworry.notification.NotiFragment
 import com.inju.dayworry.worry.worryList.WorryListFragment
@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
 
     private var worryListViewModel: WorryListViewModel ?= null
 
-    private val counselFragment = CounselListFragment()
+    private val counselFragment = HomeListFragment()
     private val worryListFragment = WorryListFragment()
     private val notiFragment = NotiFragment()
     private val myPageFragment = MyPageFragment()

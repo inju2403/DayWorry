@@ -3,13 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".counsel.counselList.CounselFragment2"
+    tools:context=".home.HomeFragment1"
     android:background="@color/liteNavyColor">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="counsel2" />
+        android:text="counsel1" />
 
 </FrameLayout>

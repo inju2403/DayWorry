@@ -2,6 +2,7 @@ package com.inju.dayworry.model.implementations
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
+import com.inju.dayworry.model.pojo.Contents
 import com.inju.dayworry.model.pojo.Worry
 import com.inju.dayworry.model.repository.IDayWorryRepository
 import com.inju.dayworry.retrofit.ApiService
@@ -30,8 +31,8 @@ class DayWorryRepoImpl(
 //        return Worry()
     }
 
-    override suspend fun addOrUpdateWorry(title: String, content: String, tag: String, id: Long)  {
-        httpCall?.addOrUpdateWorry(id, title, content, tag, token)
+    override suspend fun addOrUpdateWorry(id: Long, contents: Contents)  {
+        httpCall?.addOrUpdateWorry(id, contents, token)
     }
 
     override suspend fun deleteWorry(id : Long) {

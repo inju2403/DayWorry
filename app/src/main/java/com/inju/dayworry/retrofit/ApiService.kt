@@ -1,5 +1,6 @@
 package com.inju.dayworry.retrofit
 
+import com.inju.dayworry.model.pojo.Contents
 import com.inju.dayworry.model.pojo.Worry
 import retrofit2.Response
 import retrofit2.http.*
@@ -20,10 +21,8 @@ interface ApiService {
 
     @PUT("path/{id}/") //고민 수정
     suspend fun addOrUpdateWorry(@Path("id") id: Long,
-                    @Query("title") title: String,
-                    @Query("content") content: String,
-                    @Query("post_hashtag") post_hashtag: String,
-                    @Header("Authorization") Authorization: String): Response<Unit>
+                                 @Body contents: Contents,
+                                 @Header("Authorization") Authorization: String): Response<Unit>
 
     @DELETE("path/{id}/") //고민 삭제
 //    fun deleteWorry(@Path("id") id: Long, @Header("Authorization") Authorization: String): Response<Unit>

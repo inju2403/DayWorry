@@ -3,6 +3,7 @@ package com.inju.dayworry.worry.worryDetail
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.inju.dayworry.model.pojo.Contents
 import com.inju.dayworry.model.pojo.Worry
 import com.inju.dayworry.model.repository.IDayWorryRepository
 import com.inju.dayworry.utils.BaseViewModel
@@ -22,7 +23,8 @@ class WorryDetailViewModel(
     }
 
     fun addOrUpdateWorry(context: Context, tag: String) = launch {
-        repo.addOrUpdateWorry(worry.value!!.title, worry.value!!.content, tag, worry.value!!.post_id)
+        var contents = Contents(worry.value!!.title, worry.value!!.content, tag)
+        repo.addOrUpdateWorry(worry.value!!.post_id, contents)
     }
 
     fun deleteWorry(id: Long) = launch {

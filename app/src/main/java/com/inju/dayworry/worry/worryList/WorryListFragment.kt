@@ -25,6 +25,9 @@ class WorryListFragment : Fragment() {
     private lateinit var scrollListener: PaginationScrollListener
     private lateinit var layoutManager: LinearLayoutManager
 
+    private var post_hashtag: String = "all"
+    private var sort: String = "created_at" //정렬 기준 created_at or hits
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -97,7 +100,7 @@ class WorryListFragment : Fragment() {
                 var itemTotalCount = recyclerView.adapter!!.itemCount - 1
                 if (lastVisibleItemPosition == itemTotalCount) {
                     //todo
-                    worryListViewModel!!.getWorrys()
+                    worryListViewModel!!.getWorrys(post_hashtag, sort)
                 }
 
             }
@@ -108,7 +111,7 @@ class WorryListFragment : Fragment() {
         super.onResume()
 
         // 고민글을 추가하고 다시 고민리스트로 가면 0 페이지부터 다시 부름
-//        worryListViewModel!!.InitWorrys()
+//        worryListViewModel!!.InitWorrys(post_hashtag, sort)
 //        Log.d(TAG,"리스트: ${worryListViewModel!!.worryListLiveData.value}")
     }
 

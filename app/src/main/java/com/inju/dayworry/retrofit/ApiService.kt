@@ -6,11 +6,13 @@ import retrofit2.http.*
 
 interface ApiService {
 
-    @GET("path/") //고민 리스트 받기 -> 페이징 (현재페이지, 페이지당 아이템 갯수)
+    @GET("path/{post_hashtag}") //고민 리스트 받기 -> 페이징 (현재페이지, 페이지당 아이템 갯수)
 //    fun getWorrys(@Header("Authorization") Authorization: String): Single<MutableList<Worry>>
-    suspend fun getWorrys(@Header("Authorization") Authorization: String,
+
+    suspend fun getWorrys(@Path("post_hashtag") post_hashtag: String,
                           @Query("currentPage") currentPage: Long,
-                          @Query("pageSize") pageSize: Long): MutableList<Worry>
+                          @Query("pageSize") pageSize: Long,
+                          @Query("sort") sort: String): MutableList<Worry>
 
     @GET("path/{id}/") //고민 받기
 //    fun getWorryById(@Path("id") id: Long, @Header("Authorization") Authorization: String): Single<Worry>

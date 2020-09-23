@@ -19,14 +19,14 @@ class WorryListViewModel(
     private var currentPage: Long = 0
     private var pageSize: Long = 15
 
-    fun InitWorrys() = launch {
+    fun InitWorrys(post_hashtag: String, sort: String) = launch {
         // 고민글을 추가하고 다시 고민리스트로 가면 0 페이지부터 다시 부름
         currentPage = 0
-        worryListState.value = repo.getWorrys(currentPage++, pageSize)
+        worryListState.value = repo.getWorrys(post_hashtag, currentPage++, pageSize, sort)
     }
 
-    fun getWorrys() = launch {
-        var newList = repo.getWorrys(currentPage++, pageSize)
+    fun getWorrys(post_hashtag: String, sort: String) = launch {
+        var newList = repo.getWorrys(post_hashtag, currentPage++, pageSize, sort)
         //새로 불러온 아이템들을 붙임
         for(item in newList) worryListState.value?.add(item)
     }
@@ -36,7 +36,7 @@ class WorryListViewModel(
 
     override fun handleEvent(event: WorryListEvent) {
         when (event) {
-            is WorryListEvent.OnStart -> getWorrys()
+//            is WorryListEvent.OnStart -> getWorrys()
             is WorryListEvent.OnWorryItemClick -> editWorry(event.worryId)
         }
     }

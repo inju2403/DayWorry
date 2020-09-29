@@ -8,6 +8,8 @@ import android.os.Bundle
 import android.util.Base64
 import android.util.Base64.NO_WRAP
 import android.util.Log
+import android.view.Gravity
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.inju.dayworry.MainActivity
 import com.inju.dayworry.R
@@ -34,8 +36,7 @@ class LoginActivity : AppCompatActivity() {
 
         kakao_login_button.setOnClickListener {
 //            var keyHash = getHashKey(this)
-//            Log.d(TAG, keyHash)
-
+//            Log.d(TAG, keyHash
             tryKaKaoLogin()
         }
 
@@ -95,6 +96,9 @@ class LoginActivity : AppCompatActivity() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ token ->
                 Log.i(TAG, "로그인 성공 ${token.accessToken}")
+//                var toast = Toast.makeText(this, "로그인 되었습니다", Toast.LENGTH_LONG)
+//                toast.setGravity(Gravity.BOTTOM, 0,300)
+//                toast.show()
 
                 // 우리 서버로 카카오 토큰 보내고 jwt 받는 로직 필요
 

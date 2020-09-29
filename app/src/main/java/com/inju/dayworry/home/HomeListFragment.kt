@@ -4,16 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.inju.dayworry.R
+import com.inju.dayworry.home.viewPager.DepthPageTransformer
 import com.inju.dayworry.home.viewPager.ZoomOutPageTransformer
 import com.inju.dayworry.utils.Constants.NUM_PAGES
 import kotlinx.android.synthetic.main.fragment_home_list.*
 
-//@RequiresApi(21)
+@RequiresApi(21)
 class HomeListFragment : Fragment() {
 
     private lateinit var viewPager: ViewPager2
@@ -36,8 +38,8 @@ class HomeListFragment : Fragment() {
         val pagerAdapter = ScreenSlidePagerAdapter(activity!!)
         viewPager.adapter = pagerAdapter
 
-        viewPager.setPageTransformer(ZoomOutPageTransformer())
-//        viewPager.setPageTransformer(DepthPageTransformer())
+//        viewPager.setPageTransformer(ZoomOutPageTransformer())
+        viewPager.setPageTransformer(DepthPageTransformer())
 
         counsel_list_view_pager.apply {
             adapter = viewPager.adapter

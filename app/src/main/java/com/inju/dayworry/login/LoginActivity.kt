@@ -2,6 +2,7 @@ package com.inju.dayworry.login
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -13,6 +14,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.inju.dayworry.MainActivity
 import com.inju.dayworry.R
+import com.inju.dayworry.retrofit.ApiService
+import com.inju.dayworry.retrofit.RetrofitClient
+import com.inju.dayworry.utils.Constants.API_BASE_URL
+import com.inju.dayworry.utils.Constants.PREFERENCE
 import com.inju.dayworry.utils.Constants.TAG
 import com.kakao.sdk.auth.LoginClient
 import com.kakao.sdk.auth.rx
@@ -22,6 +27,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import kotlinx.android.synthetic.main.activity_login.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 
@@ -34,10 +42,12 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        val pref = getSharedPreferences(PREFERENCE, MODE_PRIVATE)
+
         kakao_login_button.setOnClickListener {
 //            var keyHash = getHashKey(this)
 //            Log.d(TAG, keyHash
-            tryKaKaoLogin()
+            tryKaKaoLogin(pref)
         }
 
         naver_login_button.setOnClickListener {
@@ -86,7 +96,7 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
-    private fun tryKaKaoLogin() {
+    private fun tryKaKaoLogin(pref: SharedPreferences) {
         // 카카오톡이 설치되어 있으면 카카오톡으로 로그인, 아니면 카카오계정으로 로그인
         Single.just(LoginClient.instance.isKakaoTalkLoginAvailable(this))
             .flatMap { available ->
@@ -96,19 +106,46 @@ class LoginActivity : AppCompatActivity() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ token ->
                 Log.i(TAG, "로그인 성공 ${token.accessToken}")
-//                var toast = Toast.makeText(this, "로그인 되었습니다", Toast.LENGTH_LONG)
-//                toast.setGravity(Gravity.BOTTOM, 0,300)
-//                toast.show()
+                getUserToken(token.accessToken, pref)
 
-                // 우리 서버로 카카오 토큰 보내고 jwt 받는 로직 필요
-
-                //이미 프로필 설정 한번 했는지에 대한 처리 필요요
-                startActivity(Intent(this, SetProfileActivity::class.java))
-                finish()
             }, { error ->
                 Log.e(TAG, "로그인 실패", error)
             })
             .addTo(disposables)
+    }
+
+    fun getUserToken(token: String, pref: SharedPreferences) {
+        val editor = pref.edit()
+
+        val httpCall: ApiService? =
+            RetrofitClient.getClient(API_BASE_URL)!!.create(ApiService::class.java)
+        Log.d(TAG, "param token ${token}")
+        httpCall?.kakaoLogin(token)?.enqueue(object : Callback<String> {
+            override fun onFailure(call: Call<String>, t: Throwable) {
+                Log.d(TAG, "kakaologin - onFailed() called / t: ${t}")
+            }
+
+            override fun onResponse(call: Call<String>, response: Response<String>) {
+                when (response!!.code()) {
+                    200 -> {
+                        editor.putString("jwt", response.body())
+                        var toast = Toast.makeText(this@LoginActivity, "로그인 되었습니다", Toast.LENGTH_LONG)
+                        toast.setGravity(Gravity.BOTTOM, 0,300)
+                        toast.show()
+
+                        //이미 프로필 설정 한번 했는지에 대한 처리 필요요
+                        startActivity(Intent(this@LoginActivity, SetProfileActivity::class.java))
+                        finish()
+                    }
+                    400 -> {
+                        Log.d(TAG, "kakaologin - 400 onFailed() called / t: ${response.body()}")
+                        Toast.makeText(this@LoginActivity, "계정 정보를 확인해주세요", Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+
+        })
+
     }
 
 

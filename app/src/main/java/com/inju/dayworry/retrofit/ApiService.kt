@@ -2,10 +2,15 @@ package com.inju.dayworry.retrofit
 
 import com.inju.dayworry.model.pojo.Contents
 import com.inju.dayworry.model.pojo.Worry
+import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
 
 interface ApiService {
+
+    //카카오 로그인
+    @POST("users/login/kakao")
+    fun kakaoLogin(@Header("accessToken") accessToken: String): Call<String>
 
     @GET("posts/{tagName}") //고민 리스트 받기 -> 페이징 (현재페이지, 페이지당 아이템 갯수)
 //    fun getWorrys(@Header("Authorization") Authorization: String): Single<MutableList<Worry>>

@@ -13,6 +13,18 @@ import androidx.lifecycle.ViewModelProvider
 import com.inju.dayworry.R
 import com.inju.dayworry.worry.worryDetail.buildlogic.WorryDetailInjector
 import kotlinx.android.synthetic.main.activity_add_worry.*
+import kotlinx.android.synthetic.main.activity_add_worry.courseBtn
+import kotlinx.android.synthetic.main.activity_add_worry.dailyLiftBtn
+import kotlinx.android.synthetic.main.activity_add_worry.dateBtn
+import kotlinx.android.synthetic.main.activity_add_worry.employmentBtn
+import kotlinx.android.synthetic.main.activity_add_worry.familyBtn
+import kotlinx.android.synthetic.main.activity_add_worry.friendBtn
+import kotlinx.android.synthetic.main.activity_add_worry.healthBtn
+import kotlinx.android.synthetic.main.activity_add_worry.infantBtn
+import kotlinx.android.synthetic.main.activity_add_worry.jobBtn
+import kotlinx.android.synthetic.main.activity_add_worry.marriedBtn
+import kotlinx.android.synthetic.main.activity_add_worry.moneyBtn
+import kotlinx.android.synthetic.main.activity_add_worry.schoolBtn
 
 class AddWorryActivity : AppCompatActivity() {
 

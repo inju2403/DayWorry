@@ -1,6 +1,7 @@
 package com.inju.dayworry.worry.worryList
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -15,7 +16,20 @@ import com.inju.dayworry.R
 import com.inju.dayworry.utils.Constants.TAG
 import com.inju.dayworry.worry.worryDetail.WorryDetailActivity
 import com.inju.dayworry.worry.worryList.buildlogic.WorryListInjector
+import kotlinx.android.synthetic.main.activity_add_worry.*
 import kotlinx.android.synthetic.main.fragment_worry_list.*
+import kotlinx.android.synthetic.main.fragment_worry_list.courseBtn
+import kotlinx.android.synthetic.main.fragment_worry_list.dailyLiftBtn
+import kotlinx.android.synthetic.main.fragment_worry_list.dateBtn
+import kotlinx.android.synthetic.main.fragment_worry_list.employmentBtn
+import kotlinx.android.synthetic.main.fragment_worry_list.familyBtn
+import kotlinx.android.synthetic.main.fragment_worry_list.friendBtn
+import kotlinx.android.synthetic.main.fragment_worry_list.healthBtn
+import kotlinx.android.synthetic.main.fragment_worry_list.infantBtn
+import kotlinx.android.synthetic.main.fragment_worry_list.jobBtn
+import kotlinx.android.synthetic.main.fragment_worry_list.marriedBtn
+import kotlinx.android.synthetic.main.fragment_worry_list.moneyBtn
+import kotlinx.android.synthetic.main.fragment_worry_list.schoolBtn
 
 class WorryListFragment : Fragment() {
 
@@ -25,8 +39,12 @@ class WorryListFragment : Fragment() {
     private lateinit var scrollListener: PaginationScrollListener
     private lateinit var layoutManager: LinearLayoutManager
 
-    private var post_hashtag: String = "all"
     private var sort: String = "created_at" //정렬 기준 created_at or hits
+
+    var litePupleColor = "#9689FC" // 텍스트 색상
+    var superLiteGreyColor = "#cbcdd5" // 텍스트 색상
+
+    private var hashTag: String = "전체"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,7 +62,7 @@ class WorryListFragment : Fragment() {
         setLayoutManager()
         observeViewModel()
         recycleviewBottomDetection()
-
+        setTagBtn()
     }
 
     private fun setViewModel() {
@@ -100,18 +118,259 @@ class WorryListFragment : Fragment() {
                 var itemTotalCount = recyclerView.adapter!!.itemCount - 1
                 if (lastVisibleItemPosition == itemTotalCount) {
                     //todo
-                    worryListViewModel!!.getWorrys(post_hashtag)
+                    worryListViewModel!!.getWorrys(hashTag)
                 }
 
             }
         })
     }
 
+    private fun setTagBtn() {
+        wholeBtn.setOnClickListener {
+            if(it.isSelected) { //선택되어 있다면
+                wholeBtn.isSelected = false
+                wholeBtn.background = resources.getDrawable(R.drawable.tag_btn_unselect_style)
+                wholeBtn.setTextColor(Color.parseColor(superLiteGreyColor))
+            }
+            else {
+                hashTag = "전체"
+                resetBtnColor()
+                wholeBtn.isSelected = true
+                wholeBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
+                wholeBtn.setTextColor(Color.parseColor(litePupleColor))
+            }
+        }
+
+        dailyLiftBtn.setOnClickListener {
+            if(it.isSelected) { //선택되어 있다면
+                dailyLiftBtn.isSelected = false
+                dailyLiftBtn.background = resources.getDrawable(R.drawable.tag_btn_unselect_style)
+                dailyLiftBtn.setTextColor(Color.parseColor(superLiteGreyColor))
+            }
+            else {
+                hashTag = "일상"
+                resetBtnColor()
+                dailyLiftBtn.isSelected = true
+                dailyLiftBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
+                dailyLiftBtn.setTextColor(Color.parseColor(litePupleColor))
+            }
+        }
+
+        familyBtn.setOnClickListener {
+            if(it.isSelected) { //선택되어 있다면
+                familyBtn.isSelected = false
+                familyBtn.background = resources.getDrawable(R.drawable.tag_btn_unselect_style)
+                familyBtn.setTextColor(Color.parseColor(superLiteGreyColor))
+            }
+            else {
+                hashTag = "가족"
+                resetBtnColor()
+                familyBtn.isSelected = true
+                familyBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
+                familyBtn.setTextColor(Color.parseColor(litePupleColor))
+            }
+        }
+
+        friendBtn.setOnClickListener {
+            if(it.isSelected) { //선택되어 있다면
+                friendBtn.isSelected = false
+                friendBtn.background = resources.getDrawable(R.drawable.tag_btn_unselect_style)
+                friendBtn.setTextColor(Color.parseColor(superLiteGreyColor))
+            }
+            else {
+                hashTag = "친구"
+                resetBtnColor()
+                friendBtn.isSelected = true
+                friendBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
+                friendBtn.setTextColor(Color.parseColor(litePupleColor))
+            }
+        }
+
+        dateBtn.setOnClickListener {
+            if(it.isSelected) { //선택되어 있다면
+                dateBtn.isSelected = false
+                dateBtn.background = resources.getDrawable(R.drawable.tag_btn_unselect_style)
+                dateBtn.setTextColor(Color.parseColor(superLiteGreyColor))
+            }
+            else {
+                hashTag = "연애"
+                resetBtnColor()
+                dateBtn.isSelected = true
+                dateBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
+                dateBtn.setTextColor(Color.parseColor(litePupleColor))
+            }
+        }
+
+        schoolBtn.setOnClickListener {
+            if(it.isSelected) { //선택되어 있다면
+                schoolBtn.isSelected = false
+                schoolBtn.background = resources.getDrawable(R.drawable.tag_btn_unselect_style)
+                schoolBtn.setTextColor(Color.parseColor(superLiteGreyColor))
+            }
+            else {
+                hashTag = "학교"
+                resetBtnColor()
+                schoolBtn.isSelected = true
+                schoolBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
+                schoolBtn.setTextColor(Color.parseColor(litePupleColor))
+            }
+        }
+
+        jobBtn.setOnClickListener {
+            if(it.isSelected) { //선택되어 있다면
+                jobBtn.isSelected = false
+                jobBtn.background = resources.getDrawable(R.drawable.tag_btn_unselect_style)
+                jobBtn.setTextColor(Color.parseColor(superLiteGreyColor))
+            }
+            else {
+                hashTag = "직장"
+                resetBtnColor()
+                jobBtn.isSelected = true
+                jobBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
+                jobBtn.setTextColor(Color.parseColor(litePupleColor))
+            }
+        }
+
+        employmentBtn.setOnClickListener {
+            if(it.isSelected) { //선택되어 있다면
+                employmentBtn.isSelected = false
+                employmentBtn.background = resources.getDrawable(R.drawable.tag_btn_unselect_style)
+                employmentBtn.setTextColor(Color.parseColor(superLiteGreyColor))
+            }
+            else {
+                hashTag = "취업"
+                resetBtnColor()
+                employmentBtn.isSelected = true
+                employmentBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
+                employmentBtn.setTextColor(Color.parseColor(litePupleColor))
+            }
+        }
+
+        courseBtn.setOnClickListener {
+            if(it.isSelected) { //선택되어 있다면
+                courseBtn.isSelected = false
+                courseBtn.background = resources.getDrawable(R.drawable.tag_btn_unselect_style)
+                courseBtn.setTextColor(Color.parseColor(superLiteGreyColor))
+            }
+            else {
+                hashTag = "진로"
+                resetBtnColor()
+                courseBtn.isSelected = true
+                courseBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
+                courseBtn.setTextColor(Color.parseColor(litePupleColor))
+            }
+        }
+
+        moneyBtn.setOnClickListener {
+            if(it.isSelected) { //선택되어 있다면
+                moneyBtn.isSelected = false
+                moneyBtn.background = resources.getDrawable(R.drawable.tag_btn_unselect_style)
+                moneyBtn.setTextColor(Color.parseColor(superLiteGreyColor))
+            }
+            else {
+                hashTag = "돈"
+                resetBtnColor()
+                moneyBtn.isSelected = true
+                moneyBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
+                moneyBtn.setTextColor(Color.parseColor(litePupleColor))
+            }
+        }
+
+        healthBtn.setOnClickListener {
+            if(it.isSelected) { //선택되어 있다면
+                healthBtn.isSelected = false
+                healthBtn.background = resources.getDrawable(R.drawable.tag_btn_unselect_style)
+                healthBtn.setTextColor(Color.parseColor(superLiteGreyColor))
+            }
+            else {
+                hashTag = "건강"
+                resetBtnColor()
+                healthBtn.isSelected = true
+                healthBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
+                healthBtn.setTextColor(Color.parseColor(litePupleColor))
+            }
+        }
+
+        marriedBtn.setOnClickListener {
+            if(it.isSelected) { //선택되어 있다면
+                marriedBtn.isSelected = false
+                marriedBtn.background = resources.getDrawable(R.drawable.tag_btn_unselect_style)
+                marriedBtn.setTextColor(Color.parseColor(superLiteGreyColor))
+            }
+            else {
+                hashTag = "기혼"
+                resetBtnColor()
+                marriedBtn.isSelected = true
+                marriedBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
+                marriedBtn.setTextColor(Color.parseColor(litePupleColor))
+            }
+        }
+
+        infantBtn.setOnClickListener {
+            if(it.isSelected) { //선택되어 있다면
+                infantBtn.isSelected = false
+                infantBtn.background = resources.getDrawable(R.drawable.tag_btn_unselect_style)
+                infantBtn.setTextColor(Color.parseColor(superLiteGreyColor))
+            }
+            else {
+                hashTag = "육아"
+                resetBtnColor()
+                infantBtn.isSelected = true
+                infantBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
+                infantBtn.setTextColor(Color.parseColor(litePupleColor))
+            }
+        }
+    }
+
+    private fun resetBtnColor() {
+        wholeBtn.setTextColor(Color.parseColor(superLiteGreyColor))
+        dailyLiftBtn.setTextColor(Color.parseColor(superLiteGreyColor))
+        familyBtn.setTextColor(Color.parseColor(superLiteGreyColor))
+        friendBtn.setTextColor(Color.parseColor(superLiteGreyColor))
+        dateBtn.setTextColor(Color.parseColor(superLiteGreyColor))
+        schoolBtn.setTextColor(Color.parseColor(superLiteGreyColor))
+        jobBtn.setTextColor(Color.parseColor(superLiteGreyColor))
+        employmentBtn.setTextColor(Color.parseColor(superLiteGreyColor))
+        courseBtn.setTextColor(Color.parseColor(superLiteGreyColor))
+        moneyBtn.setTextColor(Color.parseColor(superLiteGreyColor))
+        healthBtn.setTextColor(Color.parseColor(superLiteGreyColor))
+        marriedBtn.setTextColor(Color.parseColor(superLiteGreyColor))
+        infantBtn.setTextColor(Color.parseColor(superLiteGreyColor))
+
+        wholeBtn.background = resources.getDrawable(R.drawable.tag_btn_unselect_style)
+        dailyLiftBtn.background = resources.getDrawable(R.drawable.tag_btn_unselect_style)
+        familyBtn.background = resources.getDrawable(R.drawable.tag_btn_unselect_style)
+        friendBtn.background = resources.getDrawable(R.drawable.tag_btn_unselect_style)
+        dateBtn.background = resources.getDrawable(R.drawable.tag_btn_unselect_style)
+        schoolBtn.background = resources.getDrawable(R.drawable.tag_btn_unselect_style)
+        jobBtn.background = resources.getDrawable(R.drawable.tag_btn_unselect_style)
+        employmentBtn.background = resources.getDrawable(R.drawable.tag_btn_unselect_style)
+        courseBtn.background = resources.getDrawable(R.drawable.tag_btn_unselect_style)
+        moneyBtn.background = resources.getDrawable(R.drawable.tag_btn_unselect_style)
+        healthBtn.background = resources.getDrawable(R.drawable.tag_btn_unselect_style)
+        marriedBtn.background = resources.getDrawable(R.drawable.tag_btn_unselect_style)
+        dailyLiftBtn.background = resources.getDrawable(R.drawable.tag_btn_unselect_style)
+
+        wholeBtn.isSelected = false
+        dailyLiftBtn.isSelected = false
+        familyBtn.isSelected = false
+        friendBtn.isSelected = false
+        dateBtn.isSelected = false
+        schoolBtn.isSelected = false
+        jobBtn.isSelected = false
+        employmentBtn.isSelected = false
+        courseBtn.isSelected = false
+        moneyBtn.isSelected = false
+        healthBtn.isSelected = false
+        marriedBtn.isSelected = false
+        infantBtn.isSelected = false
+    }
+
     override fun onResume() {
         super.onResume()
 
         // 고민글을 추가하고 다시 고민리스트로 가면 0 페이지부터 다시 부름
-//        worryListViewModel!!.InitWorrys(post_hashtag)
+//        worryListViewModel!!.InitWorrys(hashTag)
 //        Log.d(TAG,"리스트: ${worryListViewModel!!.worryListLiveData.value}")
     }
 

@@ -11,35 +11,39 @@ data class Worry (
     @Expose
     var post_id: Long = 0,
 
-    @SerializedName("user_id")
+    @SerializedName("created_date")
     @Expose
-    var user_id: Long = 0,
+    var created_date: Date = Date(),
 
-    @SerializedName("title")
+    @SerializedName("modified_date")
     @Expose
-    var title: String = "",
+    var modified_date: Date = Date(),
 
     @SerializedName("content")
     @Expose
     var content: String = "",
 
-    @SerializedName("post_hashtag")
+    @SerializedName("expired")
     @Expose
-    var post_hashtag: String = "",
-
-    @SerializedName("comments")
-    @Expose
-    var comments: MutableList<Counsel> = mutableListOf<Counsel>(),
+    var expired: Int = 0,
 
     @SerializedName("hits")
     @Expose
     var hits: Long = 0,
 
-    @SerializedName("likes")
+    @SerializedName("post_likes")
     @Expose
-    var likes: Long = 0,
+    var post_likes: Int = 0,
 
-    @SerializedName("expired")
+    @SerializedName("post_hashtag")
     @Expose
-    var expired: Boolean = false
+    var post_hashtag: String = "",
+
+    @SerializedName("title")
+    @Expose
+    var title: String = "",
+
+    @SerializedName("user_id")
+    @Expose
+    var user_id: Long = 0
 )

@@ -13,7 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".worry.worryDetail.WorryDetailActivity"></activity>
+        <activity
+            android:name=".worry.worryDetail.WorryDetailActivity"
+            android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".login.SetProfileActivity" />
         <activity android:name=".login.LoginActivity">
             <intent-filter>
@@ -22,9 +24,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".counsel.CounselDetailActivity"
-            android:windowSoftInputMode="adjustResize" />
         <activity android:name=".worry.worryDetail.AddWorryActivity" />
         <activity android:name=".MainActivity">
 

@@ -50,10 +50,10 @@ class AddWorryActivity : AppCompatActivity() {
         setTextChangeListener()
         setTagBtn()
 
-//        val worryId = intent.getStringExtra("WORRY_ID")
-//        if(worryId != null) {
-//            worryLoading(worryId)
-//        }
+        val worryId = intent.getLongExtra("WORRY_ID", -1)
+        if(worryId != (-1).toLong()) {
+            worryLoading(worryId)
+        }
     }
 
     private fun setViewModel() {

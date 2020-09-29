@@ -1,4 +1,4 @@
-package com.inju.dayworry.counsel.counselDetail.buildlogic
+package com.inju.dayworry.counselList.buildlogic
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -8,22 +8,23 @@ import com.inju.dayworry.retrofit.ApiService
 import com.inju.dayworry.retrofit.RetrofitClient
 import com.inju.dayworry.utils.Constants.API_BASE_URL
 
-class CounselDetailInjector (application: Application): AndroidViewModel(application) {
+
+class CounselListInjector (application: Application): AndroidViewModel(application) {
 
     val app: Application = application
 
-    val httpCall: ApiService? =
+    private val httpCall: ApiService? =
         RetrofitClient.getClient(API_BASE_URL)!!.create(
             ApiService::class.java
         )
 
-    private fun getCounselDetailRepository(): IDayWorryRepository {
+    private fun getCounselListRepository(): IDayWorryRepository {
         return DayWorryRepoImpl(httpCall, app)
 //        return DayWorryRepoImpl(app)
     }
 
-    fun provideCounselDetailViewModelFactory(): CounselDetailViewModelFactory =
-        CounselDetailViewModelFactory(
-            getCounselDetailRepository()
+    fun provideCounselListViewModelFactory(): CounselListViewModelFactory =
+        CounselListViewModelFactory(
+            getCounselListRepository()
         )
 }

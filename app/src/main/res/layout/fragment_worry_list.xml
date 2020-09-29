@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".worry.worryList.WorryListFragment">
+    tools:context=".worry.worryList.WorryListFragment"
+    android:background="@color/darkNavyColor">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/tagLayout"
@@ -19,159 +20,174 @@
             android:id="@+id/tagList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:scrollbars="none"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:scrollbars="none" >
+            app:layout_constraintVertical_bias="0.0">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/wholeBtn"
                     android:layout_width="68dp"
                     android:layout_height="40dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
                     android:background="@drawable/tag_btn_unselect_style"
                     android:text="전체"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
                     android:textColor="@color/superLiteGreyColor" />
 
                 <Button
                     android:id="@+id/dailyLiftBtn"
                     android:layout_width="68dp"
                     android:layout_height="40dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
                     android:background="@drawable/tag_btn_unselect_style"
                     android:text="일상"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
                     android:textColor="@color/superLiteGreyColor" />
 
                 <Button
                     android:id="@+id/familyBtn"
                     android:layout_width="68dp"
                     android:layout_height="40dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
                     android:background="@drawable/tag_btn_unselect_style"
                     android:text="가족"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
                     android:textColor="@color/superLiteGreyColor" />
 
                 <Button
                     android:id="@+id/friendBtn"
                     android:layout_width="68dp"
                     android:layout_height="40dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
                     android:background="@drawable/tag_btn_unselect_style"
                     android:text="친구"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
                     android:textColor="@color/superLiteGreyColor" />
 
                 <Button
                     android:id="@+id/dateBtn"
                     android:layout_width="68dp"
                     android:layout_height="40dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
                     android:background="@drawable/tag_btn_unselect_style"
                     android:text="연애"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
                     android:textColor="@color/superLiteGreyColor" />
 
                 <Button
                     android:id="@+id/schoolBtn"
                     android:layout_width="68dp"
                     android:layout_height="40dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
                     android:background="@drawable/tag_btn_unselect_style"
                     android:text="학교"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
                     android:textColor="@color/superLiteGreyColor" />
 
                 <Button
                     android:id="@+id/jobBtn"
                     android:layout_width="68dp"
                     android:layout_height="40dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
                     android:background="@drawable/tag_btn_unselect_style"
                     android:text="직장"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
                     android:textColor="@color/superLiteGreyColor" />
 
                 <Button
                     android:id="@+id/employmentBtn"
                     android:layout_width="68dp"
                     android:layout_height="40dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
                     android:background="@drawable/tag_btn_unselect_style"
                     android:text="취업"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
                     android:textColor="@color/superLiteGreyColor" />
 
                 <Button
                     android:id="@+id/courseBtn"
                     android:layout_width="68dp"
                     android:layout_height="40dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
                     android:background="@drawable/tag_btn_unselect_style"
                     android:text="진로"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
                     android:textColor="@color/superLiteGreyColor" />
 
                 <Button
                     android:id="@+id/moneyBtn"
                     android:layout_width="68dp"
                     android:layout_height="40dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
                     android:background="@drawable/tag_btn_unselect_style"
                     android:text="돈"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
                     android:textColor="@color/superLiteGreyColor" />
 
                 <Button
                     android:id="@+id/healthBtn"
                     android:layout_width="68dp"
                     android:layout_height="40dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
                     android:background="@drawable/tag_btn_unselect_style"
                     android:text="건강"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
                     android:textColor="@color/superLiteGreyColor" />
 
                 <Button
                     android:id="@+id/marriedBtn"
                     android:layout_width="68dp"
                     android:layout_height="40dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
                     android:background="@drawable/tag_btn_unselect_style"
                     android:text="기혼"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
                     android:textColor="@color/superLiteGreyColor" />
 
                 <Button
                     android:id="@+id/infantBtn"
                     android:layout_width="68dp"
                     android:layout_height="40dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
                     android:background="@drawable/tag_btn_unselect_style"
                     android:text="육아"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
                     android:textColor="@color/superLiteGreyColor" />
             </LinearLayout>
         </HorizontalScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <TextView
+        android:id="@+id/introTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="18dp"
+        android:text="새로운 고민"
+        android:textSize="20sp"
+        android:textColor="@color/whiteColor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tagLayout" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/worryListView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="14dp"
         android:background="@color/darkNavyColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tagLayout"
+        app:layout_constraintTop_toBottomOf="@+id/introTitle"
         tools:listitem="@layout/item_worry">
 
     </androidx.recyclerview.widget.RecyclerView>
@@ -184,5 +200,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/pagingLoadingUi"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/worryListView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

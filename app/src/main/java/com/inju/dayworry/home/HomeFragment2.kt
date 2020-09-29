@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.inju.dayworry.R
-import com.inju.dayworry.counsel.CounselDetailActivity
+import com.inju.dayworry.worry.worryDetail.WorryDetailActivity
 import kotlinx.android.synthetic.main.fragment_home2.*
 
 class HomeFragment2 : Fragment() {
@@ -24,7 +24,7 @@ class HomeFragment2 : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         tmpImage.setOnClickListener {
-            startActivity(Intent(activity!!, CounselDetailActivity::class.java))
+            startActivity(Intent(activity!!, WorryDetailActivity::class.java))
         }
     }
 

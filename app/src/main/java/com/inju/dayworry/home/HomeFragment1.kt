@@ -7,9 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.inju.dayworry.MainActivity
 import com.inju.dayworry.R
-import com.inju.dayworry.counsel.CounselDetailActivity
+import com.inju.dayworry.worry.worryDetail.WorryDetailActivity
 import kotlinx.android.synthetic.main.fragment_home1.*
 
 class HomeFragment1 : Fragment() {
@@ -41,7 +40,7 @@ class HomeFragment1 : Fragment() {
         }
 
         tmpImage.setOnClickListener {
-            startActivity(Intent(activity!!, CounselDetailActivity::class.java))
+            startActivity(Intent(activity!!, WorryDetailActivity::class.java))
         }
     }
 }

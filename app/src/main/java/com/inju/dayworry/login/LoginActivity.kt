@@ -45,6 +45,7 @@ class LoginActivity : AppCompatActivity() {
         val pref = getSharedPreferences(PREFERENCE, MODE_PRIVATE)
 
         kakao_login_button.setOnClickListener {
+
 //            var keyHash = getHashKey(this)
 //            Log.d(TAG, keyHash
             tryKaKaoLogin(pref)

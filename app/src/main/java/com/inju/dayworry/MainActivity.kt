@@ -3,6 +3,7 @@ package com.inju.dayworry
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModelProvider
 import com.inju.dayworry.home.HomeListFragment
 import com.inju.dayworry.mypage.MyPageFragment
@@ -13,6 +14,7 @@ import com.inju.dayworry.worry.worryList.WorryListViewModel
 import com.inju.dayworry.worry.worryList.buildlogic.WorryListInjector
 import kotlinx.android.synthetic.main.activity_main.*
 
+@RequiresApi(21)
 class MainActivity : AppCompatActivity() {
 
     private var worryListViewModel: WorryListViewModel ?= null
@@ -87,6 +89,7 @@ class MainActivity : AppCompatActivity() {
 
         worryTapView.setOnClickListener {
             if(worryJudge == 0) {
+
                 counselJudge = 0
                 worryJudge = 1
                 notiJudge = 0

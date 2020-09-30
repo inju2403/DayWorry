@@ -2,19 +2,48 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".worry.worryList.WorryListFragment"
-    android:background="@color/darkNavyColor">
+    android:background="@color/darkNavyColor"
+    tools:context=".worry.worryList.WorryListFragment">
+
+    <EditText
+        android:id="@+id/searchTextEdit"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="20dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="43dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textColor="@color/whiteColor"
+        android:background="@color/liteNavyColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/searchImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="11dp"
+        android:src="@drawable/ic_search"
+        app:layout_constraintBottom_toBottomOf="@+id/searchTextEdit"
+        app:layout_constraintEnd_toEndOf="@+id/searchTextEdit"
+        app:layout_constraintTop_toTopOf="@+id/searchTextEdit" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/tagLayout"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:layout_marginTop="8dp"
         android:background="@color/darkNavyColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleEditLayout">
+        app:layout_constraintTop_toBottomOf="@+id/searchTextEdit">
 
         <HorizontalScrollView
             android:id="@+id/tagList"
@@ -25,8 +54,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0">
+            app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -37,7 +65,7 @@
                     android:id="@+id/wholeBtn"
                     android:layout_width="68dp"
                     android:layout_height="40dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="20dp"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/tag_btn_unselect_style"
                     android:text="전체"
@@ -158,6 +186,7 @@
                     android:layout_width="68dp"
                     android:layout_height="40dp"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginRight="20dp"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/tag_btn_unselect_style"
                     android:text="육아"
@@ -173,8 +202,8 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="18dp"
         android:text="새로운 고민"
-        android:textSize="20sp"
         android:textColor="@color/whiteColor"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tagLayout" />
 

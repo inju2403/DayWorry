@@ -2,7 +2,7 @@ package com.inju.dayworry.counselList
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.inju.dayworry.model.pojo.Worry
+import com.inju.dayworry.model.pojo.Counsel
 import com.inju.dayworry.model.repository.IDayWorryRepository
 import com.inju.dayworry.utils.BaseViewModel
 import kotlinx.coroutines.launch
@@ -13,8 +13,8 @@ class CounselListViewModel(
     uiContext: CoroutineContext
 ): BaseViewModel<CounselListEvent>(uiContext) {
 
-    private val counselListState = MutableLiveData<MutableList<Worry>>()
-    val counselList: LiveData<MutableList<Worry>> get() = counselListState
+    private val counselListState = MutableLiveData<MutableList<Counsel>>()
+    val counselList: LiveData<MutableList<Counsel>> get() = counselListState
 
     private var currentPage: Int = 0
 

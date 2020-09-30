@@ -7,17 +7,20 @@ import androidx.recyclerview.widget.ListAdapter
 import com.inju.dayworry.R
 import com.inju.dayworry.model.pojo.Worry
 import kotlinx.android.synthetic.main.item_worry.view.*
+import java.text.SimpleDateFormat
 
-class WorryListAdapter(val event: MutableLiveData<WorryListEvent> = MutableLiveData()) : ListAdapter<Worry, ItemViewHolder>(
+class WorryListAdapter(val event: MutableLiveData<WorryListEvent> = MutableLiveData()) : ListAdapter<Worry, WorryItemViewHolder>(
     WorryDiffUtilCallback())
 {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
+    private val timeFormat = SimpleDateFormat("mm : ss")
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WorryItemViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_worry, parent, false)
-        return ItemViewHolder(itemView)
+        return WorryItemViewHolder(itemView)
     }
 
-    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: WorryItemViewHolder, position: Int) {
         getItem(position).let {
             var worryId = it?.post_id
             holder.containerView.title.text = it.title
@@ -25,10 +28,7 @@ class WorryListAdapter(val event: MutableLiveData<WorryListEvent> = MutableLiveD
             holder.containerView.setOnClickListener {
                 event.value = WorryListEvent.OnWorryItemClick(worryId!!)
             }
-//            holder.containerView.yearView.text = "'${yearFormat.format(it.createdAt)}"
-//            holder.containerView.dateView.text = dateFormat.format(it.createdAt)
-//            holder.containerView.dayOfTheWeekView.text = weekdayFormat.format(it.createdAt)
-//            holder.containerView.tag = it.post_id
+            holder.containerView.worryItemTimeText.text = timeFormat.format(it.modified_date)
         }
     }
 

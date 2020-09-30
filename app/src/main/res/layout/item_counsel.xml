@@ -60,14 +60,14 @@
                 app:layout_constraintTop_toTopOf="@+id/worryItemTimeImage" />
 
             <ImageView
-                android:id="@+id/commentImage"
+                android:id="@+id/likeImage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 app:layout_constraintBottom_toBottomOf="@+id/worryItemTimeText"
                 app:layout_constraintStart_toEndOf="@+id/worryItemTimeText"
                 app:layout_constraintTop_toTopOf="@+id/worryItemTimeText"
-                app:srcCompat="@drawable/ic_comment" />
+                app:srcCompat="@drawable/ic_like" />
 
             <TextView
                 android:id="@+id/commentCountText"
@@ -77,8 +77,8 @@
                 android:text="6"
                 android:textColor="@color/whiteColor"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/commentImage"
-                app:layout_constraintStart_toEndOf="@+id/commentImage"
+                app:layout_constraintBottom_toBottomOf="@+id/likeImage"
+                app:layout_constraintStart_toEndOf="@+id/likeImage"
                 app:layout_constraintTop_toTopOf="@+id/worryItemTimeImage" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

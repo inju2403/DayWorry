@@ -38,6 +38,7 @@ import java.security.NoSuchAlgorithmException
 class LoginActivity : AppCompatActivity() {
 
     private val disposables = CompositeDisposable()
+    private val httpCall: ApiService? = RetrofitClient.getClient(API_BASE_URL)!!.create(ApiService::class.java)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,11 +50,10 @@ class LoginActivity : AppCompatActivity() {
 
 //            var keyHash = getHashKey(this)
 //            Log.d(TAG, keyHash)
-            if(pref.getString("jwt", "").toString() != "") {
-                //jwt가 아직 유효한지 검사해야함 (다른기기에서 로그인했을시에 만료되기 때문)
-                //임시 라우팅 코드
-                startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-                finish()
+            val jwt = pref.getString("jwt", "").toString()
+            if(jwt != "") {
+                //jwt가 아직 유효한지 검사 (다른기기에서 로그인했을시에 만료되기 때문)
+                verifyJWT(jwt, pref)
             }
             else tryKaKaoLogin(pref)
         }
@@ -125,8 +125,6 @@ class LoginActivity : AppCompatActivity() {
     fun getUserToken(token: String, pref: SharedPreferences) {
         val editor = pref.edit()
 
-        val httpCall: ApiService? =
-            RetrofitClient.getClient(API_BASE_URL)!!.create(ApiService::class.java)
         Log.d(TAG, "param token ${token}")
         httpCall?.kakaoLogin(token)?.enqueue(object : Callback<KAKAO_RETURN_POJO> {
             override fun onFailure(call: Call<KAKAO_RETURN_POJO>, t: Throwable) {
@@ -154,6 +152,27 @@ class LoginActivity : AppCompatActivity() {
 
         })
 
+    }
+
+    fun verifyJWT(jwt: String, pref: SharedPreferences) {
+        httpCall?.verifyJWT(jwt)?.enqueue(object : Callback<Void> {
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                Log.d(TAG, "kakaologin - onFailed() called / t: ${t}")
+            }
+
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                when (response!!.code()) {
+                    200 -> {
+                        startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                        finish()
+                    }
+                    400 -> {
+                        tryKaKaoLogin(pref)
+                    }
+                }
+            }
+
+        })
     }
 
 

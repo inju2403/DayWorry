@@ -13,6 +13,10 @@ interface ApiService {
     @POST("users/login/kakao")
     fun kakaoLogin(@Header("accessToken") accessToken: String): Call<KAKAO_RETURN_POJO>
 
+    //토큰 검증
+    @POST("users/check")
+    fun verifyJWT(@Header("Authorization") Authorization: String): Call<Void>
+
     @GET("posts/{tagName}") //고민 리스트 받기 -> 페이징 (현재페이지, 페이지당 아이템 갯수)
 //    fun getWorrys(@Header("Authorization") Authorization: String): Single<MutableList<Worry>>
 

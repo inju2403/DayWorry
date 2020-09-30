@@ -3,11 +3,14 @@ package com.inju.dayworry
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Gravity
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModelProvider
 import com.inju.dayworry.home.HomeListFragment
 import com.inju.dayworry.mypage.MyPageFragment
 import com.inju.dayworry.notification.NotiFragment
+import com.inju.dayworry.utils.Constants.PREFERENCE
 import com.inju.dayworry.worry.worryList.WorryListFragment
 import com.inju.dayworry.worry.worryDetail.AddWorryActivity
 import com.inju.dayworry.worry.worryList.WorryListViewModel
@@ -42,9 +45,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val pref = getSharedPreferences(PREFERENCE, MODE_PRIVATE)
+        val jwt = pref.getString("jwt", "").toString()
+
         setViewModel()
         setFragment()
-        setBottomBar()
+        setBottomBar(jwt)
     }
 
     private fun setViewModel() {
@@ -71,7 +77,7 @@ class MainActivity : AppCompatActivity() {
         fragmentManager.beginTransaction().hide(worryListFragment).commit()
     }
 
-    private fun setBottomBar() {
+    private fun setBottomBar(jwt: String) {
 
         counselTapView.setOnClickListener {
             if(counselJudge == 0) {
@@ -103,34 +109,53 @@ class MainActivity : AppCompatActivity() {
         }
 
         addTapView.setOnClickListener {
-            startActivityForResult(Intent(this@MainActivity, AddWorryActivity::class.java), REQUEST_MAINACTIVITY_CODE)
+            if(jwt == "") {
+                var toast = Toast.makeText(this@MainActivity, "로그인 후에 이용해주세요", Toast.LENGTH_LONG)
+                toast.setGravity(Gravity.BOTTOM, 0,300)
+                toast.show()
+            }
+            else startActivityForResult(Intent(this@MainActivity, AddWorryActivity::class.java), REQUEST_MAINACTIVITY_CODE)
         }
 
         notiTapView.setOnClickListener {
-            if(notiJudge == 0) {
-                counselJudge = 0
-                worryJudge = 0
-                notiJudge = 1
-                myPageJudge = 0
-                counselTapView.setImageResource(R.drawable.ic_home_unchecked)
-                worryTapView.setImageResource(R.drawable.ic_worry_list_unchecked)
-                notiTapView.setImageResource(R.drawable.ic_noti_checked)
-                myPageTapView.setImageResource(R.drawable.ic_mypage_uncheced)
-                switchFragment(FRAG_NOTIFICATION)
+            if(jwt == "") {
+                var toast = Toast.makeText(this@MainActivity, "로그인 후에 이용해주세요", Toast.LENGTH_LONG)
+                toast.setGravity(Gravity.BOTTOM, 0,300)
+                toast.show()
+            }
+            else {
+                if (notiJudge == 0) {
+                    counselJudge = 0
+                    worryJudge = 0
+                    notiJudge = 1
+                    myPageJudge = 0
+                    counselTapView.setImageResource(R.drawable.ic_home_unchecked)
+                    worryTapView.setImageResource(R.drawable.ic_worry_list_unchecked)
+                    notiTapView.setImageResource(R.drawable.ic_noti_checked)
+                    myPageTapView.setImageResource(R.drawable.ic_mypage_uncheced)
+                    switchFragment(FRAG_NOTIFICATION)
+                }
             }
         }
 
         myPageTapView.setOnClickListener {
-            if(myPageJudge == 0) {
-                counselJudge = 0
-                worryJudge = 0
-                notiJudge = 0
-                myPageJudge = 1
-                counselTapView.setImageResource(R.drawable.ic_home_unchecked)
-                worryTapView.setImageResource(R.drawable.ic_worry_list_unchecked)
-                notiTapView.setImageResource(R.drawable.ic_noti_unchecked)
-                myPageTapView.setImageResource(R.drawable.ic_mypage_checed)
-                switchFragment(FRAG_MYPAGE)
+            if(jwt == "") {
+                var toast = Toast.makeText(this@MainActivity, "로그인 후에 이용해주세요", Toast.LENGTH_LONG)
+                toast.setGravity(Gravity.BOTTOM, 0,300)
+                toast.show()
+            }
+            else {
+                if (myPageJudge == 0) {
+                    counselJudge = 0
+                    worryJudge = 0
+                    notiJudge = 0
+                    myPageJudge = 1
+                    counselTapView.setImageResource(R.drawable.ic_home_unchecked)
+                    worryTapView.setImageResource(R.drawable.ic_worry_list_unchecked)
+                    notiTapView.setImageResource(R.drawable.ic_noti_unchecked)
+                    myPageTapView.setImageResource(R.drawable.ic_mypage_checed)
+                    switchFragment(FRAG_MYPAGE)
+                }
             }
         }
     }

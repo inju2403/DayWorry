@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.inju.dayworry.MainActivity
 import com.inju.dayworry.R
+import com.inju.dayworry.model.pojo.KAKAO_RETURN_POJO
 import com.inju.dayworry.retrofit.ApiService
 import com.inju.dayworry.retrofit.RetrofitClient
 import com.inju.dayworry.utils.Constants.API_BASE_URL
@@ -47,8 +48,14 @@ class LoginActivity : AppCompatActivity() {
         kakao_login_button.setOnClickListener {
 
 //            var keyHash = getHashKey(this)
-//            Log.d(TAG, keyHash
-            tryKaKaoLogin(pref)
+//            Log.d(TAG, keyHash)
+            if(pref.getString("jwt", "").toString() != "") {
+                //jwt가 아직 유효한지 검사해야함 (다른기기에서 로그인했을시에 만료되기 때문)
+                //임시 라우팅 코드
+                startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                finish()
+            }
+            else tryKaKaoLogin(pref)
         }
 
         naver_login_button.setOnClickListener {
@@ -121,20 +128,19 @@ class LoginActivity : AppCompatActivity() {
         val httpCall: ApiService? =
             RetrofitClient.getClient(API_BASE_URL)!!.create(ApiService::class.java)
         Log.d(TAG, "param token ${token}")
-        httpCall?.kakaoLogin(token)?.enqueue(object : Callback<String> {
-            override fun onFailure(call: Call<String>, t: Throwable) {
+        httpCall?.kakaoLogin(token)?.enqueue(object : Callback<KAKAO_RETURN_POJO> {
+            override fun onFailure(call: Call<KAKAO_RETURN_POJO>, t: Throwable) {
                 Log.d(TAG, "kakaologin - onFailed() called / t: ${t}")
             }
 
-            override fun onResponse(call: Call<String>, response: Response<String>) {
+            override fun onResponse(call: Call<KAKAO_RETURN_POJO>, response: Response<KAKAO_RETURN_POJO>) {
                 when (response!!.code()) {
                     200 -> {
-                        editor.putString("jwt", response.body())
-                        var toast = Toast.makeText(this@LoginActivity, "로그인 되었습니다", Toast.LENGTH_LONG)
+                        editor.putString("jwt", response.body()?.jwt.toString())
+                        var toast = Toast.makeText(this@LoginActivity, "로그인 jwt: ${response.body()?.jwt.toString()}", Toast.LENGTH_LONG)
                         toast.setGravity(Gravity.BOTTOM, 0,300)
                         toast.show()
 
-                        //이미 프로필 설정 한번 했는지에 대한 처리 필요요
                         startActivity(Intent(this@LoginActivity, SetProfileActivity::class.java))
                         finish()
                     }

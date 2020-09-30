@@ -81,66 +81,66 @@
             android:id="@+id/dailyLiftBtn"
             android:layout_width="68dp"
             android:layout_height="40dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="56dp"
-            android:layout_marginEnd="16dp"
             android:background="@drawable/tag_btn_unselect_style"
             android:text="일상"
             android:textColor="@color/superLiteGreyColor"
-            app:layout_constraintEnd_toStartOf="@+id/familyBtn"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/familyBtn"
             android:layout_width="68dp"
             android:layout_height="40dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="16dp"
             android:background="@drawable/tag_btn_unselect_style"
             android:text="가족"
             android:textColor="@color/superLiteGreyColor"
-            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintStart_toEndOf="@+id/dailyLiftBtn"
             app:layout_constraintTop_toTopOf="@+id/dailyLiftBtn" />
 
         <Button
             android:id="@+id/friendBtn"
-            android:layout_width="68dp"
+            android:layout_width="0dp"
             android:layout_height="40dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
             android:background="@drawable/tag_btn_unselect_style"
-            android:text="친구"
+            android:text="친구사이"
             android:textColor="@color/superLiteGreyColor"
-            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintStart_toEndOf="@+id/familyBtn"
             app:layout_constraintTop_toTopOf="@+id/familyBtn" />
 
         <Button
             android:id="@+id/dateBtn"
             android:layout_width="68dp"
             android:layout_height="40dp"
-            android:layout_marginStart="16dp"
-            android:background="@drawable/tag_btn_unselect_style"
-            android:text="연애"
-            android:textColor="@color/superLiteGreyColor"
-            app:layout_constraintStart_toEndOf="@+id/friendBtn"
-            app:layout_constraintTop_toTopOf="@+id/friendBtn" />
-
-        <Button
-            android:id="@+id/schoolBtn"
-            android:layout_width="68dp"
-            android:layout_height="40dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/tag_btn_unselect_style"
-            android:text="학교"
+            android:text="연애"
             android:textColor="@color/superLiteGreyColor"
             app:layout_constraintStart_toStartOf="@+id/dailyLiftBtn"
             app:layout_constraintTop_toBottomOf="@+id/dailyLiftBtn" />
 
         <Button
+            android:id="@+id/schoolBtn"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/tag_btn_unselect_style"
+            android:text="학교생활"
+            android:textColor="@color/superLiteGreyColor"
+            app:layout_constraintStart_toStartOf="@+id/familyBtn"
+            app:layout_constraintTop_toBottomOf="@+id/familyBtn" />
+
+        <Button
             android:id="@+id/jobBtn"
-            android:layout_width="68dp"
+            android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/tag_btn_unselect_style"
-            android:text="직장"
+            android:text="직장생활"
             android:textColor="@color/superLiteGreyColor"
             app:layout_constraintStart_toEndOf="@+id/schoolBtn"
             app:layout_constraintTop_toBottomOf="@+id/familyBtn" />
@@ -153,8 +153,8 @@
             android:background="@drawable/tag_btn_unselect_style"
             android:text="취업"
             android:textColor="@color/superLiteGreyColor"
-            app:layout_constraintStart_toStartOf="@+id/friendBtn"
-            app:layout_constraintTop_toBottomOf="@+id/friendBtn" />
+            app:layout_constraintStart_toStartOf="@+id/dateBtn"
+            app:layout_constraintTop_toBottomOf="@+id/dateBtn" />
 
         <Button
             android:id="@+id/courseBtn"
@@ -164,38 +164,38 @@
             android:background="@drawable/tag_btn_unselect_style"
             android:text="진로"
             android:textColor="@color/superLiteGreyColor"
-            app:layout_constraintStart_toStartOf="@+id/dateBtn"
+            app:layout_constraintStart_toStartOf="@+id/schoolBtn"
             app:layout_constraintTop_toBottomOf="@+id/dateBtn" />
 
         <Button
             android:id="@+id/moneyBtn"
             android:layout_width="68dp"
             android:layout_height="40dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
             android:background="@drawable/tag_btn_unselect_style"
             android:text="돈"
             android:textColor="@color/superLiteGreyColor"
-            app:layout_constraintStart_toStartOf="@+id/schoolBtn"
-            app:layout_constraintTop_toBottomOf="@+id/schoolBtn" />
+            app:layout_constraintStart_toEndOf="@+id/courseBtn"
+            app:layout_constraintTop_toTopOf="@+id/courseBtn" />
 
         <Button
             android:id="@+id/healthBtn"
             android:layout_width="68dp"
             android:layout_height="40dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
             android:background="@drawable/tag_btn_unselect_style"
             android:text="건강"
             android:textColor="@color/superLiteGreyColor"
-            app:layout_constraintStart_toStartOf="@+id/jobBtn"
-            app:layout_constraintTop_toBottomOf="@+id/jobBtn" />
+            app:layout_constraintStart_toEndOf="@+id/moneyBtn"
+            app:layout_constraintTop_toTopOf="@+id/moneyBtn" />
 
         <Button
             android:id="@+id/marriedBtn"
-            android:layout_width="68dp"
+            android:layout_width="100dp"
             android:layout_height="40dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/tag_btn_unselect_style"
-            android:text="기혼"
+            android:text="기혼자만 아는"
             android:textColor="@color/superLiteGreyColor"
             app:layout_constraintStart_toStartOf="@+id/employmentBtn"
             app:layout_constraintTop_toBottomOf="@+id/employmentBtn" />
@@ -204,11 +204,12 @@
             android:id="@+id/infantBtn"
             android:layout_width="68dp"
             android:layout_height="40dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/tag_btn_unselect_style"
             android:text="육아"
             android:textColor="@color/superLiteGreyColor"
-            app:layout_constraintEnd_toEndOf="@+id/courseBtn"
+            app:layout_constraintStart_toEndOf="@+id/marriedBtn"
             app:layout_constraintTop_toBottomOf="@+id/courseBtn" />
 
         <Button
@@ -227,13 +228,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.5"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

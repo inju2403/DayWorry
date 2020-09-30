@@ -162,7 +162,7 @@ class AddWorryActivity : AppCompatActivity() {
                 friendBtn.setTextColor(Color.parseColor(superLiteGreyColor))
             }
             else {
-                hashTag = "친구"
+                hashTag = "친구사이"
                 resetBtnColor()
                 friendBtn.isSelected = true
                 friendBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
@@ -192,7 +192,7 @@ class AddWorryActivity : AppCompatActivity() {
                 schoolBtn.setTextColor(Color.parseColor(superLiteGreyColor))
             }
             else {
-                hashTag = "학교"
+                hashTag = "학교생활"
                 resetBtnColor()
                 schoolBtn.isSelected = true
                 schoolBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
@@ -207,7 +207,7 @@ class AddWorryActivity : AppCompatActivity() {
                 jobBtn.setTextColor(Color.parseColor(superLiteGreyColor))
             }
             else {
-                hashTag = "직장"
+                hashTag = "직장생활"
                 resetBtnColor()
                 jobBtn.isSelected = true
                 jobBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
@@ -282,7 +282,7 @@ class AddWorryActivity : AppCompatActivity() {
                 marriedBtn.setTextColor(Color.parseColor(superLiteGreyColor))
             }
             else {
-                hashTag = "기혼"
+                hashTag = "기혼자만 아는"
                 resetBtnColor()
                 marriedBtn.isSelected = true
                 marriedBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)

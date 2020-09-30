@@ -102,10 +102,10 @@
 
                 <Button
                     android:id="@+id/friendBtn"
-                    android:layout_width="68dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:background="@drawable/tag_btn_unselect_style"
-                    android:text="친구"
+                    android:text="친구사이"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="10dp"
                     android:textColor="@color/superLiteGreyColor" />
@@ -122,20 +122,20 @@
 
                 <Button
                     android:id="@+id/schoolBtn"
-                    android:layout_width="68dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:background="@drawable/tag_btn_unselect_style"
-                    android:text="학교"
+                    android:text="학교생활"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="10dp"
                     android:textColor="@color/superLiteGreyColor" />
 
                 <Button
                     android:id="@+id/jobBtn"
-                    android:layout_width="68dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:background="@drawable/tag_btn_unselect_style"
-                    android:text="직장"
+                    android:text="직장생활"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="10dp"
                     android:textColor="@color/superLiteGreyColor" />
@@ -182,10 +182,10 @@
 
                 <Button
                     android:id="@+id/marriedBtn"
-                    android:layout_width="68dp"
+                    android:layout_width="100dp"
                     android:layout_height="40dp"
                     android:background="@drawable/tag_btn_unselect_style"
-                    android:text="기혼"
+                    android:text="기혼자만 아는"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="10dp"
                     android:textColor="@color/superLiteGreyColor" />

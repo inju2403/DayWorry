@@ -127,7 +127,7 @@ class SetTagFragment : Fragment() {
             else {
                 if(totalCnt==3) showToast()
                 else {
-                    hashTag.add("친구")
+                    hashTag.add("친구사이")
                     friendBtn.isSelected = true
                     friendBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
                     friendBtn.setTextColor(Color.parseColor(litePupleColor))
@@ -177,7 +177,7 @@ class SetTagFragment : Fragment() {
             else {
                 if(totalCnt==3) showToast()
                 else {
-                    hashTag.add("학교")
+                    hashTag.add("학교생활")
                     schoolBtn.isSelected = true
                     schoolBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
                     schoolBtn.setTextColor(Color.parseColor(litePupleColor))
@@ -202,7 +202,7 @@ class SetTagFragment : Fragment() {
             else {
                 if(totalCnt==3) showToast()
                 else {
-                    hashTag.add("직장")
+                    hashTag.add("직장생활")
                     jobBtn.isSelected = true
                     jobBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
                     jobBtn.setTextColor(Color.parseColor(litePupleColor))
@@ -328,7 +328,7 @@ class SetTagFragment : Fragment() {
             else {
                 if(totalCnt==3) showToast()
                 else {
-                    hashTag.add("기혼")
+                    hashTag.add("기혼자만 아는")
                     marriedBtn.isSelected = true
                     marriedBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
                     marriedBtn.setTextColor(Color.parseColor(litePupleColor))

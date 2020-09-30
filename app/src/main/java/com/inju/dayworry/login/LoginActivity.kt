@@ -137,7 +137,8 @@ class LoginActivity : AppCompatActivity() {
                 when (response!!.code()) {
                     200 -> {
                         editor.putString("jwt", response.body()?.jwt.toString())
-                        var toast = Toast.makeText(this@LoginActivity, "로그인 jwt: ${response.body()?.jwt.toString()}", Toast.LENGTH_LONG)
+                        editor.commit()
+                        var toast = Toast.makeText(this@LoginActivity, "로그인 jwt: ${response.body()?.jwt}", Toast.LENGTH_LONG)
                         toast.setGravity(Gravity.BOTTOM, 0,300)
                         toast.show()
 

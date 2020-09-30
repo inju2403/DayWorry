@@ -6,10 +6,10 @@ import com.inju.dayworry.model.pojo.Worry
 class WorryDiffUtilCallback: DiffUtil.ItemCallback<Worry>() {
 
     override fun areItemsTheSame(oldItem: Worry, newItem: Worry): Boolean {
-        return oldItem.post_id == newItem.post_id
+        return oldItem.postId == newItem.postId
     }
 
     override fun areContentsTheSame(oldItem: Worry, newItem: Worry): Boolean {
-        return oldItem.modified_date == newItem.modified_date
+        return oldItem.modifiedDate == newItem.modifiedDate
     }
 }

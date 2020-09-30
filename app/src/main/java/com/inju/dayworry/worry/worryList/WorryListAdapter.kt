@@ -22,13 +22,13 @@ class WorryListAdapter(val event: MutableLiveData<WorryListEvent> = MutableLiveD
 
     override fun onBindViewHolder(holder: WorryItemViewHolder, position: Int) {
         getItem(position).let {
-            var worryId = it?.post_id
+            var worryId = it?.postId
             holder.containerView.title.text = it.title
             holder.containerView.content.text = it.content
             holder.containerView.setOnClickListener {
                 event.value = WorryListEvent.OnWorryItemClick(worryId!!)
             }
-            holder.containerView.worryItemTimeText.text = timeFormat.format(it.modified_date)
+            holder.containerView.worryItemTimeText.text = timeFormat.format(it.modifiedDate)
         }
     }
 

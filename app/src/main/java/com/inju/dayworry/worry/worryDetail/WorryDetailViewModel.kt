@@ -24,7 +24,7 @@ class WorryDetailViewModel(
 
     fun addOrUpdateWorry(context: Context, tag: String) = launch {
         var contents = Contents(worry.value!!.title, worry.value!!.content, tag)
-        repo.addOrUpdateWorry(worry.value!!.post_id, contents)
+        repo.addOrUpdateWorry(worry.value!!.postId, contents)
     }
 
     fun deleteWorry(id: Long) = launch {

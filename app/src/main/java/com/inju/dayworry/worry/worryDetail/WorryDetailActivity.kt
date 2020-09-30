@@ -69,7 +69,7 @@ class WorryDetailActivity : AppCompatActivity() {
         worryDetailViewModel!!.worry.observe (this, Observer {
             titleText.text = it.title
             contentText.text = it.content
-            timeText.text = timeFormat.format(it.modified_date)
+            timeText.text = timeFormat.format(it.modifiedDate)
         })
 
         counselListViewModel!!.let {

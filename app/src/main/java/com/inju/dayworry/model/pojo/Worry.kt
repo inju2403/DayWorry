@@ -7,43 +7,43 @@ import io.realm.annotations.PrimaryKey
 import java.util.*
 
 data class Worry (
-    @SerializedName("post_id")
+    @SerializedName("postId")
     @Expose
-    var post_id: Long = 0,
+    var postId: Long = -1,
 
-    @SerializedName("created_date")
+    @SerializedName("createdDate")
     @Expose
-    var created_date: Date = Date(),
+    var createdDate: Date = Date(),
 
-    @SerializedName("modified_date")
+    @SerializedName("modifiedDate")
     @Expose
-    var modified_date: Date = Date(),
+    var modifiedDate: Date = Date(),
 
     @SerializedName("content")
     @Expose
     var content: String = "",
 
-    @SerializedName("expired")
-    @Expose
-    var expired: Int = 0,
-
     @SerializedName("hits")
     @Expose
-    var hits: Long = 0,
+    var hits: Long = -1,
 
-    @SerializedName("post_likes")
+    @SerializedName("postLikes")
     @Expose
-    var post_likes: Int = 0,
+    var postLikes: Int = 0,
 
-    @SerializedName("post_hashtag")
+    @SerializedName("tagName")
     @Expose
-    var post_hashtag: String = "",
+    var tagName: String = "",
 
     @SerializedName("title")
     @Expose
     var title: String = "",
 
+    @SerializedName("userId")
+    @Expose
+    var userId: Long = 0,
+
     @SerializedName("user_id")
     @Expose
-    var user_id: Long = 0
+    var comments: MutableList<Counsel> = mutableListOf()
 )

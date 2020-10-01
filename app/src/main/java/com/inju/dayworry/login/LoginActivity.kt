@@ -51,6 +51,7 @@ class LoginActivity : AppCompatActivity() {
 //            var keyHash = getHashKey(this)
 //            Log.d(TAG, keyHash)
             val jwt = pref.getString("jwt", "").toString()
+            Log.d(TAG,"jwt: $jwt")
             if(jwt != "") {
                 //jwt가 아직 유효한지 검사 (다른기기에서 로그인했을시에 만료되기 때문)
                 verifyJWT(jwt, pref)
@@ -114,7 +115,7 @@ class LoginActivity : AppCompatActivity() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ token ->
                 Log.i(TAG, "로그인 성공 ${token.accessToken}")
-                getUserToken(token.accessToken, pref)
+                getUserTokenUsingKakaoToken(token.accessToken, pref)
 
             }, { error ->
                 Log.e(TAG, "로그인 실패", error)
@@ -122,7 +123,7 @@ class LoginActivity : AppCompatActivity() {
             .addTo(disposables)
     }
 
-    fun getUserToken(token: String, pref: SharedPreferences) {
+    fun getUserTokenUsingKakaoToken(token: String, pref: SharedPreferences) {
         val editor = pref.edit()
 
         Log.d(TAG, "param token ${token}")
@@ -140,11 +141,13 @@ class LoginActivity : AppCompatActivity() {
                         toast.setGravity(Gravity.BOTTOM, 0,300)
                         toast.show()
 
+
+                        Log.d(TAG,response.body().toString())
                         startActivity(Intent(this@LoginActivity, SetProfileActivity::class.java))
                         finish()
                     }
-                    400 -> {
-                        Log.d(TAG, "kakaologin - 400 onFailed() called / t: ${response.body()}")
+                    401 -> {
+                        Log.d(TAG, "kakaologin - 401 onFailed() called / t: ${response.body()}")
                         Toast.makeText(this@LoginActivity, "계정 정보를 확인해주세요", Toast.LENGTH_LONG).show()
                     }
                 }
@@ -166,7 +169,7 @@ class LoginActivity : AppCompatActivity() {
                         startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                         finish()
                     }
-                    400 -> {
+                    401 -> {
                         tryKaKaoLogin(pref)
                     }
                 }

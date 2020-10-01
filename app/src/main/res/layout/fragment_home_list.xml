@@ -13,7 +13,7 @@
         android:background="@color/mainNavyColor">
 
         <TextView
-            android:id="@+id/explainText"
+            android:id="@+id/explainSubText"
             android:layout_width="0dp"
             android:layout_height="68dp"
             android:layout_marginStart="20dp"

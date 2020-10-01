@@ -159,7 +159,7 @@
 
             <Button
                 android:id="@+id/friendBtn"
-                android:layout_width="0dp"
+                android:layout_width="99dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="16dp"
                 android:background="@drawable/edit_user_tag_btn_unselect_style"
@@ -181,7 +181,7 @@
 
             <Button
                 android:id="@+id/schoolBtn"
-                android:layout_width="0dp"
+                android:layout_width="99dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/edit_user_tag_btn_unselect_style"
@@ -192,7 +192,7 @@
 
             <Button
                 android:id="@+id/jobBtn"
-                android:layout_width="0dp"
+                android:layout_width="99dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
@@ -248,7 +248,7 @@
 
             <Button
                 android:id="@+id/marriedBtn"
-                android:layout_width="100dp"
+                android:layout_width="132dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/edit_user_tag_btn_unselect_style"

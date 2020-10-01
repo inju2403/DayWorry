@@ -28,8 +28,7 @@ class MyPageFragment : Fragment() {
     private fun setUpClickListener() {
         profileEditBtn.setOnClickListener {
             //계정 정보 수정
-            startActivity(Intent(activity!!, SetProfileActivity::class.java))
-            activity!!.finish()
+            startActivity(Intent(activity!!, EditUserActivity::class.java))
         }
         storageLayout.setOnClickListener {
             //내 글 보관함

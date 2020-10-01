@@ -51,17 +51,15 @@ class LoginActivity : AppCompatActivity() {
 //            var keyHash = getHashKey(this)
 //            Log.d(TAG, keyHash)
             val jwt = pref.getString("jwt", "").toString()
-            Log.d(TAG,"jwt: $jwt")
-//            if(jwt != "") {
-//                //jwt가 아직 유효한지 검사 (다른기기에서 로그인했을시에 만료되기 때문)
-////                verifyJWT(jwt, pref)
-//
-//                //임시 라우팅 코드
+            if(jwt != "") {
+                //jwt가 아직 유효한지 검사 (다른기기에서 로그인했을시에 만료되기 때문)
+                verifyJWT(jwt, pref)
+
+                //임시 라우팅 코드
 //                startActivity(Intent(this, MainActivity::class.java))
 //                finish()
-//            }
-//            else
-                tryKaKaoLogin(pref)
+            }
+            else tryKaKaoLogin(pref)
         }
 
         naver_login_button.setOnClickListener {
@@ -147,7 +145,7 @@ class LoginActivity : AppCompatActivity() {
                         toast.show()
 
 
-                        Log.d(TAG,response.body()?.jwt.toString())
+                        Log.d(TAG,"jwt: ${response.body()?.jwt.toString()}")
                         startActivity(Intent(this@LoginActivity, SetProfileActivity::class.java))
                         finish()
                     }

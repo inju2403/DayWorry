@@ -21,7 +21,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".mypage.EditUserActivity"></activity>
+        <activity android:name=".mypage.MyWorryHistoryActivity"></activity>
+        <activity android:name=".mypage.EditUserActivity" />
         <activity
             android:name=".worry.worryDetail.WorryDetailActivity"
             android:windowSoftInputMode="adjustResize" />

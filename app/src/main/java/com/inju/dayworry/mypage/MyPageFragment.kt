@@ -32,6 +32,7 @@ class MyPageFragment : Fragment() {
         }
         storageLayout.setOnClickListener {
             //내 글 보관함
+            startActivity(Intent(activity!!, MyWorryHistoryActivity::class.java))
         }
         onOffText.setOnClickListener {
             //푸쉬 알림 켜기/끄기

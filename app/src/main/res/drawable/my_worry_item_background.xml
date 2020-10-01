@@ -4,7 +4,7 @@
     android:shape="rectangle">
 
     <!-- 테두리 내부 색상 설정 -->
-    <solid android:color="@color/liteNavyColor" />
+    <solid android:color="@color/mainNavyColor" />
 
     <corners
         android:topLeftRadius="16dp"

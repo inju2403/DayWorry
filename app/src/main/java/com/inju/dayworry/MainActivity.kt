@@ -139,6 +139,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         myPageTapView.setOnClickListener {
+
             if(jwt == "") {
                 var toast = Toast.makeText(this@MainActivity, "로그인 후에 이용해주세요", Toast.LENGTH_LONG)
                 toast.setGravity(Gravity.BOTTOM, 0,300)

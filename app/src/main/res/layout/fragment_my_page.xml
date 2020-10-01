@@ -58,7 +58,7 @@
         android:layout_width="match_parent"
         android:layout_height="4dp"
         android:layout_marginTop="20dp"
-        android:background="@color/liteNavyColor"
+        android:background="@color/mainNavyColor"
         app:layout_constraintTop_toBottomOf="@id/profileImage" />
 
     <TextView
@@ -84,110 +84,25 @@
         app:layout_constraintStart_toEndOf="@+id/beingPostedText"
         app:layout_constraintTop_toTopOf="@+id/beingPostedText" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/myWorryLayout"
-        android:layout_width="match_parent"
-        android:layout_height="149dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="14dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/my_worry_item_background"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/myCurrentWorryList"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/beingPostedText">
-
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="12dp"
-            android:maxLines="1"
-            android:text="제목"
-            android:textColor="@color/whiteColor"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/content"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="48dp"
-            android:layout_marginEnd="12dp"
-            android:maxLines="2"
-            android:text="내용"
-            android:textColor="@color/superLiteGreyColor"
-            android:textSize="15sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/worryItemTimeImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginBottom="12dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/ic_time" />
-
-        <TextView
-            android:id="@+id/worryItemTimeText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="23:48"
-            android:textColor="@color/whiteColor"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@+id/worryItemTimeImage"
-            app:layout_constraintStart_toEndOf="@+id/worryItemTimeImage"
-            app:layout_constraintTop_toTopOf="@+id/worryItemTimeImage" />
-
-        <ImageView
-            android:id="@+id/commentImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginBottom="12dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/worryItemTimeText"
-            app:srcCompat="@drawable/ic_comment" />
-
-        <TextView
-            android:id="@+id/commentCountText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="6"
-            android:textColor="@color/whiteColor"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@+id/commentImage"
-            app:layout_constraintStart_toEndOf="@+id/commentImage"
-            app:layout_constraintTop_toTopOf="@+id/worryItemTimeImage" />
-
-        <ImageView
-            android:id="@+id/moreImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="12dp"
-            android:layout_marginBottom="12dp"
-            android:src="@drawable/ic_more"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintTop_toBottomOf="@+id/beingPostedText"
+        tools:listitem="@layout/item_my_worry_current" />
 
     <View
         android:id="@+id/line2"
         android:layout_width="match_parent"
         android:layout_height="4dp"
-        android:layout_marginTop="229dp"
-        android:background="@color/liteNavyColor"
-        app:layout_constraintTop_toBottomOf="@id/line1" />
+        android:layout_marginTop="20dp"
+        android:background="@color/mainNavyColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/myCurrentWorryList" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/storageLayout"
@@ -226,7 +141,9 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="55.5dp"
-        android:background="@color/liteNavyColor"
+        android:background="@color/mainNavyColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/line2" />
 
     <ImageView
@@ -268,7 +185,9 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="55dp"
-        android:background="@color/liteNavyColor"
+        android:background="@color/mainNavyColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/line3" />
 
     <androidx.constraintlayout.widget.ConstraintLayout

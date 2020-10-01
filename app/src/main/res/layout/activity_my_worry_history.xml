@@ -29,5 +29,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleText"
-        tools:listitem="@layout/item_my_worry"/>
+        tools:listitem="@layout/item_my_worry_history"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

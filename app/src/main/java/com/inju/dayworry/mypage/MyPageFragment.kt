@@ -23,6 +23,9 @@ class MyPageFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         setUpClickListener()
+        //아이템이 없을때
+//        emptyPostLayout.visibility = View.GONE
+        newImage.visibility = View.GONE
     }
 
     private fun setUpClickListener() {

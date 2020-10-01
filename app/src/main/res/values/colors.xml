@@ -23,5 +23,6 @@
     <color name="darkNavyColor">#2e3042</color>
     <color name="liteNavyColor">#535974</color>
     <color name="crimsonColor">#ff493b</color>
+    <color name="noticeColor">#ff4d4d</color>
     <color name="litePupleColor">#9689FC</color>
 </resources>

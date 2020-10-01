@@ -1,15 +1,219 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".mypage.MyPageFragment"
-    android:background="@color/mainNavyColor">
+    android:background="@color/mainNavyColor"
+    tools:context=".mypage.MyPageFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+
+    <ImageView
+        android:id="@+id/profileImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/ic_profile_default"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="myPage" />
+        android:id="@+id/usernameText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="26dp"
+        android:text="하고"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textColor="@color/whiteColor"
+        app:layout_constraintStart_toEndOf="@+id/profileImage"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <ImageView
+        android:id="@+id/profileEditBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="20dp"
+        android:src="@drawable/ic_edit_profile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/emailText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="6dp"
+        android:text="harugomin@naver.com"
+        android:textSize="12sp"
+        android:textColor="@color/superLiteGreyColor"
+        app:layout_constraintStart_toEndOf="@+id/profileImage"
+        app:layout_constraintTop_toBottomOf="@+id/usernameText" />
+
+    <View
+        android:id="@+id/line1"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/liteNavyColor"
+        app:layout_constraintTop_toBottomOf="@id/profileImage" />
+
+    <TextView
+        android:id="@+id/beingPostedText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:text="현재 게시중인 글"
+        android:textSize="16sp"
+        android:textColor="@color/whiteColor"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/line1" />
+
+    <ImageView
+        android:id="@+id/newImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:src="@drawable/ic_new_logo"
+        app:layout_constraintBottom_toBottomOf="@+id/beingPostedText"
+        app:layout_constraintStart_toEndOf="@+id/beingPostedText"
+        app:layout_constraintTop_toTopOf="@+id/beingPostedText" />
+
+    <View
+        android:id="@+id/line2"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:layout_marginTop="229dp"
+        android:background="@color/liteNavyColor"
+        app:layout_constraintTop_toBottomOf="@id/line1" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/storageLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/line3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/line2">
+
+        <ImageView
+            android:id="@+id/folderImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ic_folder"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/storageText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="내 글 보관함"
+            android:textColor="@color/whiteColor"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/folderImage"
+            app:layout_constraintStart_toEndOf="@+id/folderImage"
+            app:layout_constraintTop_toTopOf="@+id/folderImage" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/line3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="55.5dp"
+        android:background="@color/liteNavyColor"
+        app:layout_constraintTop_toBottomOf="@id/line2" />
+
+    <ImageView
+        android:id="@+id/mypageAlarmImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15.5dp"
+        android:src="@drawable/ic_mypage_alarm"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/line3" />
+
+    <TextView
+        android:id="@+id/myPageAlarmText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="푸쉬 알림"
+        android:textSize="16sp"
+        android:textColor="@color/whiteColor"
+        app:layout_constraintBottom_toBottomOf="@+id/mypageAlarmImage"
+        app:layout_constraintStart_toEndOf="@+id/mypageAlarmImage"
+        app:layout_constraintTop_toTopOf="@+id/mypageAlarmImage" />
+
+    <TextView
+        android:id="@+id/onOffText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17.5dp"
+        android:layout_marginEnd="20dp"
+        android:text="켜기"
+        android:textColor="@color/superLiteGreyColor"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/storageLayout" />
+
+    <View
+        android:id="@+id/line4"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="55dp"
+        android:background="@color/liteNavyColor"
+        app:layout_constraintTop_toBottomOf="@id/line3" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/deleteUserLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/line4">
+
+        <ImageView
+            android:id="@+id/deleteUserImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15.5dp"
+            android:src="@drawable/ic_delete_mypage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/deleteUserText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="계정 삭제"
+            android:textColor="@color/noticeColor"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/deleteUserImage"
+            app:layout_constraintStart_toEndOf="@+id/deleteUserImage"
+            app:layout_constraintTop_toTopOf="@+id/deleteUserImage" />
+
+        <TextView
+            android:id="@+id/delteUserExplainText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="개인 정보와 내역이 모두 삭제됩니다."
+            android:textColor="@color/superLiteGreyColor"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@+id/deleteUserText"
+            app:layout_constraintTop_toBottomOf="@+id/deleteUserText" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

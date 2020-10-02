@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.inju.dayworry.R
-import com.inju.dayworry.login.SetProfileActivity
 import kotlinx.android.synthetic.main.fragment_my_page.*
 
 class MyPageFragment : Fragment() {

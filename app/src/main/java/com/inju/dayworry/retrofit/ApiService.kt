@@ -1,7 +1,7 @@
 package com.inju.dayworry.retrofit
 
 import com.inju.dayworry.model.pojo.Contents
-import com.inju.dayworry.model.pojo.KAKAO_RETURN_POJO
+import com.inju.dayworry.model.pojo.SOCIAL_LOGIN_RETURN_POJO
 import com.inju.dayworry.model.pojo.Worry
 import retrofit2.Call
 import retrofit2.Response
@@ -11,7 +11,11 @@ interface ApiService {
 
     //카카오 로그인
     @POST("users/login/kakao")
-    fun kakaoLogin(@Header("accessToken") accessToken: String): Call<KAKAO_RETURN_POJO>
+    fun kakaoLogin(@Header("accessToken") accessToken: String): Call<SOCIAL_LOGIN_RETURN_POJO>
+
+    //네이버 로그인
+    @POST("users/login/naver")
+    fun naverLogin(@Header("accessToken") accessToken: String): Call<SOCIAL_LOGIN_RETURN_POJO>
 
     //토큰 검증
     @POST("users/check")

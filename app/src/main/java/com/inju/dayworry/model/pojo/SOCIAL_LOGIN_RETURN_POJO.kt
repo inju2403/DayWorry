@@ -4,7 +4,7 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import org.json.JSONObject
 
-data class KAKAO_RETURN_POJO(
+data class SOCIAL_LOGIN_RETURN_POJO(
     @SerializedName("jwt")
     @Expose
     var jwt: String = "",

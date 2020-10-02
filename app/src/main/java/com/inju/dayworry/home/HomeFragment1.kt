@@ -27,19 +27,9 @@ class HomeFragment1 : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        tmpImage.visibility = View.GONE
-        homeLoadingUi.visibility = View.VISIBLE
+        homeLoadingUi.visibility = View.GONE
 
-        runnable = Runnable {
-            tmpImage.visibility = View.VISIBLE
-            homeLoadingUi.visibility = View.GONE
-        }
-        handler = Handler()
-        handler?.run {
-            postDelayed(runnable, 2000)
-        }
-
-        tmpImage.setOnClickListener {
+        lookIntoBtn.setOnClickListener {
             startActivity(Intent(activity!!, WorryDetailActivity::class.java))
         }
     }

@@ -3,6 +3,7 @@ package com.inju.dayworry.login
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.inju.dayworry.R
+import com.inju.dayworry.utils.Constants
 
 class SetProfileActivity : AppCompatActivity() {
 
@@ -18,6 +19,9 @@ class SetProfileActivity : AppCompatActivity() {
     val FRAG_TAG = 1
 
     var fragmentState: Int = FRAG_PROFILE
+
+    var userAge: String = ""
+    var userName: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -2,6 +2,7 @@ package com.inju.dayworry.retrofit
 
 import com.inju.dayworry.model.pojo.Contents
 import com.inju.dayworry.model.pojo.SOCIAL_LOGIN_RETURN_POJO
+import com.inju.dayworry.model.pojo.User_REQUEST_POJO
 import com.inju.dayworry.model.pojo.Worry
 import retrofit2.Call
 import retrofit2.Response
@@ -20,6 +21,11 @@ interface ApiService {
     //토큰 검증
     @POST("users/check")
     fun verifyJWT(@Header("jwt") jwt: String): Call<Void>
+
+    @PUT("users")
+    fun updateProfile(@Body requestDto: User_REQUEST_POJO): Call<Void>
+
+
 
     @GET("posts/{tagName}") //고민 리스트 받기 -> 페이징 (현재페이지, 페이지당 아이템 갯수)
 //    fun getWorrys(@Header("Authorization") Authorization: String): Single<MutableList<Worry>>

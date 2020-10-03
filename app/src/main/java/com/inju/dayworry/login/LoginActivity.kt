@@ -22,6 +22,8 @@ import com.inju.dayworry.utils.Constants.PREFERENCE
 import com.inju.dayworry.utils.Constants.TAG
 import com.kakao.sdk.auth.LoginClient
 import com.kakao.sdk.auth.rx
+import com.kakao.sdk.user.UserApiClient
+import com.kakao.sdk.user.rx
 import com.kakao.util.helper.Utility.getPackageInfo
 import com.nhn.android.naverlogin.OAuthLogin
 import com.nhn.android.naverlogin.OAuthLoginHandler
@@ -29,6 +31,7 @@ import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_login.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -102,6 +105,7 @@ class LoginActivity : AppCompatActivity() {
             override fun onResponse(call: Call<SOCIAL_LOGIN_RETURN_POJO>, response: Response<SOCIAL_LOGIN_RETURN_POJO>) {
                 when (response!!.code()) {
                     200 -> {
+                        getUserIdByKakao(pref)
                         editor.putString("jwt", response.body()?.jwt.toString())
                         editor.commit()
                         var toast = Toast.makeText(this@LoginActivity, "로그인 jwt: ${response.body()?.jwt}", Toast.LENGTH_LONG)
@@ -124,10 +128,29 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
+    private fun getUserIdByKakao(pref: SharedPreferences) {
+        val editor = pref.edit()
+        // 토큰 정보 보기
+        UserApiClient.rx.accessTokenInfo()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ tokenInfo ->
+                Log.i(TAG, "토큰 정보 보기 성공" +
+                        "\n회원번호: ${tokenInfo.id}" +
+                        "\n만료시간: ${tokenInfo.expiresIn} 초")
+                editor.putInt("userId", tokenInfo.id.toInt())
+                editor.commit()
+            }, { error ->
+                Log.e(TAG, "토큰 정보 보기 실패", error)
+            })
+            .addTo(disposables)
+    }
+
     private fun verifyJWT(jwt: String, pref: SharedPreferences) {
         httpCall?.verifyJWT(jwt)?.enqueue(object : Callback<Void> {
             override fun onFailure(call: Call<Void>, t: Throwable) {
                 Log.d(TAG, "kakaologin - onFailed() called / t: ${t}")
+                tryKaKaoLogin(pref)
             }
 
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
@@ -136,7 +159,7 @@ class LoginActivity : AppCompatActivity() {
                         startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                         finish()
                     }
-                    400 -> {
+                    else -> {
                         tryKaKaoLogin(pref)
                     }
                 }
@@ -210,8 +233,16 @@ class LoginActivity : AppCompatActivity() {
 
 
                         Log.d(TAG,"jwt: ${response.body()?.jwt.toString()}")
-                        startActivity(Intent(this@LoginActivity, SetProfileActivity::class.java))
-                        finish()
+                        if(response.body()?.jwt.toString() != "null") {
+                            startActivity(
+                                Intent(
+                                    this@LoginActivity,
+                                    SetProfileActivity::class.java
+                                )
+                            )
+                            finish()
+                        }
+                        else Toast.makeText(this@LoginActivity, "계정 정보를 확인해주세요", Toast.LENGTH_LONG).show()
                     }
                     400 -> {
                         Log.d(TAG, "naverlogin - 400 onFailed() called / t: ${response.body()}")

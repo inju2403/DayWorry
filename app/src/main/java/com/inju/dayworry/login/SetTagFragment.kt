@@ -3,14 +3,21 @@ package com.inju.dayworry.login
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.inju.dayworry.MainActivity
 import com.inju.dayworry.R
+import com.inju.dayworry.model.pojo.User_REQUEST_POJO
+import com.inju.dayworry.retrofit.ApiService
+import com.inju.dayworry.retrofit.RetrofitClient
+import com.inju.dayworry.utils.Constants
+import com.inju.dayworry.utils.Constants.TAG
 import kotlinx.android.synthetic.main.fragment_set_profile.nextBtn
 import kotlinx.android.synthetic.main.fragment_set_tag.courseBtn
 import kotlinx.android.synthetic.main.fragment_set_tag.dailyLiftBtn
@@ -24,6 +31,9 @@ import kotlinx.android.synthetic.main.fragment_set_tag.jobBtn
 import kotlinx.android.synthetic.main.fragment_set_tag.marriedBtn
 import kotlinx.android.synthetic.main.fragment_set_tag.moneyBtn
 import kotlinx.android.synthetic.main.fragment_set_tag.schoolBtn
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class SetTagFragment : Fragment() {
 
@@ -31,8 +41,18 @@ class SetTagFragment : Fragment() {
     var superLiteGreyColor = "#cbcdd5"
     var darkNavyColor = "#2e3042"
     var liteNavyColor = "#535974"
-    private var hashTag: MutableList<String> = mutableListOf()
 
+    private val selectTagMinMessage = "고민을 한 가지 이상 선택해주세요"
+    private val selectTagMaxMessage = "고민은 3개까지 선택할 수 있어요"
+
+    private val httpCall: ApiService? = RetrofitClient.getClient(Constants.API_BASE_URL)!!.create(
+        ApiService::class.java)
+
+    private var hashTag: MutableList<String> = mutableListOf()
+    private var userAgeValue: Int = 0
+    private var hashTagString: String = ""
+
+    private var userId: Int = 0
     private var totalCnt = 0
 
     override fun onCreateView(
@@ -46,20 +66,85 @@ class SetTagFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-//        preBtn.setOnClickListener {
-//            moveSetProfileFragment()
-//        }
+        val pref = activity!!.getSharedPreferences(Constants.PREFERENCE, AppCompatActivity.MODE_PRIVATE)
+        val editor = pref.edit()
+
+        userId = pref.getInt("userId", 0)
 
         nextBtn.setOnClickListener {
-            moveMainActivity()
+            if(hashTag.size == 0) {
+                showToast(selectTagMinMessage)
+            }
+            else {
+                editor.putString("userName",(activity as SetProfileActivity).userName)
+                when((activity as SetProfileActivity).userAge) {
+                    "1~9" -> {
+                        userAgeValue = 0
+                    }
+                    "10~19" -> {
+                        userAgeValue = 10
+                    }
+                    "20~29" -> {
+                        userAgeValue = 20
+                    }
+                    "30~39" -> {
+                        userAgeValue = 30
+                    }
+                    "40~49" -> {
+                        userAgeValue = 40
+                    }
+                    "50~59" -> {
+                        userAgeValue = 50
+                    }
+                    "60~69" -> {
+                        userAgeValue = 60
+                    }
+                    "70~" -> {
+                        userAgeValue = 70
+                    }
+                }
+                editor.putInt("userAge", userAgeValue)
+                for (next in hashTag) {
+                    hashTagString += "$next,"
+                }
+                hashTagString = hashTagString.substring(0..hashTagString.length-2)
+                editor.putString("hashTags",hashTagString)
+
+                requsetProfileUpdate()
+                moveMainActivity()
+            }
         }
 
         setTagBtn()
     }
 
-//    private fun moveSetProfileFragment() {
-//        (activity as SetProfileActivity).switchSetProfileFragment()
-//    }
+    private fun requsetProfileUpdate() {
+        val userRequestPojo = User_REQUEST_POJO(
+            userAgeValue,
+            (activity as SetProfileActivity).userName,
+            "",
+            hashTag,
+            userId)
+
+        httpCall?.updateProfile(userRequestPojo)?.enqueue(object : Callback<Void> {
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                Log.d(TAG, "updateProfile - onFailed() called / t: ${t}")
+            }
+
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                when (response!!.code()) {
+                    200 -> {
+                        startActivity(Intent(context, MainActivity::class.java))
+                        activity!!.finish()
+                    }
+                    400 -> {
+                        Log.d(TAG, "kakaologin - 400 onFailed() called / t: ${response.body()}")
+                    }
+                }
+            }
+
+        })
+    }
 
 
     private fun setTagBtn() {
@@ -75,7 +160,7 @@ class SetTagFragment : Fragment() {
                 }
             }
             else {
-                if(totalCnt==3) showToast()
+                if(totalCnt==3) showToast(selectTagMaxMessage)
                 else {
                     hashTag.add("일상")
                     dailyLiftBtn.isSelected = true
@@ -100,7 +185,7 @@ class SetTagFragment : Fragment() {
                 }
             }
             else {
-                if(totalCnt==3) showToast()
+                if(totalCnt==3) showToast(selectTagMaxMessage)
                 else {
                     hashTag.add("가족")
                     familyBtn.isSelected = true
@@ -125,7 +210,7 @@ class SetTagFragment : Fragment() {
                 }
             }
             else {
-                if(totalCnt==3) showToast()
+                if(totalCnt==3) showToast(selectTagMaxMessage)
                 else {
                     hashTag.add("친구사이")
                     friendBtn.isSelected = true
@@ -150,7 +235,7 @@ class SetTagFragment : Fragment() {
                 }
             }
             else {
-                if(totalCnt==3) showToast()
+                if(totalCnt==3) showToast(selectTagMaxMessage)
                 else {
                     hashTag.add("연애")
                     dateBtn.isSelected = true
@@ -175,7 +260,7 @@ class SetTagFragment : Fragment() {
                 }
             }
             else {
-                if(totalCnt==3) showToast()
+                if(totalCnt==3) showToast(selectTagMaxMessage)
                 else {
                     hashTag.add("학교생활")
                     schoolBtn.isSelected = true
@@ -200,7 +285,7 @@ class SetTagFragment : Fragment() {
                 }
             }
             else {
-                if(totalCnt==3) showToast()
+                if(totalCnt==3) showToast(selectTagMaxMessage)
                 else {
                     hashTag.add("직장생활")
                     jobBtn.isSelected = true
@@ -225,7 +310,7 @@ class SetTagFragment : Fragment() {
                 }
             }
             else {
-                if(totalCnt==3) showToast()
+                if(totalCnt==3) showToast(selectTagMaxMessage)
                 else {
                     hashTag.add("취업")
                     employmentBtn.isSelected = true
@@ -251,7 +336,7 @@ class SetTagFragment : Fragment() {
                 }
             }
             else {
-                if(totalCnt==3) showToast()
+                if(totalCnt==3) showToast(selectTagMaxMessage)
                 else {
                     hashTag.add("진로")
                     courseBtn.isSelected = true
@@ -276,7 +361,7 @@ class SetTagFragment : Fragment() {
                 }
             }
             else {
-                if(totalCnt==3) showToast()
+                if(totalCnt==3) showToast(selectTagMaxMessage)
                 else {
                     hashTag.add("돈")
                     moneyBtn.isSelected = true
@@ -301,7 +386,7 @@ class SetTagFragment : Fragment() {
                 }
             }
             else {
-                if(totalCnt==3) showToast()
+                if(totalCnt==3) showToast(selectTagMaxMessage)
                 else {
                     hashTag.add("건강")
                     healthBtn.isSelected = true
@@ -326,7 +411,7 @@ class SetTagFragment : Fragment() {
                 }
             }
             else {
-                if(totalCnt==3) showToast()
+                if(totalCnt==3) showToast(selectTagMaxMessage)
                 else {
                     hashTag.add("기혼자만 아는")
                     marriedBtn.isSelected = true
@@ -351,7 +436,7 @@ class SetTagFragment : Fragment() {
                 }
             }
             else {
-                if(totalCnt==3) showToast()
+                if(totalCnt==3) showToast(selectTagMaxMessage)
                 else {
                     hashTag.add("육아")
                     infantBtn.isSelected = true
@@ -370,8 +455,8 @@ class SetTagFragment : Fragment() {
         activity!!.finish()
     }
 
-    private fun showToast() {
-        var toast = Toast.makeText(activity!!, "고민은 3개까지 선택할 수 있어요", Toast.LENGTH_LONG)
+    private fun showToast(str: String) {
+        var toast = Toast.makeText(activity!!, str, Toast.LENGTH_LONG)
         toast.setGravity(Gravity.BOTTOM, 0,300)
         toast.show()
     }

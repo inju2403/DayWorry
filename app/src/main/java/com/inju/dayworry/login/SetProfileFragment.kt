@@ -12,6 +12,8 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.inju.dayworry.R
 import android.util.Log
+import android.view.Gravity
+import android.widget.Toast
 import com.inju.dayworry.utils.Constants.TAG
 import kotlinx.android.synthetic.main.activity_add_worry.*
 import kotlinx.android.synthetic.main.fragment_set_profile.*
@@ -23,9 +25,10 @@ class SetProfileFragment : Fragment() {
     var darkNavyColor = "#2e3042"
     var liteNavyColor = "#535974"
 
+    private val nicknameMessage = "닉네임을 입력해주세요"
+    private val ageMessage = "연령을 선택해주세요"
+
     var ageList = arrayOf("연령을 선택해주세요", "1~9", "10~19", "20~29", "30~39", "40~49", "50~59", "60~69", "70~")
-    lateinit var userAge: String
-    lateinit var userName: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,8 +42,18 @@ class SetProfileFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         nextBtn.setOnClickListener {
-            moveSetTagFragment()
-            (activity as SetProfileActivity).fragmentState = (activity as SetProfileActivity).FRAG_TAG
+            when {
+                (activity as SetProfileActivity).userName == "" -> {
+                    showToast(nicknameMessage)
+                }
+                (activity as SetProfileActivity).userAge == "" -> {
+                    showToast(ageMessage)
+                }
+                else -> {
+                    moveSetTagFragment()
+                    (activity as SetProfileActivity).fragmentState = (activity as SetProfileActivity).FRAG_TAG
+                }
+            }
         }
 
         setTextChangeListener()
@@ -57,8 +70,8 @@ class SetProfileFragment : Fragment() {
         editTextTextPersonName.addTextChangedListener(object: TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 if(s.toString() != "") {
-                    userName = s.toString()
-                    if(userAge != "") {
+                    (activity as SetProfileActivity).userName = s.toString()
+                    if((activity as SetProfileActivity).userAge != "") {
                         nextBtn.setBackgroundColor(Color.parseColor(litePupleColor))
                         nextBtn.setTextColor(Color.parseColor(darkNavyColor))
                     }
@@ -70,7 +83,7 @@ class SetProfileFragment : Fragment() {
                 else {
                     nextBtn.setBackgroundColor(Color.parseColor(liteNavyColor))
                     nextBtn.setTextColor(Color.parseColor(superLiteGreyColor))
-                    userName = ""
+                    (activity as SetProfileActivity).userName = ""
                 }
             }
 
@@ -89,8 +102,8 @@ class SetProfileFragment : Fragment() {
             }
 
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
-                userAge = if(position > 0) ageList[position] else ""
-                if(userAge != "") {
+                (activity as SetProfileActivity).userAge = if(position > 0) ageList[position] else ""
+                if((activity as SetProfileActivity).userAge != "") {
                     if(editTextTextPersonName.text.toString() != "") {
                         nextBtn.setBackgroundColor(Color.parseColor(litePupleColor))
                         nextBtn.setTextColor(Color.parseColor(darkNavyColor))
@@ -106,6 +119,12 @@ class SetProfileFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun showToast(str: String) {
+        var toast = Toast.makeText(activity!!, str, Toast.LENGTH_LONG)
+        toast.setGravity(Gravity.BOTTOM, 0,300)
+        toast.show()
     }
 
 }

@@ -1,9 +1,6 @@
 package com.inju.dayworry.retrofit
 
-import com.inju.dayworry.model.pojo.Contents
-import com.inju.dayworry.model.pojo.SOCIAL_LOGIN_RETURN_POJO
-import com.inju.dayworry.model.pojo.User_REQUEST_POJO
-import com.inju.dayworry.model.pojo.Worry
+import com.inju.dayworry.model.pojo.*
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
@@ -22,9 +19,13 @@ interface ApiService {
     @POST("users/check")
     fun verifyJWT(@Header("jwt") jwt: String): Call<Void>
 
+    //유저 정보 업데이트
     @PUT("users")
     fun updateProfile(@Body requestDto: User_REQUEST_POJO): Call<Void>
 
+    //닉네임 중복 검사
+    @GET("users/check/{nickname}")
+    suspend fun nicknameRedundancyCheck(@Path("nickname") nickname: String): NICKNAME_REDUNDANCY_RETURN_POJO
 
 
     @GET("posts/{tagName}") //고민 리스트 받기 -> 페이징 (현재페이지, 페이지당 아이템 갯수)

@@ -53,11 +53,12 @@ class LoginActivity : AppCompatActivity() {
 
         kakao_login_button.setOnClickListener {
             val jwt = pref.getString("jwt", "").toString()
-            if(jwt != "") {
-                //jwt가 아직 유효한지 검사 (다른기기에서 로그인했을시에 만료되기 때문)
-                verifyJWT(jwt, pref)
-            }
-            else tryKaKaoLogin(pref)
+//            if(jwt != "") {
+//                //jwt가 아직 유효한지 검사 (다른기기에서 로그인했을시에 만료되기 때문)
+//                verifyJWT(jwt, pref)
+//            }
+//            else
+                tryKaKaoLogin(pref)
         }
 
         naver_login_button.setOnClickListener {

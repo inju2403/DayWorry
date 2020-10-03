@@ -78,30 +78,14 @@ class SetTagFragment : Fragment() {
             else {
                 editor.putString("userName",(activity as SetProfileActivity).userName)
                 when((activity as SetProfileActivity).userAge) {
-                    "1~9" -> {
-                        userAgeValue = 0
-                    }
-                    "10~19" -> {
-                        userAgeValue = 10
-                    }
-                    "20~29" -> {
-                        userAgeValue = 20
-                    }
-                    "30~39" -> {
-                        userAgeValue = 30
-                    }
-                    "40~49" -> {
-                        userAgeValue = 40
-                    }
-                    "50~59" -> {
-                        userAgeValue = 50
-                    }
-                    "60~69" -> {
-                        userAgeValue = 60
-                    }
-                    "70~" -> {
-                        userAgeValue = 70
-                    }
+                    "1~9" -> userAgeValue = 0
+                    "10~19" -> userAgeValue = 10
+                    "20~29" -> userAgeValue = 20
+                    "30~39" -> userAgeValue = 30
+                    "40~49" -> userAgeValue = 40
+                    "50~59" -> userAgeValue = 50
+                    "60~69" -> userAgeValue = 60
+                    "70~" -> userAgeValue = 70
                 }
                 editor.putInt("userAge", userAgeValue)
                 for (next in hashTag) {

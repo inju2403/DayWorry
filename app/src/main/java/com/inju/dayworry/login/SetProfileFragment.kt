@@ -14,18 +14,38 @@ import com.inju.dayworry.R
 import android.util.Log
 import android.view.Gravity
 import android.widget.Toast
+import com.inju.dayworry.retrofit.ApiService
+import com.inju.dayworry.retrofit.RetrofitClient
+import com.inju.dayworry.utils.Constants
 import com.inju.dayworry.utils.Constants.TAG
-import kotlinx.android.synthetic.main.activity_add_worry.*
 import kotlinx.android.synthetic.main.fragment_set_profile.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import kotlin.coroutines.CoroutineContext
 
-class SetProfileFragment : Fragment() {
+class SetProfileFragment: Fragment(), CoroutineScope {
+
+    private lateinit var job: Job
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + job
 
     var litePupleColor = "#9689FC"
     var superLiteGreyColor = "#cbcdd5"
     var darkNavyColor = "#2e3042"
     var liteNavyColor = "#535974"
 
-    private val nicknameMessage = "닉네임을 입력해주세요"
+    private val httpCall: ApiService? = RetrofitClient.getClient(Constants.API_BASE_URL)!!.create(
+        ApiService::class.java)
+
+    private var judge = false
+
+    private val nicknameEmptyMessage = "닉네임을 입력해주세요"
+    private val nicknameRedundancyMessage = "이미 존재하는 닉네임입니다"
     private val ageMessage = "연령을 선택해주세요"
 
     var ageList = arrayOf("연령을 선택해주세요", "1~9", "10~19", "20~29", "30~39", "40~49", "50~59", "60~69", "70~")
@@ -41,17 +61,18 @@ class SetProfileFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        job = Job()
+
         nextBtn.setOnClickListener {
             when {
                 (activity as SetProfileActivity).userName == "" -> {
-                    showToast(nicknameMessage)
+                    showToast(nicknameEmptyMessage)
                 }
                 (activity as SetProfileActivity).userAge == "" -> {
                     showToast(ageMessage)
                 }
                 else -> {
-                    moveSetTagFragment()
-                    (activity as SetProfileActivity).fragmentState = (activity as SetProfileActivity).FRAG_TAG
+                    judgeUserName((activity as SetProfileActivity).userName)
                 }
             }
         }
@@ -59,6 +80,17 @@ class SetProfileFragment : Fragment() {
         setTextChangeListener()
         setSpinner()
 
+    }
+
+    private fun judgeUserName(userName: String) = launch {
+        judge = httpCall?.nicknameRedundancyCheck(userName)?.flag!!
+        Log.d(TAG,"judge: $judge")
+        if(!judge) {
+            moveSetTagFragment()
+            (activity as SetProfileActivity).fragmentState =
+                (activity as SetProfileActivity).FRAG_TAG
+        }
+        else showToast(nicknameRedundancyMessage)
     }
 
     private fun moveSetTagFragment() {

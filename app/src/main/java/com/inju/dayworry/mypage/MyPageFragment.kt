@@ -18,7 +18,6 @@ import com.inju.dayworry.worry.worryList.WorryListAdapter
 import com.inju.dayworry.worry.worryList.WorryListViewModel
 import com.inju.dayworry.worry.worryList.buildlogic.WorryListInjector
 import kotlinx.android.synthetic.main.fragment_my_page.*
-import kotlinx.android.synthetic.main.fragment_worry_list.*
 
 class MyPageFragment : Fragment() {
 
@@ -95,7 +94,7 @@ class MyPageFragment : Fragment() {
     }
 
     private fun recycleviewBottomDetection() {
-        worryListView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        myCurrentWorryList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
 

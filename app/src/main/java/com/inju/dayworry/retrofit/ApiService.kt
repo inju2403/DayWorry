@@ -27,12 +27,16 @@ interface ApiService {
     @GET("users/check/{nickname}")
     suspend fun nicknameRedundancyCheck(@Path("nickname") nickname: String): NICKNAME_REDUNDANCY_RETURN_POJO
 
-
-    @GET("posts/home/{tagName}") //고민 리스트 받기 -> 페이징 (현재페이지, 페이지당 아이템 갯수)
+    //고민 리스트 받기 -> 페이징 (현재페이지, 페이지당 아이템 갯수)
+    @GET("posts/home/{tagName}")
 //    fun getWorrys(@Header("Authorization") Authorization: String): Single<MutableList<Worry>>
-
     suspend fun getWorrys(@Path("tagName") tagName: String,
                           @Query("pageNum") pageNum: Int): MutableList<Worry>
+
+    //검색으로 고민 리스트 받기 -> 페이징 (현재페이지, 페이지당 아이템 갯수)
+    @GET("posts/search/{keyword}")
+    suspend fun keywordSearch(@Path("keyword") keyword: String,
+                              @Query("pageNum") pageNum: Int): MutableList<Worry>
 
     @GET("path/{id}/") //고민 받기
 //    fun getWorryById(@Path("id") id: Long, @Header("Authorization") Authorization: String): Single<Worry>

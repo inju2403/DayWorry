@@ -23,7 +23,10 @@ class DayWorryRepoImpl(
 
     override suspend fun getWorrys(tagName: String, pageNum: Int): MutableList<Worry> {
         return httpCall?.getWorrys(tagName, pageNum)!!
-//        return mutableListOf<Worry>()
+    }
+
+    override suspend fun keywordSearch(tagName: String, pageNum: Int): MutableList<Worry> {
+        return httpCall?.keywordSearch(tagName, pageNum)!!
     }
 
     override suspend fun getWorryById(id : Long) : Worry {

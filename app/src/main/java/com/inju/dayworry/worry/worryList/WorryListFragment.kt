@@ -3,6 +3,8 @@ package com.inju.dayworry.worry.worryList
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -45,6 +47,7 @@ class WorryListFragment : Fragment() {
     var superLiteGreyColor = "#cbcdd5" // 텍스트 색상
 
     private var hashTag: String = "전체"
+    private var searchKeyword: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -60,6 +63,7 @@ class WorryListFragment : Fragment() {
         setViewModel()
         setUpAdapter()
         setLayoutManager()
+        setKeywordSearch()
         observeViewModel()
         recycleviewBottomDetection()
         setTagBtn()
@@ -87,6 +91,21 @@ class WorryListFragment : Fragment() {
 
     private fun setLayoutManager() {
         worryListView.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
+    }
+
+    private fun setKeywordSearch() {
+        searchTextEdit.addTextChangedListener(object: TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                searchKeyword = s.toString()
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { }
+        })
+
+        searchImage.setOnClickListener {
+            worryListViewModel!!.initKeywordSearch(searchKeyword)
+        }
     }
 
     private fun observeViewModel() {
@@ -118,7 +137,8 @@ class WorryListFragment : Fragment() {
                 var itemTotalCount = recyclerView.adapter!!.itemCount - 1
                 if (lastVisibleItemPosition == itemTotalCount) {
                     //todo
-                    worryListViewModel!!.getWorrys(hashTag)
+                    if(worryListViewModel!!.getWorrysState()) worryListViewModel!!.getWorrys(hashTag)
+                    else worryListViewModel!!.getKeywordSearch(hashTag)
                 }
 
             }
@@ -140,14 +160,9 @@ class WorryListFragment : Fragment() {
 
     private fun setTagBtn() {
         wholeBtn.setOnClickListener {
-            if(it.isSelected) { //선택되어 있다면
-                wholeBtn.isSelected = false
-                wholeBtn.background = resources.getDrawable(R.drawable.tag_btn_unselect_style)
-                wholeBtn.setTextColor(Color.parseColor(superLiteGreyColor))
-            }
-            else {
+            if(!it.isSelected) {
                 hashTag = "전체"
-                worryListViewModel!!.InitWorrys(hashTag)
+//                worryListViewModel!!.initWorrys(hashTag)
                 resetBtnColor()
                 wholeBtn.isSelected = true
                 wholeBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
@@ -156,13 +171,7 @@ class WorryListFragment : Fragment() {
         }
 
         dailyLiftBtn.setOnClickListener {
-            if(it.isSelected) { //선택되어 있다면
-
-                dailyLiftBtn.isSelected = false
-                dailyLiftBtn.background = resources.getDrawable(R.drawable.tag_btn_unselect_style)
-                dailyLiftBtn.setTextColor(Color.parseColor(superLiteGreyColor))
-            }
-            else {
+            if(!it.isSelected) {
                 hashTag = "일상"
                 worryListViewModel!!.InitWorrys(hashTag)
                 resetBtnColor()
@@ -173,12 +182,7 @@ class WorryListFragment : Fragment() {
         }
 
         familyBtn.setOnClickListener {
-            if(it.isSelected) { //선택되어 있다면
-                familyBtn.isSelected = false
-                familyBtn.background = resources.getDrawable(R.drawable.tag_btn_unselect_style)
-                familyBtn.setTextColor(Color.parseColor(superLiteGreyColor))
-            }
-            else {
+            if(!it.isSelected) {
                 hashTag = "가족"
                 worryListViewModel!!.InitWorrys(hashTag)
                 resetBtnColor()
@@ -189,12 +193,7 @@ class WorryListFragment : Fragment() {
         }
 
         friendBtn.setOnClickListener {
-            if(it.isSelected) { //선택되어 있다면
-                friendBtn.isSelected = false
-                friendBtn.background = resources.getDrawable(R.drawable.tag_btn_unselect_style)
-                friendBtn.setTextColor(Color.parseColor(superLiteGreyColor))
-            }
-            else {
+            if(!it.isSelected) {
                 hashTag = "친구"
                 worryListViewModel!!.InitWorrys(hashTag)
                 resetBtnColor()
@@ -205,12 +204,7 @@ class WorryListFragment : Fragment() {
         }
 
         dateBtn.setOnClickListener {
-            if(it.isSelected) { //선택되어 있다면
-                dateBtn.isSelected = false
-                dateBtn.background = resources.getDrawable(R.drawable.tag_btn_unselect_style)
-                dateBtn.setTextColor(Color.parseColor(superLiteGreyColor))
-            }
-            else {
+            if(!it.isSelected) {
                 hashTag = "연애"
                 worryListViewModel!!.InitWorrys(hashTag)
                 resetBtnColor()
@@ -221,12 +215,7 @@ class WorryListFragment : Fragment() {
         }
 
         schoolBtn.setOnClickListener {
-            if(it.isSelected) { //선택되어 있다면
-                schoolBtn.isSelected = false
-                schoolBtn.background = resources.getDrawable(R.drawable.tag_btn_unselect_style)
-                schoolBtn.setTextColor(Color.parseColor(superLiteGreyColor))
-            }
-            else {
+            if(!it.isSelected) {
                 hashTag = "학교"
                 worryListViewModel!!.InitWorrys(hashTag)
                 resetBtnColor()
@@ -237,12 +226,7 @@ class WorryListFragment : Fragment() {
         }
 
         jobBtn.setOnClickListener {
-            if(it.isSelected) { //선택되어 있다면
-                jobBtn.isSelected = false
-                jobBtn.background = resources.getDrawable(R.drawable.tag_btn_unselect_style)
-                jobBtn.setTextColor(Color.parseColor(superLiteGreyColor))
-            }
-            else {
+            if(!it.isSelected) {
                 hashTag = "직장"
                 worryListViewModel!!.InitWorrys(hashTag)
                 resetBtnColor()
@@ -253,12 +237,7 @@ class WorryListFragment : Fragment() {
         }
 
         employmentBtn.setOnClickListener {
-            if(it.isSelected) { //선택되어 있다면
-                employmentBtn.isSelected = false
-                employmentBtn.background = resources.getDrawable(R.drawable.tag_btn_unselect_style)
-                employmentBtn.setTextColor(Color.parseColor(superLiteGreyColor))
-            }
-            else {
+            if(!it.isSelected) {
                 hashTag = "취업"
                 worryListViewModel!!.InitWorrys(hashTag)
                 resetBtnColor()
@@ -269,12 +248,7 @@ class WorryListFragment : Fragment() {
         }
 
         courseBtn.setOnClickListener {
-            if(it.isSelected) { //선택되어 있다면
-                courseBtn.isSelected = false
-                courseBtn.background = resources.getDrawable(R.drawable.tag_btn_unselect_style)
-                courseBtn.setTextColor(Color.parseColor(superLiteGreyColor))
-            }
-            else {
+            if(!it.isSelected) {
                 hashTag = "진로"
                 worryListViewModel!!.InitWorrys(hashTag)
                 resetBtnColor()
@@ -285,12 +259,7 @@ class WorryListFragment : Fragment() {
         }
 
         moneyBtn.setOnClickListener {
-            if(it.isSelected) { //선택되어 있다면
-                moneyBtn.isSelected = false
-                moneyBtn.background = resources.getDrawable(R.drawable.tag_btn_unselect_style)
-                moneyBtn.setTextColor(Color.parseColor(superLiteGreyColor))
-            }
-            else {
+            if(!it.isSelected) {
                 hashTag = "돈"
                 worryListViewModel!!.InitWorrys(hashTag)
                 resetBtnColor()
@@ -301,12 +270,7 @@ class WorryListFragment : Fragment() {
         }
 
         healthBtn.setOnClickListener {
-            if(it.isSelected) { //선택되어 있다면
-                healthBtn.isSelected = false
-                healthBtn.background = resources.getDrawable(R.drawable.tag_btn_unselect_style)
-                healthBtn.setTextColor(Color.parseColor(superLiteGreyColor))
-            }
-            else {
+            if(!it.isSelected) {
                 hashTag = "건강"
                 worryListViewModel!!.InitWorrys(hashTag)
                 resetBtnColor()
@@ -317,12 +281,7 @@ class WorryListFragment : Fragment() {
         }
 
         marriedBtn.setOnClickListener {
-            if(it.isSelected) { //선택되어 있다면
-                marriedBtn.isSelected = false
-                marriedBtn.background = resources.getDrawable(R.drawable.tag_btn_unselect_style)
-                marriedBtn.setTextColor(Color.parseColor(superLiteGreyColor))
-            }
-            else {
+            if(!it.isSelected) {
                 hashTag = "기혼"
                 worryListViewModel!!.InitWorrys(hashTag)
                 resetBtnColor()
@@ -333,12 +292,7 @@ class WorryListFragment : Fragment() {
         }
 
         infantBtn.setOnClickListener {
-            if(it.isSelected) { //선택되어 있다면
-                infantBtn.isSelected = false
-                infantBtn.background = resources.getDrawable(R.drawable.tag_btn_unselect_style)
-                infantBtn.setTextColor(Color.parseColor(superLiteGreyColor))
-            }
-            else {
+            if(!it.isSelected) {
                 hashTag = "육아"
                 worryListViewModel!!.InitWorrys(hashTag)
                 resetBtnColor()

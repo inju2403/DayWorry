@@ -7,13 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.inju.dayworry.R
+import com.inju.dayworry.model.pojo.Worry
 import com.inju.dayworry.worry.worryDetail.WorryDetailActivity
 import kotlinx.android.synthetic.main.fragment_home1.*
 import kotlinx.android.synthetic.main.fragment_home2.*
 import kotlinx.android.synthetic.main.fragment_home2.homeLoadingUi
 import kotlinx.android.synthetic.main.fragment_home2.lookIntoBtn
 
-class HomeFragment2 : Fragment() {
+class HomeFragment2(worry: Worry) : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

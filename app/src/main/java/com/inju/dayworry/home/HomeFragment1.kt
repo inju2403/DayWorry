@@ -8,13 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.inju.dayworry.R
+import com.inju.dayworry.model.pojo.Worry
 import com.inju.dayworry.worry.worryDetail.WorryDetailActivity
 import kotlinx.android.synthetic.main.fragment_home1.*
 
-class HomeFragment1 : Fragment() {
+class HomeFragment1(worry: Worry) : Fragment() {
 
     private var handler: Handler? = null
     private var runnable: Runnable? =null
+    private var worry = worry
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,8 +31,14 @@ class HomeFragment1 : Fragment() {
 
         homeLoadingUi.visibility = View.GONE
 
+        setUi()
+
         lookIntoBtn.setOnClickListener {
             startActivity(Intent(activity!!, WorryDetailActivity::class.java))
         }
+    }
+
+    private fun setUi() {
+//        worryImage = worry.
     }
 }

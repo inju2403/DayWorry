@@ -67,9 +67,9 @@
                     android:layout_height="40dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="10dp"
-                    android:background="@drawable/tag_btn_unselect_style"
+                    android:background="@drawable/tag_btn_select_style"
                     android:text="전체"
-                    android:textColor="@color/superLiteGreyColor" />
+                    android:textColor="@color/litePupleColor" />
 
                 <Button
                     android:id="@+id/dailyLiftBtn"

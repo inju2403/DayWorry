@@ -22,6 +22,31 @@ class WorryListViewModel(
     private var currentPage: Int = 0
     private var currentKeywordPage: Int = 0
 
+    fun getMainWorrys() = launch {
+        // 메인 홈 탭에서 추천 고민 3개를 가져옴
+        worryListState.value = repo.getMainWorrys()
+    }
+
+    //현재 게시중인 내 고민 리스트
+    fun initMyWorrys(userId: Long) = launch {
+        currentPage = 0
+        worryListState.value = repo.getMyWorrys(userId, currentPage++)
+    }
+    fun getMyWorrys(userId: Long) = launch {
+        var newList = repo.getMyWorrys(userId, currentPage++)
+        for(item in newList) worryListState.value?.add(item)
+    }
+
+    //지난 내 고민 리스트
+    fun initHistory(userId: Long) = launch {
+        currentPage = 0
+        worryListState.value = repo.getHistory(userId, currentPage++)
+    }
+    fun getHistory(userId: Long) = launch {
+        var newList = repo.getHistory(userId, currentPage++)
+        for(item in newList) worryListState.value?.add(item)
+    }
+
     fun InitWorrys(tagName: String) = launch {
         // 고민글을 추가하고 다시 고민리스트로 가면 0 페이지부터 다시 부름
 

@@ -20,6 +20,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 @RequiresApi(21)
 class MainActivity : AppCompatActivity() {
 
+    private var mainWorryListViewModel: WorryListViewModel ?= null
     private var worryListViewModel: WorryListViewModel ?= null
 
     private val counselFragment = HomeListFragment()
@@ -54,6 +55,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setViewModel() {
+        mainWorryListViewModel = application!!.let {
+            ViewModelProvider(viewModelStore, WorryListInjector(
+                this.application
+            ).provideWorryListViewModelFactory())
+                .get(WorryListViewModel::class.java)
+        }
+
         worryListViewModel = application!!.let {
             ViewModelProvider(viewModelStore, WorryListInjector(
                 this.application

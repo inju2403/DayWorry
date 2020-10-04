@@ -8,11 +8,11 @@ data class Worry (
 
     @SerializedName("createdDate")
     @Expose
-    var createdDate: Date = Date(),
+    var createdDate: String = "",
 
     @SerializedName("modifiedDate")
     @Expose
-    var modifiedDate: Date = Date(),
+    var modifiedDate: String = "",
 
     @SerializedName("postId")
     @Expose

@@ -14,6 +14,7 @@ import com.inju.dayworry.R
 import android.util.Log
 import android.view.Gravity
 import android.widget.Toast
+import com.bumptech.glide.Glide
 import com.inju.dayworry.retrofit.ApiService
 import com.inju.dayworry.retrofit.RetrofitClient
 import com.inju.dayworry.utils.Constants
@@ -62,6 +63,11 @@ class SetProfileFragment: Fragment(), CoroutineScope {
         super.onActivityCreated(savedInstanceState)
 
         job = Job()
+
+        // Glide로 이미지 표시하기
+        var imageUrl = "https://d3scsscaxt5rdy.cloudfront.net/hago.png-20205304125305"
+        Glide.with(this).load(imageUrl).into(profile_photo)
+
 
         nextBtn.setOnClickListener {
             when {

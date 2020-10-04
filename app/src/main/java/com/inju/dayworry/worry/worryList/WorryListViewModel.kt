@@ -1,10 +1,12 @@
 package com.inju.dayworry.worry.worryList
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.inju.dayworry.model.pojo.Worry
 import com.inju.dayworry.model.repository.IDayWorryRepository
 import com.inju.dayworry.utils.BaseViewModel
+import com.inju.dayworry.utils.Constants.TAG
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
@@ -58,6 +60,7 @@ class WorryListViewModel(
 
     fun getWorrys(tagName: String) = launch {
         var newList = repo.getWorrys(tagName, currentPage++)
+        Log.d(TAG,"newList: $newList")
         //새로 불러온 아이템들을 붙임
         for(item in newList) worryListState.value?.add(item)
     }

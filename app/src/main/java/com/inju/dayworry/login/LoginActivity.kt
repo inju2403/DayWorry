@@ -139,7 +139,7 @@ class LoginActivity : AppCompatActivity() {
                 Log.i(TAG, "토큰 정보 보기 성공" +
                         "\n회원번호: ${tokenInfo.id}" +
                         "\n만료시간: ${tokenInfo.expiresIn} 초")
-                editor.putLong("userId", tokenInfo.id.toLong())
+                editor.putLong("userId", tokenInfo.id)
                 editor.commit()
             }, { error ->
                 Log.e(TAG, "토큰 정보 보기 실패", error)

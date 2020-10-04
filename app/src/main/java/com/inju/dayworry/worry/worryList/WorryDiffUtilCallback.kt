@@ -10,6 +10,6 @@ class WorryDiffUtilCallback: DiffUtil.ItemCallback<Worry>() {
     }
 
     override fun areContentsTheSame(oldItem: Worry, newItem: Worry): Boolean {
-        return oldItem.modifiedDate == newItem.modifiedDate
+        return oldItem.createdDate == newItem.createdDate
     }
 }

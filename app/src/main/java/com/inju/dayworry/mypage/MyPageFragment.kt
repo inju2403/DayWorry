@@ -23,7 +23,8 @@ class MyPageFragment : Fragment() {
 
     private var myWorryListViewModel: WorryListViewModel?= null
     private lateinit var listAdapter: WorryListAdapter
-    private var userId: Long = 0
+    private var userId: Long = 1
+    private val defaultLong: Long = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,102 +38,102 @@ class MyPageFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         val pref = activity!!.getSharedPreferences(Constants.PREFERENCE, AppCompatActivity.MODE_PRIVATE)
-        userId = pref.getLong("userId", 0)
+        userId = pref.getLong("userId", defaultLong)
 
-        setViewModel()
-        setUpAdapter()
-        setLayoutManager()
-        observeViewModel()
-        recycleviewBottomDetection()
-
-        setUpClickListener()
+//        setViewModel()
+//        setUpAdapter()
+//        setLayoutManager()
+//        observeViewModel()
+//        recycleviewBottomDetection()
+//
+//        setUpClickListener()
         //아이템이 없을때 사라지도록 변경해야함
         emptyPostLayout.visibility = View.GONE
         newImage.visibility = View.GONE
     }
 
-    private fun setViewModel() {
-        myWorryListViewModel = activity!!.application!!.let {
-            ViewModelProvider(activity!!.viewModelStore, WorryListInjector(
-                requireActivity().application
-            ).provideWorryListViewModelFactory())
-                .get(WorryListViewModel::class.java)
-        }
-    }
-
-    private fun setUpAdapter() {
-        listAdapter = WorryListAdapter()
-        listAdapter.event.observe(
-            viewLifecycleOwner,
-            Observer {
-                myWorryListViewModel!!.handleEvent(it)
-            }
-        )
-        myCurrentWorryList.adapter = listAdapter
-    }
-
-    private fun setLayoutManager() {
-        myCurrentWorryList.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
-    }
-
-    private fun observeViewModel() {
-        myWorryListViewModel!!.let {
-            it.editWorry.observe(
-                viewLifecycleOwner,
-                Observer {
-                    val intent = Intent(activity, WorryDetailActivity::class.java).apply {
-                        putExtra("WORRY_ID", it)
-                    }
-                    startActivity(intent)
-                }
-            )
-            it.worryList.observe(viewLifecycleOwner,
-                Observer {
-                    listAdapter.submitList(it)
-                })
-        }
-    }
-
-    private fun recycleviewBottomDetection() {
-        myCurrentWorryList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-
-                var lastVisibleItemPosition =
-                    (recyclerView.layoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
-
-                var itemTotalCount = recyclerView.adapter!!.itemCount - 1
-                if (lastVisibleItemPosition == itemTotalCount) {
-                    //todo
-                    myWorryListViewModel!!.getMyWorrys(userId)
-                }
-
-            }
-        })
-    }
-
-    private fun setUpClickListener() {
-        profileEditBtn.setOnClickListener {
-            //계정 정보 수정
-            startActivity(Intent(activity!!, EditUserActivity::class.java))
-        }
-        storageLayout.setOnClickListener {
-            //내 글 보관함
-            startActivity(Intent(activity!!, MyWorryHistoryActivity::class.java))
-        }
-        onOffText.setOnClickListener {
-            //푸쉬 알림 켜기/끄기
-            if(onOffText.text == "켜기") onOffText.text = "끄기"
-            else onOffText.text = "켜기"
-        }
-        deleteUserLayout.setOnClickListener {
-            //계정 삭제
-        }
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        myWorryListViewModel!!.initMyWorrys(userId)
-    }
+//    private fun setViewModel() {
+//        myWorryListViewModel = activity!!.application!!.let {
+//            ViewModelProvider(activity!!.viewModelStore, WorryListInjector(
+//                requireActivity().application
+//            ).provideWorryListViewModelFactory())
+//                .get(WorryListViewModel::class.java)
+//        }
+//    }
+//
+//    private fun setUpAdapter() {
+//        listAdapter = WorryListAdapter()
+//        listAdapter.event.observe(
+//            viewLifecycleOwner,
+//            Observer {
+//                myWorryListViewModel!!.handleEvent(it)
+//            }
+//        )
+//        myCurrentWorryList.adapter = listAdapter
+//    }
+//
+//    private fun setLayoutManager() {
+//        myCurrentWorryList.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
+//    }
+//
+//    private fun observeViewModel() {
+//        myWorryListViewModel!!.let {
+//            it.editWorry.observe(
+//                viewLifecycleOwner,
+//                Observer {
+//                    val intent = Intent(activity, WorryDetailActivity::class.java).apply {
+//                        putExtra("WORRY_ID", it)
+//                    }
+//                    startActivity(intent)
+//                }
+//            )
+//            it.worryList.observe(viewLifecycleOwner,
+//                Observer {
+//                    listAdapter.submitList(it)
+//                })
+//        }
+//    }
+//
+//    private fun recycleviewBottomDetection() {
+//        myCurrentWorryList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+//            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+//                super.onScrolled(recyclerView, dx, dy)
+//
+//                var lastVisibleItemPosition =
+//                    (recyclerView.layoutManager as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
+//
+//                var itemTotalCount = recyclerView.adapter!!.itemCount - 1
+//                if (lastVisibleItemPosition == itemTotalCount) {
+//                    //todo
+//                    myWorryListViewModel!!.getMyWorrys(userId)
+//                }
+//
+//            }
+//        })
+//    }
+//
+//    private fun setUpClickListener() {
+//        profileEditBtn.setOnClickListener {
+//            //계정 정보 수정
+//            startActivity(Intent(activity!!, EditUserActivity::class.java))
+//        }
+//        storageLayout.setOnClickListener {
+//            //내 글 보관함
+//            startActivity(Intent(activity!!, MyWorryHistoryActivity::class.java))
+//        }
+//        onOffText.setOnClickListener {
+//            //푸쉬 알림 켜기/끄기
+//            if(onOffText.text == "켜기") onOffText.text = "끄기"
+//            else onOffText.text = "켜기"
+//        }
+//        deleteUserLayout.setOnClickListener {
+//            //계정 삭제
+//        }
+//    }
+//
+//    override fun onResume() {
+//        super.onResume()
+//
+//        myWorryListViewModel!!.initMyWorrys(userId)
+//    }
 }

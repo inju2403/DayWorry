@@ -32,8 +32,17 @@ import kotlinx.android.synthetic.main.fragment_worry_list.jobBtn
 import kotlinx.android.synthetic.main.fragment_worry_list.marriedBtn
 import kotlinx.android.synthetic.main.fragment_worry_list.moneyBtn
 import kotlinx.android.synthetic.main.fragment_worry_list.schoolBtn
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
-class WorryListFragment : Fragment() {
+class WorryListFragment : Fragment(), CoroutineScope {
+
+    private lateinit var job: Job
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + job
 
     private var worryListViewModel: WorryListViewModel ?= null
 
@@ -60,8 +69,9 @@ class WorryListFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        job = Job()
+
         setViewModel()
-        setUpAdapter()
         setLayoutManager()
         setKeywordSearch()
         observeViewModel()
@@ -76,17 +86,6 @@ class WorryListFragment : Fragment() {
             ).provideWorryListViewModelFactory())
                 .get(WorryListViewModel::class.java)
         }
-    }
-
-    private fun setUpAdapter() {
-        listAdapter = WorryListAdapter()
-        listAdapter.event.observe(
-            viewLifecycleOwner,
-            Observer {
-                worryListViewModel!!.handleEvent(it)
-            }
-        )
-        worryListView.adapter = listAdapter
     }
 
     private fun setLayoutManager() {
@@ -121,12 +120,32 @@ class WorryListFragment : Fragment() {
             )
             it.worryList.observe(viewLifecycleOwner,
                 Observer {
-                    listAdapter.submitList(it)
+                    worryListView.layoutManager =
+                        LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
+
+                    listAdapter = WorryListAdapter(it)
+
+                    listAdapter.event.observe(
+                        viewLifecycleOwner,
+                        Observer {
+                            worryListViewModel!!.handleEvent(it)
+                        }
+                    )
+
+                    worryListView.adapter = listAdapter
+                    listAdapter.notifyDataSetChanged()
                 })
+
         }
     }
 
-    private fun recycleviewBottomDetection() {
+    private fun judgeTagOrSearch() = launch {
+        if(worryListViewModel!!.getWorrysState()) worryListViewModel!!.getWorrys(hashTag).join()
+        else worryListViewModel!!.getKeywordSearch(hashTag).join()
+        listAdapter.notifyDataSetChanged()
+    }
+
+    private fun recycleviewBottomDetection() = launch {
         worryListView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
@@ -137,19 +156,23 @@ class WorryListFragment : Fragment() {
                 var itemTotalCount = recyclerView.adapter!!.itemCount - 1
                 if (lastVisibleItemPosition == itemTotalCount) {
                     //todo
-                    if(worryListViewModel!!.getWorrysState()) worryListViewModel!!.getWorrys(hashTag)
-                    else worryListViewModel!!.getKeywordSearch(hashTag)
+                    judgeTagOrSearch()
                 }
 
             }
         })
     }
 
+    private fun initWorrys() = launch {
+        worryListViewModel!!.InitWorrys(hashTag).join()
+        listAdapter.notifyDataSetChanged()
+    }
+
     override fun onResume() {
         super.onResume()
 
         // 고민글을 추가하고 다시 고민리스트로 가면 0 페이지부터 다시 부름
-//        worryListViewModel!!.InitWorrys(hashTag)
+        initWorrys()
 //        Log.d(TAG,"리스트: ${worryListViewModel!!.worryList.value}")
     }
 
@@ -162,7 +185,7 @@ class WorryListFragment : Fragment() {
         wholeBtn.setOnClickListener {
             if(!it.isSelected) {
                 hashTag = "전체"
-//                worryListViewModel!!.initWorrys(hashTag)
+                worryListViewModel!!.InitWorrys(hashTag)
                 resetBtnColor()
                 wholeBtn.isSelected = true
                 wholeBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)

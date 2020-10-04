@@ -22,5 +22,5 @@ data class User_REQUEST_POJO(
 
     @SerializedName("userId")
     @Expose
-    var userId: Int = 0
+    var userId: Long = 0
 )

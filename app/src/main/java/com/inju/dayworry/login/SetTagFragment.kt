@@ -52,7 +52,8 @@ class SetTagFragment : Fragment() {
     private var userAgeValue: Int = 0
     private var hashTagString: String = ""
 
-    private var userId: Int = 0
+    private var userId: Long = 0
+    private val defaultLong: Long = 0
     private var totalCnt = 0
 
     override fun onCreateView(
@@ -69,7 +70,7 @@ class SetTagFragment : Fragment() {
         val pref = activity!!.getSharedPreferences(Constants.PREFERENCE, AppCompatActivity.MODE_PRIVATE)
         val editor = pref.edit()
 
-        userId = pref.getInt("userId", 0)
+        userId = pref.getLong("userId", defaultLong)
 
         nextBtn.setOnClickListener {
             if(hashTag.size == 0) {

@@ -13,7 +13,7 @@ class WorryListAdapter(val event: MutableLiveData<WorryListEvent> = MutableLiveD
     WorryDiffUtilCallback())
 {
 
-    private val timeFormat = SimpleDateFormat("mm : ss")
+    private val timeFormat = SimpleDateFormat("HH : mm")
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WorryItemViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_worry, parent, false)

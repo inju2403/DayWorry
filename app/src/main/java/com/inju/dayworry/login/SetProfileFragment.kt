@@ -42,7 +42,7 @@ class SetProfileFragment: Fragment(), CoroutineScope {
     private val httpCall: ApiService? = RetrofitClient.getClient(Constants.API_BASE_URL)!!.create(
         ApiService::class.java)
 
-    private var judge = false
+    private var judge = true
 
     private val nicknameEmptyMessage = "닉네임을 입력해주세요"
     private val nicknameRedundancyMessage = "이미 존재하는 닉네임입니다"
@@ -85,7 +85,7 @@ class SetProfileFragment: Fragment(), CoroutineScope {
     private fun judgeUserName(userName: String) = launch {
         judge = httpCall?.nicknameRedundancyCheck(userName)?.flag!!
         Log.d(TAG,"judge: $judge")
-        if(!judge) {
+        if(judge) {
             moveSetTagFragment()
             (activity as SetProfileActivity).fragmentState =
                 (activity as SetProfileActivity).FRAG_TAG

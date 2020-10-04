@@ -5,31 +5,35 @@ import com.google.gson.annotations.SerializedName
 import java.util.*
 
 data class Counsel (
-    @SerializedName("comment_id")
+    @SerializedName("commentId")
     @Expose
-    var comment_id: Long = 0,
+    var commentId: Long = 0,
 
-    @SerializedName("created_date")
+    @SerializedName("createdDate")
     @Expose
-    var created_date: Date = Date(),
+    var createdDate: Date = Date(),
 
-    @SerializedName("modified_date")
+    @SerializedName("modifiedDate")
     @Expose
-    var modified_date: Date = Date(),
+    var modifiedDate: Date = Date(),
 
-    @SerializedName("comment_likes")
+    @SerializedName("commentLikes")
     @Expose
-    var comment_likes: Long = 0,
+    var commentLikes: Long = 0,
 
     @SerializedName("content")
     @Expose
     var content: String = "",
 
-    @SerializedName("post_id")
+    @SerializedName("userId")
     @Expose
-    var post_id: Long = 0,
+    var userId: Long = 0,
 
-    @SerializedName("user_id")
+    @SerializedName("profileImage")
     @Expose
-    var user_id: Long = 0
+    var profileImage: String = "",
+
+    @SerializedName("nickname")
+    @Expose
+    var nickname: String = ""
 )

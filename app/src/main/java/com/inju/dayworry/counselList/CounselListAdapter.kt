@@ -15,7 +15,7 @@ class CounselListAdapter(val event: MutableLiveData<CounselListEvent> = MutableL
 )
 {
 
-    private val timeFormat = SimpleDateFormat("mm : ss")
+    private val timeFormat = SimpleDateFormat("HH : mm")
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CounselItemViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_counsel, parent, false)
@@ -24,10 +24,10 @@ class CounselListAdapter(val event: MutableLiveData<CounselListEvent> = MutableL
 
     override fun onBindViewHolder(holder: CounselItemViewHolder, position: Int) {
         getItem(position).let {
-            var counselId = it?.comment_id
+            var counselId = it?.commentId
             holder.containerView.counselContent.text = it.content
-            holder.containerView.timeText.text = timeFormat.format(it.modified_date)
-            holder.containerView.commentCountText.text = it.comment_likes.toString()
+            holder.containerView.timeText.text = timeFormat.format(it.modifiedDate)
+            holder.containerView.commentCountText.text = it.commentLikes.toString()
         }
     }
 

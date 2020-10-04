@@ -28,7 +28,7 @@ interface ApiService {
     suspend fun nicknameRedundancyCheck(@Path("nickname") nickname: String): NICKNAME_REDUNDANCY_RETURN_POJO
 
 
-    @GET("posts/{tagName}") //고민 리스트 받기 -> 페이징 (현재페이지, 페이지당 아이템 갯수)
+    @GET("posts/home/{tagName}") //고민 리스트 받기 -> 페이징 (현재페이지, 페이지당 아이템 갯수)
 //    fun getWorrys(@Header("Authorization") Authorization: String): Single<MutableList<Worry>>
 
     suspend fun getWorrys(@Path("tagName") tagName: String,

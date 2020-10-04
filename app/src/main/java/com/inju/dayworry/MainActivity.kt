@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
 
     private var mainWorryListViewModel: WorryListViewModel ?= null
     private var worryListViewModel: WorryListViewModel ?= null
+    private var myWorryListViewModel: WorryListViewModel?= null
 
     private val counselFragment = HomeListFragment()
     private val worryListFragment = WorryListFragment()
@@ -63,6 +64,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         worryListViewModel = application!!.let {
+            ViewModelProvider(viewModelStore, WorryListInjector(
+                this.application
+            ).provideWorryListViewModelFactory())
+                .get(WorryListViewModel::class.java)
+        }
+
+        myWorryListViewModel = application!!.let {
             ViewModelProvider(viewModelStore, WorryListInjector(
                 this.application
             ).provideWorryListViewModelFactory())

@@ -47,7 +47,7 @@ class MyWorryHistoryActivity : AppCompatActivity(), CoroutineScope {
         recycleviewBottomDetection()
 
         //아이템이 없을때 사라지도록 변경
-        historyLoadingUi.visibility = View.GONE
+        historyPagingLoadingUi.visibility = View.GONE
     }
 
     private fun setViewModel() {
@@ -95,12 +95,12 @@ class MyWorryHistoryActivity : AppCompatActivity(), CoroutineScope {
     }
 
     private fun paging() = launch {
-        historyLoadingUi.visibility = View.VISIBLE
+        historyPagingLoadingUi.visibility = View.VISIBLE
 
         worryListViewModel!!.getHistory(userId).join()
         listAdapter.notifyDataSetChanged()
 
-        historyLoadingUi.visibility = View.GONE
+        historyPagingLoadingUi.visibility = View.GONE
     }
 
     private fun recycleviewBottomDetection() {
@@ -122,8 +122,12 @@ class MyWorryHistoryActivity : AppCompatActivity(), CoroutineScope {
     }
 
     private fun initMyWorrys() = launch {
+        historyInitLoadingUi.visibility = View.VISIBLE
+
         worryListViewModel!!.initHistory(userId).join()
         listAdapter.notifyDataSetChanged()
+
+        historyInitLoadingUi.visibility = View.GONE
     }
 
     override fun onResume() {

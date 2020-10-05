@@ -15,8 +15,20 @@ class WorryListViewModel(
     uiContext: CoroutineContext
 ): BaseViewModel<WorryListEvent>(uiContext) {
 
+    private var myWorryListitemCnt = 0
+    fun getmyWorryListitemCnt() = myWorryListitemCnt
+
+    private val mainWorryListState = MutableLiveData<MutableList<Worry>>()
+    val mainWorryList: LiveData<MutableList<Worry>> get() = mainWorryListState
+
     private val worryListState = MutableLiveData<MutableList<Worry>>()
     val worryList: LiveData<MutableList<Worry>> get() = worryListState
+
+    private val myWorryListState = MutableLiveData<MutableList<Worry>>()
+    val myWorryList: LiveData<MutableList<Worry>> get() = myWorryListState
+
+    private val myHistoryState = MutableLiveData<MutableList<Worry>>()
+    val myHistory: LiveData<MutableList<Worry>> get() = myHistoryState
 
     private var usingTag: Boolean = false
     private var usingSearch: Boolean = false
@@ -26,27 +38,28 @@ class WorryListViewModel(
 
     fun getMainWorrys() = launch {
         // 메인 홈 탭에서 추천 고민 3개를 가져옴
-        worryListState.value = repo.getMainWorrys()
+        mainWorryListState.value = repo.getMainWorrys()
     }
 
     //현재 게시중인 내 고민 리스트
     fun initMyWorrys(userId: Long) = launch {
         currentPage = 0
-        worryListState.value = repo.getMyWorrys(userId, currentPage++)
+        myWorryListState.value = repo.getMyWorrys(userId, currentPage++)
+        myWorryListitemCnt = myWorryList.value?.size!!
     }
     fun getMyWorrys(userId: Long) = launch {
         var newList = repo.getMyWorrys(userId, currentPage++)
-        for(item in newList) worryListState.value?.add(item)
+        for(item in newList) myWorryListState.value?.add(item)
     }
 
     //지난 내 고민 리스트
     fun initHistory(userId: Long) = launch {
         currentPage = 0
-        worryListState.value = repo.getHistory(userId, currentPage++)
+        myHistoryState.value = repo.getHistory(userId, currentPage++)
     }
     fun getHistory(userId: Long) = launch {
         var newList = repo.getHistory(userId, currentPage++)
-        for(item in newList) worryListState.value?.add(item)
+        for(item in newList) myHistoryState.value?.add(item)
     }
 
     fun InitWorrys(tagName: String) = launch {
@@ -60,7 +73,7 @@ class WorryListViewModel(
 
     fun getWorrys(tagName: String) = launch {
         var newList = repo.getWorrys(tagName, currentPage++)
-        Log.d(TAG,"newList: $newList")
+//        Log.d(TAG,"newList: $newList")
         //새로 불러온 아이템들을 붙임
         for(item in newList) worryListState.value?.add(item)
     }

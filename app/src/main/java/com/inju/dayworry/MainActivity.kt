@@ -6,8 +6,10 @@ import android.os.Bundle
 import android.view.Gravity
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
 import com.inju.dayworry.home.HomeListFragment
+import com.inju.dayworry.model.pojo.Worry
 import com.inju.dayworry.mypage.MyPageFragment
 import com.inju.dayworry.notification.NotiFragment
 import com.inju.dayworry.utils.Constants.PREFERENCE
@@ -20,9 +22,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 @RequiresApi(21)
 class MainActivity : AppCompatActivity() {
 
-    private var mainWorryListViewModel: WorryListViewModel ?= null
     private var worryListViewModel: WorryListViewModel ?= null
-    private var myWorryListViewModel: WorryListViewModel?= null
 
     private val counselFragment = HomeListFragment()
     private val worryListFragment = WorryListFragment()
@@ -56,21 +56,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setViewModel() {
-        mainWorryListViewModel = application!!.let {
-            ViewModelProvider(viewModelStore, WorryListInjector(
-                this.application
-            ).provideWorryListViewModelFactory())
-                .get(WorryListViewModel::class.java)
-        }
-
         worryListViewModel = application!!.let {
-            ViewModelProvider(viewModelStore, WorryListInjector(
-                this.application
-            ).provideWorryListViewModelFactory())
-                .get(WorryListViewModel::class.java)
-        }
-
-        myWorryListViewModel = application!!.let {
             ViewModelProvider(viewModelStore, WorryListInjector(
                 this.application
             ).provideWorryListViewModelFactory())

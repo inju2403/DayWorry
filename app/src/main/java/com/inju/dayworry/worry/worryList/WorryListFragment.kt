@@ -14,6 +14,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.inju.dayworry.MainActivity
 import com.inju.dayworry.R
 import com.inju.dayworry.utils.Constants.TAG
 import com.inju.dayworry.worry.worryDetail.WorryDetailActivity

@@ -2,7 +2,6 @@ package com.inju.dayworry.mypage
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,10 +12,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.inju.dayworry.R
+import com.inju.dayworry.mypage.adapter.MyWorryListAdapter
 import com.inju.dayworry.utils.Constants
-import com.inju.dayworry.utils.Constants.TAG
 import com.inju.dayworry.worry.worryDetail.WorryDetailActivity
-import com.inju.dayworry.worry.worryList.WorryListAdapter
 import com.inju.dayworry.worry.worryList.WorryListViewModel
 import com.inju.dayworry.worry.worryList.buildlogic.WorryListInjector
 import kotlinx.android.synthetic.main.fragment_my_page.*
@@ -35,7 +33,7 @@ class MyPageFragment : Fragment(), CoroutineScope {
     private var worryListViewModel: WorryListViewModel?= null
     private lateinit var listAdapter: MyWorryListAdapter
     private var userId: Long = 1
-    private val defaultLong: Long = 2
+    private val defaultLong: Long = 1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -94,7 +92,8 @@ class MyPageFragment : Fragment(), CoroutineScope {
                     myCurrentWorryList.layoutManager =
                         LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false)
 
-                    listAdapter = MyWorryListAdapter(it)
+                    listAdapter =
+                        MyWorryListAdapter(it)
 
                     listAdapter.event.observe(
                         viewLifecycleOwner,

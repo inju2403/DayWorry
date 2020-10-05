@@ -1,4 +1,4 @@
-package com.inju.dayworry.mypage
+package com.inju.dayworry.mypage.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -11,8 +11,8 @@ import com.inju.dayworry.worry.worryList.WorryListEvent
 import kotlinx.android.synthetic.main.item_worry.view.*
 import java.text.SimpleDateFormat
 
-class MyWorryListAdapter(private val list: MutableList<Worry>,
-                         val event: MutableLiveData<WorryListEvent> = MutableLiveData()
+class MyHistoryAdapter(private val list: MutableList<Worry>,
+                       val event: MutableLiveData<WorryListEvent> = MutableLiveData()
 ) :
     RecyclerView.Adapter<WorryItemViewHolder> ()
 {
@@ -20,7 +20,7 @@ class MyWorryListAdapter(private val list: MutableList<Worry>,
     private val timeFormat = SimpleDateFormat("HH : mm")
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WorryItemViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_my_worry_current, parent, false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_my_worry_history, parent, false)
         return WorryItemViewHolder(itemView)
     }
 

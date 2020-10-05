@@ -69,6 +69,9 @@ class WorryListFragment : Fragment(), CoroutineScope {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        worryListLoadingUi.visibility = View.GONE
+        pagingLoadingUi.visibility = View.GONE
+
         job = Job()
 
         setViewModel()
@@ -140,9 +143,13 @@ class WorryListFragment : Fragment(), CoroutineScope {
     }
 
     private fun judgeTagOrSearch() = launch {
+        pagingLoadingUi.visibility = View.VISIBLE
+
         if(worryListViewModel!!.getWorrysState()) worryListViewModel!!.getWorrys(hashTag).join()
         else worryListViewModel!!.getKeywordSearch(hashTag).join()
         listAdapter.notifyDataSetChanged()
+
+        pagingLoadingUi.visibility = View.GONE
     }
 
     private fun recycleviewBottomDetection() = launch {
@@ -164,8 +171,12 @@ class WorryListFragment : Fragment(), CoroutineScope {
     }
 
     private fun initWorrys() = launch {
+        worryListLoadingUi.visibility = View.VISIBLE
+
         worryListViewModel!!.InitWorrys(hashTag).join()
         listAdapter.notifyDataSetChanged()
+
+        worryListLoadingUi.visibility = View.GONE
     }
 
     override fun onResume() {
@@ -185,7 +196,11 @@ class WorryListFragment : Fragment(), CoroutineScope {
         wholeBtn.setOnClickListener {
             if(!it.isSelected) {
                 hashTag = "전체"
+
+                worryListLoadingUi.visibility = View.VISIBLE
                 worryListViewModel!!.InitWorrys(hashTag)
+                worryListLoadingUi.visibility = View.GONE
+
                 resetBtnColor()
                 wholeBtn.isSelected = true
                 wholeBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
@@ -196,7 +211,11 @@ class WorryListFragment : Fragment(), CoroutineScope {
         dailyLiftBtn.setOnClickListener {
             if(!it.isSelected) {
                 hashTag = "일상"
+
+                worryListLoadingUi.visibility = View.VISIBLE
                 worryListViewModel!!.InitWorrys(hashTag)
+                worryListLoadingUi.visibility = View.GONE
+
                 resetBtnColor()
                 dailyLiftBtn.isSelected = true
                 dailyLiftBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
@@ -207,7 +226,11 @@ class WorryListFragment : Fragment(), CoroutineScope {
         familyBtn.setOnClickListener {
             if(!it.isSelected) {
                 hashTag = "가족"
+
+                worryListLoadingUi.visibility = View.VISIBLE
                 worryListViewModel!!.InitWorrys(hashTag)
+                worryListLoadingUi.visibility = View.GONE
+
                 resetBtnColor()
                 familyBtn.isSelected = true
                 familyBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
@@ -218,7 +241,11 @@ class WorryListFragment : Fragment(), CoroutineScope {
         friendBtn.setOnClickListener {
             if(!it.isSelected) {
                 hashTag = "친구"
+
+                worryListLoadingUi.visibility = View.VISIBLE
                 worryListViewModel!!.InitWorrys(hashTag)
+                worryListLoadingUi.visibility = View.GONE
+
                 resetBtnColor()
                 friendBtn.isSelected = true
                 friendBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
@@ -229,7 +256,11 @@ class WorryListFragment : Fragment(), CoroutineScope {
         dateBtn.setOnClickListener {
             if(!it.isSelected) {
                 hashTag = "연애"
+
+                worryListLoadingUi.visibility = View.VISIBLE
                 worryListViewModel!!.InitWorrys(hashTag)
+                worryListLoadingUi.visibility = View.GONE
+
                 resetBtnColor()
                 dateBtn.isSelected = true
                 dateBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
@@ -240,7 +271,11 @@ class WorryListFragment : Fragment(), CoroutineScope {
         schoolBtn.setOnClickListener {
             if(!it.isSelected) {
                 hashTag = "학교"
+
+                worryListLoadingUi.visibility = View.VISIBLE
                 worryListViewModel!!.InitWorrys(hashTag)
+                worryListLoadingUi.visibility = View.GONE
+
                 resetBtnColor()
                 schoolBtn.isSelected = true
                 schoolBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
@@ -251,7 +286,11 @@ class WorryListFragment : Fragment(), CoroutineScope {
         jobBtn.setOnClickListener {
             if(!it.isSelected) {
                 hashTag = "직장"
+
+                worryListLoadingUi.visibility = View.VISIBLE
                 worryListViewModel!!.InitWorrys(hashTag)
+                worryListLoadingUi.visibility = View.GONE
+
                 resetBtnColor()
                 jobBtn.isSelected = true
                 jobBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
@@ -262,7 +301,11 @@ class WorryListFragment : Fragment(), CoroutineScope {
         employmentBtn.setOnClickListener {
             if(!it.isSelected) {
                 hashTag = "취업"
+
+                worryListLoadingUi.visibility = View.VISIBLE
                 worryListViewModel!!.InitWorrys(hashTag)
+                worryListLoadingUi.visibility = View.GONE
+
                 resetBtnColor()
                 employmentBtn.isSelected = true
                 employmentBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
@@ -273,7 +316,11 @@ class WorryListFragment : Fragment(), CoroutineScope {
         courseBtn.setOnClickListener {
             if(!it.isSelected) {
                 hashTag = "진로"
+
+                worryListLoadingUi.visibility = View.VISIBLE
                 worryListViewModel!!.InitWorrys(hashTag)
+                worryListLoadingUi.visibility = View.GONE
+
                 resetBtnColor()
                 courseBtn.isSelected = true
                 courseBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
@@ -284,7 +331,11 @@ class WorryListFragment : Fragment(), CoroutineScope {
         moneyBtn.setOnClickListener {
             if(!it.isSelected) {
                 hashTag = "돈"
+
+                worryListLoadingUi.visibility = View.VISIBLE
                 worryListViewModel!!.InitWorrys(hashTag)
+                worryListLoadingUi.visibility = View.GONE
+
                 resetBtnColor()
                 moneyBtn.isSelected = true
                 moneyBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
@@ -295,7 +346,11 @@ class WorryListFragment : Fragment(), CoroutineScope {
         healthBtn.setOnClickListener {
             if(!it.isSelected) {
                 hashTag = "건강"
+
+                worryListLoadingUi.visibility = View.VISIBLE
                 worryListViewModel!!.InitWorrys(hashTag)
+                worryListLoadingUi.visibility = View.GONE
+
                 resetBtnColor()
                 healthBtn.isSelected = true
                 healthBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
@@ -306,7 +361,11 @@ class WorryListFragment : Fragment(), CoroutineScope {
         marriedBtn.setOnClickListener {
             if(!it.isSelected) {
                 hashTag = "기혼"
+
+                worryListLoadingUi.visibility = View.VISIBLE
                 worryListViewModel!!.InitWorrys(hashTag)
+                worryListLoadingUi.visibility = View.GONE
+
                 resetBtnColor()
                 marriedBtn.isSelected = true
                 marriedBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
@@ -317,7 +376,11 @@ class WorryListFragment : Fragment(), CoroutineScope {
         infantBtn.setOnClickListener {
             if(!it.isSelected) {
                 hashTag = "육아"
+
+                worryListLoadingUi.visibility = View.VISIBLE
                 worryListViewModel!!.InitWorrys(hashTag)
+                worryListLoadingUi.visibility = View.GONE
+
                 resetBtnColor()
                 infantBtn.isSelected = true
                 infantBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)

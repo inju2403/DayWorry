@@ -33,7 +33,7 @@ class HomeListFragment : Fragment(), CoroutineScope {
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + job
 
-    private var mainWorryListViewModel: WorryListViewModel?= null
+    private var worryListViewModel: WorryListViewModel?= null
     private lateinit var viewPager: ViewPager2
 
     private var worryList = mutableListOf<Worry>()
@@ -56,16 +56,16 @@ class HomeListFragment : Fragment(), CoroutineScope {
     }
 
     private fun setViewModel() = launch {
-        mainWorryListViewModel = activity!!.application!!.let {
+        worryListViewModel = activity!!.application!!.let {
             ViewModelProvider(activity!!.viewModelStore, WorryListInjector(
                 requireActivity().application
             ).provideWorryListViewModelFactory())
                 .get(WorryListViewModel::class.java)
         }
 
-//        mainWorryListViewModel?.getMainWorrys()?.join()
-//        Log.d(TAG, "main: ${mainWorryListViewModel?.worryList?.value}")
-//        worryList = mainWorryListViewModel?.worryList?.value!!
+        worryListViewModel?.getMainWorrys()?.join()
+        Log.d(TAG, "main: ${worryListViewModel?.mainWorryList?.value}")
+        worryList = worryListViewModel?.mainWorryList?.value!!
     }
 
     private fun setViewPager() {

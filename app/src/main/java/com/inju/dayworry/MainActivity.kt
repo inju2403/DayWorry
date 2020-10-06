@@ -47,6 +47,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
         val pref = getSharedPreferences(PREFERENCE, MODE_PRIVATE)
         val jwt = pref.getString("jwt", "").toString()
 

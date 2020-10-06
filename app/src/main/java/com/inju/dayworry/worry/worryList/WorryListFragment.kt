@@ -1,8 +1,10 @@
 package com.inju.dayworry.worry.worryList
 
+import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -16,12 +18,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.inju.dayworry.MainActivity
 import com.inju.dayworry.R
 import com.inju.dayworry.utils.Constants.TAG
 import com.inju.dayworry.worry.worryDetail.WorryDetailActivity
+import com.inju.dayworry.worry.worryList.adapter.WorryListAdapter
 import com.inju.dayworry.worry.worryList.buildlogic.WorryListInjector
-import kotlinx.android.synthetic.main.activity_add_worry.*
 import kotlinx.android.synthetic.main.fragment_worry_list.*
 import kotlinx.android.synthetic.main.fragment_worry_list.courseBtn
 import kotlinx.android.synthetic.main.fragment_worry_list.dailyLiftBtn
@@ -50,10 +51,7 @@ class WorryListFragment : Fragment(), CoroutineScope {
     private var worryListViewModel: WorryListViewModel ?= null
 
     private lateinit var listAdapter: WorryListAdapter
-    private lateinit var scrollListener: PaginationScrollListener
-    private lateinit var layoutManager: LinearLayoutManager
-
-    private var sort: String = "created_at" //정렬 기준 created_at or hits
+    private val REQUEST_EDITACTIVITY_CODE = 101
 
     var litePupleColor = "#9689FC" // 텍스트 색상
     var superLiteGreyColor = "#cbcdd5" // 텍스트 색상
@@ -137,7 +135,10 @@ class WorryListFragment : Fragment(), CoroutineScope {
                     worryListView.layoutManager =
                         LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
 
-                    listAdapter = WorryListAdapter(it)
+                    listAdapter =
+                        WorryListAdapter(
+                            it
+                        )
 
                     listAdapter.event.observe(
                         viewLifecycleOwner,
@@ -442,6 +443,17 @@ class WorryListFragment : Fragment(), CoroutineScope {
         healthBtn.isSelected = false
         marriedBtn.isSelected = false
         infantBtn.isSelected = false
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if(requestCode == REQUEST_EDITACTIVITY_CODE) {
+            Log.d(TAG,"req ok")
+            if(resultCode == Activity.RESULT_OK) {
+                initWorrys()
+            }
+        }
     }
 
 }

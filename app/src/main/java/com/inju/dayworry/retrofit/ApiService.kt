@@ -57,10 +57,8 @@ interface ApiService {
 //    fun getWorryById(@Path("id") id: Long, @Header("Authorization") Authorization: String): Single<Worry>
     suspend fun getWorryById(@Path("id") id: Long, @Header("Authorization") Authorization: String): Worry
 
-    @PUT("path/{id}/") //고민 수정
-    suspend fun addOrUpdateWorry(@Path("id") id: Long,
-                                 @Body contents: Contents,
-                                 @Header("Authorization") Authorization: String): Response<Unit>
+    @POST("posts/") //고민 수정
+    suspend fun addOrUpdateWorry(@Body contents: Contents): Response<Unit>
 
     @DELETE("path/{id}/") //고민 삭제
 //    fun deleteWorry(@Path("id") id: Long, @Header("Authorization") Authorization: String): Response<Unit>

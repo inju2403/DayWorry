@@ -1,15 +1,15 @@
-package com.inju.dayworry.worry.worryList
+package com.inju.dayworry.worry.worryList.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.MutableLiveData
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.inju.dayworry.R
 import com.inju.dayworry.model.pojo.Worry
+import com.inju.dayworry.worry.worryList.WorryItemViewHolder
+import com.inju.dayworry.worry.worryList.WorryListEvent
 import kotlinx.android.synthetic.main.item_worry.view.*
 import java.text.SimpleDateFormat
-import java.util.*
 
 class WorryListAdapter(private val list: MutableList<Worry>,
                        val event: MutableLiveData<WorryListEvent> = MutableLiveData()) :
@@ -37,7 +37,10 @@ class WorryListAdapter(private val list: MutableList<Worry>,
         holder.containerView.title.text = list[position].title
         holder.containerView.content.text = list[position].content
         holder.containerView.setOnClickListener {
-            event.value = WorryListEvent.OnWorryItemClick(list[position].postId!!)
+            event.value =
+                WorryListEvent.OnWorryItemClick(
+                    list[position].postId!!
+                )
         }
         holder.containerView.worryItemTimeText.text = list[position].createdDate.substring(11..15)
     }

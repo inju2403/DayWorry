@@ -4,13 +4,20 @@ import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.SyncStateContract
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
+import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.inju.dayworry.R
+import com.inju.dayworry.utils.Constants
+import com.inju.dayworry.utils.Constants.TAG
 import com.inju.dayworry.worry.worryDetail.buildlogic.WorryDetailInjector
 import kotlinx.android.synthetic.main.activity_add_worry.*
 import kotlinx.android.synthetic.main.activity_add_worry.courseBtn
@@ -25,13 +32,24 @@ import kotlinx.android.synthetic.main.activity_add_worry.jobBtn
 import kotlinx.android.synthetic.main.activity_add_worry.marriedBtn
 import kotlinx.android.synthetic.main.activity_add_worry.moneyBtn
 import kotlinx.android.synthetic.main.activity_add_worry.schoolBtn
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
-class AddWorryActivity : AppCompatActivity() {
+class AddWorryActivity : AppCompatActivity(), CoroutineScope {
+
+    private lateinit var job: Job
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + job
 
     private val RESULT_OK = 101
     private var worryDetailViewModel: WorryDetailViewModel? = null
 
-    private var hashTag: String? = null
+    private var hashTag: String? = "empty"
+    private var userId: Long = -1
+    private var defaultId: Long = -1
 
     var litePupleColor = "#9689FC" // 텍스트 색상
     var superLiteGreyColor = "#cbcdd5" // 텍스트 색상
@@ -39,6 +57,13 @@ class AddWorryActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_worry)
+
+        addWorryLoadingUi.visibility = View.GONE
+
+        val pref = getSharedPreferences(Constants.PREFERENCE, MODE_PRIVATE)
+        userId = pref.getLong("userId", defaultId)
+
+        job = Job()
 
         setSupportActionBar(addWorryActivityToolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -63,6 +88,7 @@ class AddWorryActivity : AppCompatActivity() {
             ).provideWorryDetailViewModelFactory())
                 .get(WorryDetailViewModel::class.java)
         }
+        worryDetailViewModel?.initWorry()
     }
 
     private fun observeViewModel() {
@@ -77,6 +103,7 @@ class AddWorryActivity : AppCompatActivity() {
         titleEdit.addTextChangedListener(object: TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 worryDetailViewModel!!.setWorryTitle(s.toString())
+                curLenText.text = s.toString().length.toString()
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
@@ -113,11 +140,27 @@ class AddWorryActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun worryUpdateLoading() {
-        worryDetailViewModel!!.addOrUpdateWorry(this, hashTag!!)
-        val intent = Intent()
-        setResult(RESULT_OK, intent)
-        finish()
+    private fun worryUpdateLoading() = launch {
+        if(titleEdit.text.isEmpty()) {
+            showToast("제목을 입력해주세요")
+        }
+        else if(titleEdit.text.length > 20) {
+            showToast("제목을 20자 이하로 입력해주세요")
+        }
+        else if(hashTag == "empty") {
+            showToast("태그를 선택해주세요")
+        }
+        else if(contentEdit.text.isEmpty()) {
+            showToast("내용을 입력해주세요")
+        }
+        else {
+            addWorryLoadingUi.visibility = View.VISIBLE
+            worryDetailViewModel!!.addOrUpdateWorry(userId, hashTag!!).join()
+            val intent = Intent()
+            setResult(RESULT_OK, intent)
+
+            finish()
+        }
     }
 
     private fun worryLoading(worryId: Long) {
@@ -345,5 +388,11 @@ class AddWorryActivity : AppCompatActivity() {
         healthBtn.isSelected = false
         marriedBtn.isSelected = false
         infantBtn.isSelected = false
+    }
+
+    private fun showToast(str: String) {
+        var toast = Toast.makeText(this, str, Toast.LENGTH_LONG)
+        toast.setGravity(Gravity.BOTTOM, 0,300)
+        toast.show()
     }
 }

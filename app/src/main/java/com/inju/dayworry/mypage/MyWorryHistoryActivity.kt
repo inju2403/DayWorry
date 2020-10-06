@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.inju.dayworry.R
-import com.inju.dayworry.mypage.adapter.MyHistoryAdapter
+import com.inju.dayworry.worry.worryList.adapter.MyHistoryAdapter
 import com.inju.dayworry.utils.Constants
 import com.inju.dayworry.worry.worryDetail.WorryDetailActivity
 import com.inju.dayworry.worry.worryList.WorryListViewModel
@@ -37,7 +37,7 @@ class MyWorryHistoryActivity : AppCompatActivity(), CoroutineScope {
         setContentView(R.layout.activity_my_worry_history)
 
         val pref = getSharedPreferences(Constants.PREFERENCE, AppCompatActivity.MODE_PRIVATE)
-//        userId = pref.getLong("userId", defaultLong)
+        userId = pref.getLong("userId", defaultLong)
 
         job = Job()
 

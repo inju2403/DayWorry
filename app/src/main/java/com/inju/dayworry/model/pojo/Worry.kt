@@ -45,8 +45,4 @@ data class Worry (
     @SerializedName("postLikes")
     @Expose
     var postLikes: Int = 0
-
-//    @SerializedName("userId")
-//    @Expose
-//    var userId: Long = 0
 )

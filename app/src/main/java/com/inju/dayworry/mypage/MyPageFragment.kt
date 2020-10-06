@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.inju.dayworry.R
-import com.inju.dayworry.mypage.adapter.MyWorryListAdapter
+import com.inju.dayworry.worry.worryList.adapter.MyWorryListAdapter
 import com.inju.dayworry.utils.Constants
 import com.inju.dayworry.worry.worryDetail.WorryDetailActivity
 import com.inju.dayworry.worry.worryList.WorryListViewModel
@@ -47,7 +47,7 @@ class MyPageFragment : Fragment(), CoroutineScope {
         super.onActivityCreated(savedInstanceState)
 
         val pref = activity!!.getSharedPreferences(Constants.PREFERENCE, AppCompatActivity.MODE_PRIVATE)
-//        userId = pref.getLong("userId", defaultLong)
+        userId = pref.getLong("userId", defaultLong)
 
         job = Job()
 

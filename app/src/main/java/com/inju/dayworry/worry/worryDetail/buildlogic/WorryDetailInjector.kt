@@ -19,7 +19,6 @@ class WorryDetailInjector(application: Application): AndroidViewModel(applicatio
 
     private fun getWorryRepository(): IDayWorryRepository {
         return DayWorryRepoImpl(httpCall, app)
-//        return DayWorryRepoImpl(app)
     }
 
     fun provideWorryDetailViewModelFactory(): WorryDetailViewModelFactory =

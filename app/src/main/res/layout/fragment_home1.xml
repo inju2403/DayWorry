@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/mainNavyColor"
+    android:background="@color/darkNavyColor"
     tools:context=".home.HomeFragment1">
 
     <ImageView
@@ -16,12 +16,74 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/mainNavyColor"
+        app:layout_constraintTop_toBottomOf="@id/worryImage" />
+
+    <TextView
+        android:id="@+id/titleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="48dp"
+        android:text="서른, 취업 힘들까요?"
+        android:textSize="20sp"
+        android:textColor="@color/whiteColor"
+        app:layout_constraintBottom_toBottomOf="@+id/worryImage"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/timeImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:src="@drawable/ic_time"
+        app:layout_constraintStart_toStartOf="@+id/titleText"
+        app:layout_constraintTop_toBottomOf="@+id/titleText" />
+
+    <TextView
+        android:id="@+id/timeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:text="20:28"
+        android:textSize="16sp"
+        android:textColor="@color/whiteColor"
+        app:layout_constraintBottom_toBottomOf="@+id/timeImage"
+        app:layout_constraintStart_toEndOf="@+id/timeImage"
+        app:layout_constraintTop_toTopOf="@+id/timeImage" />
+
+    <ImageView
+        android:id="@+id/commentImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:src="@drawable/ic_comment"
+        app:layout_constraintBottom_toBottomOf="@+id/timeText"
+        app:layout_constraintStart_toEndOf="@+id/timeText"
+        app:layout_constraintTop_toTopOf="@+id/timeText" />
+
+    <TextView
+        android:id="@+id/commentCountText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:text="6"
+        android:textSize="16sp"
+        android:textColor="@color/whiteColor"
+        app:layout_constraintBottom_toBottomOf="@+id/commentImage"
+        app:layout_constraintStart_toEndOf="@+id/commentImage"
+        app:layout_constraintTop_toTopOf="@+id/commentImage" />
+
     <TextView
         android:id="@+id/contentText"
         android:layout_width="0dp"
         android:layout_height="134dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="20dp"
         android:text="대학을 졸업하고 카페를 운영하다 상황이 안좋아져서 정리하게 되었어요. 취업을 해야하는데 졸업하고 지금까지 4년 간 카페일만 해와서 너무 막막하네요… 이제 곧 서른이라는 나이에 제가 다시 공부를 시작하고, 취업을 할 수 있을지 요즘 너무 걱정되네요…
 혹시라도 저와 비슷한 경험을 하신 분들이 있으시다면, 현실적인 조언 부탁드립니다! ㅠㅠ
@@ -61,13 +123,4 @@
         app:layout_constraintStart_toEndOf="@+id/tagBtn"
         app:layout_constraintTop_toTopOf="@+id/tagBtn" />
 
-    <ProgressBar
-        android:id="@+id/homeLoadingUi"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="230dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

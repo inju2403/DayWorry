@@ -6,15 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.inju.dayworry.R
 import com.inju.dayworry.model.pojo.Worry
 import com.inju.dayworry.worry.worryDetail.WorryDetailActivity
-import kotlinx.android.synthetic.main.fragment_home1.*
 import kotlinx.android.synthetic.main.fragment_home2.*
-import kotlinx.android.synthetic.main.fragment_home2.homeLoadingUi
-import kotlinx.android.synthetic.main.fragment_home2.lookIntoBtn
 
 class HomeFragment2(worry: Worry) : Fragment() {
+
+    private var worry = worry
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,11 +27,22 @@ class HomeFragment2(worry: Worry) : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        homeLoadingUi.visibility = View.GONE
+        setUi()
 
         lookIntoBtn.setOnClickListener {
             startActivity(Intent(activity!!, WorryDetailActivity::class.java))
         }
+    }
+
+    private fun setUi() {
+        var imageUrl = worry.postImage
+        Glide.with(this).load(imageUrl).into(worryImage)
+
+        titleText.text = worry.title
+        contentText.text = worry.content
+
+        timeText.text = worry.createdDate.substring(11..15)
+//        commentCountText.text = worry.
     }
 
 }

@@ -51,8 +51,17 @@ class HomeListFragment : Fragment(), CoroutineScope {
 
         job = Job()
 
-        setViewModel()
-//        setViewPager()
+        setHomeComponents()
+
+    }
+
+    private fun setHomeComponents() = launch {
+        homeLoadingUi.visibility = View.VISIBLE
+
+        setViewModel().join()
+        setViewPager()
+
+        homeLoadingUi.visibility = View.GONE
     }
 
     private fun setViewModel() = launch {
@@ -64,11 +73,11 @@ class HomeListFragment : Fragment(), CoroutineScope {
         }
 
         worryListViewModel?.getMainWorrys()?.join()
-        Log.d(TAG, "main: ${worryListViewModel?.mainWorryList?.value}")
         worryList = worryListViewModel?.mainWorryList?.value!!
+        Log.d(TAG, "main worrylist: $worryList")
     }
 
-    private fun setViewPager() {
+    private fun setViewPager() = launch {
         // Instantiate a ViewPager2 and a PagerAdapter.
         viewPager = activity!!.findViewById(R.id.counsel_list_view_pager)
 
@@ -99,5 +108,11 @@ class HomeListFragment : Fragment(), CoroutineScope {
             }
             return frag
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        setHomeComponents()
     }
 }

@@ -107,6 +107,7 @@ class LoginActivity : AppCompatActivity() {
                     200 -> {
                         getUserIdByKakao(pref)
                         editor.putString("jwt", response.body()?.jwt.toString())
+                        editor.putString("social", "kakao")
                         editor.commit()
 
                         Log.d(TAG,"jwt: ${response.body()?.jwt.toString()}")
@@ -222,10 +223,8 @@ class LoginActivity : AppCompatActivity() {
                 when (response!!.code()) {
                     200 -> {
                         editor.putString("jwt", response.body()?.jwt.toString())
+                        editor.putString("social", "naver")
                         editor.commit()
-                        var toast = Toast.makeText(this@LoginActivity, "로그인 jwt: ${response.body()?.jwt}", Toast.LENGTH_LONG)
-                        toast.setGravity(Gravity.BOTTOM, 0,300)
-                        toast.show()
 
 
                         Log.d(TAG,"jwt: ${response.body()?.jwt.toString()}")

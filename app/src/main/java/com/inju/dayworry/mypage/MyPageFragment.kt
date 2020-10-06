@@ -35,6 +35,7 @@ class MyPageFragment : Fragment(), CoroutineScope {
 
     private var userId: Long = 1
     private lateinit var userName: String
+    private lateinit var social: String
     private val defaultLong: Long = 1
 
     override fun onCreateView(
@@ -51,6 +52,8 @@ class MyPageFragment : Fragment(), CoroutineScope {
         val pref = activity!!.getSharedPreferences(Constants.PREFERENCE, AppCompatActivity.MODE_PRIVATE)
         userId = pref.getLong("userId", defaultLong)
         userName = pref.getString("userName", "").toString()
+        social = pref.getString("social", "").toString()
+        if(social=="naver") socialLogo.setImageResource(R.drawable.ic_naver_login_mypage)
         usernameText.text = userName
 
         job = Job()

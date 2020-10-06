@@ -41,17 +41,27 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/emailText"
+    <ImageView
+        android:id="@+id/socialLogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="6dp"
-        android:text="harugomin@naver.com"
-        android:textSize="12sp"
-        android:textColor="@color/superLiteGreyColor"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ic_kakao_login_mypage"
         app:layout_constraintStart_toEndOf="@+id/profileImage"
         app:layout_constraintTop_toBottomOf="@+id/usernameText" />
+
+    <TextView
+        android:id="@+id/harugoinText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="harugomin"
+        android:textColor="@color/superLiteGreyColor"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/socialLogo"
+        app:layout_constraintStart_toEndOf="@+id/socialLogo"
+        app:layout_constraintTop_toTopOf="@+id/socialLogo" />
 
     <View
         android:id="@+id/line1"

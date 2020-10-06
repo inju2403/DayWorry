@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
@@ -15,6 +16,7 @@ import com.inju.dayworry.R
 import com.inju.dayworry.home.viewPager.DepthPageTransformer
 import com.inju.dayworry.home.viewPager.ZoomOutPageTransformer
 import com.inju.dayworry.model.pojo.Worry
+import com.inju.dayworry.utils.Constants
 import com.inju.dayworry.utils.Constants.NUM_PAGES
 import com.inju.dayworry.utils.Constants.TAG
 import com.inju.dayworry.worry.worryList.WorryListViewModel
@@ -38,6 +40,8 @@ class HomeListFragment : Fragment(), CoroutineScope {
 
     private var worryList = mutableListOf<Worry>()
 
+    private lateinit var userName: String
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -50,6 +54,10 @@ class HomeListFragment : Fragment(), CoroutineScope {
         super.onActivityCreated(savedInstanceState)
 
         job = Job()
+        val pref = activity!!.getSharedPreferences(Constants.PREFERENCE, AppCompatActivity.MODE_PRIVATE)
+        userName = pref.getString("userName", "").toString()
+
+        explainSubText.text = "$userName 님이\n공감할 고민이 있어요!"
 
         setHomeComponents()
 

@@ -141,25 +141,27 @@ class AddWorryActivity : AppCompatActivity(), CoroutineScope {
     }
 
     private fun worryUpdateLoading() = launch {
-        if(titleEdit.text.isEmpty()) {
-            showToast("제목을 입력해주세요")
-        }
-        else if(titleEdit.text.length > 20) {
-            showToast("제목을 20자 이하로 입력해주세요")
-        }
-        else if(hashTag == "empty") {
-            showToast("태그를 선택해주세요")
-        }
-        else if(contentEdit.text.isEmpty()) {
-            showToast("내용을 입력해주세요")
-        }
-        else {
-            addWorryLoadingUi.visibility = View.VISIBLE
-            worryDetailViewModel!!.addOrUpdateWorry(userId, hashTag!!).join()
-            val intent = Intent()
-            setResult(RESULT_OK, intent)
+        when {
+            titleEdit.text.isEmpty() -> {
+                showToast("제목을 입력해주세요")
+            }
+            titleEdit.text.length > 20 -> {
+                showToast("제목을 20자 이하로 입력해주세요")
+            }
+            hashTag == "empty" -> {
+                showToast("태그를 선택해주세요")
+            }
+            contentEdit.text.isEmpty() -> {
+                showToast("내용을 입력해주세요")
+            }
+            else -> {
+                addWorryLoadingUi.visibility = View.VISIBLE
+                worryDetailViewModel!!.addOrUpdateWorry(userId, hashTag!!).join()
+                val intent = Intent()
+                setResult(RESULT_OK, intent)
 
-            finish()
+                finish()
+            }
         }
     }
 

@@ -32,7 +32,9 @@ class MyPageFragment : Fragment(), CoroutineScope {
 
     private var worryListViewModel: WorryListViewModel?= null
     private lateinit var listAdapter: MyWorryListAdapter
+
     private var userId: Long = 1
+    private lateinit var userName: String
     private val defaultLong: Long = 1
 
     override fun onCreateView(
@@ -48,6 +50,8 @@ class MyPageFragment : Fragment(), CoroutineScope {
 
         val pref = activity!!.getSharedPreferences(Constants.PREFERENCE, AppCompatActivity.MODE_PRIVATE)
         userId = pref.getLong("userId", defaultLong)
+        userName = pref.getString("userName", "").toString()
+        usernameText.text = userName
 
         job = Job()
 

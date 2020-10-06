@@ -94,6 +94,7 @@ class SetTagFragment : Fragment() {
                 }
                 hashTagString = hashTagString.substring(0..hashTagString.length-2)
                 editor.putString("hashTags",hashTagString)
+                editor.commit()
 
                 requsetProfileUpdate()
                 moveMainActivity()

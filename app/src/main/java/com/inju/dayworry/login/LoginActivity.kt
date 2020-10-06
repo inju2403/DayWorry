@@ -108,10 +108,6 @@ class LoginActivity : AppCompatActivity() {
                         getUserIdByKakao(pref)
                         editor.putString("jwt", response.body()?.jwt.toString())
                         editor.commit()
-                        var toast = Toast.makeText(this@LoginActivity, "로그인 jwt: ${response.body()?.jwt}", Toast.LENGTH_LONG)
-                        toast.setGravity(Gravity.BOTTOM, 0,300)
-                        toast.show()
-
 
                         Log.d(TAG,"jwt: ${response.body()?.jwt.toString()}")
                         startActivity(Intent(this@LoginActivity, SetProfileActivity::class.java))

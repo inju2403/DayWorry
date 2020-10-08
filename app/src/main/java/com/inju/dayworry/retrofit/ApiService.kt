@@ -52,6 +52,14 @@ interface ApiService {
     suspend fun getHistory(@Path("userId") userId: Long,
                            @Query("pageNum") pageNum: Int): MutableList<Worry>
 
+    //계정 삭제
+    @DELETE("users/{userId}")
+    fun deleteUser(@Path("userId") userId: Long): Call<Void>
+
+
+
+
+
 
     @GET("path/{id}/") //고민 받기
 //    fun getWorryById(@Path("id") id: Long, @Header("Authorization") Authorization: String): Single<Worry>

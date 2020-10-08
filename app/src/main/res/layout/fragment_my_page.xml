@@ -2,11 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/deleteLogoutLoadingUi"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/darkNavyColor"
     tools:context=".mypage.MyPageFragment">
-
 
     <ImageView
         android:id="@+id/profileImage"
@@ -25,9 +25,9 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="26dp"
         android:text="하고"
-        android:textStyle="bold"
-        android:textSize="20sp"
         android:textColor="@color/whiteColor"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/profileImage"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -78,8 +78,8 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:text="현재 게시중인 글"
-        android:textSize="16sp"
         android:textColor="@color/whiteColor"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/line1" />
@@ -147,8 +147,8 @@
             android:layout_marginEnd="84dp"
             android:layout_marginBottom="12dp"
             android:text="현재 게시중인 글이 없어요!\n      고민을 나눠보세요 :)"
-            android:textSize="14sp"
             android:textColor="@color/superLiteGreyColor"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -213,8 +213,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="푸쉬 알림"
-        android:textSize="16sp"
         android:textColor="@color/whiteColor"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/mypageAlarmImage"
         app:layout_constraintStart_toEndOf="@+id/mypageAlarmImage"
         app:layout_constraintTop_toTopOf="@+id/mypageAlarmImage" />
@@ -261,17 +261,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="parent" />
 
-    <TextView
-        android:id="@+id/logoutText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="로그아웃"
-        android:textSize="16sp"
-        android:textColor="@color/whiteColor"
-        app:layout_constraintBottom_toBottomOf="@+id/logoutImage"
-        app:layout_constraintStart_toEndOf="@+id/logoutImage"
-        app:layout_constraintTop_toTopOf="@+id/logoutImage" />
+        <TextView
+            android:id="@+id/logoutText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="로그아웃"
+            android:textColor="@color/whiteColor"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/logoutImage"
+            app:layout_constraintStart_toEndOf="@+id/logoutImage"
+            app:layout_constraintTop_toTopOf="@+id/logoutImage" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -327,4 +327,15 @@
             app:layout_constraintStart_toStartOf="@+id/deleteUserText"
             app:layout_constraintTop_toBottomOf="@+id/deleteUserText" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ProgressBar
+        android:id="@+id/delteUserLogoutLoadingUi"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

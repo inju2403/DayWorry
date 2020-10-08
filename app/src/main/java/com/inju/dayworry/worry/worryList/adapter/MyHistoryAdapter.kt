@@ -17,8 +17,6 @@ class MyHistoryAdapter(private val list: MutableList<Worry>,
     RecyclerView.Adapter<WorryItemViewHolder> ()
 {
 
-    private val timeFormat = SimpleDateFormat("HH : mm")
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WorryItemViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_my_worry_history, parent, false)
         return WorryItemViewHolder(itemView)
@@ -30,7 +28,7 @@ class MyHistoryAdapter(private val list: MutableList<Worry>,
         holder.containerView.setOnClickListener {
             event.value = WorryListEvent.OnWorryItemClick(list[position].postId!!)
         }
-        holder.containerView.worryItemTimeText.text = list[position].createdDate.substring(11..15)
+        holder.containerView.worryItemTimeText.text = list[position].createdDate.substring(0..3) + "." + list[position].createdDate.substring(5..6) + "." + list[position].createdDate.substring(8..9)
     }
 
     override fun getItemCount(): Int {

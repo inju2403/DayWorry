@@ -124,7 +124,8 @@ class MyWorryHistoryActivity : AppCompatActivity(), CoroutineScope {
     private fun initMyWorrys() = launch {
         historyInitLoadingUi.visibility = View.VISIBLE
 
-        worryListViewModel!!.initHistory(userId).join()
+        worryListViewModel!!.initHistory(1.toLong()).join()
+//        worryListViewModel!!.initHistory(userId).join()
         listAdapter.notifyDataSetChanged()
 
         historyInitLoadingUi.visibility = View.GONE

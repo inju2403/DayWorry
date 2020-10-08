@@ -22,7 +22,7 @@
             android:background="@color/darkNavyColor">
 
             <TextView
-                android:id="@+id/dateText"
+                android:id="@+id/worryItemTimeText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
@@ -44,7 +44,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/dateText">
+                app:layout_constraintTop_toBottomOf="@+id/worryItemTimeText">
 
 
                 <TextView

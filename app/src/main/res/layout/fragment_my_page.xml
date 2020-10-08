@@ -97,7 +97,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/myCurrentWorryList"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="2dp"
         app:layout_constraintEnd_toStartOf="@+id/myPageLoadingUi"
         app:layout_constraintStart_toStartOf="parent"
@@ -242,13 +242,57 @@
         app:layout_constraintTop_toBottomOf="@id/line3" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/logoutLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/line5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/line4">
+
+
+        <ImageView
+            android:id="@+id/logoutImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:src="@drawable/ic_logout"
+            app:layout_constraintBottom_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="parent" />
+
+    <TextView
+        android:id="@+id/logoutText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="로그아웃"
+        android:textSize="16sp"
+        android:textColor="@color/whiteColor"
+        app:layout_constraintBottom_toBottomOf="@+id/logoutImage"
+        app:layout_constraintStart_toEndOf="@+id/logoutImage"
+        app:layout_constraintTop_toTopOf="@+id/logoutImage" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/line5"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="55dp"
+        android:background="@color/mainNavyColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/line4" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/deleteUserLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/line4">
+        app:layout_constraintTop_toBottomOf="@+id/logoutLayout">
 
         <ImageView
             android:id="@+id/deleteUserImage"

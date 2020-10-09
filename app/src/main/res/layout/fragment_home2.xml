@@ -103,7 +103,7 @@
         android:layout_height="40dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="12dp"
-        android:background="@drawable/counsel_detail_tag_btn_style"
+        android:background="@drawable/main_tag_btn_style"
         android:text="일상"
         android:textColor="@color/litePupleColor"
         app:layout_constraintStart_toStartOf="parent"

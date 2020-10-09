@@ -3,6 +3,8 @@ package com.inju.dayworry
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.SyncStateContract
+import android.util.Log
 import android.view.Gravity
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -12,6 +14,7 @@ import com.inju.dayworry.home.HomeListFragment
 import com.inju.dayworry.model.pojo.Worry
 import com.inju.dayworry.mypage.MyPageFragment
 import com.inju.dayworry.notification.NotiFragment
+import com.inju.dayworry.utils.Constants.TAG
 import com.inju.dayworry.utils.Constants.PREFERENCE
 import com.inju.dayworry.worry.worryList.WorryListFragment
 import com.inju.dayworry.worry.worryDetail.AddWorryActivity
@@ -34,7 +37,7 @@ class MainActivity : AppCompatActivity() {
     private val FRAG_NOTIFICATION = 2
     private val FRAG_MYPAGE = 3
 
-    private val REQUEST_MAINACTIVITY_CODE = 100
+    private val REQUEST_CODE = 101
     private val RETURN_OK = 101
 
     private var counselJudge = 1 //선택: 1, 미선택: 0
@@ -117,7 +120,7 @@ class MainActivity : AppCompatActivity() {
                 toast.setGravity(Gravity.BOTTOM, 0,300)
                 toast.show()
             }
-            else startActivityForResult(Intent(this@MainActivity, AddWorryActivity::class.java), REQUEST_MAINACTIVITY_CODE)
+            else startActivityForResult(Intent(this@MainActivity, AddWorryActivity::class.java), REQUEST_CODE)
         }
 
         notiTapView.setOnClickListener {
@@ -197,8 +200,9 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if(requestCode == REQUEST_MAINACTIVITY_CODE) {
+        if(requestCode == REQUEST_CODE) {
             if(resultCode == RETURN_OK) {
+                Log.d(TAG, "res ok")
                 counselJudge = 0
                 worryJudge = 1
                 notiJudge = 0

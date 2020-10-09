@@ -23,8 +23,8 @@ class WorryDetailViewModel(
         worryState.value = Worry()
     }
 
-    fun getWorryById(id: Long) = launch {
-        worryState.value = repo.getWorryById(id)
+    fun getWorryById(postId: Long) = launch {
+        worryState.value = repo.getWorryById(postId)
     }
 
     fun addOrUpdateWorry(userId: Long, tageName: String) = launch {

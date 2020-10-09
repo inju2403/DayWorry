@@ -1,12 +1,10 @@
 package com.inju.dayworry.worry.worryList
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.inju.dayworry.model.pojo.Worry
 import com.inju.dayworry.model.repository.IDayWorryRepository
 import com.inju.dayworry.utils.BaseViewModel
-import com.inju.dayworry.utils.Constants.TAG
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
@@ -99,10 +97,17 @@ class WorryListViewModel(
     private val editWorryState = MutableLiveData<Long>()
     val editWorry: LiveData<Long> get() = editWorryState
 
+    private val editMyWorryState = MutableLiveData<Long>()
+    val editMyWorry: LiveData<Long> get() = editMyWorryState
+
+    private val editHistoryState = MutableLiveData<Long>()
+    val editHistory: LiveData<Long> get() = editHistoryState
+
     override fun handleEvent(event: WorryListEvent) {
         when (event) {
-//            is WorryListEvent.OnStart -> getWorrys()
             is WorryListEvent.OnWorryItemClick -> editWorry(event.worryId)
+            is WorryListEvent.OnMyWorryItemClick -> editMyWorry(event.worryId)
+            is WorryListEvent.OnHistoryItemClick -> editHistory(event.worryId)
         }
     }
 
@@ -110,4 +115,11 @@ class WorryListViewModel(
         editWorryState.value = worryId
     }
 
+    private fun editMyWorry(worryId: Long) {
+        editMyWorryState.value = worryId
+    }
+
+    private fun editHistory(worryId: Long) {
+        editHistoryState.value = worryId
+    }
 }

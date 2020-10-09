@@ -41,9 +41,8 @@ class DayWorryRepoImpl(
         return httpCall?.keywordSearch(tagName, pageNum)!!
     }
 
-    override suspend fun getWorryById(id : Long) : Worry {
-        return httpCall?.getWorryById(id, token)!!
-//        return Worry()
+    override suspend fun getWorryById(postId : Long) : Worry {
+        return httpCall?.getWorryById(postId)!!
     }
 
     override suspend fun addOrUpdateWorry(contents: Contents)  {
@@ -51,7 +50,7 @@ class DayWorryRepoImpl(
     }
 
     override suspend fun deleteWorry(id : Long) {
-        httpCall?.deleteWorry(id, token)
+//        httpCall?.deleteWorry(id, token)
     }
 
 }

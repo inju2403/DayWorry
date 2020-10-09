@@ -9,7 +9,7 @@ interface IDayWorryRepository {
     suspend fun getHistory(userId: Long, pageNum: Int): MutableList<Worry>
     suspend fun getWorrys(tagName: String, pageNum: Int): MutableList<Worry>
     suspend fun keywordSearch(tagName: String, pageNum: Int): MutableList<Worry>
-    suspend fun getWorryById(id: Long): Worry
+    suspend fun getWorryById(postId: Long): Worry
     suspend fun addOrUpdateWorry(contents: Contents)
     suspend fun deleteWorry(id: Long)
 }

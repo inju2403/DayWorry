@@ -28,7 +28,7 @@ class MyWorryListAdapter(private val list: MutableList<Worry>,
         holder.containerView.title.text = list[position].title
         holder.containerView.content.text = list[position].content
         holder.containerView.setOnClickListener {
-            event.value = WorryListEvent.OnWorryItemClick(list[position].postId!!)
+            event.value = WorryListEvent.OnMyWorryItemClick(list[position].postId!!)
         }
         holder.containerView.worryItemTimeText.text = list[position].createdDate.substring(11..15)
     }

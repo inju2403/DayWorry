@@ -65,7 +65,7 @@ class MyWorryHistoryActivity : AppCompatActivity(), CoroutineScope {
 
     private fun observeViewModel() {
         worryListViewModel!!.let {
-            it.editWorry.observe(
+            it.editHistory.observe(
                 this,
                 Observer {
                     val intent = Intent(this, WorryDetailActivity::class.java).apply {
@@ -124,8 +124,7 @@ class MyWorryHistoryActivity : AppCompatActivity(), CoroutineScope {
     private fun initMyWorrys() = launch {
         historyInitLoadingUi.visibility = View.VISIBLE
 
-        worryListViewModel!!.initHistory(1.toLong()).join()
-//        worryListViewModel!!.initHistory(userId).join()
+        worryListViewModel!!.initHistory(userId).join()
         listAdapter.notifyDataSetChanged()
 
         historyInitLoadingUi.visibility = View.GONE

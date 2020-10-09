@@ -19,18 +19,7 @@ import com.inju.dayworry.retrofit.RetrofitClient
 import com.inju.dayworry.utils.Constants
 import com.inju.dayworry.utils.Constants.TAG
 import kotlinx.android.synthetic.main.fragment_set_profile.nextBtn
-import kotlinx.android.synthetic.main.fragment_set_tag.courseBtn
-import kotlinx.android.synthetic.main.fragment_set_tag.dailyLiftBtn
-import kotlinx.android.synthetic.main.fragment_set_tag.dateBtn
-import kotlinx.android.synthetic.main.fragment_set_tag.employmentBtn
-import kotlinx.android.synthetic.main.fragment_set_tag.familyBtn
-import kotlinx.android.synthetic.main.fragment_set_tag.friendBtn
-import kotlinx.android.synthetic.main.fragment_set_tag.healthBtn
-import kotlinx.android.synthetic.main.fragment_set_tag.infantBtn
-import kotlinx.android.synthetic.main.fragment_set_tag.jobBtn
-import kotlinx.android.synthetic.main.fragment_set_tag.marriedBtn
-import kotlinx.android.synthetic.main.fragment_set_tag.moneyBtn
-import kotlinx.android.synthetic.main.fragment_set_tag.schoolBtn
+import kotlinx.android.synthetic.main.fragment_set_tag.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -70,6 +59,8 @@ class SetTagFragment : Fragment() {
         val pref = activity!!.getSharedPreferences(Constants.PREFERENCE, AppCompatActivity.MODE_PRIVATE)
         val editor = pref.edit()
 
+        setTagLoadingUi.visibility = View.GONE
+
         userId = pref.getLong("userId", defaultLong)
 
         nextBtn.setOnClickListener {
@@ -105,6 +96,7 @@ class SetTagFragment : Fragment() {
     }
 
     private fun requsetProfileUpdate() {
+        setTagLoadingUi.visibility = View.VISIBLE
         val userRequestPojo = User_REQUEST_POJO(
             userAgeValue,
             (activity as SetProfileActivity).userName,

@@ -30,7 +30,10 @@ class HomeFragment2(worry: Worry) : Fragment() {
         setUi()
 
         lookIntoBtn.setOnClickListener {
-            startActivity(Intent(activity!!, WorryDetailActivity::class.java))
+            val intent = Intent(activity, WorryDetailActivity::class.java).apply {
+                putExtra("WORRY_ID", worry.postId)
+            }
+            startActivity(intent)
         }
     }
 

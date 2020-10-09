@@ -19,6 +19,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.inju.dayworry.R
+import com.inju.dayworry.login.LoginActivity
 import com.inju.dayworry.utils.Constants.TAG
 import com.inju.dayworry.worry.worryDetail.WorryDetailActivity
 import com.inju.dayworry.worry.worryList.adapter.WorryListAdapter
@@ -51,7 +52,6 @@ class WorryListFragment : Fragment(), CoroutineScope {
     private var worryListViewModel: WorryListViewModel ?= null
 
     private lateinit var listAdapter: WorryListAdapter
-    private val REQUEST_EDITACTIVITY_CODE = 101
 
     var litePupleColor = "#9689FC" // 텍스트 색상
     var superLiteGreyColor = "#cbcdd5" // 텍스트 색상
@@ -135,10 +135,7 @@ class WorryListFragment : Fragment(), CoroutineScope {
                     worryListView.layoutManager =
                         LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
 
-                    listAdapter =
-                        WorryListAdapter(
-                            it
-                        )
+                    listAdapter = WorryListAdapter(it)
 
                     listAdapter.event.observe(
                         viewLifecycleOwner,
@@ -159,7 +156,6 @@ class WorryListFragment : Fragment(), CoroutineScope {
 
         if(worryListViewModel!!.getWorrysState()) worryListViewModel!!.getWorrys(hashTag).join()
         else worryListViewModel!!.getKeywordSearch(hashTag).join()
-        listAdapter.notifyDataSetChanged()
 
         pagingLoadingUi.visibility = View.GONE
     }
@@ -182,15 +178,6 @@ class WorryListFragment : Fragment(), CoroutineScope {
         })
     }
 
-    private fun initWorrys() = launch {
-        worryListLoadingUi.visibility = View.VISIBLE
-
-        worryListViewModel!!.InitWorrys(hashTag).join()
-        listAdapter.notifyDataSetChanged()
-
-        worryListLoadingUi.visibility = View.GONE
-    }
-
     override fun onResume() {
         super.onResume()
 
@@ -204,7 +191,16 @@ class WorryListFragment : Fragment(), CoroutineScope {
         worryListView.adapter = null
     }
 
-    private fun setTagBtn() {
+    private fun initWorrys() = launch {
+        worryListLoadingUi.visibility = View.VISIBLE
+
+        worryListViewModel!!.InitWorrys(hashTag).join()
+        listAdapter.notifyDataSetChanged()
+
+        worryListLoadingUi.visibility = View.GONE
+    }
+
+    private fun setTagBtn() = launch {
         wholeBtn.setOnClickListener {
             if(!it.isSelected) {
                 hashTag = "전체"
@@ -443,17 +439,6 @@ class WorryListFragment : Fragment(), CoroutineScope {
         healthBtn.isSelected = false
         marriedBtn.isSelected = false
         infantBtn.isSelected = false
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if(requestCode == REQUEST_EDITACTIVITY_CODE) {
-            Log.d(TAG,"req ok")
-            if(resultCode == Activity.RESULT_OK) {
-                initWorrys()
-            }
-        }
     }
 
 }

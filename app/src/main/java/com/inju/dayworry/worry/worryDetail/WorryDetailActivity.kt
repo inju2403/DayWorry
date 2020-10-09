@@ -2,6 +2,7 @@ package com.inju.dayworry.worry.worryDetail
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,20 +13,30 @@ import com.inju.dayworry.counselList.CounselListViewModel
 import com.inju.dayworry.counselList.buildlogic.CounselListInjector
 import com.inju.dayworry.worry.worryDetail.buildlogic.WorryDetailInjector
 import kotlinx.android.synthetic.main.activity_worry_detail.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
+import kotlin.coroutines.CoroutineContext
 
-class WorryDetailActivity : AppCompatActivity() {
+class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
+
+    private lateinit var job: Job
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + job
 
     private var worryDetailViewModel: WorryDetailViewModel? = null
     private var counselListViewModel: CounselListViewModel? = null
     private lateinit var listAdapter: CounselListAdapter
 
-    private val timeFormat = SimpleDateFormat("mm : ss")
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_worry_detail)
+
+        detailLoadingUi.visibility = View.GONE
+        job = Job()
 
         setViewModel()
         setUpAdapter()
@@ -69,7 +80,8 @@ class WorryDetailActivity : AppCompatActivity() {
         worryDetailViewModel!!.worry.observe (this, Observer {
             titleText.text = it.title
             contentText.text = it.content
-            timeText.text = timeFormat.format(it.modifiedDate)
+            timeText.text = it.createdDate.substring(11..15)
+            tagBtn.text = it.tagName
         })
 
         counselListViewModel!!.let {
@@ -99,8 +111,22 @@ class WorryDetailActivity : AppCompatActivity() {
         })
     }
 
-    private fun worryLoading(worryId: Long) {
-        worryDetailViewModel!!.getWorryById(worryId)
+    private fun worryLoading(worryId: Long) = launch {
+        detailLoadingUi.visibility = View.VISIBLE
+        titleText.visibility = View.GONE
+        timeText.visibility = View.GONE
+        tagBtn.visibility = View.GONE
+        contentText.visibility = View.GONE
+        timeImage.visibility = View.GONE
+
+        worryDetailViewModel!!.getWorryById(worryId).join()
+
+        detailLoadingUi.visibility = View.GONE
+        titleText.visibility = View.VISIBLE
+        timeText.visibility = View.VISIBLE
+        tagBtn.visibility = View.VISIBLE
+        contentText.visibility = View.VISIBLE
+        timeImage.visibility = View.VISIBLE
     }
 
     override fun onResume() {

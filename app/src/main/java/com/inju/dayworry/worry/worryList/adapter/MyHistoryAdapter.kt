@@ -9,7 +9,6 @@ import com.inju.dayworry.model.pojo.Worry
 import com.inju.dayworry.worry.worryList.WorryItemViewHolder
 import com.inju.dayworry.worry.worryList.WorryListEvent
 import kotlinx.android.synthetic.main.item_worry.view.*
-import java.text.SimpleDateFormat
 
 class MyHistoryAdapter(private val list: MutableList<Worry>,
                        val event: MutableLiveData<WorryListEvent> = MutableLiveData()
@@ -26,7 +25,7 @@ class MyHistoryAdapter(private val list: MutableList<Worry>,
         holder.containerView.title.text = list[position].title
         holder.containerView.content.text = list[position].content
         holder.containerView.setOnClickListener {
-            event.value = WorryListEvent.OnWorryItemClick(list[position].postId!!)
+            event.value = WorryListEvent.OnHistoryItemClick(list[position].postId!!)
         }
         holder.containerView.worryItemTimeText.text = list[position].createdDate.substring(0..3) + "." + list[position].createdDate.substring(5..6) + "." + list[position].createdDate.substring(8..9)
     }

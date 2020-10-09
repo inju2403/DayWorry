@@ -112,7 +112,7 @@ class MyPageFragment : Fragment(), CoroutineScope {
 
     private fun observeViewModel() {
         worryListViewModel!!.let {
-            it.editWorry.observe(
+            it.editMyWorry.observe(
                 viewLifecycleOwner,
                 Observer {
                     val intent = Intent(activity, WorryDetailActivity::class.java).apply {

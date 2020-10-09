@@ -115,13 +115,13 @@ class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
                 sendCounsel()
             }
         }
-        commentEditText.setOnKeyListener { v, keyCode, event ->
-                if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
-                    // 엔터 눌렀을때 행동
-                    sendCounsel()
-                }
-                true
-            }
+//        commentEditText.setOnKeyListener { v, keyCode, event ->
+//                if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
+//                    // 엔터 눌렀을때 행동
+//                    sendCounsel()
+//                }
+//                true
+//            }
     }
 
     private fun sendCounsel() = launch {

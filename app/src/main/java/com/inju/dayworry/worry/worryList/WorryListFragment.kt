@@ -106,13 +106,13 @@ class WorryListFragment : Fragment(), CoroutineScope {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { }
         })
 
-        searchTextEdit.setOnKeyListener { v, keyCode, event ->
-            if (event.action == KeyEvent.ACTION_DOWN && keyCode == KEYCODE_ENTER) {
-                // 엔터 눌렀을때 행동
-                worryListViewModel!!.initKeywordSearch(searchKeyword)
-            }
-            true
-        }
+//        searchTextEdit.setOnKeyListener { v, keyCode, event ->
+//            if (event.action == KeyEvent.ACTION_DOWN && keyCode == KEYCODE_ENTER) {
+//                // 엔터 눌렀을때 행동
+//                worryListViewModel!!.initKeywordSearch(searchKeyword)
+//            }
+//            true
+//        }
 
         searchImage.setOnClickListener {
             worryListViewModel!!.initKeywordSearch(searchKeyword)

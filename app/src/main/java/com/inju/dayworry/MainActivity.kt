@@ -11,6 +11,8 @@ import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
 import com.inju.dayworry.home.HomeListFragment
+import com.inju.dayworry.login.LoginActivity
+import com.inju.dayworry.login.SetProfileActivity
 import com.inju.dayworry.model.pojo.Worry
 import com.inju.dayworry.mypage.MyPageFragment
 import com.inju.dayworry.notification.NotiFragment
@@ -119,6 +121,9 @@ class MainActivity : AppCompatActivity() {
                 var toast = Toast.makeText(this@MainActivity, "로그인 후에 이용해주세요", Toast.LENGTH_LONG)
                 toast.setGravity(Gravity.BOTTOM, 0,300)
                 toast.show()
+
+                startActivity(Intent(this@MainActivity, LoginActivity::class.java))
+                finish()
             }
             else startActivityForResult(Intent(this@MainActivity, AddWorryActivity::class.java), REQUEST_CODE)
         }
@@ -128,6 +133,9 @@ class MainActivity : AppCompatActivity() {
                 var toast = Toast.makeText(this@MainActivity, "로그인 후에 이용해주세요", Toast.LENGTH_LONG)
                 toast.setGravity(Gravity.BOTTOM, 0,300)
                 toast.show()
+
+                startActivity(Intent(this@MainActivity, LoginActivity::class.java))
+                finish()
             }
             else {
                 if (notiJudge == 0) {
@@ -150,6 +158,9 @@ class MainActivity : AppCompatActivity() {
                 var toast = Toast.makeText(this@MainActivity, "로그인 후에 이용해주세요", Toast.LENGTH_LONG)
                 toast.setGravity(Gravity.BOTTOM, 0,300)
                 toast.show()
+
+                startActivity(Intent(this@MainActivity, LoginActivity::class.java))
+                finish()
             }
             else {
                 if (myPageJudge == 0) {

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.Gravity
+import android.view.KeyEvent
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
@@ -114,6 +115,13 @@ class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
                 sendCounsel()
             }
         }
+        commentEditText.setOnKeyListener { v, keyCode, event ->
+                if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
+                    // 엔터 눌렀을때 행동
+                    sendCounsel()
+                }
+                true
+            }
     }
 
     private fun sendCounsel() = launch {
@@ -129,6 +137,7 @@ class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
 
         counselListViewModel?.InitCounsels(worryId!!)?.join()
 
+        commentEditText.text.clear()
         detailLoadingUi.visibility = View.GONE
     }
 
@@ -185,6 +194,7 @@ class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
         tagBtn.visibility = View.GONE
         contentText.visibility = View.GONE
         timeImage.visibility = View.GONE
+        commentRecyclerView.visibility = View.GONE
 
         worryDetailViewModel!!.getWorryById(worryId).join()
         counselListViewModel!!.InitCounsels(worryId).join()
@@ -195,6 +205,7 @@ class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
         tagBtn.visibility = View.VISIBLE
         contentText.visibility = View.VISIBLE
         timeImage.visibility = View.VISIBLE
+        commentRecyclerView.visibility = View.VISIBLE
     }
 
     override fun onResume() {

@@ -1,4 +1,4 @@
-package com.inju.dayworry.counselList
+package com.inju.dayworry.counsel.counselList
 
 sealed class CounselListEvent {
     data class OnCounselItemClick(val worryId: Long) : CounselListEvent()

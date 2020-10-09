@@ -107,7 +107,7 @@ class HomeListFragment : Fragment(), CoroutineScope {
     }
 
     private inner class ScreenSlidePagerAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
-        override fun getItemCount(): Int = NUM_PAGES
+        override fun getItemCount(): Int = worryList.size
 
 //        override fun createFragment(position: Int): Fragment = CounselFragment1()
         override fun createFragment(position: Int): Fragment {

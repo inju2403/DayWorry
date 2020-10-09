@@ -1,4 +1,4 @@
-package com.inju.dayworry.counselList.buildlogic
+package com.inju.dayworry.counsel.counselList.buildlogic
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

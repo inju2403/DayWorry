@@ -1,5 +1,6 @@
 package com.inju.dayworry.model.repository
 
+import com.inju.dayworry.model.pojo.COUNSEL_REQUEST_POJO
 import com.inju.dayworry.model.pojo.Contents
 import com.inju.dayworry.model.pojo.Counsel
 import com.inju.dayworry.model.pojo.Worry
@@ -15,4 +16,5 @@ interface IDayWorryRepository {
     suspend fun deleteWorry(id: Long)
 
     suspend fun getComments(postId: Long, pageNum: Int): MutableList<Counsel>
+    suspend fun addComment(counselRequestPojo: COUNSEL_REQUEST_POJO)
 }

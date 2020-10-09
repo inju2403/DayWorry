@@ -2,6 +2,7 @@ package com.inju.dayworry.model.implementations
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
+import com.inju.dayworry.model.pojo.COUNSEL_REQUEST_POJO
 import com.inju.dayworry.model.pojo.Contents
 import com.inju.dayworry.model.pojo.Counsel
 import com.inju.dayworry.model.pojo.Worry
@@ -56,6 +57,10 @@ class DayWorryRepoImpl(
 
     override suspend fun getComments(postId: Long, pageNum: Int): MutableList<Counsel> {
         return httpCall?.getComments(postId, pageNum)!!
+    }
+
+    override suspend fun addComment(counselRequestPojo: COUNSEL_REQUEST_POJO) {
+        httpCall?.addComment(counselRequestPojo)
     }
 
 

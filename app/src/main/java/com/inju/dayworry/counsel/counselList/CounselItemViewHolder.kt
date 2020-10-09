@@ -1,4 +1,4 @@
-package com.inju.dayworry.counselList
+package com.inju.dayworry.counsel.counselList
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView

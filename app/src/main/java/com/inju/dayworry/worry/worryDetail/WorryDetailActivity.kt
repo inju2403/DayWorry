@@ -2,16 +2,25 @@ package com.inju.dayworry.worry.worryDetail
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.view.Gravity
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.inju.dayworry.R
-import com.inju.dayworry.counselList.CounselListAdapter
-import com.inju.dayworry.counselList.CounselListViewModel
-import com.inju.dayworry.counselList.buildlogic.CounselListInjector
+import com.inju.dayworry.counsel.counselDetail.CounselDetailViewModel
+import com.inju.dayworry.counsel.counselDetail.buildlogic.CounselDetailInjector
+import com.inju.dayworry.counsel.counselList.CounselListAdapter
+import com.inju.dayworry.counsel.counselList.CounselListViewModel
+import com.inju.dayworry.counsel.counselList.buildlogic.CounselListInjector
+import com.inju.dayworry.model.pojo.COUNSEL_REQUEST_POJO
+import com.inju.dayworry.utils.Constants
 import com.inju.dayworry.worry.worryDetail.buildlogic.WorryDetailInjector
+import kotlinx.android.synthetic.main.activity_add_worry.*
 import kotlinx.android.synthetic.main.activity_worry_detail.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -27,18 +36,30 @@ class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
 
     private var worryDetailViewModel: WorryDetailViewModel? = null
     private var counselListViewModel: CounselListViewModel? = null
+    private var counselDetailViewModel: CounselDetailViewModel? = null
     private lateinit var listAdapter: CounselListAdapter
     private var worryId: Long? = null
+    private var profileImage: String? = null
+    private var userId: Long? = null
+    private var userName: String? = null
+    private val defaultImage: String = "https://hago-storage-bucket.s3.ap-northeast-2.amazonaws.com/default02.jpg"
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_worry_detail)
 
+        val pref = getSharedPreferences(Constants.PREFERENCE, MODE_PRIVATE)
+        userId = pref.getLong("userId", (1).toLong())
+        userName = pref.getString("userName", "")
+        profileImage = pref.getString("profileImage", defaultImage)
+
         detailLoadingUi.visibility = View.GONE
         job = Job()
 
         setViewModel()
+        setTextChangeListener()
+        setUpClickListener()
         setLayoutManager()
         observeViewModel()
         recycleviewBottomDetection()
@@ -63,6 +84,52 @@ class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
             ).provideCounselListViewModelFactory())
                 .get(CounselListViewModel::class.java)
         }
+
+        counselDetailViewModel = application!!.let {
+            ViewModelProvider(viewModelStore, CounselDetailInjector(
+                this.application
+            ).provideCounselDetailViewModelFactory())
+                .get(CounselDetailViewModel::class.java)
+        }
+        counselDetailViewModel?.initCounsel()
+    }
+
+    private fun setTextChangeListener() {
+        commentEditText.addTextChangedListener(object: TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                counselDetailViewModel!!.setCounselContent(s.toString())
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { }
+        })
+    }
+
+    private fun setUpClickListener() = launch {
+        sendImage.setOnClickListener {
+            if(counselDetailViewModel?.counsel?.value!!.content.isEmpty()) {
+                showToast("댓글을 입력해주세요")
+            }
+            else {
+                sendCounsel()
+            }
+        }
+    }
+
+    private fun sendCounsel() = launch {
+        detailLoadingUi.visibility = View.VISIBLE
+
+        counselDetailViewModel?.addCounsel(
+            counselDetailViewModel?.counsel?.value!!.content,
+            userId!!,
+            worryDetailViewModel?.worry?.value!!.postId,
+            profileImage!!,
+            userName!!
+        )?.join()
+
+        counselListViewModel?.InitCounsels(worryId!!)?.join()
+
+        detailLoadingUi.visibility = View.GONE
     }
 
     private fun setLayoutManager() {
@@ -82,7 +149,10 @@ class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
                 Observer {
                     commentRecyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
 
-                    listAdapter = CounselListAdapter(it)
+                    listAdapter =
+                        CounselListAdapter(
+                            it
+                        )
                     commentRecyclerView.adapter = listAdapter
                     listAdapter.notifyDataSetChanged()
 
@@ -136,5 +206,11 @@ class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
     override fun onDestroy() {
         super.onDestroy()
         commentRecyclerView.adapter = null
+    }
+
+    private fun showToast(str: String) {
+        var toast = Toast.makeText(this, str, Toast.LENGTH_LONG)
+        toast.setGravity(Gravity.BOTTOM, 0,300)
+        toast.show()
     }
 }

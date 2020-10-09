@@ -1,4 +1,4 @@
-package com.inju.dayworry.counselList
+package com.inju.dayworry.counsel.counselList
 
 import androidx.recyclerview.widget.DiffUtil
 import com.inju.dayworry.model.pojo.Counsel

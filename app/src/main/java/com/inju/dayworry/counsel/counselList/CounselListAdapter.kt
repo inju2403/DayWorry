@@ -1,4 +1,4 @@
-package com.inju.dayworry.counselList
+package com.inju.dayworry.counsel.counselList
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -14,7 +14,9 @@ class CounselListAdapter(private val list: MutableList<Counsel>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CounselItemViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_counsel, parent, false)
-        return CounselItemViewHolder(itemView)
+        return CounselItemViewHolder(
+            itemView
+        )
     }
 
     override fun onBindViewHolder(holder: CounselItemViewHolder, position: Int) {

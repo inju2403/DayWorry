@@ -20,23 +20,45 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <ImageView
+                android:id="@+id/profileImage"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="12dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_profile_default" />
+
+            <TextView
+                android:id="@+id/userNameText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="56dp"
+                android:text="하고"
+                android:textSize="14sp"
+                android:textColor="@color/whiteColor"
+                app:layout_constraintBottom_toBottomOf="@+id/profileImage"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/profileImage" />
+
             <TextView
                 android:id="@+id/counselContent"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:layout_marginTop="14dp"
+                android:layout_marginTop="56dp"
                 android:layout_marginEnd="12dp"
                 android:maxLines="2"
                 android:text="내용"
-                android:textColor="@color/superLiteGreyColor"
+                android:textColor="@color/whiteColor"
                 android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/worryItemTimeImage"
+                android:id="@+id/counselItemTimeImage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
@@ -45,28 +67,29 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/counselContent"
+                app:layout_constraintVertical_bias="1.0"
                 app:srcCompat="@drawable/ic_time" />
 
             <TextView
-                android:id="@+id/worryItemTimeText"
+                android:id="@+id/counselItemTimeText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:text="23:48"
                 android:textColor="@color/whiteColor"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/worryItemTimeImage"
-                app:layout_constraintStart_toEndOf="@+id/worryItemTimeImage"
-                app:layout_constraintTop_toTopOf="@+id/worryItemTimeImage" />
+                app:layout_constraintBottom_toBottomOf="@+id/counselItemTimeImage"
+                app:layout_constraintStart_toEndOf="@+id/counselItemTimeImage"
+                app:layout_constraintTop_toTopOf="@+id/counselItemTimeImage" />
 
             <ImageView
                 android:id="@+id/likeImage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                app:layout_constraintBottom_toBottomOf="@+id/worryItemTimeText"
-                app:layout_constraintStart_toEndOf="@+id/worryItemTimeText"
-                app:layout_constraintTop_toTopOf="@+id/worryItemTimeText"
+                app:layout_constraintBottom_toBottomOf="@+id/counselItemTimeText"
+                app:layout_constraintStart_toEndOf="@+id/counselItemTimeText"
+                app:layout_constraintTop_toTopOf="@+id/counselItemTimeText"
                 app:srcCompat="@drawable/ic_like" />
 
             <TextView
@@ -79,7 +102,7 @@
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@+id/likeImage"
                 app:layout_constraintStart_toEndOf="@+id/likeImage"
-                app:layout_constraintTop_toTopOf="@+id/worryItemTimeImage" />
+                app:layout_constraintTop_toTopOf="@+id/likeImage" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

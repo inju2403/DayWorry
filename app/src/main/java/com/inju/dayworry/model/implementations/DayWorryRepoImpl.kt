@@ -3,6 +3,7 @@ package com.inju.dayworry.model.implementations
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import com.inju.dayworry.model.pojo.Contents
+import com.inju.dayworry.model.pojo.Counsel
 import com.inju.dayworry.model.pojo.Worry
 import com.inju.dayworry.model.repository.IDayWorryRepository
 import com.inju.dayworry.retrofit.ApiService
@@ -52,5 +53,10 @@ class DayWorryRepoImpl(
     override suspend fun deleteWorry(id : Long) {
 //        httpCall?.deleteWorry(id, token)
     }
+
+    override suspend fun getComments(postId: Long, pageNum: Int): MutableList<Counsel> {
+        return httpCall?.getComments(postId, pageNum)!!
+    }
+
 
 }

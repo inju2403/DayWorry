@@ -42,7 +42,15 @@ data class Worry (
     @Expose
     var hits: Long = 0,
 
-    @SerializedName("postLikes")
+    @SerializedName("commentNum")
     @Expose
-    var postLikes: Int = 0
+    var commentNum: Int = 0,
+
+    @SerializedName("userNickname")
+    @Expose
+    var userNickname: String = "",
+
+    @SerializedName("userProfileImage")
+    @Expose
+    var userProfileImage: String = ""
 )

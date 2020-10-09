@@ -64,4 +64,9 @@ interface ApiService {
     @POST("posts/")
     suspend fun addOrUpdateWorry(@Body contents: Contents): Response<Unit>
 
+    //댓글 리스트 받기
+    @GET("comment/{postId}")
+    suspend fun getComments(@Path("postId") poseId: Long,
+                            @Query("pageNum") pageNum: Int): MutableList<Counsel>
+
 }

@@ -17,7 +17,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import java.text.SimpleDateFormat
 import kotlin.coroutines.CoroutineContext
 
 class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
@@ -29,6 +28,7 @@ class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
     private var worryDetailViewModel: WorryDetailViewModel? = null
     private var counselListViewModel: CounselListViewModel? = null
     private lateinit var listAdapter: CounselListAdapter
+    private var worryId: Long? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,13 +39,13 @@ class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
         job = Job()
 
         setViewModel()
-        setUpAdapter()
+        setLayoutManager()
         observeViewModel()
         recycleviewBottomDetection()
 
-        val worryId = intent.getLongExtra("WORRY_ID", -1)
+        worryId = intent.getLongExtra("WORRY_ID", -1)
         if(worryId != (-1).toLong()) {
-            worryLoading(worryId)
+            worryLoading(worryId!!)
         }
 
     }
@@ -65,15 +65,8 @@ class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
         }
     }
 
-    private fun setUpAdapter() {
-        listAdapter = CounselListAdapter()
-        listAdapter.event.observe(
-            this,
-            Observer {
-                counselListViewModel!!.handleEvent(it)
-            }
-        )
-        commentRecyclerView.adapter = listAdapter
+    private fun setLayoutManager() {
+        commentRecyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
     }
 
     private fun observeViewModel() {
@@ -87,10 +80,14 @@ class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
         counselListViewModel!!.let {
             it.counselList.observe(this,
                 Observer {
-                    listAdapter.submitList(it)
+                    commentRecyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
+
+                    listAdapter = CounselListAdapter(it)
+                    commentRecyclerView.adapter = listAdapter
+                    listAdapter.notifyDataSetChanged()
+
                 })
         }
-
     }
 
     private fun recycleviewBottomDetection() {
@@ -104,7 +101,7 @@ class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
                 var itemTotalCount = recyclerView.adapter!!.itemCount - 1
                 if (lastVisibleItemPosition == itemTotalCount) {
                     //todo
-//                    counselListViewModel!!.getCounsels()
+                    counselListViewModel!!.getCounsels(worryId!!)
                 }
 
             }
@@ -120,6 +117,7 @@ class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
         timeImage.visibility = View.GONE
 
         worryDetailViewModel!!.getWorryById(worryId).join()
+        counselListViewModel!!.InitCounsels(worryId).join()
 
         detailLoadingUi.visibility = View.GONE
         titleText.visibility = View.VISIBLE
@@ -131,9 +129,8 @@ class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
 
     override fun onResume() {
         super.onResume()
-
         // 상담 댓글을 추가하고 다시 상당글 리스트로 가면 0 페이지부터 다시 부름
-//        counselListViewModel!!.InitCounsels()
+        counselListViewModel!!.InitCounsels(worryId!!)
     }
 
     override fun onDestroy() {

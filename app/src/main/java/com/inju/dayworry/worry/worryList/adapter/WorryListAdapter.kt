@@ -1,22 +1,31 @@
 package com.inju.dayworry.worry.worryList.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.inju.dayworry.MainActivity
 import com.inju.dayworry.R
 import com.inju.dayworry.model.pojo.Worry
+import com.inju.dayworry.utils.Constants.TAG
+import com.inju.dayworry.utils.EditBottomSheetFragment
 import com.inju.dayworry.worry.worryList.WorryItemViewHolder
 import com.inju.dayworry.worry.worryList.WorryListEvent
 import kotlinx.android.synthetic.main.item_worry.view.*
 import java.text.SimpleDateFormat
 
+
 class WorryListAdapter(private val list: MutableList<Worry>,
+                       activity: MainActivity,
                        val event: MutableLiveData<WorryListEvent> = MutableLiveData()) :
     RecyclerView.Adapter<WorryItemViewHolder> ()
 {
 
     private val timeFormat = SimpleDateFormat("HH : mm")
+    private val activity = activity
+    private val supportFragmentManager = activity.supportFragmentManager
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WorryItemViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_worry, parent, false)
@@ -39,8 +48,14 @@ class WorryListAdapter(private val list: MutableList<Worry>,
         holder.containerView.setOnClickListener {
             event.value =
                 WorryListEvent.OnWorryItemClick(
-                    list[position].postId!!
+                    list[position].postId
                 )
+        }
+        holder.containerView.moreImage.setOnClickListener {
+            Log.d(TAG,"more clicked")
+            val editBottomSheetFragment = EditBottomSheetFragment(list[position].postId)
+
+            editBottomSheetFragment.show(supportFragmentManager, "editBottomSheetFragment")
         }
         holder.containerView.worryItemTimeText.text = list[position].createdDate.substring(11..15)
     }

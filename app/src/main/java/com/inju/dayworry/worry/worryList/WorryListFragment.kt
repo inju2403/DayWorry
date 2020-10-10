@@ -18,6 +18,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.inju.dayworry.MainActivity
 import com.inju.dayworry.R
 import com.inju.dayworry.login.LoginActivity
 import com.inju.dayworry.utils.Constants.TAG
@@ -135,7 +136,7 @@ class WorryListFragment : Fragment(), CoroutineScope {
                     worryListView.layoutManager =
                         LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
 
-                    listAdapter = WorryListAdapter(it)
+                    listAdapter = WorryListAdapter(it, (activity as MainActivity))
 
                     listAdapter.event.observe(
                         viewLifecycleOwner,

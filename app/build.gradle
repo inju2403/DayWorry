@@ -9,6 +9,9 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
 
+    //데이터 바인딩 사용
+    dataBinding { enabled = true }
+
     //자바 버전 설정
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -106,4 +109,8 @@ dependencies {
     // ViewPager2 & DotsIndicator
     implementation "androidx.viewpager2:viewpager2:1.0.0"
     implementation 'com.tbuonomo.andrui:viewpagerdotsindicator:4.1.2'
+
+    // Bottom Sheet
+    implementation 'com.google.android.material:material:1.1.0'
+    implementation 'com.github.Deishelon:RoundedBottomSheet:1.0.1'
 }

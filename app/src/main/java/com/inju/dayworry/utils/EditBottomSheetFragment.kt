@@ -56,6 +56,7 @@ class EditBottomSheetFragment(val postId: Long, private val flag: Int) : BottomS
             }
             startActivity(intent)
             if(flag == 1 ) activity!!.finish() // 고민 상세화면에서 왔을 경우
+            dismiss()
         }
 
         deleteLayout.setOnClickListener {
@@ -86,7 +87,7 @@ class EditBottomSheetFragment(val postId: Long, private val flag: Int) : BottomS
         }
         if(flag == 1) activity!!.finish() // 고민 상세화면에서 왔을 경우
         else (activity as MainActivity).getWorryListViewModel?.InitWorrys("전체") // 고민 리스트에서 왔을 경우
-
+        dismiss()
     }
 
     private fun showToast(str: String) {

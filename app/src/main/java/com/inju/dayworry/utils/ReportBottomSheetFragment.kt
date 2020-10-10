@@ -38,6 +38,7 @@ class ReportBottomSheetFragment(val postId: Long, private val flag: Int) : Botto
         sirenLayout.setOnClickListener {
             showToast("신고가 완료되었습니다.")
             if(flag == 1) activity!!.finish() // 고민 상세화면에서 왔을 경우
+            dismiss()
         }
 
     }

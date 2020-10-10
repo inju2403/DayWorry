@@ -1,5 +1,6 @@
 package com.inju.dayworry.login
 
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
@@ -14,11 +15,14 @@ import com.inju.dayworry.R
 import android.util.Log
 import android.view.Gravity
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.inju.dayworry.retrofit.ApiService
 import com.inju.dayworry.retrofit.RetrofitClient
 import com.inju.dayworry.utils.Constants
 import com.inju.dayworry.utils.Constants.TAG
+import com.inju.dayworry.utils.EditBottomSheetFragment
+import com.inju.dayworry.utils.SelectProfilePhotoBottomSheetFragment
 import kotlinx.android.synthetic.main.fragment_set_profile.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -48,6 +52,7 @@ class SetProfileFragment: Fragment(), CoroutineScope {
     private val nicknameEmptyMessage = "닉네임을 입력해주세요"
     private val nicknameRedundancyMessage = "이미 존재하는 닉네임입니다"
     private val ageMessage = "연령을 선택해주세요"
+    private val setImageMessage = "프로필 이미지를 선택해주세요"
 
     var ageList = arrayOf("연령을 선택해주세요", "1~9", "10~19", "20~29", "30~39", "40~49", "50~59", "60~69", "70~")
 
@@ -65,9 +70,32 @@ class SetProfileFragment: Fragment(), CoroutineScope {
         job = Job()
 
         // Glide로 이미지 표시하기
-        var imageUrl = "https://d3scsscaxt5rdy.cloudfront.net/hago.png-20205304125305"
-        Glide.with(this).load(imageUrl).into(profile_photo)
+//        var imageUrl = "https://d3scsscaxt5rdy.cloudfront.net/hago.png-20205304125305"
+//        Glide.with(this).load(imageUrl).into(profile_photo)
 
+        val pref = activity!!.getSharedPreferences(Constants.PREFERENCE, AppCompatActivity.MODE_PRIVATE)
+
+        setUpClickListener(pref)
+
+        setTextChangeListener()
+        setSpinner()
+
+    }
+
+    private fun setUpClickListener(pref: SharedPreferences) {
+        var profileImageSet = pref.getString("profileImageSet", "no")
+
+        profile_photo.setOnClickListener {
+            val selectProfilePhotoBottomSheetFragment = SelectProfilePhotoBottomSheetFragment(profile_photo)
+
+            selectProfilePhotoBottomSheetFragment.show(activity!!.supportFragmentManager, "selectProfilePhotoBottomSheetFragment")
+        }
+
+        profile_photo_change_image.setOnClickListener {
+            val selectProfilePhotoBottomSheetFragment = SelectProfilePhotoBottomSheetFragment(profile_photo)
+
+            selectProfilePhotoBottomSheetFragment.show(activity!!.supportFragmentManager, "selectProfilePhotoBottomSheetFragment")
+        }
 
         nextBtn.setOnClickListener {
             when {
@@ -77,15 +105,14 @@ class SetProfileFragment: Fragment(), CoroutineScope {
                 (activity as SetProfileActivity).userAge == "" -> {
                     showToast(ageMessage)
                 }
+                profileImageSet == "no" -> {
+                    showToast(setImageMessage)
+                }
                 else -> {
                     judgeUserName((activity as SetProfileActivity).userName)
                 }
             }
         }
-
-        setTextChangeListener()
-        setSpinner()
-
     }
 
     private fun judgeUserName(userName: String) = launch {

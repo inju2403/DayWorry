@@ -185,9 +185,7 @@ class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
                     commentRecyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
 
                     listAdapter =
-                        CounselListAdapter(
-                            it
-                        )
+                        CounselListAdapter(it, this)
                     commentRecyclerView.adapter = listAdapter
                     listAdapter.notifyDataSetChanged()
 
@@ -228,12 +226,6 @@ class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
         timeTagLayout.visibility = View.VISIBLE
         contentText.visibility = View.VISIBLE
         commentRecyclerView.visibility = View.VISIBLE
-    }
-
-    override fun onResume() {
-        super.onResume()
-        // 상담 댓글을 추가하고 다시 상당글 리스트로 가면 0 페이지부터 다시 부름
-        counselListViewModel!!.InitCounsels(worryId!!)
     }
 
     override fun onDestroy() {

@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.inju.dayworry.MainActivity
 import com.inju.dayworry.R
 import com.inju.dayworry.worry.worryList.adapter.MyHistoryAdapter
 import com.inju.dayworry.utils.Constants
@@ -28,6 +29,8 @@ class MyWorryHistoryActivity : AppCompatActivity(), CoroutineScope {
         get() = Dispatchers.Main + job
 
     private var worryListViewModel: WorryListViewModel?= null
+    val getWorryListViewModel get() = worryListViewModel
+
     private lateinit var listAdapter: MyHistoryAdapter
     private var userId: Long = 1
     private var defaultLong: Long = 1
@@ -79,7 +82,7 @@ class MyWorryHistoryActivity : AppCompatActivity(), CoroutineScope {
                     myWorryHistoryView.layoutManager =
                         LinearLayoutManager(this, RecyclerView.VERTICAL, false)
 
-                    listAdapter = MyHistoryAdapter(it)
+                    listAdapter = MyHistoryAdapter(it, this)
 
                     listAdapter.event.observe(
                         this,

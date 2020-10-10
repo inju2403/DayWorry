@@ -8,9 +8,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.inju.dayworry.MainActivity
 import com.inju.dayworry.R
+import com.inju.dayworry.mypage.MyWorryHistoryActivity
 import com.inju.dayworry.retrofit.ApiService
 import com.inju.dayworry.retrofit.RetrofitClient
 import com.inju.dayworry.worry.worryDetail.AddWorryActivity
@@ -22,11 +24,13 @@ import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
 
-class EditBottomSheetFragment(val postId: Long, private val flag: Boolean) : BottomSheetDialogFragment(), CoroutineScope {
+class EditBottomSheetFragment(val postId: Long, private val flag: Int) : BottomSheetDialogFragment(), CoroutineScope {
 
     private lateinit var job: Job
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + job
+
+    private var userId: Long = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,6 +44,9 @@ class EditBottomSheetFragment(val postId: Long, private val flag: Boolean) : Bot
         super.onActivityCreated(savedInstanceState)
         (view?.parent as View).setBackgroundColor(Color.TRANSPARENT)
 
+        val pref = activity!!.getSharedPreferences(Constants.PREFERENCE, AppCompatActivity.MODE_PRIVATE)
+        userId = pref.getLong("userId", (0).toLong())
+
         job = Job()
 
         editLayout.setOnClickListener {
@@ -48,7 +55,7 @@ class EditBottomSheetFragment(val postId: Long, private val flag: Boolean) : Bot
                 putExtra("WORRY_ID", postId)
             }
             startActivity(intent)
-            activity!!.finish()
+            if(flag == 1 ) activity!!.finish() // 고민 상세화면에서 왔을 경우
         }
 
         deleteLayout.setOnClickListener {
@@ -63,7 +70,21 @@ class EditBottomSheetFragment(val postId: Long, private val flag: Boolean) : Bot
         httpCall?.deleteWorry(postId)
         showToast("고민글이 삭제되었습니다")
 
-        if(flag) activity!!.finish() // 고민 상세화면에서 왔을 경우
+        when(flag) {
+            0 -> {
+                (activity as MainActivity).getWorryListViewModel?.InitWorrys("전체") // 고민 리스트에서 왔을 경우
+            }
+            1 -> {
+                activity!!.finish() // 고민 상세화면에서 왔을 경우
+            }
+            2 -> {
+                (activity as MainActivity).getWorryListViewModel?.initMyWorrys(userId) // 마이페이지에서 왔을 경우
+            }
+            3 -> {
+                (activity as MyWorryHistoryActivity).getWorryListViewModel?.initHistory(userId) // 히스토리에서 왔을 경우
+            }
+        }
+        if(flag == 1) activity!!.finish() // 고민 상세화면에서 왔을 경우
         else (activity as MainActivity).getWorryListViewModel?.InitWorrys("전체") // 고민 리스트에서 왔을 경우
 
     }

@@ -27,6 +27,7 @@ class WorryListAdapter(private val list: MutableList<Worry>,
 {
 
     private val timeFormat = SimpleDateFormat("HH : mm")
+
     private val activity = activity
     val pref = activity.getSharedPreferences(Constants.PREFERENCE, AppCompatActivity.MODE_PRIVATE)
     private val supportFragmentManager = activity.supportFragmentManager
@@ -60,13 +61,13 @@ class WorryListAdapter(private val list: MutableList<Worry>,
         holder.containerView.moreImage.setOnClickListener {
             if(userId ==list[position].userId) {
                 //내 글이면 수정
-                val editBottomSheetFragment = EditBottomSheetFragment(list[position].postId, false)
+                val editBottomSheetFragment = EditBottomSheetFragment(list[position].postId, 0)
 
                 editBottomSheetFragment.show(supportFragmentManager, "editBottomSheetFragment")
             }
             else {
                 //내 글이 아니면 신고
-                val reportBottomSheetFragment = ReportBottomSheetFragment(list[position].postId, false)
+                val reportBottomSheetFragment = ReportBottomSheetFragment(list[position].postId, 0)
 
                 reportBottomSheetFragment.show(supportFragmentManager, "reportBottomSheetFragment")
             }

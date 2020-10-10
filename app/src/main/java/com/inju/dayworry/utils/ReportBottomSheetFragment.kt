@@ -15,7 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlin.coroutines.CoroutineContext
 
-class ReportBottomSheetFragment(val postId: Long, private val flag: Boolean) : BottomSheetDialogFragment(), CoroutineScope {
+class ReportBottomSheetFragment(val postId: Long, private val flag: Int) : BottomSheetDialogFragment(), CoroutineScope {
 
     private lateinit var job: Job
     override val coroutineContext: CoroutineContext
@@ -37,7 +37,7 @@ class ReportBottomSheetFragment(val postId: Long, private val flag: Boolean) : B
 
         sirenLayout.setOnClickListener {
             showToast("신고가 완료되었습니다.")
-            if(flag) activity!!.finish() // 고민 상세화면에서 왔을 경우
+            if(flag == 1) activity!!.finish() // 고민 상세화면에서 왔을 경우
         }
 
     }

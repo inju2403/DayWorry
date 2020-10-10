@@ -128,13 +128,13 @@ class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
         moreImage.setOnClickListener {
             if(userId == worryDetailViewModel?.worry?.value?.userId) {
                 //내 글이면 수정
-                val editBottomSheetFragment = EditBottomSheetFragment(worryId!!, true)
+                val editBottomSheetFragment = EditBottomSheetFragment(worryId!!, 1)
 
                 editBottomSheetFragment.show(supportFragmentManager, "editBottomSheetFragment")
             }
             else {
                 //내 글이 아니면 신고
-                val reportBottomSheetFragment = ReportBottomSheetFragment(worryId!!, true)
+                val reportBottomSheetFragment = ReportBottomSheetFragment(worryId!!, 1)
 
                 reportBottomSheetFragment.show(supportFragmentManager, "reportBottomSheetFragment")
             }

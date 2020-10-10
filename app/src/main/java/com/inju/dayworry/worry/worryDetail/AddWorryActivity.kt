@@ -165,8 +165,75 @@ class AddWorryActivity : AppCompatActivity(), CoroutineScope {
         }
     }
 
-    private fun worryLoading(worryId: Long) {
-        worryDetailViewModel!!.getWorryById(worryId)
+    private fun worryLoading(worryId: Long) = launch {
+        worryDetailViewModel!!.getWorryById(worryId).join()
+        hashTag = worryDetailViewModel!!.worry.value?.tagName
+        setExistingTag(hashTag!!)
+    }
+
+    private fun setExistingTag(hashTag: String) {
+        when(hashTag) {
+            "일상" -> {
+                dailyLiftBtn.isSelected = true
+                dailyLiftBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
+                dailyLiftBtn.setTextColor(Color.parseColor(litePupleColor))
+            }
+            "가족" -> {
+                familyBtn.isSelected = true
+                familyBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
+                familyBtn.setTextColor(Color.parseColor(litePupleColor))
+            }
+            "연애" -> {
+                dateBtn.isSelected = true
+                dateBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
+                dateBtn.setTextColor(Color.parseColor(litePupleColor))
+            }
+            "친구사이" -> {
+                friendBtn.isSelected = true
+                friendBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
+                friendBtn.setTextColor(Color.parseColor(litePupleColor))
+            }
+            "학교생활" -> {
+                schoolBtn.isSelected = true
+                schoolBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
+                schoolBtn.setTextColor(Color.parseColor(litePupleColor))
+            }
+            "직장생활" -> {
+                jobBtn.isSelected = true
+                jobBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
+                jobBtn.setTextColor(Color.parseColor(litePupleColor))
+            }
+            "취업" -> {
+                employmentBtn.isSelected = true
+                employmentBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
+                employmentBtn.setTextColor(Color.parseColor(litePupleColor))
+            }
+            "진로" -> {
+                courseBtn.isSelected = true
+                courseBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
+                courseBtn.setTextColor(Color.parseColor(litePupleColor))
+            }
+            "돈" -> {
+                moneyBtn.isSelected = true
+                moneyBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
+                moneyBtn.setTextColor(Color.parseColor(litePupleColor))
+            }
+            "건강" -> {
+                healthBtn.isSelected = true
+                healthBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
+                healthBtn.setTextColor(Color.parseColor(litePupleColor))
+            }
+            "기혼자만 아는" -> {
+                marriedBtn.isSelected = true
+                marriedBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
+                marriedBtn.setTextColor(Color.parseColor(litePupleColor))
+            }
+            "육아" -> {
+                infantBtn.isSelected = true
+                infantBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
+                infantBtn.setTextColor(Color.parseColor(litePupleColor))
+            }
+        }
     }
 
     private fun setTagBtn() {

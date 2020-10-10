@@ -36,7 +36,7 @@ data class Worry (
 
     @SerializedName("postImage")
     @Expose
-    var postImage: String = "https://hago-storage-bucket.s3.ap-northeast-2.amazonaws.com/HagoLogo.PNG",
+    var postImage: String = "",
 
     @SerializedName("hits")
     @Expose

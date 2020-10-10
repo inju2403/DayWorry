@@ -87,7 +87,8 @@ class SetTagFragment : Fragment() {
                 for (next in hashTag) {
                     hashTagString += "$next,"
                 }
-                hashTagString = hashTagString.substring(0..hashTagString.length-2)
+                hashTagString = hashTagString.substring(0..hashTagString.length-2) // Split으로 parsing하여 사용
+                Log.d(TAG, hashTagString)
                 editor.putString("hashTags",hashTagString)
                 editor.commit()
 

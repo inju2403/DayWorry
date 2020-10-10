@@ -51,8 +51,8 @@ class DayWorryRepoImpl(
         httpCall?.addOrUpdateWorry(contents)
     }
 
-    override suspend fun deleteWorry(id : Long) {
-//        httpCall?.deleteWorry(id, token)
+    override suspend fun deleteWorry(postId : Long) {
+        httpCall?.deleteWorry(postId)
     }
 
     override suspend fun getComments(postId: Long, pageNum: Int): MutableList<Counsel> {

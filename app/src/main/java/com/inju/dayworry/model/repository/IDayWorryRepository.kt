@@ -13,7 +13,7 @@ interface IDayWorryRepository {
     suspend fun keywordSearch(tagName: String, pageNum: Int): MutableList<Worry>
     suspend fun getWorryById(postId: Long): Worry
     suspend fun addOrUpdateWorry(contents: Contents)
-    suspend fun deleteWorry(id: Long)
+    suspend fun deleteWorry(postId: Long)
 
     suspend fun getComments(postId: Long, pageNum: Int): MutableList<Counsel>
     suspend fun addComment(counselRequestPojo: COUNSEL_REQUEST_POJO)

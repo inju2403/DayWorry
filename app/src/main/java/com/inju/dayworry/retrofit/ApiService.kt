@@ -64,6 +64,10 @@ interface ApiService {
     @POST("posts/")
     suspend fun addOrUpdateWorry(@Body contents: Contents): Response<Unit>
 
+    //고민 삭제
+    @DELETE("posts/{postId}")
+    suspend fun deleteWorry(@Path("postId") postId: Long): Response<Unit>
+
     //댓글 리스트 받기
     @GET("comments/{postId}")
     suspend fun getComments(@Path("postId") poseId: Long,

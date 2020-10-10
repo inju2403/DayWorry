@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.Gravity
 import android.view.KeyEvent
 import android.view.View
@@ -12,6 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.inju.dayworry.R
 import com.inju.dayworry.counsel.counselDetail.CounselDetailViewModel
 import com.inju.dayworry.counsel.counselDetail.buildlogic.CounselDetailInjector
@@ -25,6 +27,8 @@ import com.inju.dayworry.utils.ReportBottomSheetFragment
 import com.inju.dayworry.worry.worryDetail.buildlogic.WorryDetailInjector
 import kotlinx.android.synthetic.main.activity_add_worry.*
 import kotlinx.android.synthetic.main.activity_worry_detail.*
+import kotlinx.android.synthetic.main.activity_worry_detail.profileImage
+import kotlinx.android.synthetic.main.fragment_my_page.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -42,10 +46,9 @@ class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
     private var counselDetailViewModel: CounselDetailViewModel? = null
     private lateinit var listAdapter: CounselListAdapter
     private var worryId: Long? = null
-    private var profileImage: String? = null
+    private var profile_image: String = "https://hago-storage-bucket.s3.ap-northeast-2.amazonaws.com/default02.jpg"
     private var userId: Long? = null
     private var userName: String? = null
-    private val defaultImage: String = "https://hago-storage-bucket.s3.ap-northeast-2.amazonaws.com/default02.jpg"
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,23 +58,17 @@ class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
         val pref = getSharedPreferences(Constants.PREFERENCE, MODE_PRIVATE)
         userId = pref.getLong("userId", (1).toLong())
         userName = pref.getString("userName", "")
-        profileImage = pref.getString("profileImage", defaultImage)
 
         detailLoadingUi.visibility = View.GONE
         job = Job()
 
         setViewModel()
+        setProfileImage()
         setTextChangeListener()
         setUpClickListener()
         setLayoutManager()
         observeViewModel()
         recycleviewBottomDetection()
-
-        worryId = intent.getLongExtra("WORRY_ID", -1)
-        if(worryId != (-1).toLong()) {
-            worryLoading(worryId!!)
-        }
-
     }
     private fun setViewModel() {
         worryDetailViewModel = application!!.let {
@@ -80,6 +77,7 @@ class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
             ).provideWorryDetailViewModelFactory())
                 .get(WorryDetailViewModel::class.java)
         }
+
 
         counselListViewModel = application!!.let {
             ViewModelProvider(viewModelStore, CounselListInjector(
@@ -95,6 +93,17 @@ class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
                 .get(CounselDetailViewModel::class.java)
         }
         counselDetailViewModel?.initCounsel()
+    }
+
+    private fun setProfileImage() = launch {
+        worryId = intent.getLongExtra("WORRY_ID", -1)
+        if(worryId != (-1).toLong()) {
+            worryLoading(worryId!!).join()
+        }
+
+        var imageUrl = worryDetailViewModel?.worry?.value?.userProfileImage
+        Log.d(Constants.TAG, "이미지 url: $imageUrl")
+        Glide.with(this@WorryDetailActivity).load(imageUrl).into(profileImage)
     }
 
     private fun setTextChangeListener() {
@@ -148,7 +157,7 @@ class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
             counselDetailViewModel?.counsel?.value!!.content,
             userId!!,
             worryDetailViewModel?.worry?.value!!.postId,
-            profileImage!!,
+            profile_image!!,
             userName!!
         )?.join()
 

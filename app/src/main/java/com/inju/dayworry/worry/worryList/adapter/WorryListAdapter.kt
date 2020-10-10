@@ -3,12 +3,14 @@ package com.inju.dayworry.worry.worryList.adapter
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.inju.dayworry.MainActivity
 import com.inju.dayworry.R
 import com.inju.dayworry.model.pojo.Worry
+import com.inju.dayworry.utils.Constants
 import com.inju.dayworry.utils.Constants.TAG
 import com.inju.dayworry.utils.EditBottomSheetFragment
 import com.inju.dayworry.worry.worryList.WorryItemViewHolder
@@ -25,7 +27,10 @@ class WorryListAdapter(private val list: MutableList<Worry>,
 
     private val timeFormat = SimpleDateFormat("HH : mm")
     private val activity = activity
+    val pref = activity.getSharedPreferences(Constants.PREFERENCE, AppCompatActivity.MODE_PRIVATE)
     private val supportFragmentManager = activity.supportFragmentManager
+
+    private var userId = pref.getLong("userId", (0).toLong())
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WorryItemViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_worry, parent, false)
@@ -52,10 +57,15 @@ class WorryListAdapter(private val list: MutableList<Worry>,
                 )
         }
         holder.containerView.moreImage.setOnClickListener {
-            Log.d(TAG,"more clicked")
-            val editBottomSheetFragment = EditBottomSheetFragment(list[position].postId)
+            if(userId ==list[position].userId) {
+                //내 글이면 수정
+                val editBottomSheetFragment = EditBottomSheetFragment(list[position].postId)
 
-            editBottomSheetFragment.show(supportFragmentManager, "editBottomSheetFragment")
+                editBottomSheetFragment.show(supportFragmentManager, "editBottomSheetFragment")
+            }
+            else {
+                //내 글이 아니면 신고
+            }
         }
         holder.containerView.worryItemTimeText.text = list[position].createdDate.substring(11..15)
     }

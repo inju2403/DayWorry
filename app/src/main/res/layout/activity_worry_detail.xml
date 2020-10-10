@@ -57,12 +57,34 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/timeTagLayout"
                 android:layout_width="0dp"
-                android:layout_height="59.5dp"
+                android:layout_height="116.5dp"
                 android:background="@color/mainNavyColor"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/titleLayout">
+
+                <ImageView
+                    android:id="@+id/profileImage"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_profile_default" />
+
+                <TextView
+                    android:id="@+id/userNameText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="하고"
+                    android:textSize="16sp"
+                    android:textColor="@color/whiteColor"
+                    app:layout_constraintBottom_toBottomOf="@+id/profileImage"
+                    app:layout_constraintStart_toEndOf="@+id/profileImage"
+                    app:layout_constraintTop_toTopOf="@+id/profileImage" />
 
                 <ImageView
                     android:id="@+id/timeImage"
@@ -82,15 +104,37 @@
                     android:text="20:17"
                     android:textColor="@color/whiteColor"
                     android:textSize="16sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@+id/timeImage"
                     app:layout_constraintStart_toEndOf="@+id/timeImage"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="@+id/timeImage" />
+
+                <ImageView
+                    android:id="@+id/commentImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/timeText"
+                    app:layout_constraintStart_toEndOf="@+id/timeText"
+                    app:layout_constraintTop_toTopOf="@+id/timeText"
+                    app:srcCompat="@drawable/ic_comment" />
+
+                <TextView
+                    android:id="@+id/commentNumText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="6"
+                    android:textColor="@color/whiteColor"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/commentImage"
+                    app:layout_constraintStart_toEndOf="@+id/commentImage"
+                    app:layout_constraintTop_toTopOf="@+id/commentImage" />
 
                 <Button
                     android:id="@+id/tagBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="36dp"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="22dp"
                     android:layout_marginEnd="20dp"
                     android:background="@drawable/counsel_detail_tag_btn_style"
                     android:text="취업"
@@ -98,6 +142,16 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/friendBtn"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/moreImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/commentNumText"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/commentNumText"
+                    app:srcCompat="@drawable/ic_more" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -116,7 +170,7 @@
                 android:layout_width="0dp"
                 android:layout_height="407dp"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="132dp"
+                android:layout_marginTop="137dp"
                 android:layout_marginEnd="20dp"
                 android:text="대학을 졸업하고 카페를 운영하다 상황이 안좋아져서 정리하게 되었어요. 취업을 해야하는데 졸업하고 지금까지 4년 간 카페일만 해와서 너무 막막하네요… 이제 곧 서른이라는 나이에 제가 다시 공부를 시작하고, 취업을 할 수 있을지 요즘 너무 걱정되네요…\n
 혹시라도 저와 비슷한 경험을 하신 분들이 있으시다면, 현실적인 조언 부탁드립니다! ㅠㅠ "
@@ -125,7 +179,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/titleLayout" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

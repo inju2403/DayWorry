@@ -20,6 +20,8 @@ import com.inju.dayworry.counsel.counselList.CounselListViewModel
 import com.inju.dayworry.counsel.counselList.buildlogic.CounselListInjector
 import com.inju.dayworry.model.pojo.COUNSEL_REQUEST_POJO
 import com.inju.dayworry.utils.Constants
+import com.inju.dayworry.utils.EditBottomSheetFragment
+import com.inju.dayworry.utils.ReportBottomSheetFragment
 import com.inju.dayworry.worry.worryDetail.buildlogic.WorryDetailInjector
 import kotlinx.android.synthetic.main.activity_add_worry.*
 import kotlinx.android.synthetic.main.activity_worry_detail.*
@@ -122,6 +124,21 @@ class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
 //                }
 //                true
 //            }
+
+        moreImage.setOnClickListener {
+            if(userId == worryDetailViewModel?.worry?.value?.userId) {
+                //내 글이면 수정
+                val editBottomSheetFragment = EditBottomSheetFragment(worryId!!, true)
+
+                editBottomSheetFragment.show(supportFragmentManager, "editBottomSheetFragment")
+            }
+            else {
+                //내 글이 아니면 신고
+                val reportBottomSheetFragment = ReportBottomSheetFragment(worryId!!, true)
+
+                reportBottomSheetFragment.show(supportFragmentManager, "reportBottomSheetFragment")
+            }
+        }
     }
 
     private fun sendCounsel() = launch {
@@ -190,10 +207,8 @@ class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
     private fun worryLoading(worryId: Long) = launch {
         detailLoadingUi.visibility = View.VISIBLE
         titleText.visibility = View.GONE
-        timeText.visibility = View.GONE
-        tagBtn.visibility = View.GONE
+        timeTagLayout.visibility = View.GONE
         contentText.visibility = View.GONE
-        timeImage.visibility = View.GONE
         commentRecyclerView.visibility = View.GONE
 
         worryDetailViewModel!!.getWorryById(worryId).join()
@@ -201,10 +216,8 @@ class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
 
         detailLoadingUi.visibility = View.GONE
         titleText.visibility = View.VISIBLE
-        timeText.visibility = View.VISIBLE
-        tagBtn.visibility = View.VISIBLE
+        timeTagLayout.visibility = View.VISIBLE
         contentText.visibility = View.VISIBLE
-        timeImage.visibility = View.VISIBLE
         commentRecyclerView.visibility = View.VISIBLE
     }
 

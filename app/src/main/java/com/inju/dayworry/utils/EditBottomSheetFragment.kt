@@ -22,7 +22,7 @@ import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
 
-class EditBottomSheetFragment(val postId: Long) : BottomSheetDialogFragment(), CoroutineScope {
+class EditBottomSheetFragment(val postId: Long, private val flag: Boolean) : BottomSheetDialogFragment(), CoroutineScope {
 
     private lateinit var job: Job
     override val coroutineContext: CoroutineContext
@@ -48,6 +48,7 @@ class EditBottomSheetFragment(val postId: Long) : BottomSheetDialogFragment(), C
                 putExtra("WORRY_ID", postId)
             }
             startActivity(intent)
+            activity!!.finish()
         }
 
         deleteLayout.setOnClickListener {
@@ -61,7 +62,10 @@ class EditBottomSheetFragment(val postId: Long) : BottomSheetDialogFragment(), C
                 = RetrofitClient.getClient(Constants.API_BASE_URL)!!.create(ApiService::class.java)
         httpCall?.deleteWorry(postId)
         showToast("고민글이 삭제되었습니다")
-        (activity as MainActivity).getWorryListViewModel?.InitWorrys("전체")
+
+        if(flag) activity!!.finish() // 고민 상세화면에서 왔을 경우
+        else (activity as MainActivity).getWorryListViewModel?.InitWorrys("전체") // 고민 리스트에서 왔을 경우
+
     }
 
     private fun showToast(str: String) {

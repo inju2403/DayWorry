@@ -13,6 +13,7 @@ import com.inju.dayworry.model.pojo.Worry
 import com.inju.dayworry.utils.Constants
 import com.inju.dayworry.utils.Constants.TAG
 import com.inju.dayworry.utils.EditBottomSheetFragment
+import com.inju.dayworry.utils.ReportBottomSheetFragment
 import com.inju.dayworry.worry.worryList.WorryItemViewHolder
 import com.inju.dayworry.worry.worryList.WorryListEvent
 import kotlinx.android.synthetic.main.item_worry.view.*
@@ -59,12 +60,15 @@ class WorryListAdapter(private val list: MutableList<Worry>,
         holder.containerView.moreImage.setOnClickListener {
             if(userId ==list[position].userId) {
                 //내 글이면 수정
-                val editBottomSheetFragment = EditBottomSheetFragment(list[position].postId)
+                val editBottomSheetFragment = EditBottomSheetFragment(list[position].postId, false)
 
                 editBottomSheetFragment.show(supportFragmentManager, "editBottomSheetFragment")
             }
             else {
                 //내 글이 아니면 신고
+                val reportBottomSheetFragment = ReportBottomSheetFragment(list[position].postId, false)
+
+                reportBottomSheetFragment.show(supportFragmentManager, "reportBottomSheetFragment")
             }
         }
         holder.containerView.worryItemTimeText.text = list[position].createdDate.substring(11..15)

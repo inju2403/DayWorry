@@ -3,6 +3,8 @@ package com.inju.dayworry.mypage
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
@@ -24,6 +26,7 @@ import com.inju.dayworry.retrofit.RetrofitClient
 import com.inju.dayworry.worry.worryList.adapter.MyWorryListAdapter
 import com.inju.dayworry.utils.Constants
 import com.inju.dayworry.utils.Constants.TAG
+import com.inju.dayworry.utils.MyDialog
 import com.inju.dayworry.worry.worryDetail.WorryDetailActivity
 import com.inju.dayworry.worry.worryList.WorryListViewModel
 import com.inju.dayworry.worry.worryList.buildlogic.WorryListInjector
@@ -185,51 +188,20 @@ class MyPageFragment : Fragment(), CoroutineScope {
         }
         logoutLayout.setOnClickListener {
             //로그아웃
-            delteUserLogoutLoadingUi.visibility = View.VISIBLE
-            if(social=="kakao") {
-                //카카오
-                UserApiClient.rx.logout()
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe({
-                        Log.i(TAG, "로그아웃 성공. SDK에서 토큰 삭제 됨")
-                        delteUserLogoutLoadingUi.visibility = View.GONE
-                        showToast("로그아웃 되었습니다.")
-                        val editor = pref.edit()
-                        editor.clear()
-                        editor.putBoolean("runFirst", false)
-                        editor.commit()
+            val dialog = MyDialog(activity!!)
+            dialog.start("로그아웃", "정말 로그아웃 하시겠어요?")
+            dialog.setOnOKClickedListener {
 
-                        startActivity(
-                            Intent(
-                                activity,
-                                LoginActivity::class.java
-                            )
-                        )
-                        activity!!.finish()
-                    }, { error ->
-                        Log.e(TAG, "로그아웃 실패. SDK에서 토큰 삭제 됨", error)
-                        delteUserLogoutLoadingUi.visibility = View.GONE
-                        showToast("다시 시도해주세요.")
-                    }).addTo(disposables)
-            }
-            else if(social=="naver") {
-                //네이버
-            }
-        }
-        deleteUserLayout.setOnClickListener {
-            //계정삭제
-            delteUserLogoutLoadingUi.visibility = View.VISIBLE
-            httpCall?.deleteUser(userId)?.enqueue(object : Callback<Void> {
-                override fun onFailure(call: Call<Void>, t: Throwable) {
-                    Log.d(TAG,"delete user failed onFailure")
-                }
-
-                override fun onResponse(call: Call<Void>, response: Response<Void>) {
-                    when(response.code()) {
-                        200-> {
+                delteUserLogoutLoadingUi.visibility = View.VISIBLE
+                if (social == "kakao") {
+                    //카카오
+                    UserApiClient.rx.logout()
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe({
+                            Log.i(TAG, "로그아웃 성공. SDK에서 토큰 삭제 됨")
                             delteUserLogoutLoadingUi.visibility = View.GONE
-                            showToast("계정이 삭제 되었습니다. 이용해주셔서 감사합니다.")
+                            showToast("로그아웃 되었습니다.")
                             val editor = pref.edit()
                             editor.clear()
                             editor.putBoolean("runFirst", false)
@@ -242,16 +214,56 @@ class MyPageFragment : Fragment(), CoroutineScope {
                                 )
                             )
                             activity!!.finish()
-                        }
-                        else -> {
-                            Log.d(TAG,"계정삭제 에러")
+                        }, { error ->
+                            Log.e(TAG, "로그아웃 실패. SDK에서 토큰 삭제 됨", error)
                             delteUserLogoutLoadingUi.visibility = View.GONE
                             showToast("다시 시도해주세요.")
+                        }).addTo(disposables)
+                } else if (social == "naver") {
+                    //네이버
+                }
+            }
+        }
+        deleteUserLayout.setOnClickListener {
+            //계정삭제
+            val dialog = MyDialog(activity!!)
+            dialog.start("계정 삭제", "      하고 계정을 삭제하시겠어요?\n\n개인 정보와 내역이 모두 삭제됩니다.")
+            dialog.setOnOKClickedListener {
+
+                delteUserLogoutLoadingUi.visibility = View.VISIBLE
+                httpCall?.deleteUser(userId)?.enqueue(object : Callback<Void> {
+                    override fun onFailure(call: Call<Void>, t: Throwable) {
+                        Log.d(TAG, "delete user failed onFailure")
+                    }
+
+                    override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                        when (response.code()) {
+                            200 -> {
+                                delteUserLogoutLoadingUi.visibility = View.GONE
+                                showToast("계정이 삭제 되었습니다. 이용해주셔서 감사합니다.")
+                                val editor = pref.edit()
+                                editor.clear()
+                                editor.putBoolean("runFirst", false)
+                                editor.commit()
+
+                                startActivity(
+                                    Intent(
+                                        activity,
+                                        LoginActivity::class.java
+                                    )
+                                )
+                                activity!!.finish()
+                            }
+                            else -> {
+                                Log.d(TAG, "계정삭제 에러")
+                                delteUserLogoutLoadingUi.visibility = View.GONE
+                                showToast("다시 시도해주세요.")
+                            }
                         }
                     }
-                }
 
-            })
+                })
+            }
 
         }
     }

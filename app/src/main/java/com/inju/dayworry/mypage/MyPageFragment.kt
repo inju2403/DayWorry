@@ -18,6 +18,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.inju.dayworry.MainActivity
 import com.inju.dayworry.R
 import com.inju.dayworry.login.LoginActivity
@@ -63,6 +64,8 @@ class MyPageFragment : Fragment(), CoroutineScope {
     private var userId: Long = 1
     private lateinit var userName: String
     private lateinit var social: String
+    private lateinit var profile_image: String
+    private var defaultImage: String = "https://hago-storage-bucket.s3.ap-northeast-2.amazonaws.com/default01.jpg"
     private val defaultLong: Long = 1
 
     private lateinit var pref: SharedPreferences
@@ -83,8 +86,12 @@ class MyPageFragment : Fragment(), CoroutineScope {
         userId = pref.getLong("userId", defaultLong)
         userName = pref.getString("userName", "").toString()
         social = pref.getString("social", "").toString()
+        profile_image = pref.getString("profileImage", defaultImage).toString()
         if(social=="naver") socialLogo.setImageResource(R.drawable.ic_naver_login_mypage)
         usernameText.text = userName
+
+        var imageUrl = profile_image
+        Glide.with(this).load(imageUrl).into(profileImage)
 
         job = Job()
 

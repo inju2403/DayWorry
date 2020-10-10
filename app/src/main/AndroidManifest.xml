@@ -27,18 +27,18 @@
             android:name=".worry.worryDetail.WorryDetailActivity"
             android:windowSoftInputMode="adjustResize" />
         <activity android:name=".login.SetProfileActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>>
-        <activity android:name=".login.LoginActivity">
 <!--            <intent-filter>-->
 <!--                <action android:name="android.intent.action.MAIN" />-->
 
 <!--                <category android:name="android.intent.category.LAUNCHER" />-->
 <!--            </intent-filter>-->
+        </activity>>
+        <activity android:name=".login.LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".worry.worryDetail.AddWorryActivity" />
         <activity android:name=".MainActivity">

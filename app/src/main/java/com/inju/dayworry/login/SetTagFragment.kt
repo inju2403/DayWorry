@@ -40,6 +40,8 @@ class SetTagFragment : Fragment() {
     private var hashTag: MutableList<String> = mutableListOf()
     private var userAgeValue: Int = 0
     private var hashTagString: String = ""
+    private var profileImage: String = ""
+    private var defaultImage: String = "https://hago-storage-bucket.s3.ap-northeast-2.amazonaws.com/default01.jpg"
 
     private var userId: Long = 0
     private val defaultLong: Long = 0
@@ -62,6 +64,8 @@ class SetTagFragment : Fragment() {
         setTagLoadingUi.visibility = View.GONE
 
         userId = pref.getLong("userId", defaultLong)
+        profileImage = pref.getString("profileImage", defaultImage).toString()
+        Log.d(TAG,"프로필 이미지: ${this.profileImage}")
 
         nextBtn.setOnClickListener {
             if(hashTag.size == 0) {
@@ -100,7 +104,7 @@ class SetTagFragment : Fragment() {
         val userRequestPojo = User_REQUEST_POJO(
             userAgeValue,
             (activity as SetProfileActivity).userName,
-            "",
+            profileImage,
             hashTag,
             userId)
 

@@ -64,26 +64,26 @@ class LoginActivity : AppCompatActivity(), CoroutineScope {
         job = Job()
 
         val pref = getSharedPreferences(PREFERENCE, MODE_PRIVATE)
+        val editor = pref.edit()
+
+        val jwt = pref.getString("jwt", "").toString()
+        if(jwt != "") {
+            //jwt가 아직 유효한지 검사
+            //유효하면 자동로그인
+            verifyJWT(jwt, pref)
+        }
 
         kakao_login_button.setOnClickListener {
-
-            val jwt = pref.getString("jwt", "").toString()
-//            if(jwt != "") {
-//                //jwt가 아직 유효한지 검사 (다른기기에서 로그인했을시에 만료되기 때문)
-//                verifyJWT(jwt, pref)
-//            }
-//            else
-                tryKaKaoLogin(pref)
+            tryKaKaoLogin(pref)
         }
 
         naver_login_button.setOnClickListener {
             tryNaverLogin(pref)
-            //임시 라우팅
-//            startActivity(Intent(this, SetProfileActivity::class.java))
-//            finish()
         }
 
         skipText.setOnClickListener {
+            editor.clear()
+            editor.commit()
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
@@ -166,13 +166,13 @@ class LoginActivity : AppCompatActivity(), CoroutineScope {
             }
 
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
-                when (response!!.code()) {
+                when (response.code()) {
                     200 -> {
                         startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                         finish()
                     }
                     else -> {
-                        tryKaKaoLogin(pref)
+                        Log.d(TAG,"토큰 유효하지 않음")
                     }
                 }
             }

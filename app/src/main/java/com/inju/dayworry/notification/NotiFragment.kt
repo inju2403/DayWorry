@@ -1,11 +1,14 @@
 package com.inju.dayworry.notification
 
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.inju.dayworry.R
+import com.inju.dayworry.utils.Constants
 
 class NotiFragment : Fragment() {
 
@@ -20,4 +23,5 @@ class NotiFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
     }
+
 }

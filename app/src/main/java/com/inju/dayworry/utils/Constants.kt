@@ -8,4 +8,7 @@ object Constants {
 
     const val MIN_SCALE = 0.85f
     const val MIN_ALPHA = 0.5f
+
+    const val mainNaviColor = "#3b3f51"
+    const val darkNaviColor = "#2e3042"
 }

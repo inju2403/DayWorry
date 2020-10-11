@@ -1,5 +1,7 @@
 package com.inju.dayworry.home
 
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -19,6 +21,8 @@ import com.inju.dayworry.model.pojo.Worry
 import com.inju.dayworry.utils.Constants
 import com.inju.dayworry.utils.Constants.NUM_PAGES
 import com.inju.dayworry.utils.Constants.TAG
+import com.inju.dayworry.utils.Constants.darkNaviColor
+import com.inju.dayworry.utils.Constants.mainNaviColor
 import com.inju.dayworry.worry.worryList.WorryListViewModel
 import com.inju.dayworry.worry.worryList.buildlogic.WorryListInjector
 import kotlinx.android.synthetic.main.fragment_home_list.*
@@ -126,4 +130,5 @@ class HomeListFragment : Fragment(), CoroutineScope {
 
         setHomeComponents()
     }
+
 }

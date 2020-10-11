@@ -4,12 +4,14 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.util.Base64
 import android.util.Base64.NO_WRAP
 import android.util.Log
 import android.view.Gravity
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.inju.dayworry.MainActivity
@@ -17,6 +19,7 @@ import com.inju.dayworry.R
 import com.inju.dayworry.model.pojo.SOCIAL_LOGIN_RETURN_POJO
 import com.inju.dayworry.retrofit.ApiService
 import com.inju.dayworry.retrofit.RetrofitClient
+import com.inju.dayworry.utils.Constants
 import com.inju.dayworry.utils.Constants.API_BASE_URL
 import com.inju.dayworry.utils.Constants.PREFERENCE
 import com.inju.dayworry.utils.Constants.TAG
@@ -287,6 +290,21 @@ class LoginActivity : AppCompatActivity() {
         }
 
         return null
+    }
+
+    private fun setStatusBarColor() {
+        var view = window.decorView
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if(view != null) {
+                window.statusBarColor = Color.parseColor(Constants.mainNaviColor)
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        setStatusBarColor()
     }
 
 

@@ -1,6 +1,8 @@
 package com.inju.dayworry
 
 import android.content.Intent
+import android.graphics.Color
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.SyncStateContract
@@ -16,6 +18,7 @@ import com.inju.dayworry.login.SetProfileActivity
 import com.inju.dayworry.model.pojo.Worry
 import com.inju.dayworry.mypage.MyPageFragment
 import com.inju.dayworry.notification.NotiFragment
+import com.inju.dayworry.utils.Constants
 import com.inju.dayworry.utils.Constants.TAG
 import com.inju.dayworry.utils.Constants.PREFERENCE
 import com.inju.dayworry.worry.worryList.WorryListFragment
@@ -47,6 +50,8 @@ class MainActivity : AppCompatActivity() {
     private var worryJudge = 0
     private var notiJudge = 0
     private var myPageJudge = 0
+
+    private var statusBarColor = "main"
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -98,6 +103,8 @@ class MainActivity : AppCompatActivity() {
                 worryTapView.setImageResource(R.drawable.ic_worry_list_unchecked)
                 notiTapView.setImageResource(R.drawable.ic_noti_unchecked)
                 myPageTapView.setImageResource(R.drawable.ic_mypage_uncheced)
+
+                setStatusBarColor("main")
                 switchFragment(FRAG_COUNSEL)
             }
         }
@@ -113,6 +120,7 @@ class MainActivity : AppCompatActivity() {
                 worryTapView.setImageResource(R.drawable.ic_worry_list_checked)
                 notiTapView.setImageResource(R.drawable.ic_noti_unchecked)
                 myPageTapView.setImageResource(R.drawable.ic_mypage_uncheced)
+                setStatusBarColor("dark")
                 switchFragment(FRAG_WORRY)
             }
         }
@@ -126,7 +134,10 @@ class MainActivity : AppCompatActivity() {
                 startActivity(Intent(this@MainActivity, LoginActivity::class.java))
                 finish()
             }
-            else startActivityForResult(Intent(this@MainActivity, AddWorryActivity::class.java), REQUEST_CODE)
+            else {
+                setStatusBarColor("dark")
+                startActivityForResult(Intent(this@MainActivity, AddWorryActivity::class.java), REQUEST_CODE)
+            }
         }
 
         notiTapView.setOnClickListener {
@@ -135,6 +146,7 @@ class MainActivity : AppCompatActivity() {
                 toast.setGravity(Gravity.BOTTOM, 0,300)
                 toast.show()
 
+                setStatusBarColor("main")
                 startActivity(Intent(this@MainActivity, LoginActivity::class.java))
                 finish()
             }
@@ -148,6 +160,7 @@ class MainActivity : AppCompatActivity() {
                     worryTapView.setImageResource(R.drawable.ic_worry_list_unchecked)
                     notiTapView.setImageResource(R.drawable.ic_noti_checked)
                     myPageTapView.setImageResource(R.drawable.ic_mypage_uncheced)
+                    setStatusBarColor("main")
                     switchFragment(FRAG_NOTIFICATION)
                 }
             }
@@ -161,6 +174,7 @@ class MainActivity : AppCompatActivity() {
                 toast.show()
 
                 startActivity(Intent(this@MainActivity, LoginActivity::class.java))
+                setStatusBarColor("main")
                 finish()
             }
             else {
@@ -173,6 +187,7 @@ class MainActivity : AppCompatActivity() {
                     worryTapView.setImageResource(R.drawable.ic_worry_list_unchecked)
                     notiTapView.setImageResource(R.drawable.ic_noti_unchecked)
                     myPageTapView.setImageResource(R.drawable.ic_mypage_checed)
+                    setStatusBarColor("dark")
                     switchFragment(FRAG_MYPAGE)
                 }
             }
@@ -187,24 +202,28 @@ class MainActivity : AppCompatActivity() {
                 fragmentManager.beginTransaction().hide(worryListFragment).commit()
                 fragmentManager.beginTransaction().hide(notiFragment).commit()
                 fragmentManager.beginTransaction().hide(myPageFragment).commit()
+                statusBarColor = "main"
             }
             FRAG_WORRY -> {
                 fragmentManager.beginTransaction().hide(counselFragment).commit()
                 fragmentManager.beginTransaction().show(worryListFragment).commit()
                 fragmentManager.beginTransaction().hide(notiFragment).commit()
                 fragmentManager.beginTransaction().hide(myPageFragment).commit()
+                statusBarColor = "dark"
             }
             FRAG_NOTIFICATION -> {
                 fragmentManager.beginTransaction().hide(counselFragment).commit()
                 fragmentManager.beginTransaction().hide(worryListFragment).commit()
                 fragmentManager.beginTransaction().show(notiFragment).commit()
                 fragmentManager.beginTransaction().hide(myPageFragment).commit()
+                statusBarColor = "main"
             }
             FRAG_MYPAGE -> {
                 fragmentManager.beginTransaction().hide(counselFragment).commit()
                 fragmentManager.beginTransaction().hide(worryListFragment).commit()
                 fragmentManager.beginTransaction().hide(notiFragment).commit()
                 fragmentManager.beginTransaction().show(myPageFragment).commit()
+                statusBarColor = "dark"
             }
         }
     }
@@ -226,5 +245,23 @@ class MainActivity : AppCompatActivity() {
                 switchFragment(FRAG_WORRY)
             }
         }
+    }
+
+    private fun setStatusBarColor(str: String) {
+        var view = window.decorView
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if(view != null) {
+                when(str) {
+                    "main" -> window.statusBarColor = Color.parseColor(Constants.mainNaviColor)
+                    "dark" -> window.statusBarColor = Color.parseColor(Constants.darkNaviColor)
+                }
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        setStatusBarColor(statusBarColor)
     }
 }

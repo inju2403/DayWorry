@@ -2,6 +2,7 @@ package com.inju.dayworry.login
 
 import android.content.Intent
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
@@ -492,5 +493,19 @@ class SetTagFragment : Fragment() {
         toast.show()
     }
 
+    private fun setStatusBarColor() {
+        var view = activity!!.window.decorView
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if(view != null) {
+                activity!!.window.statusBarColor = Color.parseColor(Constants.darkNaviColor)
+            }
+        }
+    }
+
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+
+        setStatusBarColor()
+    }
 
 }

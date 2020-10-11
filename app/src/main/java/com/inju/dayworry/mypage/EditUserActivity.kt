@@ -3,6 +3,7 @@ package com.inju.dayworry.mypage
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -725,5 +726,24 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
         var toast = Toast.makeText(this, str, Toast.LENGTH_LONG)
         toast.setGravity(Gravity.BOTTOM, 0,300)
         toast.show()
+    }
+
+    private fun setStatusBarColor(str: String) {
+        var view = window.decorView
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if(view != null) {
+                view.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+                when(str) {
+                    "main" -> window.statusBarColor = Color.parseColor(Constants.mainNaviColor)
+                    "dark" -> window.statusBarColor = Color.parseColor(Constants.darkNaviColor)
+                }
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        setStatusBarColor("dark")
     }
 }

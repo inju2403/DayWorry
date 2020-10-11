@@ -2,6 +2,7 @@ package com.inju.dayworry.login
 
 import android.content.SharedPreferences
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -191,6 +192,22 @@ class SetProfileFragment: Fragment(), CoroutineScope {
         var toast = Toast.makeText(activity!!, str, Toast.LENGTH_LONG)
         toast.setGravity(Gravity.BOTTOM, 0,300)
         toast.show()
+    }
+
+
+    private fun setStatusBarColor() {
+        var view = activity!!.window.decorView
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if(view != null) {
+                activity!!.window.statusBarColor = Color.parseColor(Constants.darkNaviColor)
+            }
+        }
+    }
+
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+
+        setStatusBarColor()
     }
 
 }

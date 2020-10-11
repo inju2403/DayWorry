@@ -2,6 +2,7 @@ package com.inju.dayworry.worry.worryDetail
 
 import android.content.Intent
 import android.graphics.Color
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.SyncStateContract
@@ -59,6 +60,7 @@ class AddWorryActivity : AppCompatActivity(), CoroutineScope {
         setContentView(R.layout.activity_add_worry)
 
         addWorryLoadingUi.visibility = View.GONE
+        setStatusBarColor("dark")
 
         val pref = getSharedPreferences(Constants.PREFERENCE, MODE_PRIVATE)
         userId = pref.getLong("userId", defaultId)
@@ -463,5 +465,17 @@ class AddWorryActivity : AppCompatActivity(), CoroutineScope {
         var toast = Toast.makeText(this, str, Toast.LENGTH_LONG)
         toast.setGravity(Gravity.BOTTOM, 0,300)
         toast.show()
+    }
+
+    private fun setStatusBarColor(str: String) {
+        var view = window.decorView
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if(view != null) {
+                when(str) {
+                    "main" -> window.statusBarColor = Color.parseColor(Constants.mainNaviColor)
+                    "dark" -> window.statusBarColor = Color.parseColor(Constants.darkNaviColor)
+                }
+            }
+        }
     }
 }

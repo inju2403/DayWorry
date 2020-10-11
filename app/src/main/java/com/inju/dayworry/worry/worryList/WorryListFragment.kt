@@ -3,6 +3,7 @@ package com.inju.dayworry.worry.worryList
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.text.Editable
@@ -21,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.inju.dayworry.MainActivity
 import com.inju.dayworry.R
 import com.inju.dayworry.login.LoginActivity
+import com.inju.dayworry.utils.Constants
 import com.inju.dayworry.utils.Constants.TAG
 import com.inju.dayworry.worry.worryDetail.WorryDetailActivity
 import com.inju.dayworry.worry.worryList.adapter.WorryListAdapter
@@ -177,19 +179,6 @@ class WorryListFragment : Fragment(), CoroutineScope {
 
             }
         })
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        // 고민글을 추가하고 다시 고민리스트로 가면 0 페이지부터 다시 부름
-        initWorrys()
-//        Log.d(TAG,"리스트: ${worryListViewModel!!.worryList.value}")
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        worryListView.adapter = null
     }
 
     private fun initWorrys() = launch {
@@ -440,6 +429,18 @@ class WorryListFragment : Fragment(), CoroutineScope {
         healthBtn.isSelected = false
         marriedBtn.isSelected = false
         infantBtn.isSelected = false
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        // 고민글을 추가하고 다시 고민리스트로 가면 0 페이지부터 다시 부름
+        initWorrys()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        worryListView.adapter = null
     }
 
 }

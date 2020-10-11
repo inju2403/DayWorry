@@ -1,5 +1,7 @@
 package com.inju.dayworry.worry.worryDetail
 
+import android.graphics.Color
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -60,6 +62,7 @@ class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
         userName = pref.getString("userName", "")
 
         detailLoadingUi.visibility = View.GONE
+        setStatusBarColor("dark")
         job = Job()
 
         setViewModel()
@@ -237,5 +240,17 @@ class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
         var toast = Toast.makeText(this, str, Toast.LENGTH_LONG)
         toast.setGravity(Gravity.BOTTOM, 0,300)
         toast.show()
+    }
+
+    private fun setStatusBarColor(str: String) {
+        var view = window.decorView
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if(view != null) {
+                when(str) {
+                    "main" -> window.statusBarColor = Color.parseColor(Constants.mainNaviColor)
+                    "dark" -> window.statusBarColor = Color.parseColor(Constants.darkNaviColor)
+                }
+            }
+        }
     }
 }

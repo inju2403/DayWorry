@@ -20,20 +20,21 @@
         android:id="@+id/line"
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:layout_marginTop="48dp"
         android:background="@color/mainNavyColor"
-        app:layout_constraintTop_toBottomOf="@id/worryImage" />
+        app:layout_constraintTop_toBottomOf="@+id/titleText" />
 
     <TextView
         android:id="@+id/titleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginBottom="48dp"
+        android:layout_marginTop="20dp"
         android:text="서른, 취업 힘들까요?"
-        android:textSize="20sp"
         android:textColor="@color/whiteColor"
-        app:layout_constraintBottom_toBottomOf="@+id/worryImage"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/timeImage"
@@ -95,7 +96,7 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/worryImage" />
+        app:layout_constraintTop_toBottomOf="@+id/line" />
 
     <Button
         android:id="@+id/tagBtn"

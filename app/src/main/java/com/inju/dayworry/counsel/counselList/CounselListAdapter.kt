@@ -45,7 +45,7 @@ class CounselListAdapter(private val list: MutableList<Counsel>,
         else holder.containerView.likeImage.setImageResource(R.drawable.ic_like_unpressed)
 
         holder.containerView.likeImage.setOnClickListener {
-            event.value = CounselListEvent.OnCounselItemClick(list[position].commentId, list[position].userId)
+            event.value = CounselListEvent.OnCounselItemClick(list[position].commentId)
         }
     }
 

@@ -46,7 +46,8 @@ class HomeFragment3(worry: Worry) : Fragment() {
 
     private fun setUi() {
         var imageUrl = worry.postImage
-        Glide.with(this).load(imageUrl).into(worryImage)
+        if(imageUrl != "") Glide.with(this).load(imageUrl).into(worryImage)
+        else worryImage.visibility = View.GONE
 
         titleText.text = worry.title
         contentText.text = worry.content

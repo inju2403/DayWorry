@@ -66,13 +66,6 @@ class LoginActivity : AppCompatActivity(), CoroutineScope {
         val pref = getSharedPreferences(PREFERENCE, MODE_PRIVATE)
         val editor = pref.edit()
 
-        val jwt = pref.getString("jwt", "").toString()
-        if(jwt != "") {
-            //jwt가 아직 유효한지 검사
-            //유효하면 자동로그인
-            verifyJWT(jwt, pref)
-        }
-
         kakao_login_button.setOnClickListener {
             tryKaKaoLogin(pref)
         }

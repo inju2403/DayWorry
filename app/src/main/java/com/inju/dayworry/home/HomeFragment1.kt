@@ -3,6 +3,7 @@ package com.inju.dayworry.home
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.inju.dayworry.R
 import com.inju.dayworry.model.pojo.Worry
+import com.inju.dayworry.utils.Constants.TAG
 import com.inju.dayworry.worry.worryDetail.WorryDetailActivity
 import kotlinx.android.synthetic.main.fragment_home1.*
 
@@ -31,6 +33,7 @@ class HomeFragment1(worry: Worry) : Fragment() {
         setUi()
 
         lookIntoBtn.setOnClickListener {
+            Log.d(TAG, "postId: ${worry.postId}")
             val intent = Intent(activity, WorryDetailActivity::class.java).apply {
                 putExtra("WORRY_ID", worry.postId)
             }
@@ -40,7 +43,8 @@ class HomeFragment1(worry: Worry) : Fragment() {
 
     private fun setUi() {
         var imageUrl = worry.postImage
-        Glide.with(this).load(imageUrl).into(worryImage)
+        if(imageUrl != "") Glide.with(this).load(imageUrl).into(worryImage)
+        else worryImage.visibility = View.GONE
 
         titleText.text = worry.title
         contentText.text = worry.content

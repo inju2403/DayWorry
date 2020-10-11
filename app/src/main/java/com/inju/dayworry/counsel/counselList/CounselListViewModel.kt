@@ -42,12 +42,12 @@ class CounselListViewModel(
 
     override fun handleEvent(event: CounselListEvent) {
         when(event) {
-            is CounselListEvent.OnCounselItemClick -> sendLike(event.commentId, event.userId)
+            is CounselListEvent.OnCounselItemClick -> sendLike(event.commentId)
         }
     }
 
-    private fun sendLike(commentId: Long, userId: Long) = launch {
-        repo.likeComment(commentId, userId)
+    private fun sendLike(commentId: Long) = launch {
+        repo.likeComment(commentId, curUserId)
         InitCounsels(curPostId, curUserId)
     }
 

@@ -84,4 +84,9 @@ interface ApiService {
     @POST("comments")
     suspend fun addComment(@Body counselRequestPojo: COUNSEL_REQUEST_POJO): Response<Unit>
 
+    //댓글 좋아요
+    @PUT("comments/like")
+    suspend fun likeComment(@Query("commentId") commentId: Long,
+                            @Query("userId") userId: Long): Response<Unit>
+
 }

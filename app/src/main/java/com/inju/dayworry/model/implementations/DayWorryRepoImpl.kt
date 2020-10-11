@@ -63,5 +63,9 @@ class DayWorryRepoImpl(
         httpCall?.addComment(counselRequestPojo)
     }
 
+    override suspend fun likeComment(commentId: Long, userId: Long) {
+        httpCall?.likeComment(commentId, userId)
+    }
+
 
 }

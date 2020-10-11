@@ -2,16 +2,19 @@ package com.inju.dayworry.counsel.counselList
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.inju.dayworry.R
 import com.inju.dayworry.model.pojo.Counsel
 import com.inju.dayworry.worry.worryDetail.WorryDetailActivity
-import kotlinx.android.synthetic.main.activity_worry_detail.*
+import com.inju.dayworry.worry.worryList.WorryListEvent
 import kotlinx.android.synthetic.main.item_counsel.view.*
 
 class CounselListAdapter(private val list: MutableList<Counsel>,
-                        activity: WorryDetailActivity) :
+                        activity: WorryDetailActivity,
+                         val event: MutableLiveData<CounselListEvent> = MutableLiveData()
+) :
     RecyclerView.Adapter<CounselItemViewHolder> ()
 {
 
@@ -42,7 +45,7 @@ class CounselListAdapter(private val list: MutableList<Counsel>,
         else holder.containerView.likeImage.setImageResource(R.drawable.ic_like_unpressed)
 
         holder.containerView.likeImage.setOnClickListener {
-
+            event.value = CounselListEvent.OnCounselItemClick(list[position].commentId, list[position].userId)
         }
     }
 

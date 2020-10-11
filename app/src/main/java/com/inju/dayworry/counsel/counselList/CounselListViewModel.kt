@@ -21,8 +21,13 @@ class CounselListViewModel(
 
     private var currentPage: Int = 0
 
+    private var curPostId: Long = 0
+    private var curUserId: Long = 0
+
     fun InitCounsels(postId: Long, userId: Long) = launch {
-        // 고민글을 추가하고 다시 고민리스트로 가면 0 페이지부터 다시 부름
+        curPostId = postId
+        curUserId = userId
+        // 댓글을 추가하고 다시 고민리스트로 가면 0 페이지부터 다시 부름
         currentPage = 0
         Log.d(TAG, "userId: $userId")
         counselListState.value = repo.getComments(postId, currentPage++, userId)
@@ -36,7 +41,14 @@ class CounselListViewModel(
     }
 
     override fun handleEvent(event: CounselListEvent) {
-        TODO("Not yet implemented")
+        when(event) {
+            is CounselListEvent.OnCounselItemClick -> sendLike(event.commentId, event.userId)
+        }
+    }
+
+    private fun sendLike(commentId: Long, userId: Long) = launch {
+        repo.likeComment(commentId, userId)
+        InitCounsels(curPostId, curUserId)
     }
 
 }

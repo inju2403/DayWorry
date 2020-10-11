@@ -189,6 +189,14 @@ class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
 
                     listAdapter =
                         CounselListAdapter(it, this)
+
+                    listAdapter.event.observe(
+                        this,
+                        Observer {
+                            counselListViewModel!!.handleEvent(it)
+                        }
+                    )
+
                     commentRecyclerView.adapter = listAdapter
                     listAdapter.notifyDataSetChanged()
 

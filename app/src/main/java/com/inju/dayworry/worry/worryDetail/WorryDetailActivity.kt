@@ -61,8 +61,9 @@ class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
         userId = pref.getLong("userId", (0).toLong())
         userName = pref.getString("userName", "")
 
-        detailLoadingUi.visibility = View.GONE
+        visibleGone()
         setStatusBarColor("dark")
+
         job = Job()
 
         setViewModel()
@@ -72,6 +73,14 @@ class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
         setLayoutManager()
         observeViewModel()
         recycleviewBottomDetection()
+    }
+
+    private fun visibleGone() {
+        titleText.visibility = View.GONE
+        timeTagLayout.visibility = View.GONE
+        contentText.visibility = View.GONE
+        commentRecyclerView.visibility = View.GONE
+        detailLoadingUi.visibility = View.GONE
     }
     private fun setViewModel() {
         worryDetailViewModel = application!!.let {
@@ -224,10 +233,6 @@ class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
 
     private fun worryLoading(worryId: Long) = launch {
         detailLoadingUi.visibility = View.VISIBLE
-        titleText.visibility = View.GONE
-        timeTagLayout.visibility = View.GONE
-        contentText.visibility = View.GONE
-        commentRecyclerView.visibility = View.GONE
 
         worryDetailViewModel!!.getWorryById(worryId).join()
         counselListViewModel!!.InitCounsels(worryId, userId!!).join()

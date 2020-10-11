@@ -36,7 +36,14 @@ class CounselListAdapter(private val list: MutableList<Counsel>,
         holder.containerView.userNameText.text = list[position].nickname
         holder.containerView.counselContent.text = list[position].content
         holder.containerView.counselItemTimeText.text = list[position].createdDate.substring(11..15)
-        holder.containerView.commentCountText.text = list[position].commentLikes.toString()
+        holder.containerView.likeCountText.text = list[position].commentLikes.toString()
+
+        if(list[position].like) holder.containerView.likeImage.setImageResource(R.drawable.ic_like_pressed)
+        else holder.containerView.likeImage.setImageResource(R.drawable.ic_like_unpressed)
+
+        holder.containerView.likeImage.setOnClickListener {
+
+        }
     }
 
     override fun getItemCount(): Int {

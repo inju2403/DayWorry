@@ -90,10 +90,10 @@
                 app:layout_constraintBottom_toBottomOf="@+id/counselItemTimeText"
                 app:layout_constraintStart_toEndOf="@+id/counselItemTimeText"
                 app:layout_constraintTop_toTopOf="@+id/counselItemTimeText"
-                app:srcCompat="@drawable/ic_like" />
+                app:srcCompat="@drawable/ic_like_unpressed" />
 
             <TextView
-                android:id="@+id/commentCountText"
+                android:id="@+id/likeCountText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"

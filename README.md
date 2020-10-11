@@ -1,6 +1,12 @@
 # 하루 고민 (Android Sharing Concerns App)    
 
-<div><img src="https://user-images.githubusercontent.com/56947879/94985972-cfd46000-0595-11eb-84b3-cfe2b0e5d6fd.png"  width="100%"></div>
+<div><img src="https://user-images.githubusercontent.com/56947879/95682122-8e3f5700-0c1e-11eb-8146-10ba6a930e03.jpg"  width="100%"></div>
+<div><img src="https://user-images.githubusercontent.com/56947879/95682124-90091a80-0c1e-11eb-9890-ac2fca21514a.jpg"  width="100%"></div>
+<div><img src="https://user-images.githubusercontent.com/56947879/95682125-913a4780-0c1e-11eb-9ec5-2e6b531f4ba2.jpg"  width="100%"></div>
+<div><img src="https://user-images.githubusercontent.com/56947879/95682127-926b7480-0c1e-11eb-94e1-2e1bbd6ad178.jpg"  width="100%"></div>
+<div><img src="https://user-images.githubusercontent.com/56947879/95682128-939ca180-0c1e-11eb-9677-8236e31994d0.jpg"  width="100%"></div>
+<div><img src="https://user-images.githubusercontent.com/56947879/95682131-97c8bf00-0c1e-11eb-977b-fb45c76de4b9.jpg"  width="100%"></div>
+<div><img src="https://user-images.githubusercontent.com/56947879/95682134-9d260980-0c1e-11eb-9cb5-5e880b500723.jpg"  width="100%"></div>
 
 
 ## Project Description    

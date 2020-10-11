@@ -77,6 +77,7 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
     private var userAge: String = ""
     private var hashTagString: String = ""
     private var profileImage: String = ""
+    private var defaultImage: String = "https://hago-storage-bucket.s3.ap-northeast-2.amazonaws.com/default_01.jpg"
     private var userName: String = ""
     private var originUserName: String = ""
 
@@ -92,7 +93,6 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
         job = Job()
 
         val pref = getSharedPreferences(Constants.PREFERENCE, MODE_PRIVATE)
-        val editor = pref.edit()
         userAgeValue = pref.getInt("userAge", 0)
         profileImage = pref.getString("profileImage", "empty").toString()
         userId = pref.getLong("userId", (0).toLong())
@@ -104,14 +104,14 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
         for (next in hashTagList) hashTag.add(next)
 
 
-        setUpClickListener(editor)
+        setUpClickListener(pref)
         setSpinner()
         setUserInfo()
         setTextChangeListener()
         setTagBtn()
     }
 
-    private fun setUpClickListener(editor: SharedPreferences.Editor) = launch {
+    private fun setUpClickListener(pref: SharedPreferences) = launch {
 
         profile_photo.setOnClickListener {
             val selectProfilePhotoBottomSheetFragment = SelectProfilePhotoBottomSheetFragment(profile_photo)
@@ -126,11 +126,13 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
         }
 
         finishBtn.setOnClickListener {
+            profileImage = pref.getString("profileImage", defaultImage).toString()
+            Log.d(Constants.TAG,"프로필 이미지: $profileImage")
             when {
                 userName == "" -> showToast(nicknameEmptyMessage)
                 totalCnt == 0 -> showToast(selectTagMinMessage)
                 originUserName == userName -> {
-                    editor.putString("userName", userName)
+                    pref.edit().putString("userName", userName)
                     when(userAge) {
                         "1~9" -> userAgeValue = 0
                         "10~19" -> userAgeValue = 10
@@ -141,27 +143,29 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
                         "60~69" -> userAgeValue = 60
                         "70~" -> userAgeValue = 70
                     }
-                    editor.putInt("userAge", userAgeValue)
+                    pref.edit().putInt("userAge", userAgeValue)
                     for (next in hashTag) {
                         hashTagString += "$next,"
                     }
                     hashTagString = hashTagString.substring(0..hashTagString.length-2) // Split으로 parsing하여 사용
-                    editor.putString("hashTags", hashTagString)
-                    editor.commit()
+                    pref.edit().putString("hashTags", hashTagString)
+                    pref.edit().commit()
 
                     requsetProfileUpdate()
                 }
-                else -> judgeUserName(userName, editor)
+                else -> judgeUserName(userName, pref)
             }
         }
     }
 
-    private fun judgeUserName(userName: String, editor: SharedPreferences.Editor) = launch {
+    private fun judgeUserName(userName: String, pref: SharedPreferences) = launch {
         judge = httpCall?.nicknameRedundancyCheck(userName)?.flag!!
         Log.d(Constants.TAG,"judge: $judge")
 
         if(judge) {
-            editor.putString("userName", userName)
+            profileImage = pref.getString("profileImage", defaultImage).toString()
+            Log.d(Constants.TAG,"프로필 이미지: $profileImage")
+            pref.edit().putString("userName", userName)
             when(userAge) {
                 "1~9" -> userAgeValue = 0
                 "10~19" -> userAgeValue = 10
@@ -172,13 +176,13 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
                 "60~69" -> userAgeValue = 60
                 "70~" -> userAgeValue = 70
             }
-            editor.putInt("userAge", userAgeValue)
+            pref.edit().putInt("userAge", userAgeValue)
             for (next in hashTag) {
                 hashTagString += "$next,"
             }
             hashTagString = hashTagString.substring(0..hashTagString.length-2) // Split으로 parsing하여 사용
-            editor.putString("hashTags", hashTagString)
-            editor.commit()
+            pref.edit().putString("hashTags", hashTagString)
+            pref.edit().commit()
 
             requsetProfileUpdate()
         }
@@ -378,6 +382,10 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
                     finishBtn.setBackgroundColor(Color.parseColor(liteNavyColor))
                     finishBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 }
+
+                for(idx in 0 until hashTag.size) {
+                    if(hashTag[idx] == "일상") hashTag.removeAt(idx)
+                }
             }
             else {
                 if(totalCnt==3) showToast(selectTagMaxMessage)
@@ -402,6 +410,10 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
                 if(totalCnt==0) {
                     finishBtn.setBackgroundColor(Color.parseColor(liteNavyColor))
                     finishBtn.setTextColor(Color.parseColor(superLiteGreyColor))
+                }
+
+                for(idx in 0 until hashTag.size) {
+                    if(hashTag[idx] == "가족") hashTag.removeAt(idx)
                 }
             }
             else {
@@ -428,6 +440,10 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
                     finishBtn.setBackgroundColor(Color.parseColor(liteNavyColor))
                     finishBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 }
+
+                for(idx in 0 until hashTag.size) {
+                    if(hashTag[idx] == "친구사이") hashTag.removeAt(idx)
+                }
             }
             else {
                 if(totalCnt==3) showToast(selectTagMaxMessage)
@@ -452,6 +468,10 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
                 if(totalCnt==0) {
                     finishBtn.setBackgroundColor(Color.parseColor(liteNavyColor))
                     finishBtn.setTextColor(Color.parseColor(superLiteGreyColor))
+                }
+
+                for(idx in 0 until hashTag.size) {
+                    if(hashTag[idx] == "연애") hashTag.removeAt(idx)
                 }
             }
             else {
@@ -478,6 +498,10 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
                     finishBtn.setBackgroundColor(Color.parseColor(liteNavyColor))
                     finishBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 }
+
+                for(idx in 0 until hashTag.size) {
+                    if(hashTag[idx] == "학교생활") hashTag.removeAt(idx)
+                }
             }
             else {
                 if(totalCnt==3) showToast(selectTagMaxMessage)
@@ -502,6 +526,10 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
                 if(totalCnt==0) {
                     finishBtn.setBackgroundColor(Color.parseColor(liteNavyColor))
                     finishBtn.setTextColor(Color.parseColor(superLiteGreyColor))
+                }
+
+                for(idx in 0 until hashTag.size) {
+                    if(hashTag[idx] == "직장생활") hashTag.removeAt(idx)
                 }
             }
             else {
@@ -528,6 +556,10 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
                     finishBtn.setBackgroundColor(Color.parseColor(liteNavyColor))
                     finishBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 }
+
+                for(idx in 0 until hashTag.size) {
+                    if(hashTag[idx] == "취업") hashTag.removeAt(idx)
+                }
             }
             else {
                 if(totalCnt==3) showToast(selectTagMaxMessage)
@@ -552,6 +584,10 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
                 if(totalCnt==0) {
                     finishBtn.setBackgroundColor(Color.parseColor(liteNavyColor))
                     finishBtn.setTextColor(Color.parseColor(superLiteGreyColor))
+                }
+
+                for(idx in 0 until hashTag.size) {
+                    if(hashTag[idx] == "진로") hashTag.removeAt(idx)
                 }
             }
             else {
@@ -578,6 +614,10 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
                     finishBtn.setBackgroundColor(Color.parseColor(liteNavyColor))
                     finishBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 }
+
+                for(idx in 0 until hashTag.size) {
+                    if(hashTag[idx] == "돈") hashTag.removeAt(idx)
+                }
             }
             else {
                 if(totalCnt==3) showToast(selectTagMaxMessage)
@@ -602,6 +642,10 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
                 if(totalCnt==0) {
                     finishBtn.setBackgroundColor(Color.parseColor(liteNavyColor))
                     finishBtn.setTextColor(Color.parseColor(superLiteGreyColor))
+                }
+
+                for(idx in 0 until hashTag.size) {
+                    if(hashTag[idx] == "건강") hashTag.removeAt(idx)
                 }
             }
             else {
@@ -628,6 +672,10 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
                     finishBtn.setBackgroundColor(Color.parseColor(liteNavyColor))
                     finishBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 }
+
+                for(idx in 0 until hashTag.size) {
+                    if(hashTag[idx] == "기혼자만 아는") hashTag.removeAt(idx)
+                }
             }
             else {
                 if(totalCnt==3) showToast(selectTagMaxMessage)
@@ -652,6 +700,10 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
                 if(totalCnt==0) {
                     finishBtn.setBackgroundColor(Color.parseColor(liteNavyColor))
                     finishBtn.setTextColor(Color.parseColor(superLiteGreyColor))
+                }
+
+                for(idx in 0 until hashTag.size) {
+                    if(hashTag[idx] == "육아") hashTag.removeAt(idx)
                 }
             }
             else {

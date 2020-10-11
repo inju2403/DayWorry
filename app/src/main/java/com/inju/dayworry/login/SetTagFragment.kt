@@ -64,14 +64,14 @@ class SetTagFragment : Fragment() {
         setTagLoadingUi.visibility = View.GONE
 
         userId = pref.getLong("userId", defaultLong)
-        profileImage = pref.getString("profileImage", defaultImage).toString()
-        Log.d(TAG,"프로필 이미지: ${this.profileImage}")
 
         nextBtn.setOnClickListener {
             if(hashTag.size == 0) {
                 showToast(selectTagMinMessage)
             }
             else {
+                profileImage = pref.getString("profileImage", defaultImage).toString()
+                Log.d(TAG,"프로필 이미지: ${this.profileImage}")
                 editor.putString("userName",(activity as SetProfileActivity).userName)
                 when((activity as SetProfileActivity).userAge) {
                     "1~9" -> userAgeValue = 0
@@ -141,6 +141,10 @@ class SetTagFragment : Fragment() {
                     nextBtn.setBackgroundColor(Color.parseColor(liteNavyColor))
                     nextBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 }
+
+                for(idx in 0 until hashTag.size) {
+                    if(hashTag[idx] == "일상") hashTag.removeAt(idx)
+                }
             }
             else {
                 if(totalCnt==3) showToast(selectTagMaxMessage)
@@ -165,6 +169,10 @@ class SetTagFragment : Fragment() {
                 if(totalCnt==0) {
                     nextBtn.setBackgroundColor(Color.parseColor(liteNavyColor))
                     nextBtn.setTextColor(Color.parseColor(superLiteGreyColor))
+                }
+
+                for(idx in 0 until hashTag.size) {
+                    if(hashTag[idx] == "가족") hashTag.removeAt(idx)
                 }
             }
             else {
@@ -191,6 +199,10 @@ class SetTagFragment : Fragment() {
                     nextBtn.setBackgroundColor(Color.parseColor(liteNavyColor))
                     nextBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 }
+
+                for(idx in 0 until hashTag.size) {
+                    if(hashTag[idx] == "친구사이") hashTag.removeAt(idx)
+                }
             }
             else {
                 if(totalCnt==3) showToast(selectTagMaxMessage)
@@ -215,6 +227,10 @@ class SetTagFragment : Fragment() {
                 if(totalCnt==0) {
                     nextBtn.setBackgroundColor(Color.parseColor(liteNavyColor))
                     nextBtn.setTextColor(Color.parseColor(superLiteGreyColor))
+                }
+
+                for(idx in 0 until hashTag.size) {
+                    if(hashTag[idx] == "연애") hashTag.removeAt(idx)
                 }
             }
             else {
@@ -241,6 +257,10 @@ class SetTagFragment : Fragment() {
                     nextBtn.setBackgroundColor(Color.parseColor(liteNavyColor))
                     nextBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 }
+
+                for(idx in 0 until hashTag.size) {
+                    if(hashTag[idx] == "학교생활") hashTag.removeAt(idx)
+                }
             }
             else {
                 if(totalCnt==3) showToast(selectTagMaxMessage)
@@ -266,6 +286,10 @@ class SetTagFragment : Fragment() {
                     nextBtn.setBackgroundColor(Color.parseColor(liteNavyColor))
                     nextBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 }
+
+                for(idx in 0 until hashTag.size) {
+                    if(hashTag[idx] == "직장생활") hashTag.removeAt(idx)
+                }
             }
             else {
                 if(totalCnt==3) showToast(selectTagMaxMessage)
@@ -290,6 +314,10 @@ class SetTagFragment : Fragment() {
                 if(totalCnt==0) {
                     nextBtn.setBackgroundColor(Color.parseColor(liteNavyColor))
                     nextBtn.setTextColor(Color.parseColor(superLiteGreyColor))
+                }
+
+                for(idx in 0 until hashTag.size) {
+                    if(hashTag[idx] == "취업") hashTag.removeAt(idx)
                 }
             }
             else {
@@ -317,6 +345,10 @@ class SetTagFragment : Fragment() {
                     nextBtn.setBackgroundColor(Color.parseColor(liteNavyColor))
                     nextBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 }
+
+                for(idx in 0 until hashTag.size) {
+                    if(hashTag[idx] == "진로") hashTag.removeAt(idx)
+                }
             }
             else {
                 if(totalCnt==3) showToast(selectTagMaxMessage)
@@ -341,6 +373,10 @@ class SetTagFragment : Fragment() {
                 if(totalCnt==0) {
                     nextBtn.setBackgroundColor(Color.parseColor(liteNavyColor))
                     nextBtn.setTextColor(Color.parseColor(superLiteGreyColor))
+                }
+
+                for(idx in 0 until hashTag.size) {
+                    if(hashTag[idx] == "돈") hashTag.removeAt(idx)
                 }
             }
             else {
@@ -367,6 +403,10 @@ class SetTagFragment : Fragment() {
                     nextBtn.setBackgroundColor(Color.parseColor(liteNavyColor))
                     nextBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 }
+
+                for(idx in 0 until hashTag.size) {
+                    if(hashTag[idx] == "건강") hashTag.removeAt(idx)
+                }
             }
             else {
                 if(totalCnt==3) showToast(selectTagMaxMessage)
@@ -392,6 +432,10 @@ class SetTagFragment : Fragment() {
                     nextBtn.setBackgroundColor(Color.parseColor(liteNavyColor))
                     nextBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 }
+
+                for(idx in 0 until hashTag.size) {
+                    if(hashTag[idx] == "기혼자만 아는") hashTag.removeAt(idx)
+                }
             }
             else {
                 if(totalCnt==3) showToast(selectTagMaxMessage)
@@ -416,6 +460,10 @@ class SetTagFragment : Fragment() {
                 if(totalCnt==0) {
                     nextBtn.setBackgroundColor(Color.parseColor(liteNavyColor))
                     nextBtn.setTextColor(Color.parseColor(superLiteGreyColor))
+                }
+
+                for(idx in 0 until hashTag.size) {
+                    if(hashTag[idx] == "육아") hashTag.removeAt(idx)
                 }
             }
             else {

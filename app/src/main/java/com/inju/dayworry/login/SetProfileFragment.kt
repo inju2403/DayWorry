@@ -83,7 +83,6 @@ class SetProfileFragment: Fragment(), CoroutineScope {
     }
 
     private fun setUpClickListener(pref: SharedPreferences) {
-        var profileImageSet = pref.getString("profileImageSet", "no")
 
         profile_photo.setOnClickListener {
             val selectProfilePhotoBottomSheetFragment = SelectProfilePhotoBottomSheetFragment(profile_photo)
@@ -98,6 +97,8 @@ class SetProfileFragment: Fragment(), CoroutineScope {
         }
 
         nextBtn.setOnClickListener {
+            var profileImageSet = pref.getString("profileImageSet", "no")
+
             when {
                 (activity as SetProfileActivity).userName == "" -> {
                     showToast(nicknameEmptyMessage)

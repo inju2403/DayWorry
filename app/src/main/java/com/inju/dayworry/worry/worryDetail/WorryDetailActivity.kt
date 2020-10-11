@@ -56,7 +56,7 @@ class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
         setContentView(R.layout.activity_worry_detail)
 
         val pref = getSharedPreferences(Constants.PREFERENCE, MODE_PRIVATE)
-        userId = pref.getLong("userId", (1).toLong())
+        userId = pref.getLong("userId", (0).toLong())
         userName = pref.getString("userName", "")
 
         detailLoadingUi.visibility = View.GONE
@@ -161,7 +161,7 @@ class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
             userName!!
         )?.join()
 
-        counselListViewModel?.InitCounsels(worryId!!)?.join()
+        counselListViewModel?.InitCounsels(worryId!!, userId!!)?.join()
 
         commentEditText.text.clear()
         detailLoadingUi.visibility = View.GONE
@@ -204,7 +204,7 @@ class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
                 var itemTotalCount = recyclerView.adapter!!.itemCount - 1
                 if (lastVisibleItemPosition == itemTotalCount) {
                     //todo
-                    counselListViewModel!!.getCounsels(worryId!!)
+                    counselListViewModel!!.getCounsels(worryId!!, userId!!)
                 }
 
             }
@@ -219,7 +219,7 @@ class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
         commentRecyclerView.visibility = View.GONE
 
         worryDetailViewModel!!.getWorryById(worryId).join()
-        counselListViewModel!!.InitCounsels(worryId).join()
+        counselListViewModel!!.InitCounsels(worryId, userId!!).join()
 
         detailLoadingUi.visibility = View.GONE
         titleText.visibility = View.VISIBLE

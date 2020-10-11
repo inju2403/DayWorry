@@ -59,7 +59,7 @@ class SelectProfilePhotoBottomSheetFragment(profile_photo: ImageView) : BottomSh
             resetCheckColor()
             defaultCheckImage2.setImageResource(R.drawable.ic_checked)
             select = 2
-            editor.putString("profileImage", "https://hago-storage-bucket.s3.ap-northeast-2.amazonaws.com/default_02.jpg")
+            editor.putString("profileImage", "https://hago-storage-bucket.s3.ap-northeast-2.amazonaws.com/default_04.jpg")
             editor.commit()
         }
         defaultImage3.setOnClickListener {
@@ -73,7 +73,7 @@ class SelectProfilePhotoBottomSheetFragment(profile_photo: ImageView) : BottomSh
             resetCheckColor()
             defaultCheckImage4.setImageResource(R.drawable.ic_checked)
             select = 4
-            editor.putString("profileImage", "https://hago-storage-bucket.s3.ap-northeast-2.amazonaws.com/default_04.jpg")
+            editor.putString("profileImage", "https://hago-storage-bucket.s3.ap-northeast-2.amazonaws.com/default_02.jpg")
             editor.commit()
         }
 

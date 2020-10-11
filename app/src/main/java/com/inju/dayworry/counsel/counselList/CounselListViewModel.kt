@@ -21,15 +21,16 @@ class CounselListViewModel(
 
     private var currentPage: Int = 0
 
-    fun InitCounsels(postId: Long) = launch {
+    fun InitCounsels(postId: Long, userId: Long) = launch {
         // 고민글을 추가하고 다시 고민리스트로 가면 0 페이지부터 다시 부름
         currentPage = 0
-        counselListState.value = repo.getComments(postId, currentPage++)
+        Log.d(TAG, "userId: $userId")
+        counselListState.value = repo.getComments(postId, currentPage++, userId)
         Log.d(TAG, "댓글: ${counselListState.value}")
     }
 
-    fun getCounsels(postId: Long) = launch {
-        var newList = repo.getComments(postId, currentPage++)
+    fun getCounsels(postId: Long, userId: Long) = launch {
+        var newList = repo.getComments(postId, currentPage++, userId)
         //새로 불러온 아이템들을 붙임
         for(item in newList) counselListState.value?.add(item)
     }

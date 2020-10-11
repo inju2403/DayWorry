@@ -55,8 +55,8 @@ class DayWorryRepoImpl(
         httpCall?.deleteWorry(postId)
     }
 
-    override suspend fun getComments(postId: Long, pageNum: Int): MutableList<Counsel> {
-        return httpCall?.getComments(postId, pageNum)!!
+    override suspend fun getComments(postId: Long, pageNum: Int, userId: Long): MutableList<Counsel> {
+        return httpCall?.getComments(postId, pageNum, userId)!!
     }
 
     override suspend fun addComment(counselRequestPojo: COUNSEL_REQUEST_POJO) {

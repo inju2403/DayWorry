@@ -15,6 +15,6 @@ interface IDayWorryRepository {
     suspend fun addOrUpdateWorry(contents: Contents)
     suspend fun deleteWorry(postId: Long)
 
-    suspend fun getComments(postId: Long, pageNum: Int): MutableList<Counsel>
+    suspend fun getComments(postId: Long, pageNum: Int, userId: Long): MutableList<Counsel>
     suspend fun addComment(counselRequestPojo: COUNSEL_REQUEST_POJO)
 }

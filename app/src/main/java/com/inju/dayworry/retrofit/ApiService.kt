@@ -71,7 +71,8 @@ interface ApiService {
     //댓글 리스트 받기
     @GET("comments/{postId}")
     suspend fun getComments(@Path("postId") poseId: Long,
-                            @Query("pageNum") pageNum: Int): MutableList<Counsel>
+                            @Query("pageNum") pageNum: Int,
+                            @Query("userId") userId: Long): MutableList<Counsel>
 
     //댓글 작성
     @POST("comments")

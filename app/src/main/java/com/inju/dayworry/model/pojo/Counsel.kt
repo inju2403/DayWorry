@@ -35,5 +35,9 @@ data class Counsel (
 
     @SerializedName("nickname")
     @Expose
-    var nickname: String = ""
+    var nickname: String = "",
+
+    @SerializedName("like")
+    @Expose
+    var like: Boolean = false
 )

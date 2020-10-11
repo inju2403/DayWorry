@@ -160,7 +160,7 @@ class MainActivity : AppCompatActivity() {
                     worryTapView.setImageResource(R.drawable.ic_worry_list_unchecked)
                     notiTapView.setImageResource(R.drawable.ic_noti_checked)
                     myPageTapView.setImageResource(R.drawable.ic_mypage_uncheced)
-                    setStatusBarColor("main")
+                    setStatusBarColor("dark")
                     switchFragment(FRAG_NOTIFICATION)
                 }
             }
@@ -216,7 +216,7 @@ class MainActivity : AppCompatActivity() {
                 fragmentManager.beginTransaction().hide(worryListFragment).commit()
                 fragmentManager.beginTransaction().show(notiFragment).commit()
                 fragmentManager.beginTransaction().hide(myPageFragment).commit()
-                statusBarColor = "main"
+                statusBarColor = "dark"
             }
             FRAG_MYPAGE -> {
                 fragmentManager.beginTransaction().hide(counselFragment).commit()

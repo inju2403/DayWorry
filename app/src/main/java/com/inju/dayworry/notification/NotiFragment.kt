@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.inju.dayworry.R
 import com.inju.dayworry.utils.Constants
+import kotlinx.android.synthetic.main.fragment_noti.*
 
 class NotiFragment : Fragment() {
 
@@ -22,6 +23,14 @@ class NotiFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        
+        setUpClickListener()
+    }
+
+    private fun setUpClickListener() {
+        deleteAllText.setOnClickListener {
+
+        }
     }
 
 }

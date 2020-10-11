@@ -41,7 +41,7 @@ class SetTagFragment : Fragment() {
     private var userAgeValue: Int = 0
     private var hashTagString: String = ""
     private var profileImage: String = ""
-    private var defaultImage: String = "https://hago-storage-bucket.s3.ap-northeast-2.amazonaws.com/default01.jpg"
+    private var defaultImage: String = "https://hago-storage-bucket.s3.ap-northeast-2.amazonaws.com/default_01.jpg"
 
     private var userId: Long = 0
     private val defaultLong: Long = 0

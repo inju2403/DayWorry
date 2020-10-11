@@ -52,28 +52,28 @@ class SelectProfilePhotoBottomSheetFragment(profile_photo: ImageView) : BottomSh
             resetCheckColor()
             defaultCheckImage1.setImageResource(R.drawable.ic_checked)
             select = 1
-            editor.putString("profileImage", "https://hago-storage-bucket.s3.ap-northeast-2.amazonaws.com/default01.jpg")
+            editor.putString("profileImage", "https://hago-storage-bucket.s3.ap-northeast-2.amazonaws.com/default_01.jpg")
             editor.commit()
         }
         defaultImage2.setOnClickListener {
             resetCheckColor()
             defaultCheckImage2.setImageResource(R.drawable.ic_checked)
             select = 2
-            editor.putString("profileImage", "https://hago-storage-bucket.s3.ap-northeast-2.amazonaws.com/default02.jpg")
+            editor.putString("profileImage", "https://hago-storage-bucket.s3.ap-northeast-2.amazonaws.com/default_02.jpg")
             editor.commit()
         }
         defaultImage3.setOnClickListener {
             resetCheckColor()
             defaultCheckImage3.setImageResource(R.drawable.ic_checked)
             select = 3
-            editor.putString("profileImage", "https://hago-storage-bucket.s3.ap-northeast-2.amazonaws.com/default03.jpg")
+            editor.putString("profileImage", "https://hago-storage-bucket.s3.ap-northeast-2.amazonaws.com/default_03.jpg")
             editor.commit()
         }
         defaultImage4.setOnClickListener {
             resetCheckColor()
             defaultCheckImage4.setImageResource(R.drawable.ic_checked)
             select = 4
-            editor.putString("profileImage", "https://hago-storage-bucket.s3.ap-northeast-2.amazonaws.com/default04.jpg")
+            editor.putString("profileImage", "https://hago-storage-bucket.s3.ap-northeast-2.amazonaws.com/default_04.jpg")
             editor.commit()
         }
 

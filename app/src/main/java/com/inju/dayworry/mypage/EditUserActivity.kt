@@ -78,6 +78,7 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
     private var hashTagString: String = ""
     private var profileImage: String = ""
     private var userName: String = ""
+    private var originUserName: String = ""
 
     private var userId: Long = 0
 
@@ -96,6 +97,7 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
         profileImage = pref.getString("profileImage", "empty").toString()
         userId = pref.getLong("userId", (0).toLong())
         userName = pref.getString("userName", "").toString()
+        originUserName = pref.getString("userName", "").toString()
         hashTagString = pref.getString("hashTags", "").toString()
 
         var hashTagList = hashTagString.split(",")
@@ -127,6 +129,28 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
             when {
                 userName == "" -> showToast(nicknameEmptyMessage)
                 totalCnt == 0 -> showToast(selectTagMinMessage)
+                originUserName == userName -> {
+                    editor.putString("userName", userName)
+                    when(userAge) {
+                        "1~9" -> userAgeValue = 0
+                        "10~19" -> userAgeValue = 10
+                        "20~29" -> userAgeValue = 20
+                        "30~39" -> userAgeValue = 30
+                        "40~49" -> userAgeValue = 40
+                        "50~59" -> userAgeValue = 50
+                        "60~69" -> userAgeValue = 60
+                        "70~" -> userAgeValue = 70
+                    }
+                    editor.putInt("userAge", userAgeValue)
+                    for (next in hashTag) {
+                        hashTagString += "$next,"
+                    }
+                    hashTagString = hashTagString.substring(0..hashTagString.length-2) // Split으로 parsing하여 사용
+                    editor.putString("hashTags", hashTagString)
+                    editor.commit()
+
+                    requsetProfileUpdate()
+                }
                 else -> judgeUserName(userName, editor)
             }
         }

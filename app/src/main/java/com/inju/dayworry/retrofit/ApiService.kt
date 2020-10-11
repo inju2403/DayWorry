@@ -1,6 +1,8 @@
 package com.inju.dayworry.retrofit
 
+import com.google.gson.JsonElement
 import com.inju.dayworry.model.pojo.*
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
@@ -14,6 +16,10 @@ interface ApiService {
     //네이버 로그인
     @POST("users/login/naver")
     fun naverLogin(@Header("accessToken") accessToken: String): Call<SOCIAL_LOGIN_RETURN_POJO>
+
+    //네이버 프로필 정보 조회
+    @GET("v1/nid/me")
+    suspend fun getNaverInfo(@Header("Authorization") Authorization: String): JsonElement
 
     //토큰 검증
     @POST("users/check")

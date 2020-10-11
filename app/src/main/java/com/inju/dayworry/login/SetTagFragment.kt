@@ -65,6 +65,7 @@ class SetTagFragment : Fragment() {
         setTagLoadingUi.visibility = View.GONE
 
         userId = pref.getLong("userId", defaultLong)
+        Log.d(TAG,"userId: $userId")
 
         nextBtn.setOnClickListener {
             if(hashTag.size == 0) {

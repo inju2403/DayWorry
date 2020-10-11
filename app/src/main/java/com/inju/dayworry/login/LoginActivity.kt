@@ -36,14 +36,23 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
+import kotlin.coroutines.CoroutineContext
 
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity(), CoroutineScope {
+
+    private lateinit var job: Job
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + job
 
     private val disposables = CompositeDisposable()
     private val httpCall: ApiService? = RetrofitClient.getClient(API_BASE_URL)!!.create(ApiService::class.java)
@@ -51,6 +60,8 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        job = Job()
 
         val pref = getSharedPreferences(PREFERENCE, MODE_PRIVATE)
 
@@ -214,8 +225,16 @@ class LoginActivity : AppCompatActivity() {
         mOAuthLoginModule.startOauthLoginActivity(this, mOAuthLoginHandler)
     }
 
-    private fun getUserTokenUsingNaverToken(token: String, pref: SharedPreferences) {
+    private fun getUserTokenUsingNaverToken(token: String, pref: SharedPreferences) = launch {
         val editor = pref.edit()
+        var naverHttpCall = RetrofitClient.getNaverClient("https://openapi.naver.com/")!!.create(ApiService::class.java)
+        var jsonObj = naverHttpCall.getNaverInfo("Bearer $token")
+
+        var naverUserId = jsonObj.asJsonObject.getAsJsonObject("response").get("id").toString()
+        naverUserId = naverUserId.substring(1..naverUserId.length-2)
+        editor.putLong("userId", naverUserId.toLong())
+        editor.commit()
+        Log.d(TAG, "naver user id: $naverUserId")
 
         Log.d(TAG, "param token ${token}")
         httpCall?.naverLogin(token)?.enqueue(object : Callback<SOCIAL_LOGIN_RETURN_POJO> {
@@ -224,7 +243,7 @@ class LoginActivity : AppCompatActivity() {
             }
 
             override fun onResponse(call: Call<SOCIAL_LOGIN_RETURN_POJO>, response: Response<SOCIAL_LOGIN_RETURN_POJO>) {
-                when (response!!.code()) {
+                when (response.code()) {
                     200 -> {
                         editor.putString("jwt", response.body()?.jwt.toString())
                         editor.putString("social", "naver")

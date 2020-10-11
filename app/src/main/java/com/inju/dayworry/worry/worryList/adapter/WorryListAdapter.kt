@@ -73,6 +73,7 @@ class WorryListAdapter(private val list: MutableList<Worry>,
             }
         }
         holder.containerView.worryItemTimeText.text = list[position].createdDate.substring(11..15)
+        holder.containerView.commentCountText.text = list[position].commentNum.toString()
     }
 
     override fun getItemCount(): Int {

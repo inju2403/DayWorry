@@ -46,6 +46,6 @@ class HomeFragment1(worry: Worry) : Fragment() {
         contentText.text = worry.content
 
         timeText.text = worry.createdDate.substring(11..15)
-//        commentCountText.text = worry.
+        commentCountText.text = worry.commentNum.toString()
     }
 }

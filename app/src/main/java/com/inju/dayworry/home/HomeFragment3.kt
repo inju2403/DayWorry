@@ -10,7 +10,14 @@ import com.bumptech.glide.Glide
 import com.inju.dayworry.R
 import com.inju.dayworry.model.pojo.Worry
 import com.inju.dayworry.worry.worryDetail.WorryDetailActivity
+import kotlinx.android.synthetic.main.fragment_home1.*
 import kotlinx.android.synthetic.main.fragment_home3.*
+import kotlinx.android.synthetic.main.fragment_home3.commentCountText
+import kotlinx.android.synthetic.main.fragment_home3.contentText
+import kotlinx.android.synthetic.main.fragment_home3.lookIntoBtn
+import kotlinx.android.synthetic.main.fragment_home3.timeText
+import kotlinx.android.synthetic.main.fragment_home3.titleText
+import kotlinx.android.synthetic.main.fragment_home3.worryImage
 
 class HomeFragment3(worry: Worry) : Fragment() {
 
@@ -45,7 +52,7 @@ class HomeFragment3(worry: Worry) : Fragment() {
         contentText.text = worry.content
 
         timeText.text = worry.createdDate.substring(11..15)
-//        commentCountText.text = worry.
+        commentCountText.text = worry.commentNum.toString()
     }
 
 }

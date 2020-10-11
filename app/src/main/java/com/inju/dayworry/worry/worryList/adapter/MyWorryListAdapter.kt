@@ -48,6 +48,7 @@ class MyWorryListAdapter(private val list: MutableList<Worry>,
 
             editBottomSheetFragment.show(supportFragmentManager, "editBottomSheetFragment")
         }
+        holder.containerView.commentCountText.text = list[position].commentNum.toString()
     }
 
     override fun getItemCount(): Int {

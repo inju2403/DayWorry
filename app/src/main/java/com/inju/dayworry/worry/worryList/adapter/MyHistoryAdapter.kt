@@ -35,7 +35,7 @@ class MyHistoryAdapter(private val list: MutableList<Worry>,
         holder.containerView.title.text = list[position].title
         holder.containerView.content.text = list[position].content
         holder.containerView.setOnClickListener {
-            event.value = WorryListEvent.OnHistoryItemClick(list[position].postId!!)
+            event.value = WorryListEvent.OnHistoryItemClick(list[position].postId)
         }
         holder.containerView.worryItemTimeText.text = list[position].createdDate.substring(0..3) + "." + list[position].createdDate.substring(5..6) + "." + list[position].createdDate.substring(8..9)
 
@@ -45,6 +45,7 @@ class MyHistoryAdapter(private val list: MutableList<Worry>,
 
             editBottomSheetFragment.show(supportFragmentManager, "editBottomSheetFragment")
         }
+        holder.containerView.commentCountText.text = list[position].commentNum.toString()
     }
 
     override fun getItemCount(): Int {

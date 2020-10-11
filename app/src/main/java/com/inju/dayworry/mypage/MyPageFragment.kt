@@ -196,6 +196,7 @@ class MyPageFragment : Fragment(), CoroutineScope {
             else onOffText.text = "켜기"
         }
         logoutLayout.setOnClickListener {
+            val editor = pref.edit()
             //로그아웃
             val dialog = MyDialog(activity!!)
             dialog.start("로그아웃", "정말 로그아웃 하시겠어요?")
@@ -230,6 +231,16 @@ class MyPageFragment : Fragment(), CoroutineScope {
                         }).addTo(disposables)
                 } else if (social == "naver") {
                     //네이버
+                    editor.clear()
+                    editor.commit()
+                    showToast("로그아웃 되었습니다.")
+                    startActivity(
+                        Intent(
+                            activity,
+                            LoginActivity::class.java
+                        )
+                    )
+                    activity!!.finish()
                 }
             }
         }

@@ -7,13 +7,12 @@
 
 '하루 고민'은?
 
-마음 한켠 쌓아두었던 고민을
-하루동안 풀어놓고 마음을 비울 수 있도록 도와주는
-고민 상담 서비스
+오늘하루 고민하고, 내일은 잊자!    
+하고는 마음 한편 쌓아두었던 고민을 24시간 동안 풀어놓고 더 나은 내일을 보낼 수 있도록 도와주는 고민상담 커뮤니티 입니다.
 
 ## Background    
 
-하나의 고민을 계속해서 안고 있지 말고 커뮤니티에 공유하고 이를 딱 하루만 다 같이 고민한 후에 날려버림으로써 사회적으로 긍정적인 효과를 기대할 수 있음
+하나의 고민을 계속해서 안고 있지 말고 커뮤니티에 공유하고 이를 딱 하루만 다 같이 고민한 후에 날려버림으로써 개인의 고민을 해소하고 나아가 사회적으로 긍정적인 효과를 기대할 수 있음
 
 
 ## Role    
@@ -31,8 +30,8 @@
  - [Glide](https://github.com/bumptech/glide) (Glide is a fast and efficient open source media management and image loading framework for Android that wraps media decoding, memory and disk caching, and resource pooling into a simple and easy to use interface.)    
  - [Android Sliding Up Panel](https://github.com/umano/AndroidSlidingUpPanel) (This library provides a simple way to add a draggable sliding up panel (popularized by Google Music and Google Maps) to your Android application.)     
  - [ViewPager2](https://developer.android.com/jetpack/androidx/releases/viewpager2?hl=ko) (Swipe views allow you to navigate between sibling screens, such as tabs, with a horizontal finger gesture, or swipe)    
- - [dotsindicator](https://github.com/tommybuonomo/dotsindicator) (This library makes it possible to represent View Pager Dots Indicator with 3 different awesome styles. It supports ViewPager and ViewPager2)     
-
+ - [dotsindicator](https://github.com/tommybuonomo/dotsindicator) (This library makes it possible to represent View Pager Dots Indicator with 3 different awesome styles. It supports ViewPager and ViewPager2)      
+ - [BottomSheet](https://github.com/Flipboard/bottomsheet) (BottomSheet is an Android component which presents a dismissible view from the bottom of the screen. BottomSheet can be a useful replacement for dialogs and menus but can hold any view so the use cases are endless.)    
 
 
 ## Architecture
@@ -60,3 +59,22 @@ worryListState.value = repo.getWorrys() // get data from API and/or DB
 * **LEE SEUNGJU**
     * **Github** - (https://github.com/inju2403)
     * **Blog**    - (https://inju2403.blog.me)
+
+
+
+## Licence
+```
+Copyright 2020 LEE SEUNGJU.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+```

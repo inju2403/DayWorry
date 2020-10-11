@@ -67,5 +67,9 @@ class DayWorryRepoImpl(
         httpCall?.likeComment(commentId, userId)
     }
 
+    override suspend fun getStorys(): MutableList<Worry> {
+        return httpCall?.getStorys()!!
+    }
+
 
 }

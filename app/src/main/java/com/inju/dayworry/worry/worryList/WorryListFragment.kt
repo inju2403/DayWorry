@@ -25,6 +25,7 @@ import com.inju.dayworry.login.LoginActivity
 import com.inju.dayworry.utils.Constants
 import com.inju.dayworry.utils.Constants.TAG
 import com.inju.dayworry.worry.worryDetail.WorryDetailActivity
+import com.inju.dayworry.worry.worryList.adapter.StoryAdapter
 import com.inju.dayworry.worry.worryList.adapter.WorryListAdapter
 import com.inju.dayworry.worry.worryList.buildlogic.WorryListInjector
 import kotlinx.android.synthetic.main.fragment_worry_list.*
@@ -55,6 +56,7 @@ class WorryListFragment : Fragment(), CoroutineScope {
     private var worryListViewModel: WorryListViewModel ?= null
 
     private lateinit var listAdapter: WorryListAdapter
+    private lateinit var storyAdapter: StoryAdapter
 
     var litePupleColor = "#9689FC" // 텍스트 색상
     var superLiteGreyColor = "#cbcdd5" // 텍스트 색상
@@ -133,6 +135,16 @@ class WorryListFragment : Fragment(), CoroutineScope {
                     startActivity(intent)
                 }
             )
+            it.editStory.observe(
+                viewLifecycleOwner,
+                Observer {
+                    val intent = Intent(activity, WorryDetailActivity::class.java).apply {
+                        putExtra("WORRY_ID", it)
+                    }
+                    startActivity(intent)
+                }
+            )
+
             it.worryList.observe(viewLifecycleOwner,
                 Observer {
                     worryListView.layoutManager =
@@ -149,6 +161,24 @@ class WorryListFragment : Fragment(), CoroutineScope {
 
                     worryListView.adapter = listAdapter
                     listAdapter.notifyDataSetChanged()
+                })
+
+            it.story.observe(viewLifecycleOwner,
+                Observer {
+                    storyListView.layoutManager =
+                        LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false)
+
+                    storyAdapter = StoryAdapter(it, (activity as MainActivity))
+
+                    storyAdapter.event.observe(
+                        viewLifecycleOwner,
+                        Observer {
+                            worryListViewModel!!.handleEvent(it)
+                        }
+                    )
+
+                    storyListView.adapter = storyAdapter
+                    storyAdapter.notifyDataSetChanged()
                 })
 
         }
@@ -185,6 +215,7 @@ class WorryListFragment : Fragment(), CoroutineScope {
         worryListLoadingUi.visibility = View.VISIBLE
 
         worryListViewModel!!.InitWorrys(hashTag).join()
+        worryListViewModel!!.getStorys().join()
         listAdapter.notifyDataSetChanged()
 
         worryListLoadingUi.visibility = View.GONE

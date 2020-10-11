@@ -195,17 +195,38 @@
         </HorizontalScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@color/mainNavyColor"
+        android:id="@+id/storyLayout"
+        android:layout_width="match_parent"
+        android:layout_height="123dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tagLayout">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/storyListView"
+            android:layout_width="match_parent"
+            android:layout_height="123dp"
+            android:layout_marginStart="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:listitem="@layout/item_story" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <TextView
         android:id="@+id/introTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="20dp"
         android:text="새로운 고민"
         android:textColor="@color/whiteColor"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tagLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/storyLayout" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/worryListView"

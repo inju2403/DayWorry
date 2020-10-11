@@ -89,4 +89,7 @@ interface ApiService {
     suspend fun likeComment(@Query("commentId") commentId: Long,
                             @Query("userId") userId: Long): Response<Unit>
 
+    @GET("posts/home/story")
+    suspend fun getStorys(): MutableList<Worry>
+
 }

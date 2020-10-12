@@ -37,8 +37,8 @@
  - [Android Sliding Up Panel](https://github.com/umano/AndroidSlidingUpPanel) (This library provides a simple way to add a draggable sliding up panel (popularized by Google Music and Google Maps) to your Android application.)     
  - [ViewPager2](https://developer.android.com/jetpack/androidx/releases/viewpager2?hl=ko) (Swipe views allow you to navigate between sibling screens, such as tabs, with a horizontal finger gesture, or swipe)    
  - [dotsindicator](https://github.com/tommybuonomo/dotsindicator) (This library makes it possible to represent View Pager Dots Indicator with 3 different awesome styles. It supports ViewPager and ViewPager2)      
- - [BottomSheet](https://github.com/Flipboard/bottomsheet) (BottomSheet is an Android component which presents a dismissible view from the bottom of the screen. BottomSheet can be a useful replacement for dialogs and menus but can hold any view so the use cases are endless.)    
-
+ - [BottomSheet](https://github.com/Flipboard/bottomsheet) (BottomSheet is an Android component which presents a dismissible view from the bottom of the screen. BottomSheet can be a useful replacement for dialogs and menus but can hold any view so the use cases are endless.)     
+ - [Lottie](https://github.com/airbnb/lottie-android) (Lottie is a mobile library for Android and iOS that parses Adobe After Effects animations exported as json with Bodymovin and renders them natively on mobile)    
 
 ## Architecture
 

@@ -140,7 +140,7 @@ class SetTagFragment : Fragment() {
                 dailyLiftBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 --totalCnt
                 if(totalCnt==0) {
-                    nextBtn.setBackgroundColor(Color.parseColor(liteNavyColor))
+                    nextBtn.setBackgroundResource(R.drawable.next_btn_unselect_background)
                     nextBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 }
 
@@ -156,7 +156,7 @@ class SetTagFragment : Fragment() {
                     dailyLiftBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
                     dailyLiftBtn.setTextColor(Color.parseColor(litePupleColor))
                     ++totalCnt
-                    nextBtn.setBackgroundColor(Color.parseColor(litePupleColor))
+                    nextBtn.setBackgroundResource(R.drawable.next_btn_background)
                     nextBtn.setTextColor(Color.parseColor(darkNavyColor))
                 }
             }
@@ -169,7 +169,7 @@ class SetTagFragment : Fragment() {
                 familyBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 --totalCnt
                 if(totalCnt==0) {
-                    nextBtn.setBackgroundColor(Color.parseColor(liteNavyColor))
+                    nextBtn.setBackgroundResource(R.drawable.next_btn_unselect_background)
                     nextBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 }
 
@@ -185,7 +185,7 @@ class SetTagFragment : Fragment() {
                     familyBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
                     familyBtn.setTextColor(Color.parseColor(litePupleColor))
                     ++totalCnt
-                    nextBtn.setBackgroundColor(Color.parseColor(litePupleColor))
+                    nextBtn.setBackgroundResource(R.drawable.next_btn_background)
                     nextBtn.setTextColor(Color.parseColor(darkNavyColor))
                 }
             }
@@ -198,7 +198,7 @@ class SetTagFragment : Fragment() {
                 friendBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 --totalCnt
                 if(totalCnt==0) {
-                    nextBtn.setBackgroundColor(Color.parseColor(liteNavyColor))
+                    nextBtn.setBackgroundResource(R.drawable.next_btn_unselect_background)
                     nextBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 }
 
@@ -214,7 +214,7 @@ class SetTagFragment : Fragment() {
                     friendBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
                     friendBtn.setTextColor(Color.parseColor(litePupleColor))
                     ++totalCnt
-                    nextBtn.setBackgroundColor(Color.parseColor(litePupleColor))
+                    nextBtn.setBackgroundResource(R.drawable.next_btn_background)
                     nextBtn.setTextColor(Color.parseColor(darkNavyColor))
                 }
             }
@@ -227,7 +227,7 @@ class SetTagFragment : Fragment() {
                 dateBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 --totalCnt
                 if(totalCnt==0) {
-                    nextBtn.setBackgroundColor(Color.parseColor(liteNavyColor))
+                    nextBtn.setBackgroundResource(R.drawable.next_btn_unselect_background)
                     nextBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 }
 
@@ -243,7 +243,7 @@ class SetTagFragment : Fragment() {
                     dateBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
                     dateBtn.setTextColor(Color.parseColor(litePupleColor))
                     ++totalCnt
-                    nextBtn.setBackgroundColor(Color.parseColor(litePupleColor))
+                    nextBtn.setBackgroundResource(R.drawable.next_btn_background)
                     nextBtn.setTextColor(Color.parseColor(darkNavyColor))
                 }
             }
@@ -256,7 +256,7 @@ class SetTagFragment : Fragment() {
                 schoolBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 --totalCnt
                 if(totalCnt==0) {
-                    nextBtn.setBackgroundColor(Color.parseColor(liteNavyColor))
+                    nextBtn.setBackgroundResource(R.drawable.next_btn_unselect_background)
                     nextBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 }
 
@@ -272,7 +272,7 @@ class SetTagFragment : Fragment() {
                     schoolBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
                     schoolBtn.setTextColor(Color.parseColor(litePupleColor))
                     ++totalCnt
-                    nextBtn.setBackgroundColor(Color.parseColor(litePupleColor))
+                    nextBtn.setBackgroundResource(R.drawable.next_btn_background)
                     nextBtn.setTextColor(Color.parseColor(darkNavyColor))
                 }
             }
@@ -285,7 +285,7 @@ class SetTagFragment : Fragment() {
                 jobBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 --totalCnt
                 if(totalCnt==0) {
-                    nextBtn.setBackgroundColor(Color.parseColor(liteNavyColor))
+                    nextBtn.setBackgroundResource(R.drawable.next_btn_unselect_background)
                     nextBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 }
 
@@ -301,7 +301,7 @@ class SetTagFragment : Fragment() {
                     jobBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
                     jobBtn.setTextColor(Color.parseColor(litePupleColor))
                     ++totalCnt
-                    nextBtn.setBackgroundColor(Color.parseColor(litePupleColor))
+                    nextBtn.setBackgroundResource(R.drawable.next_btn_background)
                     nextBtn.setTextColor(Color.parseColor(darkNavyColor))
                 }
             }
@@ -314,7 +314,7 @@ class SetTagFragment : Fragment() {
                 employmentBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 --totalCnt
                 if(totalCnt==0) {
-                    nextBtn.setBackgroundColor(Color.parseColor(liteNavyColor))
+                    nextBtn.setBackgroundResource(R.drawable.next_btn_unselect_background)
                     nextBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 }
 
@@ -331,7 +331,7 @@ class SetTagFragment : Fragment() {
                         resources.getDrawable(R.drawable.tag_btn_select_style)
                     employmentBtn.setTextColor(Color.parseColor(litePupleColor))
                     ++totalCnt
-                    nextBtn.setBackgroundColor(Color.parseColor(litePupleColor))
+                    nextBtn.setBackgroundResource(R.drawable.next_btn_background)
                     nextBtn.setTextColor(Color.parseColor(darkNavyColor))
                 }
             }
@@ -344,7 +344,7 @@ class SetTagFragment : Fragment() {
                 courseBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 --totalCnt
                 if(totalCnt==0) {
-                    nextBtn.setBackgroundColor(Color.parseColor(liteNavyColor))
+                    nextBtn.setBackgroundResource(R.drawable.next_btn_unselect_background)
                     nextBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 }
 
@@ -360,7 +360,7 @@ class SetTagFragment : Fragment() {
                     courseBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
                     courseBtn.setTextColor(Color.parseColor(litePupleColor))
                     ++totalCnt
-                    nextBtn.setBackgroundColor(Color.parseColor(litePupleColor))
+                    nextBtn.setBackgroundResource(R.drawable.next_btn_background)
                     nextBtn.setTextColor(Color.parseColor(darkNavyColor))
                 }
             }
@@ -373,7 +373,7 @@ class SetTagFragment : Fragment() {
                 moneyBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 --totalCnt
                 if(totalCnt==0) {
-                    nextBtn.setBackgroundColor(Color.parseColor(liteNavyColor))
+                    nextBtn.setBackgroundResource(R.drawable.next_btn_unselect_background)
                     nextBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 }
 
@@ -389,7 +389,7 @@ class SetTagFragment : Fragment() {
                     moneyBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
                     moneyBtn.setTextColor(Color.parseColor(litePupleColor))
                     ++totalCnt
-                    nextBtn.setBackgroundColor(Color.parseColor(litePupleColor))
+                    nextBtn.setBackgroundResource(R.drawable.next_btn_background)
                     nextBtn.setTextColor(Color.parseColor(darkNavyColor))
                 }
             }
@@ -402,7 +402,7 @@ class SetTagFragment : Fragment() {
                 healthBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 --totalCnt
                 if(totalCnt==0) {
-                    nextBtn.setBackgroundColor(Color.parseColor(liteNavyColor))
+                    nextBtn.setBackgroundResource(R.drawable.next_btn_unselect_background)
                     nextBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 }
 
@@ -418,7 +418,7 @@ class SetTagFragment : Fragment() {
                     healthBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
                     healthBtn.setTextColor(Color.parseColor(litePupleColor))
                     ++totalCnt
-                    nextBtn.setBackgroundColor(Color.parseColor(litePupleColor))
+                    nextBtn.setBackgroundResource(R.drawable.next_btn_background)
                     nextBtn.setTextColor(Color.parseColor(darkNavyColor))
                 }
             }
@@ -431,7 +431,7 @@ class SetTagFragment : Fragment() {
                 marriedBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 --totalCnt
                 if(totalCnt==0) {
-                    nextBtn.setBackgroundColor(Color.parseColor(liteNavyColor))
+                    nextBtn.setBackgroundResource(R.drawable.next_btn_unselect_background)
                     nextBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 }
 
@@ -447,7 +447,7 @@ class SetTagFragment : Fragment() {
                     marriedBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
                     marriedBtn.setTextColor(Color.parseColor(litePupleColor))
                     ++totalCnt
-                    nextBtn.setBackgroundColor(Color.parseColor(litePupleColor))
+                    nextBtn.setBackgroundResource(R.drawable.next_btn_background)
                     nextBtn.setTextColor(Color.parseColor(darkNavyColor))
                 }
             }
@@ -460,7 +460,7 @@ class SetTagFragment : Fragment() {
                 infantBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 --totalCnt
                 if(totalCnt==0) {
-                    nextBtn.setBackgroundColor(Color.parseColor(liteNavyColor))
+                    nextBtn.setBackgroundResource(R.drawable.next_btn_unselect_background)
                     nextBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 }
 
@@ -476,7 +476,7 @@ class SetTagFragment : Fragment() {
                     infantBtn.background = resources.getDrawable(R.drawable.tag_btn_select_style)
                     infantBtn.setTextColor(Color.parseColor(litePupleColor))
                     ++totalCnt
-                    nextBtn.setBackgroundColor(Color.parseColor(litePupleColor))
+                    nextBtn.setBackgroundResource(R.drawable.next_btn_background)
                     nextBtn.setTextColor(Color.parseColor(darkNavyColor))
                 }
             }

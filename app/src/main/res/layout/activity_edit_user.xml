@@ -297,7 +297,7 @@
         android:textSize="18sp"
         android:textStyle="bold"
         android:textColor="@color/superLiteGreyColor"
-        android:background="@color/liteNavyColor"
+        android:background="@drawable/next_btn_unselect_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

@@ -238,16 +238,16 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
                 userAge = if(position > 0) ageList[position] else ""
                 if(userAge != "") {
                     if(editTextTextPersonName.text.toString() != "") {
-                        finishBtn.setBackgroundColor(Color.parseColor(litePupleColor))
+                        finishBtn.setBackgroundResource(R.drawable.next_btn_background)
                         finishBtn.setTextColor(Color.parseColor(darkNavyColor))
                     }
                     else {
-                        finishBtn.setBackgroundColor(Color.parseColor(liteNavyColor))
+                        finishBtn.setBackgroundResource(R.drawable.next_btn_unselect_background)
                         finishBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                     }
                 }
                 else {
-                    finishBtn.setBackgroundColor(Color.parseColor(liteNavyColor))
+                    finishBtn.setBackgroundResource(R.drawable.next_btn_unselect_background)
                     finishBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 }
             }
@@ -266,7 +266,7 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
                     dailyLiftBtn.background = resources.getDrawable(R.drawable.edit_tag_btn_select_style)
                     dailyLiftBtn.setTextColor(Color.parseColor(litePupleColor))
                     ++totalCnt
-                    finishBtn.setBackgroundColor(Color.parseColor(litePupleColor))
+                    finishBtn.setBackgroundResource(R.drawable.next_btn_background)
                     finishBtn.setTextColor(Color.parseColor(darkNavyColor))
                 }
                 "가족" -> {
@@ -274,7 +274,7 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
                     familyBtn.background = resources.getDrawable(R.drawable.edit_tag_btn_select_style)
                     familyBtn.setTextColor(Color.parseColor(litePupleColor))
                     ++totalCnt
-                    finishBtn.setBackgroundColor(Color.parseColor(litePupleColor))
+                    finishBtn.setBackgroundResource(R.drawable.next_btn_background)
                     finishBtn.setTextColor(Color.parseColor(darkNavyColor))
                 }
                 "친구사이" -> {
@@ -282,7 +282,7 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
                     friendBtn.background = resources.getDrawable(R.drawable.edit_tag_btn_select_style)
                     friendBtn.setTextColor(Color.parseColor(litePupleColor))
                     ++totalCnt
-                    finishBtn.setBackgroundColor(Color.parseColor(litePupleColor))
+                    finishBtn.setBackgroundResource(R.drawable.next_btn_background)
                     finishBtn.setTextColor(Color.parseColor(darkNavyColor))
                 }
                 "연애" -> {
@@ -290,7 +290,7 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
                     dateBtn.background = resources.getDrawable(R.drawable.edit_tag_btn_select_style)
                     dateBtn.setTextColor(Color.parseColor(litePupleColor))
                     ++totalCnt
-                    finishBtn.setBackgroundColor(Color.parseColor(litePupleColor))
+                    finishBtn.setBackgroundResource(R.drawable.next_btn_background)
                     finishBtn.setTextColor(Color.parseColor(darkNavyColor))
                 }
                 "학교생활" -> {
@@ -298,7 +298,7 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
                     schoolBtn.background = resources.getDrawable(R.drawable.edit_tag_btn_select_style)
                     schoolBtn.setTextColor(Color.parseColor(litePupleColor))
                     ++totalCnt
-                    finishBtn.setBackgroundColor(Color.parseColor(litePupleColor))
+                    finishBtn.setBackgroundResource(R.drawable.next_btn_background)
                     finishBtn.setTextColor(Color.parseColor(darkNavyColor))
                 }
                 "직장생활" -> {
@@ -306,7 +306,7 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
                     jobBtn.background = resources.getDrawable(R.drawable.edit_tag_btn_select_style)
                     jobBtn.setTextColor(Color.parseColor(litePupleColor))
                     ++totalCnt
-                    finishBtn.setBackgroundColor(Color.parseColor(litePupleColor))
+                    finishBtn.setBackgroundResource(R.drawable.next_btn_background)
                     finishBtn.setTextColor(Color.parseColor(darkNavyColor))
                 }
                 "취업" -> {
@@ -314,7 +314,7 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
                     employmentBtn.background = resources.getDrawable(R.drawable.edit_tag_btn_select_style)
                     employmentBtn.setTextColor(Color.parseColor(litePupleColor))
                     ++totalCnt
-                    finishBtn.setBackgroundColor(Color.parseColor(litePupleColor))
+                    finishBtn.setBackgroundResource(R.drawable.next_btn_background)
                     finishBtn.setTextColor(Color.parseColor(darkNavyColor))
                 }
                 "진로" -> {
@@ -322,7 +322,7 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
                     courseBtn.background = resources.getDrawable(R.drawable.edit_tag_btn_select_style)
                     courseBtn.setTextColor(Color.parseColor(litePupleColor))
                     ++totalCnt
-                    finishBtn.setBackgroundColor(Color.parseColor(litePupleColor))
+                    finishBtn.setBackgroundResource(R.drawable.next_btn_background)
                     finishBtn.setTextColor(Color.parseColor(darkNavyColor))
                 }
                 "돈" -> {
@@ -330,7 +330,7 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
                     moneyBtn.background = resources.getDrawable(R.drawable.edit_tag_btn_select_style)
                     moneyBtn.setTextColor(Color.parseColor(litePupleColor))
                     ++totalCnt
-                    finishBtn.setBackgroundColor(Color.parseColor(litePupleColor))
+                    finishBtn.setBackgroundResource(R.drawable.next_btn_background)
                     finishBtn.setTextColor(Color.parseColor(darkNavyColor))
                 }
                 "건강" -> {
@@ -338,7 +338,7 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
                     healthBtn.background = resources.getDrawable(R.drawable.edit_tag_btn_select_style)
                     healthBtn.setTextColor(Color.parseColor(litePupleColor))
                     ++totalCnt
-                    finishBtn.setBackgroundColor(Color.parseColor(litePupleColor))
+                    finishBtn.setBackgroundResource(R.drawable.next_btn_background)
                     finishBtn.setTextColor(Color.parseColor(darkNavyColor))
                 }
                 "기혼자만 아는" -> {
@@ -346,7 +346,7 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
                     marriedBtn.background = resources.getDrawable(R.drawable.edit_tag_btn_select_style)
                     marriedBtn.setTextColor(Color.parseColor(litePupleColor))
                     ++totalCnt
-                    finishBtn.setBackgroundColor(Color.parseColor(litePupleColor))
+                    finishBtn.setBackgroundResource(R.drawable.next_btn_background)
                     finishBtn.setTextColor(Color.parseColor(darkNavyColor))
                 }
                 "육아" -> {
@@ -354,7 +354,7 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
                     infantBtn.background = resources.getDrawable(R.drawable.edit_tag_btn_select_style)
                     infantBtn.setTextColor(Color.parseColor(litePupleColor))
                     ++totalCnt
-                    finishBtn.setBackgroundColor(Color.parseColor(litePupleColor))
+                    finishBtn.setBackgroundResource(R.drawable.next_btn_background)
                     finishBtn.setTextColor(Color.parseColor(darkNavyColor))
                 }
             }
@@ -380,7 +380,7 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
                 dailyLiftBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 --totalCnt
                 if(totalCnt==0) {
-                    finishBtn.setBackgroundColor(Color.parseColor(liteNavyColor))
+                    finishBtn.setBackgroundResource(R.drawable.next_btn_unselect_background)
                     finishBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 }
 
@@ -396,7 +396,7 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
                     dailyLiftBtn.background = resources.getDrawable(R.drawable.edit_tag_btn_select_style)
                     dailyLiftBtn.setTextColor(Color.parseColor(litePupleColor))
                     ++totalCnt
-                    finishBtn.setBackgroundColor(Color.parseColor(litePupleColor))
+                    finishBtn.setBackgroundResource(R.drawable.next_btn_background)
                     finishBtn.setTextColor(Color.parseColor(darkNavyColor))
                 }
             }
@@ -409,7 +409,7 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
                 familyBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 --totalCnt
                 if(totalCnt==0) {
-                    finishBtn.setBackgroundColor(Color.parseColor(liteNavyColor))
+                    finishBtn.setBackgroundResource(R.drawable.next_btn_unselect_background)
                     finishBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 }
 
@@ -425,7 +425,7 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
                     familyBtn.background = resources.getDrawable(R.drawable.edit_tag_btn_select_style)
                     familyBtn.setTextColor(Color.parseColor(litePupleColor))
                     ++totalCnt
-                    finishBtn.setBackgroundColor(Color.parseColor(litePupleColor))
+                    finishBtn.setBackgroundResource(R.drawable.next_btn_background)
                     finishBtn.setTextColor(Color.parseColor(darkNavyColor))
                 }
             }
@@ -438,7 +438,7 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
                 friendBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 --totalCnt
                 if(totalCnt==0) {
-                    finishBtn.setBackgroundColor(Color.parseColor(liteNavyColor))
+                    finishBtn.setBackgroundResource(R.drawable.next_btn_unselect_background)
                     finishBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 }
 
@@ -454,7 +454,7 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
                     friendBtn.background = resources.getDrawable(R.drawable.edit_tag_btn_select_style)
                     friendBtn.setTextColor(Color.parseColor(litePupleColor))
                     ++totalCnt
-                    finishBtn.setBackgroundColor(Color.parseColor(litePupleColor))
+                    finishBtn.setBackgroundResource(R.drawable.next_btn_background)
                     finishBtn.setTextColor(Color.parseColor(darkNavyColor))
                 }
             }
@@ -467,7 +467,7 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
                 dateBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 --totalCnt
                 if(totalCnt==0) {
-                    finishBtn.setBackgroundColor(Color.parseColor(liteNavyColor))
+                    finishBtn.setBackgroundResource(R.drawable.next_btn_unselect_background)
                     finishBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 }
 
@@ -483,7 +483,7 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
                     dateBtn.background = resources.getDrawable(R.drawable.edit_tag_btn_select_style)
                     dateBtn.setTextColor(Color.parseColor(litePupleColor))
                     ++totalCnt
-                    finishBtn.setBackgroundColor(Color.parseColor(litePupleColor))
+                    finishBtn.setBackgroundResource(R.drawable.next_btn_background)
                     finishBtn.setTextColor(Color.parseColor(darkNavyColor))
                 }
             }
@@ -496,7 +496,7 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
                 schoolBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 --totalCnt
                 if(totalCnt==0) {
-                    finishBtn.setBackgroundColor(Color.parseColor(liteNavyColor))
+                    finishBtn.setBackgroundResource(R.drawable.next_btn_unselect_background)
                     finishBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 }
 
@@ -512,7 +512,7 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
                     schoolBtn.background = resources.getDrawable(R.drawable.edit_tag_btn_select_style)
                     schoolBtn.setTextColor(Color.parseColor(litePupleColor))
                     ++totalCnt
-                    finishBtn.setBackgroundColor(Color.parseColor(litePupleColor))
+                    finishBtn.setBackgroundResource(R.drawable.next_btn_background)
                     finishBtn.setTextColor(Color.parseColor(darkNavyColor))
                 }
             }
@@ -525,7 +525,7 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
                 jobBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 --totalCnt
                 if(totalCnt==0) {
-                    finishBtn.setBackgroundColor(Color.parseColor(liteNavyColor))
+                    finishBtn.setBackgroundResource(R.drawable.next_btn_unselect_background)
                     finishBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 }
 
@@ -541,7 +541,7 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
                     jobBtn.background = resources.getDrawable(R.drawable.edit_tag_btn_select_style)
                     jobBtn.setTextColor(Color.parseColor(litePupleColor))
                     ++totalCnt
-                    finishBtn.setBackgroundColor(Color.parseColor(litePupleColor))
+                    finishBtn.setBackgroundResource(R.drawable.next_btn_background)
                     finishBtn.setTextColor(Color.parseColor(darkNavyColor))
                 }
             }
@@ -554,7 +554,7 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
                 employmentBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 --totalCnt
                 if(totalCnt==0) {
-                    finishBtn.setBackgroundColor(Color.parseColor(liteNavyColor))
+                    finishBtn.setBackgroundResource(R.drawable.next_btn_unselect_background)
                     finishBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 }
 
@@ -570,7 +570,7 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
                     employmentBtn.background = resources.getDrawable(R.drawable.edit_tag_btn_select_style)
                     employmentBtn.setTextColor(Color.parseColor(litePupleColor))
                     ++totalCnt
-                    finishBtn.setBackgroundColor(Color.parseColor(litePupleColor))
+                    finishBtn.setBackgroundResource(R.drawable.next_btn_background)
                     finishBtn.setTextColor(Color.parseColor(darkNavyColor))
                 }
             }
@@ -583,7 +583,7 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
                 courseBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 --totalCnt
                 if(totalCnt==0) {
-                    finishBtn.setBackgroundColor(Color.parseColor(liteNavyColor))
+                    finishBtn.setBackgroundResource(R.drawable.next_btn_unselect_background)
                     finishBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 }
 
@@ -599,7 +599,7 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
                     courseBtn.background = resources.getDrawable(R.drawable.edit_tag_btn_select_style)
                     courseBtn.setTextColor(Color.parseColor(litePupleColor))
                     ++totalCnt
-                    finishBtn.setBackgroundColor(Color.parseColor(litePupleColor))
+                    finishBtn.setBackgroundResource(R.drawable.next_btn_background)
                     finishBtn.setTextColor(Color.parseColor(darkNavyColor))
                 }
             }
@@ -612,7 +612,7 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
                 moneyBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 --totalCnt
                 if(totalCnt==0) {
-                    finishBtn.setBackgroundColor(Color.parseColor(liteNavyColor))
+                    finishBtn.setBackgroundResource(R.drawable.next_btn_unselect_background)
                     finishBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 }
 
@@ -628,7 +628,7 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
                     moneyBtn.background = resources.getDrawable(R.drawable.edit_tag_btn_select_style)
                     moneyBtn.setTextColor(Color.parseColor(litePupleColor))
                     ++totalCnt
-                    finishBtn.setBackgroundColor(Color.parseColor(litePupleColor))
+                    finishBtn.setBackgroundResource(R.drawable.next_btn_background)
                     finishBtn.setTextColor(Color.parseColor(darkNavyColor))
                 }
             }
@@ -641,7 +641,7 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
                 healthBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 --totalCnt
                 if(totalCnt==0) {
-                    finishBtn.setBackgroundColor(Color.parseColor(liteNavyColor))
+                    finishBtn.setBackgroundResource(R.drawable.next_btn_unselect_background)
                     finishBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 }
 
@@ -657,7 +657,7 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
                     healthBtn.background = resources.getDrawable(R.drawable.edit_tag_btn_select_style)
                     healthBtn.setTextColor(Color.parseColor(litePupleColor))
                     ++totalCnt
-                    finishBtn.setBackgroundColor(Color.parseColor(litePupleColor))
+                    finishBtn.setBackgroundResource(R.drawable.next_btn_background)
                     finishBtn.setTextColor(Color.parseColor(darkNavyColor))
                 }
             }
@@ -670,7 +670,7 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
                 marriedBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 --totalCnt
                 if(totalCnt==0) {
-                    finishBtn.setBackgroundColor(Color.parseColor(liteNavyColor))
+                    finishBtn.setBackgroundResource(R.drawable.next_btn_unselect_background)
                     finishBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 }
 
@@ -686,7 +686,7 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
                     marriedBtn.background = resources.getDrawable(R.drawable.edit_tag_btn_select_style)
                     marriedBtn.setTextColor(Color.parseColor(litePupleColor))
                     ++totalCnt
-                    finishBtn.setBackgroundColor(Color.parseColor(litePupleColor))
+                    finishBtn.setBackgroundResource(R.drawable.next_btn_background)
                     finishBtn.setTextColor(Color.parseColor(darkNavyColor))
                 }
             }
@@ -699,7 +699,7 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
                 infantBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 --totalCnt
                 if(totalCnt==0) {
-                    finishBtn.setBackgroundColor(Color.parseColor(liteNavyColor))
+                    finishBtn.setBackgroundResource(R.drawable.next_btn_unselect_background)
                     finishBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 }
 
@@ -715,7 +715,7 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
                     infantBtn.background = resources.getDrawable(R.drawable.edit_tag_btn_select_style)
                     infantBtn.setTextColor(Color.parseColor(litePupleColor))
                     ++totalCnt
-                    finishBtn.setBackgroundColor(Color.parseColor(litePupleColor))
+                    finishBtn.setBackgroundResource(R.drawable.next_btn_background)
                     finishBtn.setTextColor(Color.parseColor(darkNavyColor))
                 }
             }

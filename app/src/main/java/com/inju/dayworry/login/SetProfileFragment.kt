@@ -139,16 +139,16 @@ class SetProfileFragment: Fragment(), CoroutineScope {
                 if(s.toString() != "") {
                     (activity as SetProfileActivity).userName = s.toString()
                     if((activity as SetProfileActivity).userAge != "") {
-                        nextBtn.setBackgroundColor(Color.parseColor(litePupleColor))
+                        nextBtn.setBackgroundResource(R.drawable.next_btn_background)
                         nextBtn.setTextColor(Color.parseColor(darkNavyColor))
                     }
                     else {
-                        nextBtn.setBackgroundColor(Color.parseColor(liteNavyColor))
+                        nextBtn.setBackgroundResource(R.drawable.next_btn_unselect_background)
                         nextBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                     }
                 }
                 else {
-                    nextBtn.setBackgroundColor(Color.parseColor(liteNavyColor))
+                    nextBtn.setBackgroundResource(R.drawable.next_btn_unselect_background)
                     nextBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                     (activity as SetProfileActivity).userName = ""
                 }
@@ -172,16 +172,16 @@ class SetProfileFragment: Fragment(), CoroutineScope {
                 (activity as SetProfileActivity).userAge = if(position > 0) ageList[position] else ""
                 if((activity as SetProfileActivity).userAge != "") {
                     if(editTextTextPersonName.text.toString() != "") {
-                        nextBtn.setBackgroundColor(Color.parseColor(litePupleColor))
+                        nextBtn.setBackgroundResource(R.drawable.next_btn_background)
                         nextBtn.setTextColor(Color.parseColor(darkNavyColor))
                     }
                     else {
-                        nextBtn.setBackgroundColor(Color.parseColor(liteNavyColor))
+                        nextBtn.setBackgroundResource(R.drawable.next_btn_unselect_background)
                         nextBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                     }
                 }
                 else {
-                    nextBtn.setBackgroundColor(Color.parseColor(liteNavyColor))
+                    nextBtn.setBackgroundResource(R.drawable.next_btn_unselect_background)
                     nextBtn.setTextColor(Color.parseColor(superLiteGreyColor))
                 }
             }

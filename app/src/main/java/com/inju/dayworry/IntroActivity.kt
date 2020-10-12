@@ -8,9 +8,11 @@ import android.os.Handler
 import android.util.Log
 import android.view.View
 import com.inju.dayworry.login.LoginActivity
+import com.inju.dayworry.onBoarding.OnBoardingActivity
 import com.inju.dayworry.retrofit.ApiService
 import com.inju.dayworry.retrofit.RetrofitClient
 import com.inju.dayworry.utils.Constants
+import com.inju.dayworry.utils.Constants.PREFERENCE
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -39,21 +41,32 @@ class IntroActivity : AppCompatActivity() {
         super.onResume()
 
         runnable = Runnable {
-            val pref = getSharedPreferences(Constants.PREFERENCE, MODE_PRIVATE)
+            val pref = getSharedPreferences(PREFERENCE, MODE_PRIVATE)
             val editor = pref.edit()
+            var runFirst = pref.getBoolean("runFirst", true)
 
-            val jwt = pref.getString("jwt", "").toString()
-            if(jwt != "") {
-                //jwt가 아직 유효한지 검사
-                //유효하면 자동로그인
-                verifyJWT(jwt, pref)
-            }
-            else {
-                val intent = Intent(applicationContext, LoginActivity::class.java)
-                startActivity(intent)
+            if(runFirst) { // 최초 실행
+                editor.putBoolean("runFirst", false)
+                editor.commit()
+
+                startActivity(Intent(this@IntroActivity, OnBoardingActivity::class.java))
                 finish()
             }
 
+            else {
+                //최초 실행이 아니면
+                val jwt = pref.getString("jwt", "").toString()
+                if(jwt != "") {
+                    //jwt가 아직 유효한지 검사
+                    //유효하면 자동로그인
+                    verifyJWT(jwt, pref)
+                }
+                else {
+                    val intent = Intent(applicationContext, LoginActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+            }
         }
         handler = Handler()
         handler?.run {
@@ -64,7 +77,7 @@ class IntroActivity : AppCompatActivity() {
     private fun verifyJWT(jwt: String, pref: SharedPreferences) {
         httpCall?.verifyJWT(jwt)?.enqueue(object : Callback<Void> {
             override fun onFailure(call: Call<Void>, t: Throwable) {
-                Log.d(Constants.TAG, "kakaologin - onFailed() called / t: ${t}")
+                Log.d(Constants.TAG, "verifyJWT - onFailed() called / t: ${t}")
             }
 
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
@@ -75,6 +88,10 @@ class IntroActivity : AppCompatActivity() {
                     }
                     else -> {
                         Log.d(Constants.TAG,"토큰 유효하지 않음")
+                        val editor = pref.edit()
+                        editor.clear()
+                        editor.commit()
+
                         val intent = Intent(applicationContext, LoginActivity::class.java)
                         startActivity(intent)
                         finish()

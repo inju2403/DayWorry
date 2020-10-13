@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.util.TypedValue
 import android.view.Gravity
 import android.view.KeyEvent
 import android.view.View
@@ -37,7 +38,6 @@ import kotlinx.android.synthetic.main.activity_worry_detail.profileImage
 import kotlinx.android.synthetic.main.activity_worry_detail.tagBtn
 import kotlinx.android.synthetic.main.activity_worry_detail.timeText
 import kotlinx.android.synthetic.main.activity_worry_detail.titleText
-import kotlinx.android.synthetic.main.fragment_home1.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -243,11 +243,24 @@ class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
         })
     }
 
+    private fun setTagBtnSize() {
+        Log.d(Constants.TAG, "태그 이름: "+ worryDetailViewModel?.worry?.value?.tagName)
+        when(worryDetailViewModel?.worry?.value?.tagName) {
+            "친구사이" -> tagBtn.layoutParams.width = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 89f, resources.displayMetrics).toInt()
+            "직장생활" -> tagBtn.layoutParams.width = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 89f, resources.displayMetrics).toInt()
+            "학교생활" -> tagBtn.layoutParams.width = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 89f, resources.displayMetrics).toInt()
+            "기혼자만 아는" -> tagBtn.layoutParams.width = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 119f, resources.displayMetrics).toInt()
+            else -> tagBtn.layoutParams.width = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 60f, resources.displayMetrics).toInt()
+        }
+    }
+
     private fun worryLoading(worryId: Long) = launch {
         detailLoadingUi.visibility = View.VISIBLE
 
         worryDetailViewModel!!.getWorryById(worryId).join()
         counselListViewModel!!.InitCounsels(worryId, userId!!).join()
+
+        setTagBtnSize()
 
         detailLoadingUi.visibility = View.GONE
         titleText.visibility = View.VISIBLE

@@ -2,13 +2,11 @@ package com.inju.dayworry.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.inju.dayworry.R
@@ -16,15 +14,7 @@ import com.inju.dayworry.model.pojo.Worry
 import com.inju.dayworry.utils.Constants.TAG
 import com.inju.dayworry.worry.worryDetail.WorryDetailActivity
 import kotlinx.android.synthetic.main.fragment_home1.*
-import kotlinx.android.synthetic.main.fragment_home1.commentCountText
-import kotlinx.android.synthetic.main.fragment_home1.contentText
-import kotlinx.android.synthetic.main.fragment_home1.line1
-import kotlinx.android.synthetic.main.fragment_home1.lookIntoBtn
-import kotlinx.android.synthetic.main.fragment_home1.tagBtn
-import kotlinx.android.synthetic.main.fragment_home1.timeText
-import kotlinx.android.synthetic.main.fragment_home1.titleText
-import kotlinx.android.synthetic.main.fragment_home1.worryImage
-import kotlinx.android.synthetic.main.fragment_home3.*
+
 
 class HomeFragment1(worry: Worry) : Fragment() {
 
@@ -63,6 +53,14 @@ class HomeFragment1(worry: Worry) : Fragment() {
         titleText.text = worry.title
         contentText.text = worry.content
         tagBtn.text = worry.tagName
+
+        when(worry.tagName) {
+            "친구사이" -> tagBtn.layoutParams.width = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 99f, resources.displayMetrics).toInt()
+            "직장생활" -> tagBtn.layoutParams.width = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 99f, resources.displayMetrics).toInt()
+            "학교생활" -> tagBtn.layoutParams.width = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 99f, resources.displayMetrics).toInt()
+            "기혼자만 아는" -> tagBtn.layoutParams.width = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 132f, resources.displayMetrics).toInt()
+            else -> tagBtn.layoutParams.width = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 68f, resources.displayMetrics).toInt()
+        }
 
         timeText.text = worry.createdDate.substring(11..15)
         commentCountText.text = worry.commentNum.toString()

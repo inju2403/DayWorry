@@ -2,6 +2,7 @@ package com.inju.dayworry.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -60,13 +61,13 @@ class HomeFragment3(worry: Worry) : Fragment() {
         contentText.text = worry.content
         tagBtn.text = worry.tagName
 
-//        when(worry.tagName) {
-//            "친구사이" -> tagBtn.layoutParams = ConstraintLayout.LayoutParams(99, 40)
-//            "직장생활" -> tagBtn.layoutParams = ConstraintLayout.LayoutParams(99, 40)
-//            "학교생활" -> tagBtn.layoutParams = ConstraintLayout.LayoutParams(99, 40)
-//            "기혼자만 아는" -> tagBtn.layoutParams = ConstraintLayout.LayoutParams(132, 40)
-//            else -> tagBtn.layoutParams = ConstraintLayout.LayoutParams(68, 40)
-//        }
+        when(worry.tagName) {
+            "친구사이" -> tagBtn.layoutParams.width = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 99f, resources.displayMetrics).toInt()
+            "직장생활" -> tagBtn.layoutParams.width = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 99f, resources.displayMetrics).toInt()
+            "학교생활" -> tagBtn.layoutParams.width = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 99f, resources.displayMetrics).toInt()
+            "기혼자만 아는" -> tagBtn.layoutParams.width = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 132f, resources.displayMetrics).toInt()
+            else -> tagBtn.layoutParams.width = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 68f, resources.displayMetrics).toInt()
+        }
 
         timeText.text = worry.createdDate.substring(11..15)
         commentCountText.text = worry.commentNum.toString()

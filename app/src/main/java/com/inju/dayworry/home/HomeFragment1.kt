@@ -7,6 +7,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.inju.dayworry.R
@@ -14,6 +16,15 @@ import com.inju.dayworry.model.pojo.Worry
 import com.inju.dayworry.utils.Constants.TAG
 import com.inju.dayworry.worry.worryDetail.WorryDetailActivity
 import kotlinx.android.synthetic.main.fragment_home1.*
+import kotlinx.android.synthetic.main.fragment_home1.commentCountText
+import kotlinx.android.synthetic.main.fragment_home1.contentText
+import kotlinx.android.synthetic.main.fragment_home1.line1
+import kotlinx.android.synthetic.main.fragment_home1.lookIntoBtn
+import kotlinx.android.synthetic.main.fragment_home1.tagBtn
+import kotlinx.android.synthetic.main.fragment_home1.timeText
+import kotlinx.android.synthetic.main.fragment_home1.titleText
+import kotlinx.android.synthetic.main.fragment_home1.worryImage
+import kotlinx.android.synthetic.main.fragment_home3.*
 
 class HomeFragment1(worry: Worry) : Fragment() {
 
@@ -44,10 +55,14 @@ class HomeFragment1(worry: Worry) : Fragment() {
     private fun setUi() {
         var imageUrl = worry.postImage
         if(imageUrl != "") Glide.with(this).load(imageUrl).into(worryImage)
-        else worryImage.visibility = View.GONE
+        else {
+            worryImage.visibility = View.GONE
+            line1.visibility = View.GONE
+        }
 
         titleText.text = worry.title
         contentText.text = worry.content
+        tagBtn.text = worry.tagName
 
         timeText.text = worry.createdDate.substring(11..15)
         commentCountText.text = worry.commentNum.toString()

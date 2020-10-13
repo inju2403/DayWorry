@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.inju.dayworry.R
@@ -14,10 +16,13 @@ import kotlinx.android.synthetic.main.fragment_home1.*
 import kotlinx.android.synthetic.main.fragment_home2.*
 import kotlinx.android.synthetic.main.fragment_home2.commentCountText
 import kotlinx.android.synthetic.main.fragment_home2.contentText
+import kotlinx.android.synthetic.main.fragment_home2.line1
 import kotlinx.android.synthetic.main.fragment_home2.lookIntoBtn
+import kotlinx.android.synthetic.main.fragment_home2.tagBtn
 import kotlinx.android.synthetic.main.fragment_home2.timeText
 import kotlinx.android.synthetic.main.fragment_home2.titleText
 import kotlinx.android.synthetic.main.fragment_home2.worryImage
+import kotlinx.android.synthetic.main.fragment_home3.*
 
 class HomeFragment2(worry: Worry) : Fragment() {
 
@@ -47,10 +52,14 @@ class HomeFragment2(worry: Worry) : Fragment() {
     private fun setUi() {
         var imageUrl = worry.postImage
         if(imageUrl != "") Glide.with(this).load(imageUrl).into(worryImage)
-        else worryImage.visibility = View.GONE
+        else {
+            worryImage.visibility = View.GONE
+            line1.visibility = View.GONE
+        }
 
         titleText.text = worry.title
         contentText.text = worry.content
+        tagBtn.text = worry.tagName
 
         timeText.text = worry.createdDate.substring(11..15)
         commentCountText.text = worry.commentNum.toString()

@@ -17,7 +17,17 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <View
-        android:id="@+id/line"
+        android:id="@+id/line1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="103dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/line2"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="48dp"
@@ -36,7 +46,7 @@
         android:textColor="@color/whiteColor"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/worryImage" />
+        app:layout_constraintTop_toBottomOf="@+id/line1" />
 
     <ImageView
         android:id="@+id/timeImage"
@@ -84,10 +94,11 @@
     <TextView
         android:id="@+id/contentText"
         android:layout_width="0dp"
-        android:layout_height="134dp"
+        android:layout_height="0dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="20dp"
+        android:layout_marginBottom="64dp"
         android:text="대학을 졸업하고 카페를 운영하다 상황이 안좋아져서 정리하게 되었어요. 취업을 해야하는데 졸업하고 지금까지 4년 간 카페일만 해와서 너무 막막하네요… 이제 곧 서른이라는 나이에 제가 다시 공부를 시작하고, 취업을 할 수 있을지 요즘 너무 걱정되네요…
 혹시라도 저와 비슷한 경험을 하신 분들이 있으시다면, 현실적인 조언 부탁드립니다! ㅠㅠ
 
@@ -96,13 +107,14 @@
 "
         android:textColor="@color/superLiteGreyColor"
         android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/line" />
+        app:layout_constraintTop_toBottomOf="@+id/line2" />
 
     <Button
         android:id="@+id/tagBtn"
-        android:layout_width="68dp"
+        android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="12dp"

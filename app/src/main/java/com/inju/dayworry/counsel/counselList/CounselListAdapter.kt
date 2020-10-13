@@ -5,6 +5,8 @@ import android.view.ViewGroup
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
 import com.inju.dayworry.R
 import com.inju.dayworry.model.pojo.Counsel
 import com.inju.dayworry.worry.worryDetail.WorryDetailActivity
@@ -35,7 +37,10 @@ class CounselListAdapter(private val list: MutableList<Counsel>,
 //            holder.containerView.commentCountText.text = it.commentLikes.toString()
 //        }
         val imageUrl = list[position].profileImage
-        Glide.with(activity).load(imageUrl).into(holder.containerView.profileImage)
+        Glide.with(activity).load(imageUrl)
+                            .apply(RequestOptions.bitmapTransform(RoundedCorners(32)))
+                            .into(holder.containerView.profileImage)
+
         holder.containerView.userNameText.text = list[position].nickname
         holder.containerView.counselContent.text = list[position].content
         holder.containerView.counselItemTimeText.text = list[position].createdDate.substring(11..15)

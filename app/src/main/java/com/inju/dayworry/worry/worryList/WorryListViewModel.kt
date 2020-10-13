@@ -139,6 +139,6 @@ class WorryListViewModel(
     }
 
     private fun editStory(worryId: Long) {
-        editHistoryState.value = worryId
+        editStoryState.value = worryId
     }
 }

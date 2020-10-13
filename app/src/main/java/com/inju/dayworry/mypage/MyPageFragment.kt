@@ -20,6 +20,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
 import com.inju.dayworry.MainActivity
 import com.inju.dayworry.R
 import com.inju.dayworry.login.LoginActivity
@@ -92,7 +94,9 @@ class MyPageFragment : Fragment(), CoroutineScope {
         usernameText.text = userName
 
         var imageUrl = profile_image
-        Glide.with(this).load(imageUrl).into(profileImage)
+        Glide.with(this).load(imageUrl)
+                                  .apply(RequestOptions.bitmapTransform(RoundedCorners(32)))
+                                  .into(profileImage)
 
         job = Job()
 

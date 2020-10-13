@@ -16,6 +16,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
 import com.inju.dayworry.R
 import com.inju.dayworry.counsel.counselDetail.CounselDetailViewModel
 import com.inju.dayworry.counsel.counselDetail.buildlogic.CounselDetailInjector
@@ -49,6 +51,7 @@ class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
     private lateinit var listAdapter: CounselListAdapter
     private var worryId: Long? = null
     private var profile_image: String = "https://hago-storage-bucket.s3.ap-northeast-2.amazonaws.com/default_01.jpg"
+    private var profile_image_default: String = "https://hago-storage-bucket.s3.ap-northeast-2.amazonaws.com/default_01.jpg"
     private var userId: Long? = null
     private var userName: String? = null
 
@@ -60,6 +63,7 @@ class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
         val pref = getSharedPreferences(Constants.PREFERENCE, MODE_PRIVATE)
         userId = pref.getLong("userId", (0).toLong())
         userName = pref.getString("userName", "")
+        profile_image = pref.getString("profileImage", profile_image_default).toString()
 
         visibleGone()
         setStatusBarColor("dark")
@@ -115,7 +119,10 @@ class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
 
         var imageUrl = worryDetailViewModel?.worry?.value?.userProfileImage
         Log.d(Constants.TAG, "이미지 url: $imageUrl")
-        Glide.with(this@WorryDetailActivity).load(imageUrl).into(profileImage)
+        Glide.with(this@WorryDetailActivity)
+            .load(imageUrl)
+            .apply(RequestOptions.bitmapTransform(RoundedCorners(32)))
+            .into(profileImage)
     }
 
     private fun setTextChangeListener() {
@@ -169,7 +176,7 @@ class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
             counselDetailViewModel?.counsel?.value!!.content,
             userId!!,
             worryDetailViewModel?.worry?.value!!.postId,
-            profile_image!!,
+            profile_image,
             userName!!
         )?.join()
 

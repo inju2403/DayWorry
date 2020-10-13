@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
 import com.inju.dayworry.MainActivity
 import com.inju.dayworry.R
 import com.inju.dayworry.model.pojo.Worry
@@ -38,7 +40,9 @@ class StoryAdapter(private val list: MutableList<Worry>,
         holder.containerView.timeText.text = list[position].createdDate.substring(11..15)
 
         val imageUrl = list[position].userProfileImage
-        Glide.with(activity).load(imageUrl).into(holder.containerView.profileImage)
+        Glide.with(activity).load(imageUrl)
+                            .apply(RequestOptions.bitmapTransform(RoundedCorners(32)))
+                            .into(holder.containerView.profileImage)
     }
 
     override fun getItemCount(): Int {

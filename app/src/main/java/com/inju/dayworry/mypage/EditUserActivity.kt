@@ -15,6 +15,8 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
 import com.inju.dayworry.MainActivity
 import com.inju.dayworry.R
 import com.inju.dayworry.model.pojo.User_REQUEST_POJO
@@ -257,7 +259,9 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
     private fun setUserInfo() {
         editTextTextPersonName.setText(userName)
 
-        Glide.with(this).load(profileImage).into(profile_photo)
+        Glide.with(this).load(profileImage)
+                                .apply(RequestOptions.bitmapTransform(RoundedCorners(32)))
+                                .into(profile_photo)
 
         for(next in hashTag) {
             when(next) {

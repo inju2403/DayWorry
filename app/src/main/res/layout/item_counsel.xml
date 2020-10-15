@@ -60,30 +60,19 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/counselItemTimeImage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="12dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/counselContent"
-                app:layout_constraintVertical_bias="1.0"
-                app:srcCompat="@drawable/ic_time" />
-
             <TextView
                 android:id="@+id/counselItemTimeText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="15dp"
                 android:text="23:48"
                 android:textColor="@color/whiteColor"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="@+id/counselItemTimeImage"
-                app:layout_constraintStart_toEndOf="@+id/counselItemTimeImage"
-                app:layout_constraintTop_toTopOf="@+id/counselItemTimeImage" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/counselContent" />
 
             <ImageView
                 android:id="@+id/likeImage"

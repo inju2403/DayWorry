@@ -43,7 +43,18 @@ class CounselListAdapter(private val list: MutableList<Counsel>,
 
         holder.containerView.userNameText.text = list[position].nickname
         holder.containerView.counselContent.text = list[position].content
-        holder.containerView.counselItemTimeText.text = list[position].createdDate.substring(11..15)
+
+        var createdTime = list[position].createdDate.substring(11..15)
+        if(createdTime[0] == '0' || createdTime.substring(0..2).toInt() < 12) {
+            if(createdTime[0] == '0') createdTime = createdTime.substring(1..4)
+            createdTime = "AM $createdTime"
+        }
+        else {
+            val createdTimeHour = createdTime.substring(0..12).toInt() - 12
+            createdTime = "PM " + createdTimeHour.toString() + createdTime.substring(2..5)
+        }
+        holder.containerView.counselItemTimeText.text = createdTime
+
         holder.containerView.likeCountText.text = list[position].commentLikes.toString()
 
         if(list[position].like) holder.containerView.likeImage.setImageResource(R.drawable.ic_like_pressed)

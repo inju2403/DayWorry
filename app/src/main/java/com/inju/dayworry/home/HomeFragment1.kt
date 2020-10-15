@@ -7,6 +7,7 @@ import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.inju.dayworry.R
@@ -14,8 +15,10 @@ import com.inju.dayworry.model.pojo.Worry
 import com.inju.dayworry.utils.Constants.TAG
 import com.inju.dayworry.worry.worryDetail.WorryDetailActivity
 import kotlinx.android.synthetic.main.fragment_home1.*
+import java.time.LocalDateTime
+import java.time.temporal.ChronoUnit
 
-
+@RequiresApi(26)
 class HomeFragment1(worry: Worry) : Fragment() {
 
     private var worry = worry
@@ -62,7 +65,19 @@ class HomeFragment1(worry: Worry) : Fragment() {
             else -> tagBtn.layoutParams.width = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 68f, resources.displayMetrics).toInt()
         }
 
-        timeText.text = worry.createdDate.substring(11..15)
+        //        val currentTime = ZonedDateTime.now(ZoneId.of("Asia/Seoul"))
+        val currentTime = LocalDateTime.now()
+        val worryTime = LocalDateTime.parse(worry.createdDate)
+
+        val day: Long = (60 * 60 * 24).toLong()
+        val remainTimeSec = day - ChronoUnit.SECONDS.between(worryTime, currentTime)
+        val remainHour = remainTimeSec / 3600
+        var remainMinute = ((remainTimeSec/60) - remainHour*60).toString()
+        if(remainMinute.length == 1) remainMinute = "0$remainMinute"
+        val remainTime = "$remainHour:$remainMinute"
+
+        timeText.text = remainTime
+
         commentCountText.text = worry.commentNum.toString()
     }
 }

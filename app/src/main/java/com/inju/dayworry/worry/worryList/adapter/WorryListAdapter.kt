@@ -3,6 +3,7 @@ package com.inju.dayworry.worry.worryList.adapter
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
@@ -18,15 +19,19 @@ import com.inju.dayworry.worry.worryList.WorryItemViewHolder
 import com.inju.dayworry.worry.worryList.WorryListEvent
 import kotlinx.android.synthetic.main.item_worry.view.*
 import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.Period
+import java.time.ZoneId
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
+import java.time.temporal.ChronoUnit
 
-
+@RequiresApi(26)
 class WorryListAdapter(private val list: MutableList<Worry>,
                        activity: MainActivity,
                        val event: MutableLiveData<WorryListEvent> = MutableLiveData()) :
     RecyclerView.Adapter<WorryItemViewHolder> ()
 {
-
-    private val timeFormat = SimpleDateFormat("HH : mm")
 
     private val activity = activity
     val pref = activity.getSharedPreferences(Constants.PREFERENCE, AppCompatActivity.MODE_PRIVATE)
@@ -40,16 +45,6 @@ class WorryListAdapter(private val list: MutableList<Worry>,
     }
 
     override fun onBindViewHolder(holder: WorryItemViewHolder, position: Int) {
-//        getItem(position).let {
-//            var worryId = it?.postId
-//            holder.containerView.title.text = it.title
-//            holder.containerView.content.text = it.content
-//            holder.containerView.setOnClickListener {
-//                event.value = WorryListEvent.OnWorryItemClick(worryId!!)
-//            }
-////            holder.containerView.worryItemTimeText.text = timeFormat.format(it.modifiedDate)
-//            holder.containerView.worryItemTimeText.text = it.createdDate.substring(11..15)
-//        }
         holder.containerView.title.text = list[position].title
         holder.containerView.content.text = list[position].content
         holder.containerView.setOnClickListener {
@@ -72,7 +67,19 @@ class WorryListAdapter(private val list: MutableList<Worry>,
                 reportBottomSheetFragment.show(supportFragmentManager, "reportBottomSheetFragment")
             }
         }
-        holder.containerView.worryItemTimeText.text = list[position].createdDate.substring(11..15)
+
+//        val currentTime = ZonedDateTime.now(ZoneId.of("Asia/Seoul"))
+        val currentTime = LocalDateTime.now()
+        val worryTime = LocalDateTime.parse(list[position].createdDate)
+
+        val day: Long = (60 * 60 * 24).toLong()
+        val remainTimeSec = day - ChronoUnit.SECONDS.between(worryTime, currentTime)
+        val remainHour = remainTimeSec / 3600
+        var remainMinute = ((remainTimeSec/60) - remainHour*60).toString()
+        if(remainMinute.length == 1) remainMinute = "0$remainMinute"
+        val remainTime = "$remainHour:$remainMinute"
+        holder.containerView.worryItemTimeText.text = remainTime
+
         holder.containerView.commentCountText.text = list[position].commentNum.toString()
     }
 

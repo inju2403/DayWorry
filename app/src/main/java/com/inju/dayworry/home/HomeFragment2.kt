@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
@@ -24,7 +25,10 @@ import kotlinx.android.synthetic.main.fragment_home2.timeText
 import kotlinx.android.synthetic.main.fragment_home2.titleText
 import kotlinx.android.synthetic.main.fragment_home2.worryImage
 import kotlinx.android.synthetic.main.fragment_home3.*
+import java.time.LocalDateTime
+import java.time.temporal.ChronoUnit
 
+@RequiresApi(26)
 class HomeFragment2(worry: Worry) : Fragment() {
 
     private var worry = worry
@@ -70,7 +74,19 @@ class HomeFragment2(worry: Worry) : Fragment() {
             else -> tagBtn.layoutParams.width = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 68f, resources.displayMetrics).toInt()
         }
 
-        timeText.text = worry.createdDate.substring(11..15)
+        //        val currentTime = ZonedDateTime.now(ZoneId.of("Asia/Seoul"))
+        val currentTime = LocalDateTime.now()
+        val worryTime = LocalDateTime.parse(worry.createdDate)
+
+        val day: Long = (60 * 60 * 24).toLong()
+        val remainTimeSec = day - ChronoUnit.SECONDS.between(worryTime, currentTime)
+        val remainHour = remainTimeSec / 3600
+        var remainMinute = ((remainTimeSec/60) - remainHour*60).toString()
+        if(remainMinute.length == 1) remainMinute = "0$remainMinute"
+        val remainTime = "$remainHour:$remainMinute"
+
+        timeText.text = remainTime
+
         commentCountText.text = worry.commentNum.toString()
     }
 

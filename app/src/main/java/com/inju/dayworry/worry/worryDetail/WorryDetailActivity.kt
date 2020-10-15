@@ -14,6 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -38,12 +39,16 @@ import kotlinx.android.synthetic.main.activity_worry_detail.profileImage
 import kotlinx.android.synthetic.main.activity_worry_detail.tagBtn
 import kotlinx.android.synthetic.main.activity_worry_detail.timeText
 import kotlinx.android.synthetic.main.activity_worry_detail.titleText
+import kotlinx.android.synthetic.main.item_worry.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import java.time.LocalDateTime
+import java.time.temporal.ChronoUnit
 import kotlin.coroutines.CoroutineContext
 
+@RequiresApi(26)
 class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
 
     private lateinit var job: Job
@@ -199,7 +204,20 @@ class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
         worryDetailViewModel!!.worry.observe (this, Observer {
             titleText.text = it.title
             contentText.text = it.content
-            timeText.text = it.createdDate.substring(11..15)
+
+            //        val currentTime = ZonedDateTime.now(ZoneId.of("Asia/Seoul"))
+            val currentTime = LocalDateTime.now()
+            val worryTime = LocalDateTime.parse(it.createdDate)
+
+            val day: Long = (60 * 60 * 24).toLong()
+            val remainTimeSec = day - ChronoUnit.SECONDS.between(worryTime, currentTime)
+            val remainHour = remainTimeSec / 3600
+            var remainMinute = ((remainTimeSec/60) - remainHour*60).toString()
+            if(remainMinute.length == 1) remainMinute = "0$remainMinute"
+            val remainTime = "$remainHour:$remainMinute"
+            timeText.text = remainTime
+
+            commentNumText.text = it.commentNum.toString()
             tagBtn.text = it.tagName
         })
 

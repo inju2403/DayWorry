@@ -79,7 +79,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:text=""
+                    android:text="하고"
                     android:textSize="16sp"
                     android:textColor="@color/whiteColor"
                     app:layout_constraintBottom_toBottomOf="@+id/profileImage"

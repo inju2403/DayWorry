@@ -45,6 +45,19 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/profileImage" />
 
+            <Button
+                android:id="@+id/writerBtn"
+                android:layout_width="48dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="12dp"
+                android:text="작성자"
+                android:background="@drawable/counsel_detail_tag_btn_style"
+                android:textColor="@color/litePupleColor"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/userNameText"
+                app:layout_constraintStart_toEndOf="@+id/userNameText"
+                app:layout_constraintTop_toTopOf="@+id/userNameText" />
+
             <TextView
                 android:id="@+id/counselContent"
                 android:layout_width="0dp"

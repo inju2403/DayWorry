@@ -217,8 +217,10 @@ class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
             val remainTime = "$remainHour:$remainMinute"
             timeText.text = remainTime
 
+            userNameText.text = it.userNickname
             commentNumText.text = it.commentNum.toString()
             tagBtn.text = it.tagName
+
         })
 
         counselListViewModel!!.let {
@@ -227,7 +229,7 @@ class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
                     commentRecyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
 
                     listAdapter =
-                        CounselListAdapter(it, this)
+                        CounselListAdapter(it, this, worryDetailViewModel?.worry?.value?.userId!!)
 
                     listAdapter.event.observe(
                         this,

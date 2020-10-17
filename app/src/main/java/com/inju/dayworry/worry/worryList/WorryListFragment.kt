@@ -1,52 +1,38 @@
 package com.inju.dayworry.worry.worryList
 
-import android.app.Activity
+import android.content.Context
+import android.content.Context.INPUT_METHOD_SERVICE
 import android.content.Intent
 import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
-import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
-import android.view.KeyEvent
+import android.view.*
 import android.view.KeyEvent.KEYCODE_ENTER
+import android.view.inputmethod.InputMethodManager
+import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.inju.dayworry.MainActivity
 import com.inju.dayworry.R
-import com.inju.dayworry.login.LoginActivity
-import com.inju.dayworry.utils.Constants
-import com.inju.dayworry.utils.Constants.TAG
+import com.inju.dayworry.SearchActivity
 import com.inju.dayworry.worry.worryDetail.WorryDetailActivity
 import com.inju.dayworry.worry.worryList.adapter.StoryAdapter
 import com.inju.dayworry.worry.worryList.adapter.WorryListAdapter
 import com.inju.dayworry.worry.worryList.buildlogic.WorryListInjector
 import kotlinx.android.synthetic.main.fragment_worry_list.*
-import kotlinx.android.synthetic.main.fragment_worry_list.courseBtn
-import kotlinx.android.synthetic.main.fragment_worry_list.dailyLiftBtn
-import kotlinx.android.synthetic.main.fragment_worry_list.dateBtn
-import kotlinx.android.synthetic.main.fragment_worry_list.employmentBtn
-import kotlinx.android.synthetic.main.fragment_worry_list.familyBtn
-import kotlinx.android.synthetic.main.fragment_worry_list.friendBtn
-import kotlinx.android.synthetic.main.fragment_worry_list.healthBtn
-import kotlinx.android.synthetic.main.fragment_worry_list.infantBtn
-import kotlinx.android.synthetic.main.fragment_worry_list.jobBtn
-import kotlinx.android.synthetic.main.fragment_worry_list.marriedBtn
-import kotlinx.android.synthetic.main.fragment_worry_list.moneyBtn
-import kotlinx.android.synthetic.main.fragment_worry_list.schoolBtn
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
+
+@RequiresApi(26)
 class WorryListFragment : Fragment(), CoroutineScope {
 
     private lateinit var job: Job
@@ -102,25 +88,8 @@ class WorryListFragment : Fragment(), CoroutineScope {
     }
 
     private fun setKeywordSearch() {
-        searchTextEdit.addTextChangedListener(object: TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                searchKeyword = s.toString()
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { }
-        })
-
-//        searchTextEdit.setOnKeyListener { v, keyCode, event ->
-//            if (event.action == KeyEvent.ACTION_DOWN && keyCode == KEYCODE_ENTER) {
-//                // 엔터 눌렀을때 행동
-//                worryListViewModel!!.initKeywordSearch(searchKeyword)
-//            }
-//            true
-//        }
-
-        searchImage.setOnClickListener {
-            worryListViewModel!!.initKeywordSearch(searchKeyword)
+        searchClickLayout.setOnClickListener {
+            startActivity(Intent(activity, SearchActivity::class.java))
         }
     }
 
@@ -184,11 +153,10 @@ class WorryListFragment : Fragment(), CoroutineScope {
         }
     }
 
-    private fun judgeTagOrSearch() = launch {
+    private fun doPaging() = launch {
         pagingLoadingUi.visibility = View.VISIBLE
 
-        if(worryListViewModel!!.getWorrysState()) worryListViewModel!!.getWorrys(hashTag).join()
-        else worryListViewModel!!.getKeywordSearch(hashTag).join()
+        worryListViewModel!!.getWorrys(hashTag).join()
 
         pagingLoadingUi.visibility = View.GONE
     }
@@ -204,7 +172,7 @@ class WorryListFragment : Fragment(), CoroutineScope {
                 var itemTotalCount = recyclerView.adapter!!.itemCount - 1
                 if (lastVisibleItemPosition == itemTotalCount) {
                     //todo
-                    judgeTagOrSearch()
+                    doPaging()
                 }
 
             }
@@ -473,5 +441,4 @@ class WorryListFragment : Fragment(), CoroutineScope {
         super.onDestroyView()
         worryListView.adapter = null
     }
-
 }

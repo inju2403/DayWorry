@@ -76,7 +76,7 @@ class SetTagFragment : Fragment() {
                 Log.d(TAG,"프로필 이미지: ${this.profileImage}")
                 editor.putString("userName",(activity as SetProfileActivity).userName)
                 when((activity as SetProfileActivity).userAge) {
-                    "1~9" -> userAgeValue = 0
+                    "1~9" -> userAgeValue = 1
                     "10~19" -> userAgeValue = 10
                     "20~29" -> userAgeValue = 20
                     "30~39" -> userAgeValue = 30

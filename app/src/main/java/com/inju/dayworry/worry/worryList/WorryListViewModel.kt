@@ -31,13 +31,13 @@ class WorryListViewModel(
     private val storyState = MutableLiveData<MutableList<Worry>>()
     val story: LiveData<MutableList<Worry>> get() = storyState
 
-    private var usingTag: Boolean = false
-    private var usingSearch: Boolean = false
+    private val searchState = MutableLiveData<MutableList<Worry>>()
+    val search: LiveData<MutableList<Worry>> get() = searchState
 
     private var currentWorryPage: Int = 0
-    private var currentKeywordPage: Int = 0
     private var currentMyWorrydPage: Int = 0
     private var currentHistoryPage: Int = 0
+    private var currentSearchPage: Int = 0
     private var currentStoryPage: Int = 0 // 이후에 스토리를 페이징으로 변경할 때를 위해서 미리 할당
 
     fun getStorys() = launch {
@@ -73,8 +73,6 @@ class WorryListViewModel(
     // 돋보기 고민 리스트 탭
     fun InitWorrys(tagName: String) = launch {
         // 고민글을 추가하고 다시 고민리스트로 가면 0 페이지부터 다시 부름
-        usingTag = true
-        usingSearch = false
         currentWorryPage = 0
         worryListState.value = repo.getWorrys(tagName, currentWorryPage++)
     }
@@ -87,23 +85,15 @@ class WorryListViewModel(
 
     // 검색으로 고민 리스트 불러오기
     fun initKeywordSearch(keyword: String) = launch {
-        usingTag = false
-        usingSearch = true
-        currentKeywordPage = 0
-        worryListState.value = repo.keywordSearch(keyword, currentKeywordPage++)
+        currentSearchPage = 0
+        searchState.value = repo.keywordSearch(keyword, currentSearchPage++)
     }
 
     fun getKeywordSearch(keyword: String) = launch {
-        var newList = repo.keywordSearch(keyword, currentKeywordPage++)
+        var newList = repo.keywordSearch(keyword, currentSearchPage++)
         //새로 불러온 아이템들을 붙임
-        for(item in newList) worryListState.value?.add(item)
+        for(item in newList) searchState.value?.add(item)
     }
-
-    fun getWorrysState(): Boolean {
-        //tag로 리스트를 받고 있으면 true, search로 받고 있으면 false 반환
-        return usingTag
-    }
-
 
     private val editWorryState = MutableLiveData<Long>()
     val editWorry: LiveData<Long> get() = editWorryState
@@ -117,12 +107,16 @@ class WorryListViewModel(
     private val editStoryState = MutableLiveData<Long>()
     val editStory: LiveData<Long> get() = editStoryState
 
+    private val editSearchState = MutableLiveData<Long>()
+    val editSearch: LiveData<Long> get() = editSearchState
+
     override fun handleEvent(event: WorryListEvent) {
         when (event) {
             is WorryListEvent.OnWorryItemClick -> editWorry(event.worryId)
             is WorryListEvent.OnMyWorryItemClick -> editMyWorry(event.worryId)
             is WorryListEvent.OnHistoryItemClick -> editHistory(event.worryId)
             is WorryListEvent.OnStoryItemClick -> editStory(event.worryId)
+            is WorryListEvent.OnSearchItemClick -> editSearh(event.worryId)
         }
     }
 
@@ -140,5 +134,9 @@ class WorryListViewModel(
 
     private fun editStory(worryId: Long) {
         editStoryState.value = worryId
+    }
+
+    private fun editSearh(worryId: Long) {
+        editSearchState.value = worryId
     }
 }

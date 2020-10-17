@@ -32,7 +32,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
-@RequiresApi(21)
+@RequiresApi(26)
 class HomeListFragment : Fragment(), CoroutineScope {
 
     private lateinit var job: Job

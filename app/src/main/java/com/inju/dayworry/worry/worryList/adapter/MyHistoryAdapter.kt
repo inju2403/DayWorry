@@ -40,12 +40,6 @@ class MyHistoryAdapter(private val list: MutableList<Worry>,
         }
         holder.containerView.worryItemTimeText.text = list[position].createdDate.substring(0..3) + "." + list[position].createdDate.substring(5..6) + "." + list[position].createdDate.substring(8..9)
 
-        holder.containerView.moreImage.setOnClickListener {
-            //내 글 수정
-            val editBottomSheetFragment = EditBottomSheetFragment(list[position].postId, 3)
-
-            editBottomSheetFragment.show(supportFragmentManager, "editBottomSheetFragment")
-        }
         holder.containerView.commentCountText.text = list[position].commentNum.toString()
     }
 

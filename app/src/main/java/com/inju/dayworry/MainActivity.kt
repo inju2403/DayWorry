@@ -27,7 +27,7 @@ import com.inju.dayworry.worry.worryList.WorryListViewModel
 import com.inju.dayworry.worry.worryList.buildlogic.WorryListInjector
 import kotlinx.android.synthetic.main.activity_main.*
 
-@RequiresApi(21)
+@RequiresApi(26)
 class MainActivity : AppCompatActivity() {
 
     private var worryListViewModel: WorryListViewModel ?= null

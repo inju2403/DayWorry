@@ -21,7 +21,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".onBoarding.OnBoardingActivity"></activity>
+        <activity android:name=".SearchActivity"></activity>
+        <activity android:name=".onBoarding.OnBoardingActivity" />
         <activity android:name=".IntroActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

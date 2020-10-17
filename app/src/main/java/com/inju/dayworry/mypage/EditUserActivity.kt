@@ -170,7 +170,7 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
             Log.d(Constants.TAG,"프로필 이미지: $profileImage")
             pref.edit().putString("userName", userName)
             when(userAge) {
-                "1~9" -> userAgeValue = 0
+                "1~9" -> userAgeValue = 1
                 "10~19" -> userAgeValue = 10
                 "20~29" -> userAgeValue = 20
                 "30~39" -> userAgeValue = 30

@@ -81,9 +81,6 @@ class EditBottomSheetFragment(val postId: Long, private val flag: Int) : BottomS
             2 -> {
                 (activity as MainActivity).getWorryListViewModel?.initMyWorrys(userId) // 마이페이지에서 왔을 경우
             }
-            3 -> {
-                (activity as MyWorryHistoryActivity).getWorryListViewModel?.initHistory(userId) // 히스토리에서 왔을 경우
-            }
         }
         if(flag == 1) activity!!.finish() // 고민 상세화면에서 왔을 경우
         else (activity as MainActivity).getWorryListViewModel?.InitWorrys("전체") // 고민 리스트에서 왔을 경우

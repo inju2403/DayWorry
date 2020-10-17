@@ -258,6 +258,26 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <ImageView
+        android:id="@+id/selectPictureImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/contentEditLayout"
+        app:srcCompat="@drawable/ic_picture_select" />
+
+    <ImageView
+        android:id="@+id/cameraImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/selectPictureImage"
+        app:layout_constraintStart_toEndOf="@+id/selectPictureImage"
+        app:layout_constraintTop_toTopOf="@+id/selectPictureImage"
+        app:srcCompat="@drawable/ic_camera" />
+
     <ProgressBar
         android:id="@+id/addWorryLoadingUi"
         style="?android:attr/progressBarStyle"

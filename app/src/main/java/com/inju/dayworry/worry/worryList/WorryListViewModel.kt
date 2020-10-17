@@ -16,6 +16,9 @@ class WorryListViewModel(
     private var myWorryListitemCnt = 0
     fun getmyWorryListitemCnt() = myWorryListitemCnt
 
+    private var mySearchListitemCnt = 0
+    fun getmySearchListitemCnt() = mySearchListitemCnt
+
     private val mainWorryListState = MutableLiveData<MutableList<Worry>>()
     val mainWorryList: LiveData<MutableList<Worry>> get() = mainWorryListState
 
@@ -87,6 +90,7 @@ class WorryListViewModel(
     fun initKeywordSearch(keyword: String) = launch {
         currentSearchPage = 0
         searchState.value = repo.keywordSearch(keyword, currentSearchPage++)
+        mySearchListitemCnt = search.value?.size!!
     }
 
     fun getKeywordSearch(keyword: String) = launch {

@@ -48,7 +48,6 @@ class SearchActivity : AppCompatActivity(), CoroutineScope {
 
         job = Job()
         searchLoadingUi.visibility = View.GONE
-        searchResultText.visibility = View.INVISIBLE
         searchResetImage.visibility = View.GONE
 
         setViewModel()
@@ -71,6 +70,20 @@ class SearchActivity : AppCompatActivity(), CoroutineScope {
         searchWorryListView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
     }
 
+    private fun loadSearchWorrys() = launch{
+        searchLoadingUi.visibility = View.VISIBLE
+        searchListViewModel!!.initKeywordSearch(searchKeyword).join()
+
+        if(searchListViewModel!!.getmySearchListitemCnt() == 0) {
+            viewText.text = "      검색 결과가 아직 없어요.\n" +
+                    "첫 번째 고민글을 작성해보세요!"
+            viewText.visibility = View.VISIBLE
+        }
+        else viewText.visibility = View.GONE
+
+        searchLoadingUi.visibility = View.GONE
+    }
+
     private fun setKeywordSearch() {
 
         searchTextEdit.addTextChangedListener(object: TextWatcher {
@@ -87,15 +100,15 @@ class SearchActivity : AppCompatActivity(), CoroutineScope {
         searchTextEdit.setOnKeyListener { v, keyCode, event ->
             if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
                 // 엔터 눌렀을때 행동
+                searchKeyword = searchKeyword.trim()
                 if(searchKeyword.isEmpty()) {
                     showToast("검색어를 입력해주세요")
                 }
                 else {
-                    searchListViewModel!!.initKeywordSearch(searchKeyword)
-                    searchResultText.visibility = View.VISIBLE
+                    loadSearchWorrys()
                 }
             }
-            true
+            false
         }
 
         searchResetImage.setOnClickListener {

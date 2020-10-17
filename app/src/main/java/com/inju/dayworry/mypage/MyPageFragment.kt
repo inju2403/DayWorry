@@ -1,21 +1,17 @@
 package com.inju.dayworry.mypage
 
-import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,15 +22,14 @@ import com.bumptech.glide.request.RequestOptions
 import com.inju.dayworry.MainActivity
 import com.inju.dayworry.R
 import com.inju.dayworry.login.LoginActivity
-import com.inju.dayworry.login.SetProfileActivity
 import com.inju.dayworry.retrofit.ApiService
 import com.inju.dayworry.retrofit.RetrofitClient
-import com.inju.dayworry.worry.worryList.adapter.MyWorryListAdapter
 import com.inju.dayworry.utils.Constants
 import com.inju.dayworry.utils.Constants.TAG
 import com.inju.dayworry.utils.MyDialog
 import com.inju.dayworry.worry.worryDetail.WorryDetailActivity
 import com.inju.dayworry.worry.worryList.WorryListViewModel
+import com.inju.dayworry.worry.worryList.adapter.MyWorryListAdapter
 import com.inju.dayworry.worry.worryList.buildlogic.WorryListInjector
 import com.kakao.sdk.user.UserApiClient
 import com.kakao.sdk.user.rx
@@ -59,6 +54,8 @@ class MyPageFragment : Fragment(), CoroutineScope {
     private val disposables = CompositeDisposable()
     private val httpCall: ApiService? = RetrofitClient.getClient(Constants.API_BASE_URL)!!.create(
         ApiService::class.java)
+    private var mOAuthLoginModule = OAuthLogin.getInstance()
+    private var isSuccessDeleteNaverToken = false
 
     private lateinit var job: Job
     override val coroutineContext: CoroutineContext
@@ -87,6 +84,12 @@ class MyPageFragment : Fragment(), CoroutineScope {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        mOAuthLoginModule.init(
+            activity
+            ,getString(R.string.naver_client_id)
+            ,getString(R.string.naver_client_secret)
+            ,getString(R.string.naver_client_name)
+        )
 
         pref = activity!!.getSharedPreferences(Constants.PREFERENCE, AppCompatActivity.MODE_PRIVATE)
         userId = pref.getLong("userId", defaultLong)
@@ -238,8 +241,7 @@ class MyPageFragment : Fragment(), CoroutineScope {
                         }).addTo(disposables)
                 } else if (social == "naver") {
                     //네이버
-                    var mOAuthLoginModule = OAuthLogin.getInstance()
-                    mOAuthLoginModule.logout(activity)
+                    mOAuthLoginModule.logout(context)
                     editor.clear()
                     editor.putBoolean("runFirst", false)
                     editor.commit()
@@ -260,42 +262,70 @@ class MyPageFragment : Fragment(), CoroutineScope {
             dialog.start("계정 삭제", "      하고 계정을 삭제하시겠어요?\n\n개인 정보와 내역이 모두 삭제됩니다.")
             dialog.setOnOKClickedListener {
 
-                delteUserLogoutLoadingUi.visibility = View.VISIBLE
-                httpCall?.deleteUser(userId)?.enqueue(object : Callback<Void> {
-                    override fun onFailure(call: Call<Void>, t: Throwable) {
-                        Log.d(TAG, "delete user failed onFailure")
-                    }
-
-                    override fun onResponse(call: Call<Void>, response: Response<Void>) {
-                        when (response.code()) {
-                            200 -> {
-                                delteUserLogoutLoadingUi.visibility = View.GONE
-                                showToast("계정이 삭제 되었습니다. 이용해주셔서 감사합니다.")
-                                val editor = pref.edit()
-                                editor.clear()
-                                editor.putBoolean("runFirst", false)
-                                editor.commit()
-
-                                startActivity(
-                                    Intent(
-                                        activity,
-                                        LoginActivity::class.java
-                                    )
-                                )
-                                activity!!.finish()
-                            }
-                            else -> {
-                                Log.d(TAG, "계정삭제 에러")
-                                delteUserLogoutLoadingUi.visibility = View.GONE
-                                showToast("다시 시도해주세요.")
-                            }
-                        }
-                    }
-
-                })
+                if(social == "kakao") {
+                    //카카오
+                    // 연결 끊기
+                    UserApiClient.rx.unlink()
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe({
+                            Log.i(TAG, "연결 끊기 성공. SDK에서 토큰 삭제 됨")
+                            deleteUserFromServer()
+                        }, { error ->
+                            Log.e(TAG, "연결 끊기 실패", error)
+                        }).addTo(disposables)
+                }
+                else {
+                    //네이버
+//                    isSuccessDeleteNaverToken = mOAuthLoginModule.logoutAndDeleteToken(context)
+//                    if (!isSuccessDeleteNaverToken) {
+//                        // 서버에서 토큰 삭제에 실패했어도 클라이언트에 있는 토큰은 삭제되어 로그아웃된 상태입니다.
+//                        // 클라이언트에 토큰 정보가 없기 때문에 추가로 처리할 수 있는 작업은 없습니다.
+//                        Log.d(TAG, "errorCode:" + mOAuthLoginModule.getLastErrorCode(context));
+//                        Log.d(TAG, "errorDesc:" + mOAuthLoginModule.getLastErrorDesc(context));
+//                    }
+                    deleteUserFromServer()
+                }
             }
 
         }
+    }
+
+    private fun deleteUserFromServer() {
+        delteUserLogoutLoadingUi.visibility = View.VISIBLE
+        httpCall?.deleteUser(userId)?.enqueue(object : Callback<Void> {
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                Log.d(TAG, "delete user failed onFailure")
+            }
+
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                when (response.code()) {
+                    200 -> {
+                        delteUserLogoutLoadingUi.visibility = View.GONE
+                        showToast("계정이 삭제 되었습니다. 이용해주셔서 감사합니다.")
+                        Log.d(TAG, "네이버 계정 삭제: $isSuccessDeleteNaverToken")
+                        val editor = pref.edit()
+                        editor.clear()
+                        editor.putBoolean("runFirst", false)
+                        editor.commit()
+
+                        startActivity(
+                            Intent(
+                                activity,
+                                LoginActivity::class.java
+                            )
+                        )
+                        activity!!.finish()
+                    }
+                    else -> {
+                        Log.d(TAG, "계정삭제 에러")
+                        delteUserLogoutLoadingUi.visibility = View.GONE
+                        showToast("다시 시도해주세요.")
+                    }
+                }
+            }
+
+        })
     }
 
     private fun initMyWorrys() = launch {

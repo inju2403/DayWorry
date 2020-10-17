@@ -38,6 +38,7 @@ import com.inju.dayworry.worry.worryList.WorryListViewModel
 import com.inju.dayworry.worry.worryList.buildlogic.WorryListInjector
 import com.kakao.sdk.user.UserApiClient
 import com.kakao.sdk.user.rx
+import com.nhn.android.naverlogin.OAuthLogin
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
@@ -237,7 +238,10 @@ class MyPageFragment : Fragment(), CoroutineScope {
                         }).addTo(disposables)
                 } else if (social == "naver") {
                     //네이버
+                    var mOAuthLoginModule = OAuthLogin.getInstance()
+                    mOAuthLoginModule.logout(activity)
                     editor.clear()
+                    editor.putBoolean("runFirst", false)
                     editor.commit()
                     showToast("로그아웃 되었습니다.")
                     startActivity(

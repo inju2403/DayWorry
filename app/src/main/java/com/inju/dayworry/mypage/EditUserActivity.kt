@@ -96,6 +96,7 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
         job = Job()
 
         val pref = getSharedPreferences(Constants.PREFERENCE, MODE_PRIVATE)
+        val editor = pref.edit()
         userAgeValue = pref.getInt("userAge", 0)
         profileImage = pref.getString("profileImage", "empty").toString()
         userId = pref.getLong("userId", (0).toLong())
@@ -116,6 +117,8 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
 
     private fun setUpClickListener(pref: SharedPreferences) = launch {
 
+        val editor = pref.edit()
+
         profile_photo.setOnClickListener {
             val selectProfilePhotoBottomSheetFragment = SelectProfilePhotoBottomSheetFragment(profile_photo)
 
@@ -135,7 +138,10 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
                 userName == "" -> showToast(nicknameEmptyMessage)
                 totalCnt == 0 -> showToast(selectTagMinMessage)
                 originUserName == userName -> {
-                    pref.edit().putString("userName", userName)
+                    editor.putString("userName", userName)
+                    editor.putInt("userAge", userAgeValue)
+                    editor.putString("hashTags", hashTagString)
+                    editor.commit()
                     when(userAge) {
                         "1~9" -> userAgeValue = 0
                         "10~19" -> userAgeValue = 10
@@ -146,15 +152,12 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
                         "60~69" -> userAgeValue = 60
                         "70~" -> userAgeValue = 70
                     }
-                    pref.edit().putInt("userAge", userAgeValue)
                     for (next in hashTag) {
                         hashTagString += "$next,"
                     }
                     hashTagString = hashTagString.substring(0..hashTagString.length-2) // Split으로 parsing하여 사용
-                    pref.edit().putString("hashTags", hashTagString)
-                    pref.edit().commit()
 
-                    requsetProfileUpdate()
+                    requsetProfileUpdate(editor)
                 }
                 else -> judgeUserName(userName, pref)
             }
@@ -165,10 +168,11 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
         judge = httpCall?.nicknameRedundancyCheck(userName)?.flag!!
         Log.d(Constants.TAG,"judge: $judge")
 
+        val editor = pref.edit()
+
         if(judge) {
             profileImage = pref.getString("profileImage", defaultImage).toString()
             Log.d(Constants.TAG,"프로필 이미지: $profileImage")
-            pref.edit().putString("userName", userName)
             when(userAge) {
                 "1~9" -> userAgeValue = 1
                 "10~19" -> userAgeValue = 10
@@ -179,20 +183,16 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
                 "60~69" -> userAgeValue = 60
                 "70~" -> userAgeValue = 70
             }
-            pref.edit().putInt("userAge", userAgeValue)
             for (next in hashTag) {
                 hashTagString += "$next,"
             }
             hashTagString = hashTagString.substring(0..hashTagString.length-2) // Split으로 parsing하여 사용
-            pref.edit().putString("hashTags", hashTagString)
-            pref.edit().commit()
-
-            requsetProfileUpdate()
+            requsetProfileUpdate(editor)
         }
         else showToast(nicknameRedundancyMessage)
     }
 
-    private fun requsetProfileUpdate() {
+    private fun requsetProfileUpdate(editor: SharedPreferences.Editor) {
         editUserLoadingUi.visibility = View.VISIBLE
         val userRequestPojo = User_REQUEST_POJO(
             userAgeValue,
@@ -209,8 +209,12 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
                 when (response.code()) {
                     200 -> {
+                        editor.putString("userName", userName)
+                        editor.putInt("userAge", userAgeValue)
+                        editor.putString("hashTags", hashTagString)
+                        editor.commit()
+
                         showToast("프로필 변경이 완료되었습니다")
-                        startActivity(Intent(this@EditUserActivity, MainActivity::class.java))
                         finish()
                     }
                     400 -> {

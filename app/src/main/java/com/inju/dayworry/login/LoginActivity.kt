@@ -76,6 +76,7 @@ class LoginActivity : AppCompatActivity(), CoroutineScope {
 
         skipText.setOnClickListener {
             editor.clear()
+            editor.putBoolean("runFirst", false)
             editor.commit()
             startActivity(Intent(this, MainActivity::class.java))
             finish()

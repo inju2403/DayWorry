@@ -145,7 +145,10 @@ class SetTagFragment : Fragment() {
                 }
 
                 for(idx in 0 until hashTag.size) {
-                    if(hashTag[idx] == "일상") hashTag.removeAt(idx)
+                    if(hashTag[idx] == "일상") {
+                        hashTag.removeAt(idx)
+                        break
+                    }
                 }
             }
             else {
@@ -174,7 +177,10 @@ class SetTagFragment : Fragment() {
                 }
 
                 for(idx in 0 until hashTag.size) {
-                    if(hashTag[idx] == "가족") hashTag.removeAt(idx)
+                    if(hashTag[idx] == "가족") {
+                        hashTag.removeAt(idx)
+                        break
+                    }
                 }
             }
             else {
@@ -203,7 +209,10 @@ class SetTagFragment : Fragment() {
                 }
 
                 for(idx in 0 until hashTag.size) {
-                    if(hashTag[idx] == "친구사이") hashTag.removeAt(idx)
+                    if(hashTag[idx] == "친구사이") {
+                        hashTag.removeAt(idx)
+                        break
+                    }
                 }
             }
             else {
@@ -232,7 +241,10 @@ class SetTagFragment : Fragment() {
                 }
 
                 for(idx in 0 until hashTag.size) {
-                    if(hashTag[idx] == "연애") hashTag.removeAt(idx)
+                    if(hashTag[idx] == "연애") {
+                        hashTag.removeAt(idx)
+                        break
+                    }
                 }
             }
             else {
@@ -261,7 +273,10 @@ class SetTagFragment : Fragment() {
                 }
 
                 for(idx in 0 until hashTag.size) {
-                    if(hashTag[idx] == "학교생활") hashTag.removeAt(idx)
+                    if(hashTag[idx] == "학교생활") {
+                        hashTag.removeAt(idx)
+                        break
+                    }
                 }
             }
             else {
@@ -290,7 +305,10 @@ class SetTagFragment : Fragment() {
                 }
 
                 for(idx in 0 until hashTag.size) {
-                    if(hashTag[idx] == "직장생활") hashTag.removeAt(idx)
+                    if(hashTag[idx] == "직장생활") {
+                        hashTag.removeAt(idx)
+                        break
+                    }
                 }
             }
             else {
@@ -319,7 +337,10 @@ class SetTagFragment : Fragment() {
                 }
 
                 for(idx in 0 until hashTag.size) {
-                    if(hashTag[idx] == "취업") hashTag.removeAt(idx)
+                    if(hashTag[idx] == "취업") {
+                        hashTag.removeAt(idx)
+                        break
+                    }
                 }
             }
             else {
@@ -349,7 +370,10 @@ class SetTagFragment : Fragment() {
                 }
 
                 for(idx in 0 until hashTag.size) {
-                    if(hashTag[idx] == "진로") hashTag.removeAt(idx)
+                    if(hashTag[idx] == "진로") {
+                        hashTag.removeAt(idx)
+                        break
+                    }
                 }
             }
             else {
@@ -378,7 +402,10 @@ class SetTagFragment : Fragment() {
                 }
 
                 for(idx in 0 until hashTag.size) {
-                    if(hashTag[idx] == "돈") hashTag.removeAt(idx)
+                    if(hashTag[idx] == "돈") {
+                        hashTag.removeAt(idx)
+                        break
+                    }
                 }
             }
             else {
@@ -407,7 +434,10 @@ class SetTagFragment : Fragment() {
                 }
 
                 for(idx in 0 until hashTag.size) {
-                    if(hashTag[idx] == "건강") hashTag.removeAt(idx)
+                    if(hashTag[idx] == "건강") {
+                        hashTag.removeAt(idx)
+                        break
+                    }
                 }
             }
             else {
@@ -436,7 +466,10 @@ class SetTagFragment : Fragment() {
                 }
 
                 for(idx in 0 until hashTag.size) {
-                    if(hashTag[idx] == "기혼자만 아는") hashTag.removeAt(idx)
+                    if(hashTag[idx] == "기혼자만 아는") {
+                        hashTag.removeAt(idx)
+                        break
+                    }
                 }
             }
             else {
@@ -465,7 +498,10 @@ class SetTagFragment : Fragment() {
                 }
 
                 for(idx in 0 until hashTag.size) {
-                    if(hashTag[idx] == "육아") hashTag.removeAt(idx)
+                    if(hashTag[idx] == "육아") {
+                        hashTag.removeAt(idx)
+                        break
+                    }
                 }
             }
             else {

@@ -263,6 +263,7 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
     private fun setUserInfo() {
         editTextTextPersonName.setText(userName)
 
+        Log.d("로그", profileImage)
         Glide.with(this).load(profileImage)
                                 .apply(RequestOptions.bitmapTransform(RoundedCorners(32)))
                                 .into(profile_photo)

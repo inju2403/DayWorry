@@ -221,7 +221,7 @@ class AddWorryActivity : AppCompatActivity(), CoroutineScope {
                         cameraImage.visibility = View.GONE
 
                         selectImage.visibility = View.VISIBLE
-                        selectImage.setImageBitmap(myBitmap)
+                        selectImage.setImageURI(fileUri)
                         photoClearImage.visibility = View.VISIBLE
                     }
                 }
@@ -234,7 +234,7 @@ class AddWorryActivity : AppCompatActivity(), CoroutineScope {
                         cameraImage.visibility = View.GONE
 
                         selectImage.visibility = View.VISIBLE
-                        selectImage.setImageBitmap(myBitmap)
+                        selectImage.setImageURI(fileUri)
                         photoClearImage.visibility = View.VISIBLE
                     }
                 }

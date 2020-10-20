@@ -294,6 +294,7 @@
         android:layout_height="100dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
+        android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/addWorryLoadingUi"
         app:srcCompat="@drawable/ic_photo_sample" />

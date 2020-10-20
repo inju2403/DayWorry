@@ -87,7 +87,11 @@ class SelectProfilePhotoBottomSheetFragment(profile_photo: ImageView) : BottomSh
             editor.putString("profileImageSet", "ok")
             editor.commit()
             when(select) {
-                1 -> profile_photo.setImageResource(R.drawable.ic_profile_default1)
+                1 -> {
+                    editor.putString("profileImage", "https://hago-storage-bucket.s3.ap-northeast-2.amazonaws.com/default_01.jpg")
+                    editor.commit()
+                    profile_photo.setImageResource(R.drawable.ic_profile_default1)
+                }
                 2 -> profile_photo.setImageResource(R.drawable.ic_profile_default2)
                 3 -> profile_photo.setImageResource(R.drawable.ic_profile_default3)
                 4 -> profile_photo.setImageResource(R.drawable.ic_profile_default4)

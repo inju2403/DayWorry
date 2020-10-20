@@ -39,7 +39,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".mypage.MyWorryHistoryActivity" />
-        <activity android:name=".mypage.EditUserActivity" />
+        <activity
+            android:name=".mypage.EditUserActivity"
+            android:windowSoftInputMode="adjustNothing"/>
         <activity
             android:name=".worry.worryDetail.WorryDetailActivity"
             android:windowSoftInputMode="adjustResize" />

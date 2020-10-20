@@ -27,12 +27,12 @@ class WorryDetailViewModel(
         worryState.value = repo.getWorryById(postId)
     }
 
-    fun addOrUpdateWorry(userId: Long, tageName: String) = launch {
+    fun addOrUpdateWorry(userId: Long, tageName: String, imagePath: String) = launch {
         var contents
                 = Contents(
                     worry.value!!.content,
                     worry.value!!.postId,
-                    worry.value!!.postImage,
+                    imagePath,
                     tageName,
                     worry.value!!.title,
                     userId)

@@ -59,13 +59,14 @@ class AddWorryActivity : AppCompatActivity(), CoroutineScope {
 
     var search: Button? = null
     var fileUri: Uri? = null
-    var path: String? = null
+    var path: String = ""
     var myBitmap: Bitmap? = null
 
     var mCurrentPhotoPath: String? = null
 
     private val RESULT_OK = 101
-    val REQUEST_TAKE_PHOTO_CAMERA = 1
+    val SELECT_GALLERY_PHOTO = 20
+    val REQUEST_TAKE_PHOTO = 1
     val REQUEST_TAKE_PHOTO_ALBUM = 2
     private var worryDetailViewModel: WorryDetailViewModel? = null
 
@@ -92,6 +93,8 @@ class AddWorryActivity : AppCompatActivity(), CoroutineScope {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.title = ""
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_toolbar_cancel)
+        selectImage.visibility = View.GONE
+        photoClearImage.visibility = View.GONE
 
         setViewModel()
         setUpClickListener()
@@ -123,22 +126,34 @@ class AddWorryActivity : AppCompatActivity(), CoroutineScope {
     }
 
     //카메라 시작
-
     private fun setUpClickListener() {
-        selectPictureImage.setOnClickListener {
-
+        selectPictureImage.setOnClickListener { // 갤러리 선택
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type = "image/*"
+            startActivityForResult(intent, SELECT_GALLERY_PHOTO)
         }
-
-        cameraImage.setOnClickListener {
+        cameraImage.setOnClickListener { // 카메라 촬영
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 // 카메라 실행 부분
-                if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                if (checkSelfPermission(Manifest.permission.CAMERA)
+                    == PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                     dispatchTakePictureIntent()
                 } else {
                     Log.d(TAG, "권한 설정 요청")
-                    ActivityCompat.requestPermissions(this@AddWorryActivity, arrayOf<String?>(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
+                    ActivityCompat.requestPermissions(this@AddWorryActivity,
+                        arrayOf<String?>(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE), 1000)
                 }
             }
+        }
+
+        photoClearImage.setOnClickListener {
+            path = ""
+            selectImage.visibility = View.GONE
+            photoClearImage.visibility = View.GONE
+
+            selectPictureImage.visibility = View.VISIBLE
+            cameraImage.visibility = View.VISIBLE
+
         }
     }
 
@@ -159,7 +174,7 @@ class AddWorryActivity : AppCompatActivity(), CoroutineScope {
                     BuildConfig.APPLICATION_ID + ".provider",
                     photoFile)
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
-                startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO_CAMERA)
+                startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO)
             }
         }
     }
@@ -183,8 +198,8 @@ class AddWorryActivity : AppCompatActivity(), CoroutineScope {
         super.onActivityResult(requestCode, resultCode, data)
         try {
             when (requestCode) {
-                REQUEST_TAKE_PHOTO_CAMERA -> {
-                    if (resultCode === Activity.RESULT_OK) {
+                REQUEST_TAKE_PHOTO -> { // result for take photo
+                    if (resultCode == Activity.RESULT_OK) {
                         val file = File(mCurrentPhotoPath)
                         myBitmap = MediaStore.Images.Media
                             .getBitmap(contentResolver, Uri.fromFile(file))
@@ -198,6 +213,29 @@ class AddWorryActivity : AppCompatActivity(), CoroutineScope {
                         else {
                             Log.d("myBitmap null", "null")
                         }
+                        // get Image uri and path
+                        fileUri = getImageUri(this@AddWorryActivity, myBitmap)
+                        path = getRealPathFromURI(this@AddWorryActivity, fileUri)!!
+
+                        selectPictureImage.visibility = View.GONE
+                        cameraImage.visibility = View.GONE
+
+                        selectImage.visibility = View.VISIBLE
+                        selectImage.setImageBitmap(myBitmap)
+                        photoClearImage.visibility = View.VISIBLE
+                    }
+                }
+                SELECT_GALLERY_PHOTO -> { // result for select gallery photo
+                    if (resultCode == Activity.RESULT_OK) {
+                        fileUri = data?.data
+                        path = getRealPathFromURI(this, fileUri)!!
+
+                        selectPictureImage.visibility = View.GONE
+                        cameraImage.visibility = View.GONE
+
+                        selectImage.visibility = View.VISIBLE
+                        selectImage.setImageBitmap(myBitmap)
+                        photoClearImage.visibility = View.VISIBLE
                     }
                 }
             }
@@ -205,14 +243,6 @@ class AddWorryActivity : AppCompatActivity(), CoroutineScope {
             error.printStackTrace()
         }
 
-        if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
-            if (myBitmap != null) {
-                //send server
-            }
-            else {
-                Log.d("uri error", "error")
-            }
-        }
     }
 
     private fun exifOrientationToDegrees(exifOrientation: Int): Int {
@@ -417,7 +447,7 @@ class AddWorryActivity : AppCompatActivity(), CoroutineScope {
             }
             else -> {
                 addWorryLoadingUi.visibility = View.VISIBLE
-                worryDetailViewModel!!.addOrUpdateWorry(userId, hashTag!!).join()
+                worryDetailViewModel!!.addOrUpdateWorry(userId, hashTag!!, path).join()
                 val intent = Intent()
                 setResult(RESULT_OK, intent)
 

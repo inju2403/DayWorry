@@ -460,6 +460,15 @@ class AddWorryActivity : AppCompatActivity(), CoroutineScope {
         worryDetailViewModel!!.getWorryById(worryId).join()
         hashTag = worryDetailViewModel!!.worry.value?.tagName
         setExistingTag(hashTag!!)
+
+        if(worryDetailViewModel!!.worry.value?.postImage != "") {
+            selectPictureImage.visibility = View.GONE
+            cameraImage.visibility = View.GONE
+
+            selectImage.visibility = View.VISIBLE
+            selectImage.setImageURI(Uri.parse(worryDetailViewModel!!.worry.value?.postImage))
+            photoClearImage.visibility = View.VISIBLE
+        }
     }
 
     private fun setExistingTag(hashTag: String) {

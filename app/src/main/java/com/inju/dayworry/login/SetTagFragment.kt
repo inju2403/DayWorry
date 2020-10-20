@@ -117,7 +117,7 @@ class SetTagFragment : Fragment() {
             }
 
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
-                when (response!!.code()) {
+                when (response.code()) {
                     200 -> {
                         startActivity(Intent(context, MainActivity::class.java))
                         activity!!.finish()

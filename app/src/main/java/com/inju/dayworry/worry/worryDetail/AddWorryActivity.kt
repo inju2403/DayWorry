@@ -37,19 +37,24 @@ import androidx.lifecycle.ViewModelProvider
 import com.inju.dayworry.BuildConfig
 import com.inju.dayworry.R
 import com.inju.dayworry.utils.Constants
+import com.inju.dayworry.utils.Constants.TAG
 import com.inju.dayworry.worry.worryDetail.buildlogic.WorryDetailInjector
 import kotlinx.android.synthetic.main.activity_add_worry.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.coroutines.CoroutineContext
-import com.inju.dayworry.utils.Constants.TAG
 
 class AddWorryActivity : AppCompatActivity(), CoroutineScope {
 
@@ -73,6 +78,8 @@ class AddWorryActivity : AppCompatActivity(), CoroutineScope {
     private var hashTag: String? = "empty"
     private var userId: Long = -1
     private var defaultId: Long = -1
+    private var rqBody: RequestBody = path.toRequestBody("image/jpeg".toMediaTypeOrNull())
+    private var body : MultipartBody.Part = MultipartBody.Part.createFormData("postImage", "fileName", rqBody)
 
     var litePupleColor = "#9689FC" // 텍스트 색상
     var superLiteGreyColor = "#cbcdd5" // 텍스트 색상
@@ -148,6 +155,7 @@ class AddWorryActivity : AppCompatActivity(), CoroutineScope {
 
         photoClearImage.setOnClickListener {
             path = ""
+            rqBody = path.toRequestBody("image/jpeg".toMediaTypeOrNull())
             selectImage.visibility = View.GONE
             photoClearImage.visibility = View.GONE
 
@@ -217,6 +225,10 @@ class AddWorryActivity : AppCompatActivity(), CoroutineScope {
                         fileUri = getImageUri(this@AddWorryActivity, myBitmap)
                         path = getRealPathFromURI(this@AddWorryActivity, fileUri)!!
 
+                        rqBody = path.toRequestBody("image/jpeg".toMediaTypeOrNull())
+                        body = MultipartBody.Part.createFormData("postImage", file.name, rqBody)
+                        Log.d("로그그", "$rqBody")
+
                         selectPictureImage.visibility = View.GONE
                         cameraImage.visibility = View.GONE
 
@@ -227,8 +239,13 @@ class AddWorryActivity : AppCompatActivity(), CoroutineScope {
                 }
                 SELECT_GALLERY_PHOTO -> { // result for select gallery photo
                     if (resultCode == Activity.RESULT_OK) {
+                        val file = File(mCurrentPhotoPath)
                         fileUri = data?.data
                         path = getRealPathFromURI(this, fileUri)!!
+
+                        rqBody = path.toRequestBody("image/jpeg".toMediaTypeOrNull())
+                        body = MultipartBody.Part.createFormData("postImage", file.name, rqBody)
+                        Log.d("로그그", "$rqBody")
 
                         selectPictureImage.visibility = View.GONE
                         cameraImage.visibility = View.GONE
@@ -447,7 +464,8 @@ class AddWorryActivity : AppCompatActivity(), CoroutineScope {
             }
             else -> {
                 addWorryLoadingUi.visibility = View.VISIBLE
-                worryDetailViewModel!!.addOrUpdateWorry(userId, hashTag!!, path).join()
+//                worryDetailViewModel!!.postImage(body).join()
+                worryDetailViewModel!!.addOrUpdateWorry(userId, hashTag!!).join()
                 val intent = Intent()
                 setResult(RESULT_OK, intent)
 
@@ -457,6 +475,13 @@ class AddWorryActivity : AppCompatActivity(), CoroutineScope {
     }
 
     private fun worryLoading(worryId: Long) = launch {
+        addWorryLoadingUi.visibility = View.VISIBLE
+
+        selectPictureImage.visibility = View.GONE
+        cameraImage.visibility = View.GONE
+        titleEdit.visibility = View.GONE
+        contentEdit.visibility = View.GONE
+
         worryDetailViewModel!!.getWorryById(worryId).join()
         hashTag = worryDetailViewModel!!.worry.value?.tagName
         setExistingTag(hashTag!!)
@@ -469,6 +494,15 @@ class AddWorryActivity : AppCompatActivity(), CoroutineScope {
             selectImage.setImageURI(Uri.parse(worryDetailViewModel!!.worry.value?.postImage))
             photoClearImage.visibility = View.VISIBLE
         }
+        else {
+            selectPictureImage.visibility = View.VISIBLE
+            cameraImage.visibility = View.VISIBLE
+        }
+
+        titleEdit.visibility = View.VISIBLE
+        contentEdit.visibility = View.GONE
+
+        addWorryLoadingUi.visibility = View.GONE
     }
 
     private fun setExistingTag(hashTag: String) {

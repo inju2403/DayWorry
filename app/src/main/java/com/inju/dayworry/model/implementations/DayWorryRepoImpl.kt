@@ -11,6 +11,9 @@ import com.inju.dayworry.retrofit.ApiService
 import com.inju.dayworry.retrofit.RetrofitClient
 import com.inju.dayworry.utils.Constants.API_BASE_URL
 import com.inju.dayworry.utils.Constants.PREFERENCE
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import retrofit2.http.Multipart
 
 class DayWorryRepoImpl(
     val httpCall: ApiService?
@@ -48,7 +51,13 @@ class DayWorryRepoImpl(
     }
 
     override suspend fun addOrUpdateWorry(contents: Contents)  {
+//    override suspend fun addOrUpdateWorry(content: String, postId: Long, postImage: MultipartBody.Part, tagName: String, title: String, userId: Long)  {
         httpCall?.addOrUpdateWorry(contents)
+//        httpCall?.addOrUpdateWorry(content, postId, postImage, tagName, title, userId)
+    }
+
+    override suspend fun postImage(file: MultipartBody.Part): String {
+        return httpCall?.postImage(file)!!
     }
 
     override suspend fun deleteWorry(postId : Long) {

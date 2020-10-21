@@ -2,6 +2,8 @@ package com.inju.dayworry.retrofit
 
 import com.google.gson.JsonElement
 import com.inju.dayworry.model.pojo.*
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Response
@@ -23,7 +25,7 @@ interface ApiService {
 
     //토큰 검증
     @POST("users/check")
-    fun verifyJWT(@Header("jwt") jwt: String): Call<Void>
+    fun verifyJWT(@Header("jwt") jwt: String): Call<User_REQUEST_POJO>
 
     //유저 정보 업데이트
     @PUT("users")
@@ -67,8 +69,22 @@ interface ApiService {
     fun deleteUser(@Path("userId") userId: Long): Call<Void>
 
     //고민 수정
+//    @Multipart
     @POST("posts/")
     suspend fun addOrUpdateWorry(@Body contents: Contents): Response<Unit>
+//    suspend fun addOrUpdateWorry(
+//        @Query ("content") content: String,
+//        @Query ("postId") postId: Long,
+//        @Part postImage: MultipartBody.Part,
+//        @Query ("tagName") tagName: String,
+//        @Query ("title") title: String,
+//        @Query ("userId") userId: Long
+//    ): Response<Unit>
+
+    //고민 사진 보내기
+    @Multipart
+    @POST("posts/image")
+    suspend fun postImage(@Part file: MultipartBody.Part): String
 
     //고민 삭제
     @DELETE("posts/{postId}")

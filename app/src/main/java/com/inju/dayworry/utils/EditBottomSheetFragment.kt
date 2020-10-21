@@ -74,6 +74,7 @@ class EditBottomSheetFragment(val postId: Long, private val flag: Int) : BottomS
         when(flag) {
             0 -> {
                 (activity as MainActivity).getWorryListViewModel?.InitWorrys("전체") // 고민 리스트에서 왔을 경우
+                (activity as MainActivity).getWorryListViewModel?.getStorys() // 스토리 업데이트
             }
             1 -> {
                 activity!!.finish() // 고민 상세화면에서 왔을 경우

@@ -4,6 +4,9 @@ import com.inju.dayworry.model.pojo.COUNSEL_REQUEST_POJO
 import com.inju.dayworry.model.pojo.Contents
 import com.inju.dayworry.model.pojo.Counsel
 import com.inju.dayworry.model.pojo.Worry
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import retrofit2.http.Multipart
 
 interface IDayWorryRepository {
     suspend fun getMainWorrys(): MutableList<Worry>
@@ -13,6 +16,9 @@ interface IDayWorryRepository {
     suspend fun keywordSearch(tagName: String, pageNum: Int): MutableList<Worry>
     suspend fun getWorryById(postId: Long): Worry
     suspend fun addOrUpdateWorry(contents: Contents)
+//    suspend fun addOrUpdateWorry(content: String, postId: Long, postImage: MultipartBody.Part, tagName: String, title: String, userId: Long)
+    suspend fun postImage(file: MultipartBody.Part): String
+
     suspend fun deleteWorry(postId: Long)
 
     suspend fun getComments(postId: Long, pageNum: Int, userId: Long): MutableList<Counsel>

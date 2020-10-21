@@ -7,7 +7,10 @@ import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.View
+import com.google.gson.annotations.Expose
+import com.google.gson.annotations.SerializedName
 import com.inju.dayworry.login.LoginActivity
+import com.inju.dayworry.model.pojo.User_REQUEST_POJO
 import com.inju.dayworry.onBoarding.OnBoardingActivity
 import com.inju.dayworry.retrofit.ApiService
 import com.inju.dayworry.retrofit.RetrofitClient
@@ -75,20 +78,31 @@ class IntroActivity : AppCompatActivity() {
     }
 
     private fun verifyJWT(jwt: String, pref: SharedPreferences) {
-        httpCall?.verifyJWT(jwt)?.enqueue(object : Callback<Void> {
-            override fun onFailure(call: Call<Void>, t: Throwable) {
+        val editor = pref.edit()
+
+        httpCall?.verifyJWT(jwt)?.enqueue(object : Callback<User_REQUEST_POJO> {
+            override fun onFailure(call: Call<User_REQUEST_POJO>, t: Throwable) {
                 Log.d(Constants.TAG, "verifyJWT - onFailed() called / t: ${t}")
             }
 
-            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+            override fun onResponse(call: Call<User_REQUEST_POJO>, response: Response<User_REQUEST_POJO>) {
                 when (response.code()) {
                     200 -> {
+//                        var ageRange: Int = 0,
+//                        var nickname: String = "",
+//                        var profileImage: String = "",
+//                        var userHashtags: MutableList<String> = mutableListOf(),
+//                        var userId: Long = 0
+//                        editor.putInt("ageRange", response.body()!!.ageRange)
+//                        editor.putString("nickname", response.body()!!.nickname)
+//                        editor.putString("profileImage", response.body()!!.profileImage)
+//                        editor.putInt("ageRange", response.body()!!.ageRange)
+//                        editor.putInt("ageRange", response.body()!!.ageRange)
                         startActivity(Intent(this@IntroActivity, MainActivity::class.java))
                         finish()
                     }
                     else -> {
                         Log.d(Constants.TAG,"토큰 유효하지 않음")
-                        val editor = pref.edit()
                         editor.clear()
                         editor.commit()
 

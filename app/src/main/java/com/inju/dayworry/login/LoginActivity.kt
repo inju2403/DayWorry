@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.inju.dayworry.MainActivity
 import com.inju.dayworry.R
 import com.inju.dayworry.model.pojo.SOCIAL_LOGIN_RETURN_POJO
+import com.inju.dayworry.model.pojo.User_REQUEST_POJO
 import com.inju.dayworry.retrofit.ApiService
 import com.inju.dayworry.retrofit.RetrofitClient
 import com.inju.dayworry.utils.Constants
@@ -67,10 +68,14 @@ class LoginActivity : AppCompatActivity(), CoroutineScope {
         val editor = pref.edit()
 
         kakao_login_button.setOnClickListener {
+            editor.putString("social", "kakao")
+            editor.commit()
             tryKaKaoLogin(pref)
         }
 
         naver_login_button.setOnClickListener {
+            editor.putString("social", "naver")
+            editor.commit()
             tryNaverLogin(pref)
         }
 
@@ -94,7 +99,8 @@ class LoginActivity : AppCompatActivity(), CoroutineScope {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ token ->
                 Log.i(TAG, "로그인 성공 ${token.accessToken}")
-                getUserTokenUsingKakaoToken(token.accessToken, pref)
+                verifyJWT(token.accessToken, pref)
+//                getUserTokenUsingKakaoToken(token.accessToken, pref)
 
             }, { error ->
                 Log.e(TAG, "로그인 실패", error)
@@ -102,7 +108,8 @@ class LoginActivity : AppCompatActivity(), CoroutineScope {
             .addTo(disposables)
     }
 
-    private fun getUserTokenUsingKakaoToken(token: String, pref: SharedPreferences) {
+    private fun getUserTokenUsingKakaoToken(token: String, pref: SharedPreferences) = launch {
+
         val editor = pref.edit()
 
         Log.d(TAG, "param token ${token}")
@@ -152,20 +159,32 @@ class LoginActivity : AppCompatActivity(), CoroutineScope {
             .addTo(disposables)
     }
 
-    private fun verifyJWT(jwt: String, pref: SharedPreferences) {
-        httpCall?.verifyJWT(jwt)?.enqueue(object : Callback<Void> {
-            override fun onFailure(call: Call<Void>, t: Throwable) {
+    private fun verifyJWT(jwt: String, pref: SharedPreferences) = launch {
+        httpCall?.verifyJWT(jwt)?.enqueue(object : Callback<User_REQUEST_POJO> {
+            override fun onFailure(call: Call<User_REQUEST_POJO>, t: Throwable) {
                 Log.d(TAG, "kakaologin - onFailed() called / t: ${t}")
                 tryKaKaoLogin(pref)
             }
 
-            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+            override fun onResponse(call: Call<User_REQUEST_POJO>, response: Response<User_REQUEST_POJO>) {
                 when (response.code()) {
                     200 -> {
-                        startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-                        finish()
+                        Log.d("로그그","${response.body()!!.ageRange}")
+                        if(response.body()!!.ageRange != 0) {
+                            //이미 프로필 세팅한 적이 있으면
+                            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                            finish()
+                        }
+                        else {
+                            startActivity(Intent(this@LoginActivity, SetProfileActivity::class.java))
+                            finish()
+                        }
                     }
                     else -> {
+                        Log.d("로그그","토큰유효x")
+                        var social = pref.getString("social", "")
+                        if(social == "kakao") getUserTokenUsingKakaoToken(jwt, pref)
+                        else if(social == "naver") getUserTokenUsingNaverToken(jwt, pref)
                         Log.d(TAG,"토큰 유효하지 않음")
                     }
                 }
@@ -201,7 +220,8 @@ class LoginActivity : AppCompatActivity(), CoroutineScope {
                     val expiresAt: Long = mOAuthLoginModule.getExpiresAt(this@LoginActivity)
                     val tokenType: String = mOAuthLoginModule.getTokenType(this@LoginActivity)
 
-                    getUserTokenUsingNaverToken(accessToken, pref)
+                    verifyJWT(accessToken, pref)
+//                    getUserTokenUsingNaverToken(accessToken, pref)
 
                     Log.d(TAG,"naver token: $accessToken")
                 } else {

@@ -100,6 +100,10 @@ class AddWorryActivity : AppCompatActivity(), CoroutineScope {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.title = ""
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_toolbar_cancel)
+
+        selectPictureImage.visibility = View.GONE
+        cameraImage.visibility = View.GONE
+
         selectImage.visibility = View.GONE
         photoClearImage.visibility = View.GONE
 

@@ -99,8 +99,8 @@ class LoginActivity : AppCompatActivity(), CoroutineScope {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ token ->
                 Log.i(TAG, "로그인 성공 ${token.accessToken}")
-                verifyJWT(token.accessToken, pref)
-//                getUserTokenUsingKakaoToken(token.accessToken, pref)
+//                verifyJWT(token.accessToken, pref)
+                getUserTokenUsingKakaoToken(token.accessToken, pref)
 
             }, { error ->
                 Log.e(TAG, "로그인 실패", error)
@@ -126,9 +126,11 @@ class LoginActivity : AppCompatActivity(), CoroutineScope {
                         editor.putString("social", "kakao")
                         editor.commit()
 
-                        Log.d(TAG,"jwt: ${response.body()?.jwt.toString()}")
-                        startActivity(Intent(this@LoginActivity, SetProfileActivity::class.java))
-                        finish()
+                        verifyJWT(response.body()?.jwt.toString(), pref)
+
+//                        Log.d(TAG,"jwt: ${response.body()?.jwt.toString()}")
+//                        startActivity(Intent(this@LoginActivity, SetProfileActivity::class.java))
+//                        finish()
                     }
                     400 -> {
                         Log.d(TAG, "kakaologin - 400 onFailed() called / t: ${response.body()}")
@@ -160,6 +162,7 @@ class LoginActivity : AppCompatActivity(), CoroutineScope {
     }
 
     private fun verifyJWT(jwt: String, pref: SharedPreferences) = launch {
+        val editor = pref.edit()
         httpCall?.verifyJWT(jwt)?.enqueue(object : Callback<User_REQUEST_POJO> {
             override fun onFailure(call: Call<User_REQUEST_POJO>, t: Throwable) {
                 Log.d(TAG, "kakaologin - onFailed() called / t: ${t}")
@@ -172,6 +175,21 @@ class LoginActivity : AppCompatActivity(), CoroutineScope {
                         Log.d("로그그","${response.body()!!.ageRange}")
                         if(response.body()!!.ageRange != 0) {
                             //이미 프로필 세팅한 적이 있으면
+                            editor.putInt("ageRange", response.body()!!.ageRange)
+                            editor.putString("userName", response.body()!!.nickname)
+                            editor.putString("profileImage", response.body()!!.profileImage)
+                            editor.putLong("userId", response.body()!!.userId)
+
+                            var hashTag = response.body()!!.userHashtags
+                            var hashTagString = ""
+                            for (next in hashTag) {
+                                hashTagString += "$next,"
+                            }
+                            hashTagString = hashTagString.substring(0..hashTagString.length-2) // Split으로 parsing하여 사용
+                            Log.d(TAG, hashTagString)
+                            editor.putString("hashTags",hashTagString)
+                            editor.commit()
+
                             startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                             finish()
                         }
@@ -181,10 +199,8 @@ class LoginActivity : AppCompatActivity(), CoroutineScope {
                         }
                     }
                     else -> {
-                        Log.d("로그그","토큰유효x")
-                        var social = pref.getString("social", "")
-                        if(social == "kakao") getUserTokenUsingKakaoToken(jwt, pref)
-                        else if(social == "naver") getUserTokenUsingNaverToken(jwt, pref)
+                        startActivity(Intent(this@LoginActivity, SetProfileActivity::class.java))
+                        finish()
                         Log.d(TAG,"토큰 유효하지 않음")
                     }
                 }
@@ -220,8 +236,8 @@ class LoginActivity : AppCompatActivity(), CoroutineScope {
                     val expiresAt: Long = mOAuthLoginModule.getExpiresAt(this@LoginActivity)
                     val tokenType: String = mOAuthLoginModule.getTokenType(this@LoginActivity)
 
-                    verifyJWT(accessToken, pref)
-//                    getUserTokenUsingNaverToken(accessToken, pref)
+//                    verifyJWT(accessToken, pref)
+                    getUserTokenUsingNaverToken(accessToken, pref)
 
                     Log.d(TAG,"naver token: $accessToken")
                 } else {
@@ -263,18 +279,20 @@ class LoginActivity : AppCompatActivity(), CoroutineScope {
                         editor.putString("social", "naver")
                         editor.commit()
 
+                        verifyJWT(response.body()?.jwt.toString() ,pref)
 
-                        Log.d(TAG,"jwt: ${response.body()?.jwt.toString()}")
-                        if(response.body()?.jwt.toString() != "null") {
-                            startActivity(
-                                Intent(
-                                    this@LoginActivity,
-                                    SetProfileActivity::class.java
-                                )
-                            )
-                            finish()
-                        }
-                        else Toast.makeText(this@LoginActivity, "계정 정보를 확인해주세요", Toast.LENGTH_LONG).show()
+
+//                        Log.d(TAG,"jwt: ${response.body()?.jwt.toString()}")
+//                        if(response.body()?.jwt.toString() != "null") {
+//                            startActivity(
+//                                Intent(
+//                                    this@LoginActivity,
+//                                    SetProfileActivity::class.java
+//                                )
+//                            )
+//                            finish()
+//                        }
+//                        else Toast.makeText(this@LoginActivity, "계정 정보를 확인해주세요", Toast.LENGTH_LONG).show()
                     }
                     400 -> {
                         Log.d(TAG, "naverlogin - 400 onFailed() called / t: ${response.body()}")

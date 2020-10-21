@@ -72,6 +72,7 @@ class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
 
         val pref = getSharedPreferences(Constants.PREFERENCE, MODE_PRIVATE)
         userId = pref.getLong("userId", (0).toLong())
+        Log.d("로그그", "$userId")
         userName = pref.getString("userName", "")
         profile_image = pref.getString("profileImage", profile_image_default).toString()
 
@@ -148,7 +149,10 @@ class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
 
     private fun setUpClickListener() = launch {
         sendImage.setOnClickListener {
-            if(counselDetailViewModel?.counsel?.value!!.content.isEmpty()) {
+            if(userName == "") {
+                showToast("로그인 후에 이용해주세요")
+            }
+            else if(counselDetailViewModel?.counsel?.value!!.content.isEmpty()) {
                 showToast("댓글을 입력해주세요")
             }
             else {

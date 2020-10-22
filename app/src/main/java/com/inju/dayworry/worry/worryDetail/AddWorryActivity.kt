@@ -37,33 +37,30 @@ import androidx.lifecycle.ViewModelProvider
 import com.inju.dayworry.BuildConfig
 import com.inju.dayworry.R
 import com.inju.dayworry.utils.Constants
-import com.inju.dayworry.utils.Constants.TAG
 import com.inju.dayworry.worry.worryDetail.buildlogic.WorryDetailInjector
 import kotlinx.android.synthetic.main.activity_add_worry.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import okhttp3.MediaType
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
-import okhttp3.RequestBody.Companion.asRequestBody
-import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.coroutines.CoroutineContext
+import com.inju.dayworry.utils.Constants.TAG
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 
 class AddWorryActivity : AppCompatActivity(), CoroutineScope {
 
     private lateinit var job: Job
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + job
-
-    var addPhoto = false
 
     var search: Button? = null
     var fileUri: Uri? = null
@@ -78,11 +75,14 @@ class AddWorryActivity : AppCompatActivity(), CoroutineScope {
     val REQUEST_TAKE_PHOTO_ALBUM = 2
     private var worryDetailViewModel: WorryDetailViewModel? = null
 
+    private var rqBody: RequestBody = path.toRequestBody("image/jpeg".toMediaTypeOrNull())
+    private var body : MultipartBody.Part = MultipartBody.Part.createFormData("postImage", "fileName", rqBody)
+
+
     private var hashTag: String? = "empty"
     private var userId: Long = -1
     private var defaultId: Long = -1
-    private var rqBody: RequestBody = path.toRequestBody("image/jpeg".toMediaTypeOrNull())
-    private var body : MultipartBody.Part = MultipartBody.Part.createFormData("postImage", "fileName", rqBody)
+    private var addPhoto = false
 
     var litePupleColor = "#9689FC" // 텍스트 색상
     var superLiteGreyColor = "#cbcdd5" // 텍스트 색상
@@ -103,10 +103,6 @@ class AddWorryActivity : AppCompatActivity(), CoroutineScope {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.title = ""
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_toolbar_cancel)
-
-//        selectPictureImage.visibility = View.GONE
-//        cameraImage.visibility = View.GONE
-
         selectImage.visibility = View.GONE
         photoClearImage.visibility = View.GONE
 
@@ -163,7 +159,6 @@ class AddWorryActivity : AppCompatActivity(), CoroutineScope {
         photoClearImage.setOnClickListener {
             path = ""
             addPhoto = false
-            rqBody = path.toRequestBody("image/jpeg".toMediaTypeOrNull())
             selectImage.visibility = View.GONE
             photoClearImage.visibility = View.GONE
 
@@ -234,9 +229,7 @@ class AddWorryActivity : AppCompatActivity(), CoroutineScope {
                         path = getRealPathFromURI(this@AddWorryActivity, fileUri)!!
 
                         rqBody = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
-
                         body = MultipartBody.Part.createFormData("file", file.name, rqBody)
-                        addPhoto = true
 
 
                         selectPictureImage.visibility = View.GONE
@@ -245,18 +238,18 @@ class AddWorryActivity : AppCompatActivity(), CoroutineScope {
                         selectImage.visibility = View.VISIBLE
                         selectImage.setImageURI(fileUri)
                         photoClearImage.visibility = View.VISIBLE
+
+                        addPhoto = true
                     }
                 }
                 SELECT_GALLERY_PHOTO -> { // result for select gallery photo
                     if (resultCode == Activity.RESULT_OK) {
-                        val file = File(mCurrentPhotoPath)
                         fileUri = data?.data
                         path = getRealPathFromURI(this, fileUri)!!
+                        var file = File(path)
 
                         rqBody = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
-
                         body = MultipartBody.Part.createFormData("file", file.name, rqBody)
-                        addPhoto = true
 
                         selectPictureImage.visibility = View.GONE
                         cameraImage.visibility = View.GONE
@@ -264,6 +257,8 @@ class AddWorryActivity : AppCompatActivity(), CoroutineScope {
                         selectImage.visibility = View.VISIBLE
                         selectImage.setImageURI(fileUri)
                         photoClearImage.visibility = View.VISIBLE
+
+                        addPhoto = true
                     }
                 }
             }
@@ -301,6 +296,7 @@ class AddWorryActivity : AppCompatActivity(), CoroutineScope {
                     bitmap = Bitmap.createScaledBitmap(bitmap, 1280, 1280, true) // 이미지 사이즈 줄이기
                 }
             } catch (ex: OutOfMemoryError) {
+                Log.d(TAG, "원본반환")
                 // 메모리가 부족하여 회전을 시키지 못할 경우 그냥 원본을 반환합니다.
             }
         }
@@ -486,13 +482,6 @@ class AddWorryActivity : AppCompatActivity(), CoroutineScope {
     }
 
     private fun worryLoading(worryId: Long) = launch {
-        addWorryLoadingUi.visibility = View.VISIBLE
-
-        selectPictureImage.visibility = View.GONE
-        cameraImage.visibility = View.GONE
-        titleEdit.visibility = View.GONE
-        contentEdit.visibility = View.GONE
-
         worryDetailViewModel!!.getWorryById(worryId).join()
         hashTag = worryDetailViewModel!!.worry.value?.tagName
         setExistingTag(hashTag!!)
@@ -505,15 +494,6 @@ class AddWorryActivity : AppCompatActivity(), CoroutineScope {
             selectImage.setImageURI(Uri.parse(worryDetailViewModel!!.worry.value?.postImage))
             photoClearImage.visibility = View.VISIBLE
         }
-        else {
-            selectPictureImage.visibility = View.VISIBLE
-            cameraImage.visibility = View.VISIBLE
-        }
-
-        titleEdit.visibility = View.VISIBLE
-        contentEdit.visibility = View.GONE
-
-        addWorryLoadingUi.visibility = View.GONE
     }
 
     private fun setExistingTag(hashTag: String) {

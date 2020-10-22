@@ -42,12 +42,6 @@ class WorryDetailViewModel(
 
         repo.addOrUpdateWorry(contents)
 
-//        repo.addOrUpdateWorry(worry.value!!.content,
-//            worry.value!!.postId,
-//            imagePath,
-//            tageName,
-//            worry.value!!.title,
-//            userId)
     }
 
     fun postImage(file: MultipartBody.Part) = launch {

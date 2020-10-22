@@ -69,22 +69,13 @@ interface ApiService {
     fun deleteUser(@Path("userId") userId: Long): Call<Void>
 
     //고민 수정
-//    @Multipart
     @POST("posts/")
     suspend fun addOrUpdateWorry(@Body contents: Contents): Response<Unit>
-//    suspend fun addOrUpdateWorry(
-//        @Query ("content") content: String,
-//        @Query ("postId") postId: Long,
-//        @Part postImage: MultipartBody.Part,
-//        @Query ("tagName") tagName: String,
-//        @Query ("title") title: String,
-//        @Query ("userId") userId: Long
-//    ): Response<Unit>
 
     //고민 사진 보내기
     @Multipart
     @POST("posts/image")
-    suspend fun postImage(@Part file: MultipartBody.Part): String
+    suspend fun postImage(@Part file: MultipartBody.Part): IMAGE_RETURN_POJO
 
     //고민 삭제
     @DELETE("posts/{postId}")

@@ -51,13 +51,11 @@ class DayWorryRepoImpl(
     }
 
     override suspend fun addOrUpdateWorry(contents: Contents)  {
-//    override suspend fun addOrUpdateWorry(content: String, postId: Long, postImage: MultipartBody.Part, tagName: String, title: String, userId: Long)  {
         httpCall?.addOrUpdateWorry(contents)
-//        httpCall?.addOrUpdateWorry(content, postId, postImage, tagName, title, userId)
     }
 
     override suspend fun postImage(file: MultipartBody.Part): String {
-        return httpCall?.postImage(file)!!
+        return httpCall?.postImage(file)!!.imgPath
     }
 
     override suspend fun deleteWorry(postId : Long) {

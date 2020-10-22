@@ -16,7 +16,6 @@ interface IDayWorryRepository {
     suspend fun keywordSearch(tagName: String, pageNum: Int): MutableList<Worry>
     suspend fun getWorryById(postId: Long): Worry
     suspend fun addOrUpdateWorry(contents: Contents)
-//    suspend fun addOrUpdateWorry(content: String, postId: Long, postImage: MultipartBody.Part, tagName: String, title: String, userId: Long)
     suspend fun postImage(file: MultipartBody.Part): String
 
     suspend fun deleteWorry(postId: Long)

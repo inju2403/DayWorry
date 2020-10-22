@@ -3,6 +3,7 @@ package com.inju.dayworry.login
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Build
@@ -10,8 +11,6 @@ import android.os.Bundle
 import android.util.Base64
 import android.util.Base64.NO_WRAP
 import android.util.Log
-import android.view.Gravity
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.inju.dayworry.MainActivity
@@ -175,7 +174,7 @@ class LoginActivity : AppCompatActivity(), CoroutineScope {
                         Log.d("로그그","${response.body()!!.ageRange}")
                         if(response.body()!!.ageRange != 0) {
                             //이미 프로필 세팅한 적이 있으면
-                            editor.putInt("ageRange", response.body()!!.ageRange)
+                            editor.putInt("userAge", response.body()!!.ageRange)
                             editor.putString("userName", response.body()!!.nickname)
                             editor.putString("profileImage", response.body()!!.profileImage)
                             editor.putLong("userId", response.body()!!.userId)

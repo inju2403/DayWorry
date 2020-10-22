@@ -48,6 +48,7 @@ import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.ByteArrayOutputStream
 import java.io.File
@@ -61,6 +62,8 @@ class AddWorryActivity : AppCompatActivity(), CoroutineScope {
     private lateinit var job: Job
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + job
+
+    var addPhoto = false
 
     var search: Button? = null
     var fileUri: Uri? = null
@@ -101,8 +104,8 @@ class AddWorryActivity : AppCompatActivity(), CoroutineScope {
         supportActionBar!!.title = ""
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_toolbar_cancel)
 
-        selectPictureImage.visibility = View.GONE
-        cameraImage.visibility = View.GONE
+//        selectPictureImage.visibility = View.GONE
+//        cameraImage.visibility = View.GONE
 
         selectImage.visibility = View.GONE
         photoClearImage.visibility = View.GONE
@@ -159,6 +162,7 @@ class AddWorryActivity : AppCompatActivity(), CoroutineScope {
 
         photoClearImage.setOnClickListener {
             path = ""
+            addPhoto = false
             rqBody = path.toRequestBody("image/jpeg".toMediaTypeOrNull())
             selectImage.visibility = View.GONE
             photoClearImage.visibility = View.GONE
@@ -229,9 +233,11 @@ class AddWorryActivity : AppCompatActivity(), CoroutineScope {
                         fileUri = getImageUri(this@AddWorryActivity, myBitmap)
                         path = getRealPathFromURI(this@AddWorryActivity, fileUri)!!
 
-                        rqBody = path.toRequestBody("image/jpeg".toMediaTypeOrNull())
-                        body = MultipartBody.Part.createFormData("postImage", file.name, rqBody)
-                        Log.d("로그그", "$rqBody")
+                        rqBody = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
+
+                        body = MultipartBody.Part.createFormData("file", file.name, rqBody)
+                        addPhoto = true
+
 
                         selectPictureImage.visibility = View.GONE
                         cameraImage.visibility = View.GONE
@@ -247,9 +253,10 @@ class AddWorryActivity : AppCompatActivity(), CoroutineScope {
                         fileUri = data?.data
                         path = getRealPathFromURI(this, fileUri)!!
 
-                        rqBody = path.toRequestBody("image/jpeg".toMediaTypeOrNull())
-                        body = MultipartBody.Part.createFormData("postImage", file.name, rqBody)
-                        Log.d("로그그", "$rqBody")
+                        rqBody = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
+
+                        body = MultipartBody.Part.createFormData("file", file.name, rqBody)
+                        addPhoto = true
 
                         selectPictureImage.visibility = View.GONE
                         cameraImage.visibility = View.GONE
@@ -468,7 +475,7 @@ class AddWorryActivity : AppCompatActivity(), CoroutineScope {
             }
             else -> {
                 addWorryLoadingUi.visibility = View.VISIBLE
-//                worryDetailViewModel!!.postImage(body).join()
+                if(addPhoto) worryDetailViewModel!!.postImage(body).join()
                 worryDetailViewModel!!.addOrUpdateWorry(userId, hashTag!!).join()
                 val intent = Intent()
                 setResult(RESULT_OK, intent)

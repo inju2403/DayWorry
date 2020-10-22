@@ -39,6 +39,7 @@ import kotlinx.android.synthetic.main.activity_worry_detail.profileImage
 import kotlinx.android.synthetic.main.activity_worry_detail.tagBtn
 import kotlinx.android.synthetic.main.activity_worry_detail.timeText
 import kotlinx.android.synthetic.main.activity_worry_detail.titleText
+import kotlinx.android.synthetic.main.fragment_home1.*
 import kotlinx.android.synthetic.main.item_worry.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -82,7 +83,7 @@ class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
         job = Job()
 
         setViewModel()
-        setProfileImage()
+        setImage()
         setTextChangeListener()
         setUpClickListener()
         setLayoutManager()
@@ -96,6 +97,7 @@ class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
         contentText.visibility = View.GONE
         commentRecyclerView.visibility = View.GONE
         detailLoadingUi.visibility = View.GONE
+        postImageView.visibility = View.GONE
     }
     private fun setViewModel() {
         worryDetailViewModel = application!!.let {
@@ -122,18 +124,24 @@ class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
         counselDetailViewModel?.initCounsel()
     }
 
-    private fun setProfileImage() = launch {
+    private fun setImage() = launch {
         worryId = intent.getLongExtra("WORRY_ID", -1)
         if(worryId != (-1).toLong()) {
             worryLoading(worryId!!).join()
         }
 
-        var imageUrl = worryDetailViewModel?.worry?.value?.userProfileImage
-        Log.d(Constants.TAG, "이미지 url: $imageUrl")
+        var profileImageUrl = worryDetailViewModel?.worry?.value?.userProfileImage
+        Log.d(Constants.TAG, "이미지 url: $profileImageUrl")
         Glide.with(this@WorryDetailActivity)
-            .load(imageUrl)
+            .load(profileImageUrl)
             .apply(RequestOptions.bitmapTransform(RoundedCorners(32)))
             .into(profileImage)
+
+        var postImageUrl = worryDetailViewModel?.worry?.value?.postImage
+        if(postImageUrl != "") {
+            Glide.with(this@WorryDetailActivity).load(postImageUrl).into(postImageView)
+            postImageView.visibility = View.VISIBLE
+        }
     }
 
     private fun setTextChangeListener() {

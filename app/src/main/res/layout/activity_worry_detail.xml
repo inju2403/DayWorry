@@ -165,12 +165,25 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/timeTagLayout" />
 
+            <ImageView
+                android:id="@+id/postImageView"
+                android:layout_width="0dp"
+                android:layout_height="188dp"
+                android:layout_marginStart="20dp"
+                android:scaleType="centerCrop"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/timeTagLayout"
+                app:srcCompat="@drawable/ic_image_sample" />
+
             <TextView
                 android:id="@+id/contentText"
                 android:layout_width="0dp"
                 android:layout_height="407dp"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="137dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="20dp"
                 android:text=""
                 android:textColor="@color/whiteColor"
@@ -178,7 +191,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/titleLayout" />
+                app:layout_constraintTop_toBottomOf="@+id/postImageView" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

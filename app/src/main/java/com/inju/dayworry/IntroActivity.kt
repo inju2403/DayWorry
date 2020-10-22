@@ -16,6 +16,7 @@ import com.inju.dayworry.retrofit.ApiService
 import com.inju.dayworry.retrofit.RetrofitClient
 import com.inju.dayworry.utils.Constants
 import com.inju.dayworry.utils.Constants.PREFERENCE
+import kotlinx.android.synthetic.main.activity_intro.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -38,6 +39,8 @@ class IntroActivity : AppCompatActivity() {
                 View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY or
                 View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or
                 View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+
+        showLottieView()
     }
 
     override fun onResume() {
@@ -120,5 +123,10 @@ class IntroActivity : AppCompatActivity() {
         super.onPause()
 
         handler?.removeCallbacks(runnable)
+    }
+
+    private fun showLottieView() {
+        splashLottieView.playAnimation()
+        splashLottieView.loop(true)
     }
 }

@@ -1,5 +1,6 @@
 package com.inju.dayworry.counsel.counselList
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.inju.dayworry.R
 import com.inju.dayworry.model.pojo.Counsel
+import com.inju.dayworry.utils.Constants.TAG
 import com.inju.dayworry.worry.worryDetail.WorryDetailActivity
 import com.inju.dayworry.worry.worryList.WorryListEvent
 import kotlinx.android.synthetic.main.item_counsel.view.*
@@ -47,7 +49,8 @@ class CounselListAdapter(private val list: MutableList<Counsel>,
         holder.containerView.userNameText.text = list[position].nickname
         holder.containerView.counselContent.text = list[position].content
 
-        var createdTime = list[position].createdDate.substring(14..18)
+        Log.d(TAG, "${list[position].createdDate}")
+        var createdTime = list[position].createdDate.substring(11..15)
         if(createdTime[0] == '0' || createdTime.substring(0..1).toInt() < 12) {
             if(createdTime[0] == '0') createdTime = createdTime.substring(1..3)
             createdTime = "AM $createdTime"

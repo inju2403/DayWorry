@@ -9,7 +9,7 @@
     tools:context=".worry.worryList.WorryListFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:background="@color/liteNavyColor"
+        android:background="@drawable/search_border"
         android:id="@+id/searchClickLayout"
         android:layout_width="match_parent"
         android:layout_height="40dp"

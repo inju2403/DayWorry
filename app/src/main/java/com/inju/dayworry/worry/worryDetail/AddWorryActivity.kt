@@ -34,6 +34,7 @@ import androidx.core.content.FileProvider
 import androidx.exifinterface.media.ExifInterface
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import com.inju.dayworry.BuildConfig
 import com.inju.dayworry.R
 import com.inju.dayworry.utils.Constants
@@ -490,8 +491,8 @@ class AddWorryActivity : AppCompatActivity(), CoroutineScope {
             selectPictureImage.visibility = View.GONE
             cameraImage.visibility = View.GONE
 
+            Glide.with(this@AddWorryActivity).load(Uri.parse(worryDetailViewModel!!.worry.value?.postImage)).into(selectImage)
             selectImage.visibility = View.VISIBLE
-            selectImage.setImageURI(Uri.parse(worryDetailViewModel!!.worry.value?.postImage))
             photoClearImage.visibility = View.VISIBLE
         }
     }

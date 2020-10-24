@@ -52,10 +52,11 @@ class CounselListAdapter(private val list: MutableList<Counsel>,
         Log.d(TAG, "${list[position].createdDate}")
         var createdTime = list[position].createdDate.substring(11..15)
         if(createdTime[0] == '0' || createdTime.substring(0..1).toInt() < 12) {
-            if(createdTime[0] == '0') createdTime = createdTime.substring(1..3)
+            if(createdTime[0] == '0') createdTime = createdTime.substring(1..4)
             createdTime = "AM $createdTime"
         }
         else {
+
             val createdTimeHour = createdTime.substring(0..1).toInt() - 12
             createdTime = "PM " + createdTimeHour.toString() + createdTime.substring(2..4)
         }

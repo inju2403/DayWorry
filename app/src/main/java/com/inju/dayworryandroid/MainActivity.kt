@@ -235,7 +235,7 @@ class MainActivity : AppCompatActivity() {
                 notiJudge = 0
                 myPageJudge = 0
                 counselTapView.setImageResource(R.drawable.ic_home_unchecked)
-                worryTapView.setImageResource(R.drawable.ic_worry_list_unchecked)
+                worryTapView.setImageResource(R.drawable.ic_worry_list_checked)
                 notiTapView.setImageResource(R.drawable.ic_noti_unchecked)
                 myPageTapView.setImageResource(R.drawable.ic_mypage_uncheced)
                 switchFragment(FRAG_WORRY)

@@ -53,13 +53,8 @@ class HomeListFragment : Fragment(), CoroutineScope {
         super.onActivityCreated(savedInstanceState)
 
         job = Job()
-        val pref = activity!!.getSharedPreferences(Constants.PREFERENCE, AppCompatActivity.MODE_PRIVATE)
-        userName = pref.getString("userName", "").toString()
-        jwt = pref.getString("jwt", "").toString()
 
-        if(jwt == "") explainSubText.text = "지금 많은 사람들이\n공감한 고민을 보여드릴게요!"
-        else explainSubText.text = "$userName 님이\n공감할 고민이 있어요!"
-
+        setUserInfo()
         setHomeComponents()
 
     }
@@ -118,9 +113,19 @@ class HomeListFragment : Fragment(), CoroutineScope {
         }
     }
 
+    private fun setUserInfo() {
+        val pref = activity!!.getSharedPreferences(Constants.PREFERENCE, AppCompatActivity.MODE_PRIVATE)
+        userName = pref.getString("userName", "").toString()
+        jwt = pref.getString("jwt", "").toString()
+
+        if(jwt == "") explainSubText.text = "지금 많은 사람들이\n공감한 고민을 보여드릴게요!"
+        else explainSubText.text = "$userName 님이\n공감할 고민이 있어요!"
+    }
+
     override fun onResume() {
         super.onResume()
 
+        setUserInfo()
         setHomeComponents()
     }
 

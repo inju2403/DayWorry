@@ -1,5 +1,6 @@
 ## Link    
-[DayWorry](https://www.youtube.com/watch?v=uprBOfF8Jzs)      
+[Play Store](https://play.google.com/store/apps/details?id=com.inju.dayworryandroid)      
+[하루고민 영상](https://www.youtube.com/watch?v=CGq7LSSuSJM)      
 
 # 하루 고민 (Android Sharing Concerns App)    
 

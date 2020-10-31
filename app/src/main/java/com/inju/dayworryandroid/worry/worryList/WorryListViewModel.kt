@@ -47,9 +47,9 @@ class WorryListViewModel(
         storyState.value = repo.getStorys()
     }
 
-    fun getMainWorrys() = launch {
+    fun getMainWorrys(userId: Long) = launch {
         // 메인 홈 탭에서 추천 고민 3개를 가져옴
-        mainWorryListState.value = repo.getMainWorrys()
+        mainWorryListState.value = repo.getMainWorrys(userId)
     }
 
     //현재 게시중인 내 고민 리스트

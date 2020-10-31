@@ -37,6 +37,7 @@ class HomeListFragment : Fragment(), CoroutineScope {
     private lateinit var viewPager: ViewPager2
 
     private var worryList = mutableListOf<Worry>()
+    private var userId: Long = -1
 
     private lateinit var userName: String
     private lateinit var jwt: String
@@ -53,6 +54,8 @@ class HomeListFragment : Fragment(), CoroutineScope {
         super.onActivityCreated(savedInstanceState)
 
         job = Job()
+        val pref = activity!!.getSharedPreferences(Constants.PREFERENCE, AppCompatActivity.MODE_PRIVATE)
+        userId = pref.getLong("userId", -1)
 
         setUserInfo()
         setHomeComponents()
@@ -76,7 +79,7 @@ class HomeListFragment : Fragment(), CoroutineScope {
                 .get(WorryListViewModel::class.java)
         }
 
-        worryListViewModel?.getMainWorrys()?.join()
+        worryListViewModel?.getMainWorrys(userId)?.join()
         worryList = worryListViewModel?.mainWorryList?.value!!
         Log.d(TAG, "main worrylist: $worryList")
     }

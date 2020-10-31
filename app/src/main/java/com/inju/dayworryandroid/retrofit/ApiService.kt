@@ -35,7 +35,7 @@ interface ApiService {
 
     //메인 홈 탭에서 고민 리스트(3개) 받기
     @GET("posts/main")
-    suspend fun getMainWorrys(): MutableList<Worry>
+    suspend fun getMainWorrys(@Query("userId") userId: Long): MutableList<Worry>
 
     //고민 리스트 받기 -> 페이징 (현재페이지, 페이지당 아이템 갯수)
     @GET("posts/home/{tagName}")

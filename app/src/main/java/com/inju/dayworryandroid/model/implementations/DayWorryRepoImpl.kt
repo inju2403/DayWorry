@@ -24,8 +24,8 @@ class DayWorryRepoImpl(
     val str = pref.getString("token", "").toString()
     val token = "JWT $str"
 
-    override suspend fun getMainWorrys(): MutableList<Worry> {
-        return httpCall?.getMainWorrys()!!
+    override suspend fun getMainWorrys(userId: Long): MutableList<Worry> {
+        return httpCall?.getMainWorrys(userId)!!
     }
 
     override suspend fun getMyWorrys(userId: Long, pageNum: Int): MutableList<Worry> {

@@ -7,7 +7,7 @@ import com.inju.dayworryandroid.model.pojo.Worry
 import okhttp3.MultipartBody
 
 interface IDayWorryRepository {
-    suspend fun getMainWorrys(): MutableList<Worry>
+    suspend fun getMainWorrys(userId: Long): MutableList<Worry>
     suspend fun getMyWorrys(userId: Long, pageNum: Int): MutableList<Worry>
     suspend fun getHistory(userId: Long, pageNum: Int): MutableList<Worry>
     suspend fun getWorrys(tagName: String, pageNum: Int): MutableList<Worry>

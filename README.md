@@ -68,7 +68,7 @@ worryListState.value = repo.getWorrys() // get data from API and/or DB
 
 * **LEE SEUNGJU**
     * **Github** - (https://github.com/inju2403)
-    * **Blog**    - (https://inju2403.blog.me)
+    * **Blog**    - (https://blog.naver.com/inju2403)
 
 
 

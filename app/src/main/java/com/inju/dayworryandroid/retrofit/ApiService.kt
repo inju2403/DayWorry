@@ -55,6 +55,7 @@ interface ApiService {
 
     // 지난 내 고민 리스트 받기
     @GET("users/history/{userId}")
+//    fun getHistory(@Path("userId") userId: Long, @Query("pageNum") pageNum: Int): Single<MutableList<Worry>>
     suspend fun getHistory(@Path("userId") userId: Long,
                            @Query("pageNum") pageNum: Int): MutableList<Worry>
 

@@ -60,6 +60,9 @@ class LoginActivity : AppCompatActivity(), CoroutineScope {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        var keyHash = getHashKey(this)
+        Log.d(TAG, keyHash)
+
         job = Job()
 
         val pref = getSharedPreferences(PREFERENCE, MODE_PRIVATE)

@@ -25,55 +25,120 @@ class DayWorryRepoImpl(
     val token = "JWT $str"
 
     override suspend fun getMainWorrys(userId: Long): MutableList<Worry> {
-        return httpCall?.getMainWorrys(userId)!!
+        try {
+            return httpCall?.getMainWorrys(userId)!!
+        }catch (e: Exception) {
+            e.printStackTrace()
+            throw e
+        }
     }
 
     override suspend fun getMyWorrys(userId: Long, pageNum: Int): MutableList<Worry> {
-        return httpCall?.getMyWorrys(userId, pageNum)!!
+        try {
+            return httpCall?.getMyWorrys(userId, pageNum)!!
+        }catch (e: Exception) {
+            e.printStackTrace()
+            throw e
+        }
     }
 
     override suspend fun getHistory(userId: Long, pageNum: Int): MutableList<Worry> {
-        return httpCall?.getHistory(userId, pageNum)!!
+        try {
+            return httpCall?.getHistory(userId, pageNum)!!
+        }catch (e: Exception) {
+            e.printStackTrace()
+            throw e
+        }
     }
 
     override suspend fun getWorrys(tagName: String, pageNum: Int): MutableList<Worry> {
-        return httpCall?.getWorrys(tagName, pageNum)!!
+        try {
+            return httpCall?.getWorrys(tagName, pageNum)!!
+        }catch (e: Exception) {
+            e.printStackTrace()
+            throw e
+        }
     }
 
     override suspend fun keywordSearch(tagName: String, pageNum: Int): MutableList<Worry> {
-        return httpCall?.keywordSearch(tagName, pageNum)!!
+        try {
+            return httpCall?.keywordSearch(tagName, pageNum)!!
+        }catch (e: Exception) {
+            e.printStackTrace()
+            throw e
+        }
     }
 
     override suspend fun getWorryById(postId : Long) : Worry {
-        return httpCall?.getWorryById(postId)!!
+        try {
+            return httpCall?.getWorryById(postId)!!
+        }catch (e: Exception) {
+            e.printStackTrace()
+            throw e
+        }
     }
 
     override suspend fun addOrUpdateWorry(contents: Contents)  {
-        httpCall?.addOrUpdateWorry(contents)
+        try {
+            httpCall?.addOrUpdateWorry(contents)
+        }catch (e: Exception) {
+            e.printStackTrace()
+            throw e
+        }
     }
 
     override suspend fun postImage(file: MultipartBody.Part): String {
-        return httpCall?.postImage(file)!!.imgPath
+        try {
+            return httpCall?.postImage(file)!!.imgPath
+        }catch (e: Exception) {
+            e.printStackTrace()
+            throw e
+        }
     }
 
     override suspend fun deleteWorry(postId : Long) {
-        httpCall?.deleteWorry(postId)
+        try {
+            httpCall?.deleteWorry(postId)
+        }catch (e: Exception) {
+            e.printStackTrace()
+            throw e
+        }
     }
 
     override suspend fun getComments(postId: Long, pageNum: Int, userId: Long): MutableList<Counsel> {
-        return httpCall?.getComments(postId, pageNum, userId)!!
+        try {
+            return httpCall?.getComments(postId, pageNum, userId)!!
+        }catch (e: Exception) {
+            e.printStackTrace()
+            throw e
+        }
     }
 
     override suspend fun addComment(counselRequestPojo: COUNSEL_REQUEST_POJO) {
-        httpCall?.addComment(counselRequestPojo)
+        try {
+            httpCall?.addComment(counselRequestPojo)
+        }catch (e: Exception) {
+            e.printStackTrace()
+            throw e
+        }
     }
 
     override suspend fun likeComment(commentId: Long, userId: Long) {
-        httpCall?.likeComment(commentId, userId)
+        try {
+            httpCall?.likeComment(commentId, userId)
+        }catch (e: Exception) {
+            e.printStackTrace()
+            throw e
+        }
     }
 
     override suspend fun getStorys(): MutableList<Worry> {
-        return httpCall?.getStorys()!!
+        try {
+            return httpCall?.getStorys()!!
+        }catch (e: Exception) {
+            e.printStackTrace()
+            throw e
+        }
     }
 
 

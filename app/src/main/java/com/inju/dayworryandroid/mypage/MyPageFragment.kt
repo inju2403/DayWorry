@@ -70,7 +70,7 @@ class MyPageFragment : Fragment(), CoroutineScope {
     private lateinit var userName: String
     private lateinit var social: String
     private lateinit var profile_image: String
-    private var defaultImage: String = "https://hago-storage-bucket.s3.ap-northeast-2.amazonaws.com/default_01.jpg"
+    private var defaultImage: String = "https://hago.s3.ap-northeast-2.amazonaws.com/default_01.jpg"
     private val defaultLong: Long = 1
 
     private lateinit var pref: SharedPreferences

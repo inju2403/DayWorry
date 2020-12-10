@@ -78,7 +78,7 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
     private var userAge: String = ""
     private var hashTagString: String = ""
     private var profileImage: String = ""
-    private var defaultImage: String = "https://hago-storage-bucket.s3.ap-northeast-2.amazonaws.com/default_01.jpg"
+    private var defaultImage: String = "https://hago.s3.ap-northeast-2.amazonaws.com/default_01.jpg"
     private var userName: String = ""
     private var originUserName: String = ""
 

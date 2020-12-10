@@ -67,18 +67,18 @@ object RetrofitClient {
             clientBuilder.readTimeout(5, TimeUnit.MINUTES); // read
 
 
-//            naverRetrofitClient = Retrofit.Builder()
-//                .baseUrl(baseUrl)
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .client(clientBuilder.build())
-//                .build()
-
-            retrofitClient = Retrofit.Builder()
+            naverRetrofitClient = Retrofit.Builder()
                 .baseUrl(baseUrl)
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(clientBuilder.build())
                 .build()
+
+//            retrofitClient = Retrofit.Builder()
+//                .baseUrl(baseUrl)
+//                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .client(clientBuilder.build())
+//                .build()
         }
 
         return naverRetrofitClient

@@ -21,8 +21,8 @@ interface ApiService {
     @GET("v1/nid/me")
     suspend fun getNaverInfo(@Header("Authorization") Authorization: String): JsonElement
 
-    //토큰 검증
-    @POST("users/check")
+    //토큰 검증 네이버
+    @POST("users/check/sns")
     fun verifyJWT(@Header("jwt") jwt: String): Call<User_REQUEST_POJO>
 
     //유저 정보 업데이트

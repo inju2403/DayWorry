@@ -30,8 +30,8 @@ interface ApiService {
     fun updateProfile(@Body requestDto: User_REQUEST_POJO): Call<Void>
 
     //닉네임 중복 검사
-    @GET("users/check/{nickname}")
-    suspend fun nicknameRedundancyCheck(@Path("nickname") nickname: String): NICKNAME_REDUNDANCY_RETURN_POJO
+    @GET("users/check/nickname")
+    suspend fun nicknameRedundancyCheck(@Query("nickname") nickname: String): NICKNAME_REDUNDANCY_RETURN_POJO
 
     //메인 홈 탭에서 고민 리스트(3개) 받기
     @GET("posts/main")

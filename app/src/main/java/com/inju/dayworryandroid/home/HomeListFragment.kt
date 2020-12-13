@@ -65,8 +65,8 @@ class HomeListFragment : Fragment(), CoroutineScope {
     private fun setHomeComponents() = launch {
         homeLoadingUi.visibility = View.VISIBLE
 
-        setViewModel().join()
-        setViewPager()
+//        setViewModel().join()
+//        setViewPager()
 
         homeLoadingUi.visibility = View.GONE
     }

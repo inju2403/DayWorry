@@ -26,6 +26,7 @@ import com.inju.dayworryandroid.counsel.counselList.CounselListAdapter
 import com.inju.dayworryandroid.counsel.counselList.CounselListViewModel
 import com.inju.dayworryandroid.counsel.counselList.buildlogic.CounselListInjector
 import com.inju.dayworryandroid.utils.Constants
+import com.inju.dayworryandroid.utils.Constants.API_BASE_URL
 import com.inju.dayworryandroid.utils.EditBottomSheetFragment
 import com.inju.dayworryandroid.utils.ReportBottomSheetFragment
 import com.inju.dayworryandroid.worry.worryDetail.buildlogic.WorryDetailInjector
@@ -281,7 +282,7 @@ class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
             .apply(RequestOptions.bitmapTransform(RoundedCorners(32)))
             .into(profileImage)
 
-        var postImageUrl = worryDetailViewModel?.worry?.value?.postImage
+        var postImageUrl = API_BASE_URL + worryDetailViewModel?.worry?.value?.postImage
         if(postImageUrl != "") {
             Glide.with(this@WorryDetailActivity).load(postImageUrl).into(postImageView)
             postImageView.visibility = View.VISIBLE

@@ -58,10 +58,10 @@ class HomeListFragment : Fragment(), CoroutineScope {
         userId = pref.getLong("userId", -1)
 
         setUserInfo()
-        setHomeComponents()
-
+//        setHomeComponents()
+//
     }
-
+//
     private fun setHomeComponents() = launch {
         homeLoadingUi.visibility = View.VISIBLE
 

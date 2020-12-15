@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.util.Base64
 import android.util.Base64.NO_WRAP
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.inju.dayworryandroid.MainActivity
@@ -67,6 +68,12 @@ class LoginActivity : AppCompatActivity(), CoroutineScope {
 
         val pref = getSharedPreferences(PREFERENCE, MODE_PRIVATE)
         val editor = pref.edit()
+
+
+
+
+        kakao_login_button.visibility = View.GONE
+        naver_login_button.visibility = View.GONE
 
         kakao_login_button.setOnClickListener {
             editor.putString("social", "kakao")

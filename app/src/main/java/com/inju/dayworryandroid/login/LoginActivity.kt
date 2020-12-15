@@ -69,23 +69,31 @@ class LoginActivity : AppCompatActivity(), CoroutineScope {
         val pref = getSharedPreferences(PREFERENCE, MODE_PRIVATE)
         val editor = pref.edit()
 
+        loginBtn.setOnClickListener {
+            startActivity(Intent(this, TryLoginActivity::class.java))
+            finish()
+        }
 
+        signUpBtn.setOnClickListener {
+            startActivity(Intent(this, SetProfileActivity::class.java))
+            finish()
+        }
 
 
         kakao_login_button.visibility = View.GONE
         naver_login_button.visibility = View.GONE
 
-        kakao_login_button.setOnClickListener {
-            editor.putString("social", "kakao")
-            editor.commit()
-            tryKaKaoLogin(pref)
-        }
-
-        naver_login_button.setOnClickListener {
-            editor.putString("social", "naver")
-            editor.commit()
-            tryNaverLogin(pref)
-        }
+//        kakao_login_button.setOnClickListener {
+//            editor.putString("social", "kakao")
+//            editor.commit()
+//            tryKaKaoLogin(pref)
+//        }
+//
+//        naver_login_button.setOnClickListener {
+//            editor.putString("social", "naver")
+//            editor.commit()
+//            tryNaverLogin(pref)
+//        }
 
         skipText.setOnClickListener {
             editor.clear()

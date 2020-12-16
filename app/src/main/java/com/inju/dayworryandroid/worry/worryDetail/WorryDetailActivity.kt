@@ -281,8 +281,8 @@ class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
             .apply(RequestOptions.bitmapTransform(RoundedCorners(32)))
             .into(profileImage)
 
-        var postImageUrl = API_BASE_URL + worryDetailViewModel?.worry?.value?.postImage
-        if(postImageUrl != API_BASE_URL) {
+        var postImageUrl = Constants.IMAGE_BASE_URL + worryDetailViewModel?.worry?.value?.postImage
+        if(postImageUrl != Constants.IMAGE_BASE_URL) {
             Glide.with(this@WorryDetailActivity).load(postImageUrl).into(postImageView)
             postImageView.visibility = View.VISIBLE
         }

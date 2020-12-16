@@ -79,7 +79,7 @@ interface ApiService {
     //고민 사진 보내기
     @Multipart
     @POST("posts/image")
-    suspend fun postImage(@Part file: MultipartBody.Part): IMAGE_RETURN_POJO
+    suspend fun postImage(@Part files: MultipartBody.Part): IMAGE_RETURN_POJO
 
     //고민 삭제
     @DELETE("posts/{postId}")
@@ -108,9 +108,6 @@ interface ApiService {
     //아이디 중복 체
     @GET("users/check/id")
     fun checkId(@Query("id") id: String): Call<ID_CHECK_RETURN_POJO>
-
-//    @POST("users/signup")
-//    fun signUp(@Body signUpRequestPojo: SIGN_UP_REQUEST_POJO): Call<Void>
 
     @POST("users/signup")
     fun signUp( @Query("ageRange") ageRange: Int,

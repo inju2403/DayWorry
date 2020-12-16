@@ -3,6 +3,7 @@ package com.inju.dayworryandroid.utils
 object Constants {
 //    const val API_BASE_URL = "http://52.78.127.67:8080/api/v1/"
     const val API_BASE_URL = "http://15.165.183.122:8080/api/v1/"
+    const val IMAGE_BASE_URL = "http://15.165.183.122/"
     const val TAG: String = "로그"
     const val PREFERENCE = "template.android.DayWorry"
     const val NUM_PAGES = 3

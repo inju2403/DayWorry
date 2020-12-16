@@ -38,6 +38,7 @@ import com.bumptech.glide.Glide
 import com.inju.dayworryandroid.BuildConfig
 import com.inju.dayworryandroid.R
 import com.inju.dayworryandroid.utils.Constants
+import com.inju.dayworryandroid.utils.Constants.IMAGE_BASE_URL
 import com.inju.dayworryandroid.worry.worryDetail.buildlogic.WorryDetailInjector
 import kotlinx.android.synthetic.main.activity_add_worry.*
 import kotlinx.coroutines.CoroutineScope
@@ -242,7 +243,7 @@ class AddWorryActivity : AppCompatActivity(), CoroutineScope {
                         path = getRealPathFromURI(this@AddWorryActivity, fileUri)!!
 
                         rqBody = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
-                        body = MultipartBody.Part.createFormData("file", file.name, rqBody)
+                        body = MultipartBody.Part.createFormData("files", file.name, rqBody)
 
 
                         selectPictureImage.visibility = View.GONE
@@ -262,7 +263,7 @@ class AddWorryActivity : AppCompatActivity(), CoroutineScope {
                         var file = File(path)
 
                         rqBody = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
-                        body = MultipartBody.Part.createFormData("file", file.name, rqBody)
+                        body = MultipartBody.Part.createFormData("files", file.name, rqBody)
 
                         selectPictureImage.visibility = View.GONE
                         cameraImage.visibility = View.GONE
@@ -499,11 +500,11 @@ class AddWorryActivity : AppCompatActivity(), CoroutineScope {
         hashTag = worryDetailViewModel!!.worry.value?.tagName
         setExistingTag(hashTag!!)
 
-        if(worryDetailViewModel!!.worry.value?.postImage != "") {
+        if(worryDetailViewModel!!.worry.value?.postImage != IMAGE_BASE_URL) {
             selectPictureImage.visibility = View.GONE
             cameraImage.visibility = View.GONE
 
-            Glide.with(this@AddWorryActivity).load(Uri.parse(worryDetailViewModel!!.worry.value?.postImage)).into(selectImage)
+            Glide.with(this@AddWorryActivity).load(Uri.parse(IMAGE_BASE_URL + worryDetailViewModel!!.worry.value?.postImage)).into(selectImage)
             selectImage.visibility = View.VISIBLE
             photoClearImage.visibility = View.VISIBLE
         }

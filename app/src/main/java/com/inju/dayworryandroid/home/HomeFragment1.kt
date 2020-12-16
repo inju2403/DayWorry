@@ -12,6 +12,8 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.inju.dayworryandroid.R
 import com.inju.dayworryandroid.model.pojo.Worry
+import com.inju.dayworryandroid.utils.Constants
+import com.inju.dayworryandroid.utils.Constants.API_BASE_URL
 import com.inju.dayworryandroid.utils.Constants.TAG
 import com.inju.dayworryandroid.worry.worryDetail.WorryDetailActivity
 import kotlinx.android.synthetic.main.fragment_home1.*
@@ -47,8 +49,8 @@ class HomeFragment1(worry: Worry) : Fragment() {
     }
 
     private fun setUi() {
-        var imageUrl = worry.postImage
-        if(imageUrl != "") Glide.with(this).load(imageUrl).into(worryImage)
+        var imageUrl = Constants.IMAGE_BASE_URL + worry.postImage
+        if(imageUrl != Constants.IMAGE_BASE_URL) Glide.with(this).load(imageUrl).into(worryImage)
         else {
             worryImage.visibility = View.GONE
             line1.visibility = View.GONE

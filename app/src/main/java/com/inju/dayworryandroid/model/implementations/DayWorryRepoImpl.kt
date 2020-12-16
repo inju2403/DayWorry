@@ -24,7 +24,7 @@ class DayWorryRepoImpl(
     val str = pref.getString("token", "").toString()
     val token = "JWT $str"
 
-    override suspend fun getMainWorrys(userId: Long): MutableList<Worry> {
+    override suspend fun getMainWorrys(userId: String): MutableList<Worry> {
         try {
             return httpCall?.getMainWorrys(userId)!!
         }catch (e: Exception) {
@@ -33,7 +33,7 @@ class DayWorryRepoImpl(
         }
     }
 
-    override suspend fun getMyWorrys(userId: Long, pageNum: Int): MutableList<Worry> {
+    override suspend fun getMyWorrys(userId: String, pageNum: Int): MutableList<Worry> {
         try {
             return httpCall?.getMyWorrys(userId, pageNum)!!
         }catch (e: Exception) {
@@ -42,7 +42,7 @@ class DayWorryRepoImpl(
         }
     }
 
-    override suspend fun getHistory(userId: Long, pageNum: Int): MutableList<Worry> {
+    override suspend fun getHistory(userId: String, pageNum: Int): MutableList<Worry> {
         try {
             return httpCall?.getHistory(userId, pageNum)!!
         }catch (e: Exception) {
@@ -105,7 +105,7 @@ class DayWorryRepoImpl(
         }
     }
 
-    override suspend fun getComments(postId: Long, pageNum: Int, userId: Long): MutableList<Counsel> {
+    override suspend fun getComments(postId: Long, pageNum: Int, userId: String): MutableList<Counsel> {
         try {
             return httpCall?.getComments(postId, pageNum, userId)!!
         }catch (e: Exception) {
@@ -123,7 +123,7 @@ class DayWorryRepoImpl(
         }
     }
 
-    override suspend fun likeComment(commentId: Long, userId: Long) {
+    override suspend fun likeComment(commentId: Long, userId: String) {
         try {
             httpCall?.likeComment(commentId, userId)
         }catch (e: Exception) {

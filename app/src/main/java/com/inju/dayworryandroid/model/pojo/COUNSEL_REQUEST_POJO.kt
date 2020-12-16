@@ -10,7 +10,7 @@ data class COUNSEL_REQUEST_POJO (
 
     @SerializedName("userId")
     @Expose
-    var userId: Long = 0,
+    var userId: String = "",
 
     @SerializedName("postId")
     @Expose

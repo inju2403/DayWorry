@@ -1,10 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.kakao.sdk:v2-talk-rx:2.0.1@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/cb9fd266d1782affd902b9b160dcfa22/jetified-v2-talk-rx-2.0.1/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c2c1cefe87e8fa6f4dcf43f830c134c0/jetified-v2-talk-rx-2.0.1/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c2c1cefe87e8fa6f4dcf43f830c134c0/jetified-v2-talk-rx-2.0.1/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c2c1cefe87e8fa6f4dcf43f830c134c0/jetified-v2-talk-rx-2.0.1/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/df665d4eeb1f31af88a84bd6fdb5a3e4/jetified-v2-talk-rx-2.0.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/df665d4eeb1f31af88a84bd6fdb5a3e4/jetified-v2-talk-rx-2.0.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/df665d4eeb1f31af88a84bd6fdb5a3e4/jetified-v2-talk-rx-2.0.1/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

@@ -66,12 +66,11 @@ class MyPageFragment : Fragment(), CoroutineScope {
     private var worryListViewModel: WorryListViewModel?= null
     private lateinit var listAdapter: MyWorryListAdapter
 
-    private var userId: Long = 1
+    private var userId: String = ""
     private lateinit var userName: String
     private lateinit var social: String
     private lateinit var profile_image: String
     private var defaultImage: String = "http://15.165.183.122/default_01.jpg"
-    private val defaultLong: Long = 1
 
     private lateinit var pref: SharedPreferences
 
@@ -344,11 +343,11 @@ class MyPageFragment : Fragment(), CoroutineScope {
 
     private fun setUserInfo() {
         pref = activity!!.getSharedPreferences(Constants.PREFERENCE, AppCompatActivity.MODE_PRIVATE)
-        userId = pref.getLong("userId", defaultLong)
+        userId = pref.getString("userId", "").toString()
         userName = pref.getString("userName", "").toString()
         social = pref.getString("social", "").toString()
         profile_image = pref.getString("profileImage", defaultImage).toString()
-        if(social=="naver") socialLogo.setImageResource(R.drawable.ic_naver_login_mypage)
+
         usernameText.text = userName
 
         var imageUrl = profile_image

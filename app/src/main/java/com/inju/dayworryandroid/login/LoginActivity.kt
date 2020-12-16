@@ -194,7 +194,7 @@ class LoginActivity : AppCompatActivity(), CoroutineScope {
                             editor.putInt("userAge", response.body()!!.ageRange)
                             editor.putString("userName", response.body()!!.nickname)
                             editor.putString("profileImage", response.body()!!.profileImage)
-                            editor.putLong("userId", response.body()!!.userId)
+                            editor.putString("userId", response.body()!!.userId)
 
                             var hashTag = response.body()!!.userHashtags
                             var hashTagString = ""

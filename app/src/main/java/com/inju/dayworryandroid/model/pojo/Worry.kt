@@ -19,7 +19,7 @@ data class Worry (
 
     @SerializedName("userId")
     @Expose
-    var userId: Long = -1,
+    var userId: String = "",
 
     @SerializedName("title")
     @Expose

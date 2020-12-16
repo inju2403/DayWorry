@@ -29,7 +29,7 @@ class EditBottomSheetFragment(val postId: Long, private val flag: Int) : BottomS
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + job
 
-    private var userId: Long = 0
+    private var userId: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,7 +44,7 @@ class EditBottomSheetFragment(val postId: Long, private val flag: Int) : BottomS
         (view?.parent as View).setBackgroundColor(Color.TRANSPARENT)
 
         val pref = activity!!.getSharedPreferences(Constants.PREFERENCE, AppCompatActivity.MODE_PRIVATE)
-        userId = pref.getLong("userId", (0).toLong())
+        userId = pref.getString("userId", "").toString()
 
         job = Job()
 

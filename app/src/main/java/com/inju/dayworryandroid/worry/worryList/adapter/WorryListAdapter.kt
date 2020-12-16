@@ -29,7 +29,7 @@ class WorryListAdapter(private val list: MutableList<Worry>,
     val pref = activity.getSharedPreferences(Constants.PREFERENCE, AppCompatActivity.MODE_PRIVATE)
     private val supportFragmentManager = activity.supportFragmentManager
 
-    private var userId = pref.getLong("userId", (0).toLong())
+    private var userId = pref.getString("userId", "").toString()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WorryItemViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_worry, parent, false)

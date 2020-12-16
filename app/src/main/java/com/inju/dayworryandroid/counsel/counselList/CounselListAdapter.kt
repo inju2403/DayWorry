@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.item_counsel.view.*
 
 class CounselListAdapter(private val list: MutableList<Counsel>,
                          activity: WorryDetailActivity,
-                         worryUserId: Long,
+                         worryUserId: String,
                          val event: MutableLiveData<CounselListEvent> = MutableLiveData()
 ) :
     RecyclerView.Adapter<CounselItemViewHolder> ()

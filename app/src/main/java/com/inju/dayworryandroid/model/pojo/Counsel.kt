@@ -26,7 +26,7 @@ data class Counsel (
 
     @SerializedName("userId")
     @Expose
-    var userId: Long = 0,
+    var userId: String = "",
 
     @SerializedName("profileImage")
     @Expose

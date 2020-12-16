@@ -33,7 +33,7 @@ class MyWorryHistoryActivity : AppCompatActivity(), CoroutineScope {
     val getWorryListViewModel get() = worryListViewModel
 
     private lateinit var listAdapter: MyHistoryAdapter
-    private var userId: Long = 1
+    private var userId: String = ""
     private var defaultLong: Long = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,7 +41,7 @@ class MyWorryHistoryActivity : AppCompatActivity(), CoroutineScope {
         setContentView(R.layout.activity_my_worry_history)
 
         val pref = getSharedPreferences(Constants.PREFERENCE, AppCompatActivity.MODE_PRIVATE)
-        userId = pref.getLong("userId", defaultLong)
+        userId = pref.getString("userId", "").toString()
 
         job = Job()
 

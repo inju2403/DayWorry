@@ -41,27 +41,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/socialLogo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/ic_kakao_login_mypage"
-        app:layout_constraintStart_toEndOf="@+id/profileImage"
-        app:layout_constraintTop_toBottomOf="@+id/usernameText" />
-
     <TextView
-        android:id="@+id/harugoinText"
+        android:id="@+id/idText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:text="harugomin"
+        android:layout_marginTop="8dp"
+        android:text="id"
         android:textColor="@color/superLiteGreyColor"
         android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@+id/socialLogo"
-        app:layout_constraintStart_toEndOf="@+id/socialLogo"
-        app:layout_constraintTop_toTopOf="@+id/socialLogo" />
+        app:layout_constraintStart_toStartOf="@+id/usernameText"
+        app:layout_constraintTop_toBottomOf="@+id/usernameText" />
 
     <View
         android:id="@+id/line1"

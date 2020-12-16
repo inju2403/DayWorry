@@ -59,7 +59,7 @@ class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
     private var worryId: Long? = null
     private var profile_image: String = "http://15.165.183.122/default_01.jpg"
     private var profile_image_default: String = "http://15.165.183.122/default_01.jpg"
-    private var userId: Long? = null
+    private var userId: String = ""
     private var userName: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,7 +67,7 @@ class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
         setContentView(R.layout.activity_worry_detail)
 
         val pref = getSharedPreferences(Constants.PREFERENCE, MODE_PRIVATE)
-        userId = pref.getLong("userId", (0).toLong())
+        userId = pref.getString("userId", "").toString()
         Log.d("로그그", "$userId")
         userName = pref.getString("userName", "")
         profile_image = pref.getString("profileImage", profile_image_default).toString()

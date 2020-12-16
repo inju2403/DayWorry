@@ -45,8 +45,7 @@ class SetTagFragment : Fragment() {
 //    private var defaultImage: String = "https://hago-storage-bucket.s3.ap-northeast-2.amazonaws.com/default_01.jpg"
     private var defaultImage: String = "http://15.165.183.122/default_01.jpg"
 
-    private var userId: Long = 0
-    private val defaultLong: Long = 0
+    private var userId: String = ""
     private var totalCnt = 0
 
     override fun onCreateView(
@@ -65,7 +64,7 @@ class SetTagFragment : Fragment() {
 
         setTagLoadingUi.visibility = View.GONE
 
-        userId = pref.getLong("userId", defaultLong)
+        userId = pref.getString("userId", "").toString()
         Log.d(TAG,"userId: $userId")
 
         nextBtn.setOnClickListener {

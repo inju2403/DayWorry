@@ -1,10 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.kakao.sdk:v2-auth-rx:2.0.1@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/42cc5260e88119a597d312732a8edede/jetified-v2-auth-rx-2.0.1/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b10c836ecba28fb5196480096c84d851/jetified-v2-auth-rx-2.0.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b10c836ecba28fb5196480096c84d851/jetified-v2-auth-rx-2.0.1/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b10c836ecba28fb5196480096c84d851/jetified-v2-auth-rx-2.0.1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c93f15bcf72cfb896d30cf4aad4f83e6/jetified-v2-auth-rx-2.0.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c93f15bcf72cfb896d30cf4aad4f83e6/jetified-v2-auth-rx-2.0.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c93f15bcf72cfb896d30cf4aad4f83e6/jetified-v2-auth-rx-2.0.1/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

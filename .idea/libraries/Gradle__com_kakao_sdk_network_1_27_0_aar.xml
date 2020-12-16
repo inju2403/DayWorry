@@ -1,10 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.kakao.sdk:network:1.27.0@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7e60b3b64422f826c311dbd8c6e0f290/jetified-network-1.27.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/cfa507819b2b933d382d020e8437d478/jetified-network-1.27.0/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/cfa507819b2b933d382d020e8437d478/jetified-network-1.27.0/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/cfa507819b2b933d382d020e8437d478/jetified-network-1.27.0/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e9e61fc43f536312124b377abffcc0c4/jetified-network-1.27.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e9e61fc43f536312124b377abffcc0c4/jetified-network-1.27.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e9e61fc43f536312124b377abffcc0c4/jetified-network-1.27.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

@@ -47,28 +47,28 @@ class WorryListViewModel(
         storyState.value = repo.getStorys()
     }
 
-    fun getMainWorrys(userId: Long) = launch {
+    fun getMainWorrys(userId: String) = launch {
         // 메인 홈 탭에서 추천 고민 3개를 가져옴
         mainWorryListState.value = repo.getMainWorrys(userId)
     }
 
     //현재 게시중인 내 고민 리스트
-    fun initMyWorrys(userId: Long) = launch {
+    fun initMyWorrys(userId: String) = launch {
         currentMyWorrydPage = 0
         myWorryListState.value = repo.getMyWorrys(userId, currentMyWorrydPage++)
         myWorryListitemCnt = myWorryList.value?.size!!
     }
-    fun getMyWorrys(userId: Long) = launch {
+    fun getMyWorrys(userId: String) = launch {
         var newList = repo.getMyWorrys(userId, currentMyWorrydPage++)
         for(item in newList) myWorryListState.value?.add(item)
     }
 
     //지난 내 고민 리스트
-    fun initHistory(userId: Long) = launch {
+    fun initHistory(userId: String) = launch {
         currentHistoryPage = 0
         myHistoryState.value = repo.getHistory(userId, currentHistoryPage++)
     }
-    fun getHistory(userId: Long) = launch {
+    fun getHistory(userId: String) = launch {
         var newList = repo.getHistory(userId, currentHistoryPage++)
         for(item in newList) myHistoryState.value?.add(item)
     }

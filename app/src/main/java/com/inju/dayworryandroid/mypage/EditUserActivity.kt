@@ -82,7 +82,7 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
     private var userName: String = ""
     private var originUserName: String = ""
 
-    private var userId: Long = 0
+    private var userId: String = ""
 
     private var totalCnt = 0
 
@@ -97,7 +97,7 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
         val editor = pref.edit()
         userAgeValue = pref.getInt("userAge", 0)
         profileImage = pref.getString("profileImage", "empty").toString()
-        userId = pref.getLong("userId", (0).toLong())
+        userId = pref.getString("userId", "").toString()
         userName = pref.getString("userName", "").toString()
         originUserName = pref.getString("userName", "").toString()
         hashTagString = pref.getString("hashTags", "").toString()

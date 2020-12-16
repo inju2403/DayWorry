@@ -25,6 +25,11 @@ interface ApiService {
     @POST("users/check/sns")
     fun verifyJWT(@Header("jwt") jwt: String): Call<User_REQUEST_POJO>
 
+    //토큰 검증
+    @POST("users/check")
+    fun verifyUserToken(@Header("jwt") jwt: String): Call<User_REQUEST_POJO>
+
+
     //유저 정보 업데이트
     @PUT("users")
     fun updateProfile(@Body requestDto: User_REQUEST_POJO): Call<Void>
@@ -35,7 +40,7 @@ interface ApiService {
 
     //메인 홈 탭에서 고민 리스트(3개) 받기
     @GET("posts/main")
-    suspend fun getMainWorrys(@Query("userId") userId: Long): MutableList<Worry>
+    suspend fun getMainWorrys(@Query("userId") userId: String): MutableList<Worry>
 
     //고민 리스트 받기 -> 페이징 (현재페이지, 페이지당 아이템 갯수)
     @GET("posts/home/{tagName}")
@@ -50,13 +55,13 @@ interface ApiService {
 
     // 현재 게시중인 내 고민 리스트 받기
     @GET("users/posts/{userId}")
-    suspend fun getMyWorrys(@Path("userId") userId: Long,
+    suspend fun getMyWorrys(@Path("userId") userId: String,
                             @Query("pageNum") pageNum: Int): MutableList<Worry>
 
     // 지난 내 고민 리스트 받기
     @GET("users/history/{userId}")
 //    fun getHistory(@Path("userId") userId: Long, @Query("pageNum") pageNum: Int): Single<MutableList<Worry>>
-    suspend fun getHistory(@Path("userId") userId: Long,
+    suspend fun getHistory(@Path("userId") userId: String,
                            @Query("pageNum") pageNum: Int): MutableList<Worry>
 
     // 고민 상세 조회
@@ -65,7 +70,7 @@ interface ApiService {
 
     //계정 삭제
     @DELETE("users/{userId}")
-    fun deleteUser(@Path("userId") userId: Long): Call<Void>
+    fun deleteUser(@Path("userId") userId: String): Call<Void>
 
     //고민 수정
     @POST("posts/")
@@ -84,7 +89,7 @@ interface ApiService {
     @GET("comments/{postId}")
     suspend fun getComments(@Path("postId") poseId: Long,
                             @Query("pageNum") pageNum: Int,
-                            @Query("userId") userId: Long): MutableList<Counsel>
+                            @Query("userId") userId: String): MutableList<Counsel>
 
     //댓글 작성
     @POST("comments")
@@ -93,7 +98,7 @@ interface ApiService {
     //댓글 좋아요
     @PUT("comments/like")
     suspend fun likeComment(@Query("commentId") commentId: Long,
-                            @Query("userId") userId: Long): Response<Unit>
+                            @Query("userId") userId: String): Response<Unit>
 
     @GET("posts/home/story")
     suspend fun getStorys(): MutableList<Worry>
@@ -115,5 +120,5 @@ interface ApiService {
 
     @POST("users/login")
     fun login(  @Query("id") id: String,
-                @Query("password") password: String): Call<Void>
+                @Query("password") password: String): Call<JWTPOJO>
 }

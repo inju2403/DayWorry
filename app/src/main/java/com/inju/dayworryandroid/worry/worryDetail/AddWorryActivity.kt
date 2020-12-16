@@ -82,7 +82,7 @@ class AddWorryActivity : AppCompatActivity(), CoroutineScope {
 
 
     private var hashTag: String? = "empty"
-    private var userId: Long = -1
+    private var userId: String = ""
     private var defaultId: Long = -1
     private var addPhoto = false
 
@@ -97,7 +97,7 @@ class AddWorryActivity : AppCompatActivity(), CoroutineScope {
         setStatusBarColor("dark")
 
         val pref = getSharedPreferences(Constants.PREFERENCE, MODE_PRIVATE)
-        userId = pref.getLong("userId", defaultId)
+        userId = pref.getString("userId", "").toString()
 
         job = Job()
 

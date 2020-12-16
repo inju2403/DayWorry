@@ -21,7 +21,7 @@ class CounselDetailViewModel (
         counselState.value = COUNSEL_REQUEST_POJO()
     }
 
-    fun addCounsel(content: String, userId: Long, postId: Long, profileImage: String, nickname: String) = launch {
+    fun addCounsel(content: String, userId: String, postId: Long, profileImage: String, nickname: String) = launch {
         var counsel = COUNSEL_REQUEST_POJO(content, userId, postId, profileImage, nickname)
         repo.addComment(counsel)
     }

@@ -3,7 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
-apply plugin: 'realm-android'
+//apply plugin: 'realm-android'
 
 android {
     lintOptions {
@@ -17,8 +17,10 @@ android {
     buildToolsVersion "29.0.2"
 
     //데이터 바인딩 사용
-    dataBinding { enabled = true }
+    buildFeatures {
+        dataBinding = true
 
+    }
     //자바 버전 설정
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8

@@ -349,6 +349,7 @@ class MyPageFragment : Fragment(), CoroutineScope {
         profile_image = pref.getString("profileImage", defaultImage).toString()
 
         usernameText.text = userName
+        idText.visibility = View.GONE
 
         var imageUrl = profile_image
         Glide.with(this).load(imageUrl)

@@ -74,6 +74,7 @@ class TryLoginActivity : AppCompatActivity() {
                         }
 
                         override fun onResponse(call: Call<JWTPOJO>, response: Response<JWTPOJO>) {
+                            editor.putString("jwt", response.body()!!.jwt)
                             when(response.code()) {
                                 200 -> {
                                     Log.d("로로", response.body()!!.jwt)
@@ -90,7 +91,6 @@ class TryLoginActivity : AppCompatActivity() {
                                             when(response.code()) {
                                                 200 -> {
                                                     if(response.body()!!.ageRange != 0) {
-                                                        //이미 프로필 세팅한 적이 있으면
                                                         editor.putInt("userAge", response.body()!!.ageRange)
                                                         editor.putString("userName", response.body()!!.nickname)
                                                         editor.putString("profileImage", response.body()!!.profileImage)

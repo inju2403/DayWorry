@@ -63,7 +63,7 @@ class IntroActivity : AppCompatActivity() {
                 if(jwt != "") {
                     //jwt가 아직 유효한지 검사
                     //유효하면 자동로그인
-                    verifyJWT(jwt, pref)
+                    verifyUserToken(jwt, pref)
                 }
                 else {
                     val intent = Intent(applicationContext, LoginActivity::class.java)
@@ -78,10 +78,10 @@ class IntroActivity : AppCompatActivity() {
         }
     }
 
-    private fun verifyJWT(jwt: String, pref: SharedPreferences) {
+    private fun verifyUserToken(jwt: String, pref: SharedPreferences) {
         val editor = pref.edit()
 
-        httpCall?.verifyJWT(jwt)?.enqueue(object : Callback<User_REQUEST_POJO> {
+        httpCall?.verifyUserToken(jwt)?.enqueue(object : Callback<User_REQUEST_POJO> {
             override fun onFailure(call: Call<User_REQUEST_POJO>, t: Throwable) {
                 Log.d(Constants.TAG, "verifyJWT - onFailed() called / t: ${t}")
             }
@@ -89,18 +89,25 @@ class IntroActivity : AppCompatActivity() {
             override fun onResponse(call: Call<User_REQUEST_POJO>, response: Response<User_REQUEST_POJO>) {
                 when (response.code()) {
                     200 -> {
-//                        var ageRange: Int = 0,
-//                        var nickname: String = "",
-//                        var profileImage: String = "",
-//                        var userHashtags: MutableList<String> = mutableListOf(),
-//                        var userId: Long = 0
-//                        editor.putInt("ageRange", response.body()!!.ageRange)
-//                        editor.putString("nickname", response.body()!!.nickname)
-//                        editor.putString("profileImage", response.body()!!.profileImage)
-//                        editor.putInt("ageRange", response.body()!!.ageRange)
-//                        editor.putInt("ageRange", response.body()!!.ageRange)
-                        startActivity(Intent(this@IntroActivity, MainActivity::class.java))
-                        finish()
+                        if(response.body()!!.ageRange != 0) {
+                            editor.putInt("userAge", response.body()!!.ageRange)
+                            editor.putString("userName", response.body()!!.nickname)
+                            editor.putString("profileImage", response.body()!!.profileImage)
+                            editor.putString("userId", response.body()!!.userId)
+
+                            var hashTag = response.body()!!.userHashtags
+                            var hashTagString = ""
+                            for (next in hashTag) {
+                                hashTagString += "$next,"
+                            }
+                            hashTagString =
+                                hashTagString.substring(0..hashTagString.length - 2) // Split으로 parsing하여 사용
+                            Log.d(Constants.TAG, hashTagString)
+                            editor.putString("hashTags", hashTagString)
+                            editor.commit()
+                            startActivity(Intent(this@IntroActivity, MainActivity::class.java))
+                            finish()
+                        }
                     }
                     else -> {
                         Log.d(Constants.TAG,"토큰 유효하지 않음")

@@ -105,11 +105,15 @@ interface ApiService {
 //    @POST("users/signup")
 //    fun signUp(@Body signUpRequestPojo: SIGN_UP_REQUEST_POJO): Call<Void>
 
-    @POST("users/signup")
+    @POST("users/singup")
     fun signUp( @Query("ageRange") ageRange: Int,
                 @Query("nickname") nickname: String,
                 @Query("password") password: String,
                 @Query("profileImage") profileImage: String,
                 @Query("userLoginId") userLoginId: String,
                 @Query("userhashtags") userhashtags: MutableList<String>): Call<Void>
+
+    @POST("users/login")
+    fun login(  @Query("id") id: String,
+                @Query("password") password: String): Call<Void>
 }

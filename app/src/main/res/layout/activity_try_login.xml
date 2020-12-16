@@ -51,9 +51,11 @@
         android:layout_marginEnd="20dp"
         android:background="@drawable/border"
         android:ems="10"
-        android:hint="              아이디를 입력해주세요."
+        android:hint="아이디를 입력해주세요."
+        android:paddingLeft="40dp"
         android:textSize="14sp"
         android:textColorHint="@color/liteGreyColor"
+        android:textColor="@color/liteGreyColor"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -78,10 +80,12 @@
         android:layout_marginEnd="20dp"
         android:background="@drawable/border"
         android:ems="10"
-        android:hint="              비밀번호 입력해주세요."
+        android:hint="비밀번호 입력해주세요."
+        android:paddingLeft="40dp"
         android:textSize="14sp"
         android:textColorHint="@color/liteGreyColor"
-        android:inputType="textPersonName"
+        android:textColor="@color/liteGreyColor"
+        android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/idEditText" />
@@ -108,21 +112,32 @@
         android:background="@drawable/next_btn_unselect_background"
         android:textStyle="bold"
         android:textSize="18sp"
+        android:stateListAnimator="@null"
         android:textColor="@color/superLiteGreyColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pwEditText" />
 
     <TextView
-        android:id="@+id/loginText"
+        android:id="@+id/signUpText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="회원가하기"
+        android:text="회원가입하기"
         android:textSize="12sp"
         android:textColor="@color/liteGreyColor"
         app:layout_constraintEnd_toEndOf="@+id/loginBtn"
         app:layout_constraintStart_toStartOf="@+id/loginBtn"
         app:layout_constraintTop_toBottomOf="@+id/loginBtn" />
+
+    <ProgressBar
+        android:id="@+id/loginLoadingUi"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/loginBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pwEditText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

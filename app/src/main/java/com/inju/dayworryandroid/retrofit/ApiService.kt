@@ -100,17 +100,19 @@ interface ApiService {
     suspend fun likeComment(@Query("commentId") commentId: Long,
                             @Query("userId") userId: String): Response<Unit>
 
+    //스토리 받기
     @GET("posts/home/story")
     suspend fun getStorys(): MutableList<Worry>
 
 
+    //아이디 중복 체
     @GET("users/check/id")
     fun checkId(@Query("id") id: String): Call<ID_CHECK_RETURN_POJO>
 
 //    @POST("users/signup")
 //    fun signUp(@Body signUpRequestPojo: SIGN_UP_REQUEST_POJO): Call<Void>
 
-    @POST("users/singup")
+    @POST("users/signup")
     fun signUp( @Query("ageRange") ageRange: Int,
                 @Query("nickname") nickname: String,
                 @Query("password") password: String,

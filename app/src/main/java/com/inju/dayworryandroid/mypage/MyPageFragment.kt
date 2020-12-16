@@ -202,49 +202,19 @@ class MyPageFragment : Fragment(), CoroutineScope {
             val dialog = MyDialog(activity!!)
             dialog.start("로그아웃", "정말 로그아웃 하시겠어요?")
             dialog.setOnOKClickedListener {
+                showToast("로그아웃 되었습니다.")
+                val editor = pref.edit()
+                editor.clear()
+                editor.putBoolean("runFirst", false)
+                editor.commit()
 
-                delteUserLogoutLoadingUi.visibility = View.VISIBLE
-                if (social == "kakao") {
-                    //카카오
-                    UserApiClient.rx.logout()
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe({
-                            Log.i(TAG, "로그아웃 성공. SDK에서 토큰 삭제 됨")
-                            delteUserLogoutLoadingUi.visibility = View.GONE
-                            showToast("로그아웃 되었습니다.")
-                            val editor = pref.edit()
-                            editor.clear()
-                            editor.putBoolean("runFirst", false)
-                            editor.commit()
-
-                            startActivity(
-                                Intent(
-                                    activity,
-                                    LoginActivity::class.java
-                                )
-                            )
-                            activity!!.finish()
-                        }, { error ->
-                            Log.e(TAG, "로그아웃 실패. SDK에서 토큰 삭제 됨", error)
-                            delteUserLogoutLoadingUi.visibility = View.GONE
-                            showToast("다시 시도해주세요.")
-                        }).addTo(disposables)
-                } else if (social == "naver") {
-                    //네이버
-                    mOAuthLoginModule.logout(context)
-                    editor.clear()
-                    editor.putBoolean("runFirst", false)
-                    editor.commit()
-                    showToast("로그아웃 되었습니다.")
-                    startActivity(
-                        Intent(
-                            activity,
-                            LoginActivity::class.java
-                        )
+                startActivity(
+                    Intent(
+                        activity,
+                        LoginActivity::class.java
                     )
-                    activity!!.finish()
-                }
+                )
+                activity!!.finish()
             }
         }
         deleteUserLayout.setOnClickListener {
@@ -252,31 +222,7 @@ class MyPageFragment : Fragment(), CoroutineScope {
             val dialog = MyDialog(activity!!)
             dialog.start("계정 삭제", "      하고 계정을 삭제하시겠어요?\n\n개인 정보와 내역이 모두 삭제됩니다.")
             dialog.setOnOKClickedListener {
-
-                if(social == "kakao") {
-                    //카카오
-                    // 연결 끊기
-                    UserApiClient.rx.unlink()
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe({
-                            Log.i(TAG, "연결 끊기 성공. SDK에서 토큰 삭제 됨")
-                            deleteUserFromServer()
-                        }, { error ->
-                            Log.e(TAG, "연결 끊기 실패", error)
-                        }).addTo(disposables)
-                }
-                else {
-                    //네이버
-                    isSuccessDeleteNaverToken = mOAuthLoginModule.logoutAndDeleteToken(context)
-                    if (!isSuccessDeleteNaverToken) {
-                        // 서버에서 토큰 삭제에 실패했어도 클라이언트에 있는 토큰은 삭제되어 로그아웃된 상태입니다.
-                        // 클라이언트에 토큰 정보가 없기 때문에 추가로 처리할 수 있는 작업은 없습니다.
-                        Log.d(TAG, "errorCode:" + mOAuthLoginModule.getLastErrorCode(context));
-                        Log.d(TAG, "errorDesc:" + mOAuthLoginModule.getLastErrorDesc(context));
-                    }
                     deleteUserFromServer()
-                }
             }
 
         }

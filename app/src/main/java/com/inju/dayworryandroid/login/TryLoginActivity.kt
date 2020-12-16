@@ -69,7 +69,7 @@ class TryLoginActivity : AppCompatActivity() {
 
                         override fun onFailure(call: Call<JWTPOJO>, t: Throwable) {
                             Log.d(Constants.TAG, "login - onFailed() called / t: ${t}")
-                            showToast("잠시 후에 다시 시도해주세요")
+                            showToast("계정 정보를 확인해주세요.")
                             loginLoadingUi.visibility = View.GONE
                         }
 
@@ -122,7 +122,7 @@ class TryLoginActivity : AppCompatActivity() {
 
                                 }
                                 else -> {
-                                    showToast("잠시 후에 다시 시도해주세요.")
+                                    showToast("계정 정보를 확인해주세요.")
                                 }
                             }
                         }

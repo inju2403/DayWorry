@@ -76,8 +76,8 @@ class TryLoginActivity : AppCompatActivity() {
                         override fun onResponse(call: Call<JWTPOJO>, response: Response<JWTPOJO>) {
                             when(response.code()) {
                                 200 -> {
-                                    Log.d("로로", response.body()!!.toString())
-                                    httpCall.verifyUserToken(response.body()!!.toString()).enqueue(object : Callback<User_REQUEST_POJO> {
+                                    Log.d("로로", response.body()!!.jwt)
+                                    httpCall.verifyUserToken(response.body()!!.jwt).enqueue(object : Callback<User_REQUEST_POJO> {
 
                                         override fun onFailure(call: Call<User_REQUEST_POJO>, t: Throwable) {
                                             Log.d(Constants.TAG, "verifyUserToken - onFailed() called / t: ${t}")

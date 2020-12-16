@@ -95,12 +95,44 @@ class SetTagFragment : Fragment() {
                 editor.putString("hashTags",hashTagString)
                 editor.commit()
 
-                requsetProfileUpdate()
-                moveMainActivity()
+//                requsetProfileUpdate()
+                requestSignUp()
+//                moveMainActivity()
             }
         }
 
         setTagBtn()
+    }
+
+    private fun requestSignUp() {
+        setTagLoadingUi.visibility = View.VISIBLE
+
+        httpCall?.signUp(userAgeValue,
+                        (activity as SetProfileActivity).userName,
+                        (activity as SetProfileActivity).userPw,
+                        profileImage,
+                        (activity as SetProfileActivity).userId,
+                        hashTag)?.enqueue(object : Callback<Void> {
+            override fun onFailure(call: Call<Void>, t: Throwable) {
+                Log.d(TAG, "signUp - onFailed() called / t: ${t}")
+            }
+
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                when(response.code()) {
+                    200 -> {
+                        showToast("회원가입 완료")
+                        setTagLoadingUi.visibility = View.GONE
+                        startActivity(Intent(context, LoginActivity::class.java))
+                        activity!!.finish()
+                    }
+                    else -> {
+                        setTagLoadingUi.visibility = View.GONE
+                        showToast("잠시 후에 다시 시도해주세요.")
+                    }
+                }
+            }
+
+        })
     }
 
     private fun requsetProfileUpdate() {

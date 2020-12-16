@@ -98,4 +98,18 @@ interface ApiService {
     @GET("posts/home/story")
     suspend fun getStorys(): MutableList<Worry>
 
+
+    @GET("users/check/id")
+    fun checkId(@Query("id") id: String): Call<ID_CHECK_RETURN_POJO>
+
+//    @POST("users/signup")
+//    fun signUp(@Body signUpRequestPojo: SIGN_UP_REQUEST_POJO): Call<Void>
+
+    @POST("users/signup")
+    fun signUp( @Query("ageRange") ageRange: Int,
+                @Query("nickname") nickname: String,
+                @Query("password") password: String,
+                @Query("profileImage") profileImage: String,
+                @Query("userLoginId") userLoginId: String,
+                @Query("userhashtags") userhashtags: MutableList<String>): Call<Void>
 }

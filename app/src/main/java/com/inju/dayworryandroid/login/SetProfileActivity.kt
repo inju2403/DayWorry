@@ -24,6 +24,8 @@ class SetProfileActivity : AppCompatActivity() {
 
     var userAge: String = ""
     var userName: String = ""
+    var userId: String = ""
+    var userPw: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

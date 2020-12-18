@@ -105,10 +105,12 @@ interface ApiService {
     suspend fun getStorys(): MutableList<Worry>
 
 
-    //아이디 중복 체
+    //아이디 중복 체크
     @GET("users/check/id")
     fun checkId(@Query("id") id: String): Call<ID_CHECK_RETURN_POJO>
 
+
+    //회원가입
     @POST("users/signup")
     fun signUp( @Query("ageRange") ageRange: Int,
                 @Query("nickname") nickname: String,
@@ -117,6 +119,8 @@ interface ApiService {
                 @Query("userLoginId") userLoginId: String,
                 @Query("userhashtags") userhashtags: MutableList<String>): Call<Void>
 
+
+    //로그인
     @POST("users/login")
     fun login(  @Query("id") id: String,
                 @Query("password") password: String): Call<JWTPOJO>

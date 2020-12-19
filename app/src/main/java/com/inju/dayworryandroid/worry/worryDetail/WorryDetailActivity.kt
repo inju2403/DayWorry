@@ -44,6 +44,7 @@ import okhttp3.internal.wait
 import java.time.LocalDateTime
 import java.time.temporal.ChronoUnit
 import kotlin.coroutines.CoroutineContext
+import android.text.method.ScrollingMovementMethod as ScrollingMovementMethod1
 
 @RequiresApi(26)
 class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
@@ -74,6 +75,8 @@ class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
 
         visibleGone()
         setStatusBarColor("dark")
+        contentText.movementMethod = ScrollingMovementMethod1()
+
 
         job = Job()
 

@@ -26,7 +26,7 @@ interface ApiService {
     fun verifyJWT(@Header("jwt") jwt: String): Call<User_REQUEST_POJO>
 
     //토큰 검증
-    @POST("users/check")
+    @GET("users/check")
     fun verifyUserToken(@Header("jwt") jwt: String): Call<User_REQUEST_POJO>
 
 

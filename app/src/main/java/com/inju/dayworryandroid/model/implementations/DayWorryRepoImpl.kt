@@ -1,6 +1,7 @@
 package com.inju.dayworryandroid.model.implementations
 
 import android.content.Context
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.inju.dayworryandroid.model.pojo.COUNSEL_REQUEST_POJO
 import com.inju.dayworryandroid.model.pojo.Contents
@@ -29,8 +30,9 @@ class DayWorryRepoImpl(
             return httpCall?.getMainWorrys(userId)!!
         }catch (e: Exception) {
             e.printStackTrace()
-            throw e
+            Toast.makeText(context, "서버가 불안정합니다. 잠시 후에 다시 시도해주세요.", Toast.LENGTH_LONG).show()
         }
+        return mutableListOf()
     }
 
     override suspend fun getMyWorrys(userId: String, pageNum: Int): MutableList<Worry> {
@@ -38,8 +40,9 @@ class DayWorryRepoImpl(
             return httpCall?.getMyWorrys(userId, pageNum)!!
         }catch (e: Exception) {
             e.printStackTrace()
-            throw e
+            Toast.makeText(context, "서버가 불안정합니다. 잠시 후에 다시 시도해주세요.", Toast.LENGTH_LONG).show()
         }
+        return mutableListOf()
     }
 
     override suspend fun getHistory(userId: String, pageNum: Int): MutableList<Worry> {
@@ -47,8 +50,9 @@ class DayWorryRepoImpl(
             return httpCall?.getHistory(userId, pageNum)!!
         }catch (e: Exception) {
             e.printStackTrace()
-            throw e
+            Toast.makeText(context, "서버가 불안정합니다. 잠시 후에 다시 시도해주세요.", Toast.LENGTH_LONG).show()
         }
+        return mutableListOf()
     }
 
     override suspend fun getWorrys(tagName: String, pageNum: Int): MutableList<Worry> {
@@ -56,8 +60,9 @@ class DayWorryRepoImpl(
             return httpCall?.getWorrys(tagName, pageNum)!!
         }catch (e: Exception) {
             e.printStackTrace()
-            throw e
+            Toast.makeText(context, "서버가 불안정합니다. 잠시 후에 다시 시도해주세요.", Toast.LENGTH_LONG).show()
         }
+        return mutableListOf()
     }
 
     override suspend fun keywordSearch(tagName: String, pageNum: Int): MutableList<Worry> {
@@ -65,8 +70,9 @@ class DayWorryRepoImpl(
             return httpCall?.keywordSearch(tagName, pageNum)!!
         }catch (e: Exception) {
             e.printStackTrace()
-            throw e
+            Toast.makeText(context, "서버가 불안정합니다. 잠시 후에 다시 시도해주세요.", Toast.LENGTH_LONG).show()
         }
+        return mutableListOf()
     }
 
     override suspend fun getWorryById(postId : Long) : Worry {
@@ -74,8 +80,9 @@ class DayWorryRepoImpl(
             return httpCall?.getWorryById(postId)!!
         }catch (e: Exception) {
             e.printStackTrace()
-            throw e
+            Toast.makeText(context, "서버가 불안정합니다. 잠시 후에 다시 시도해주세요.", Toast.LENGTH_LONG).show()
         }
+        return Worry()
     }
 
     override suspend fun addOrUpdateWorry(contents: Contents)  {
@@ -83,7 +90,7 @@ class DayWorryRepoImpl(
             httpCall?.addOrUpdateWorry(contents)
         }catch (e: Exception) {
             e.printStackTrace()
-            throw e
+            Toast.makeText(context, "서버가 불안정합니다. 잠시 후에 다시 시도해주세요.", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -92,8 +99,9 @@ class DayWorryRepoImpl(
             return httpCall?.postImage(file)!!.imgPath
         }catch (e: Exception) {
             e.printStackTrace()
-            throw e
+            Toast.makeText(context, "서버가 불안정합니다. 잠시 후에 다시 시도해주세요.", Toast.LENGTH_LONG).show()
         }
+        return ""
     }
 
     override suspend fun deleteWorry(postId : Long) {
@@ -101,7 +109,7 @@ class DayWorryRepoImpl(
             httpCall?.deleteWorry(postId)
         }catch (e: Exception) {
             e.printStackTrace()
-            throw e
+            Toast.makeText(context, "서버가 불안정합니다. 잠시 후에 다시 시도해주세요.", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -110,8 +118,9 @@ class DayWorryRepoImpl(
             return httpCall?.getComments(postId, pageNum, userId)!!
         }catch (e: Exception) {
             e.printStackTrace()
-            throw e
+            Toast.makeText(context, "서버가 불안정합니다. 잠시 후에 다시 시도해주세요.", Toast.LENGTH_LONG).show()
         }
+        return mutableListOf()
     }
 
     override suspend fun addComment(counselRequestPojo: COUNSEL_REQUEST_POJO) {
@@ -119,7 +128,7 @@ class DayWorryRepoImpl(
             httpCall?.addComment(counselRequestPojo)
         }catch (e: Exception) {
             e.printStackTrace()
-            throw e
+            Toast.makeText(context, "서버가 불안정합니다. 잠시 후에 다시 시도해주세요.", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -128,7 +137,7 @@ class DayWorryRepoImpl(
             httpCall?.likeComment(commentId, userId)
         }catch (e: Exception) {
             e.printStackTrace()
-            throw e
+            Toast.makeText(context, "서버가 불안정합니다. 잠시 후에 다시 시도해주세요.", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -137,8 +146,9 @@ class DayWorryRepoImpl(
             return httpCall?.getStorys()!!
         }catch (e: Exception) {
             e.printStackTrace()
-            throw e
+            Toast.makeText(context, "서버가 불안정합니다. 잠시 후에 다시 시도해주세요.", Toast.LENGTH_LONG).show()
         }
+        return mutableListOf()
     }
 
 

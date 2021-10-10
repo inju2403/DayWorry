@@ -70,7 +70,7 @@ class MyPageFragment : Fragment(), CoroutineScope {
     private lateinit var userName: String
     private lateinit var social: String
     private lateinit var profile_image: String
-    private var defaultImage: String = "http://15.165.183.122/default_01.jpg"
+    private var defaultImage: String = "https://hago-bucket.s3.ap-northeast-2.amazonaws.com/default01.png"
 
     private lateinit var pref: SharedPreferences
 
@@ -266,6 +266,9 @@ class MyPageFragment : Fragment(), CoroutineScope {
     }
 
     private fun initMyWorrys() = launch {
+        if(userId == "") {
+            return@launch
+        }
         worryListViewModel!!.initMyWorrys(userId).join()
         listAdapter.notifyDataSetChanged()
 

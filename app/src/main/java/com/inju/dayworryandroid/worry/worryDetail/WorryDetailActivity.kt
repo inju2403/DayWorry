@@ -58,8 +58,8 @@ class WorryDetailActivity : AppCompatActivity(), CoroutineScope {
     private var counselDetailViewModel: CounselDetailViewModel? = null
     private lateinit var listAdapter: CounselListAdapter
     private var worryId: Long? = null
-    private var profile_image: String = "http://15.165.183.122/default_01.jpg"
-    private var profile_image_default: String = "http://15.165.183.122/default_01.jpg"
+    private var profile_image: String = "https://hago-bucket.s3.ap-northeast-2.amazonaws.com/default01.png"
+    private var profile_image_default: String = "https://hago-bucket.s3.ap-northeast-2.amazonaws.com/default01.png"
     private var userId: String = ""
     private var userName: String? = null
 

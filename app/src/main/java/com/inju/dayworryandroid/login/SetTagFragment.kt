@@ -43,7 +43,7 @@ class SetTagFragment : Fragment() {
     private var hashTagString: String = ""
     private var profileImage: String = ""
 //    private var defaultImage: String = "https://hago-storage-bucket.s3.ap-northeast-2.amazonaws.com/default_01.jpg"
-    private var defaultImage: String = "http://15.165.183.122/default_01.jpg"
+    private var defaultImage: String = "https://hago-bucket.s3.ap-northeast-2.amazonaws.com/default01.png"
 
     private var userId: String = ""
     private var totalCnt = 0
@@ -86,11 +86,12 @@ class SetTagFragment : Fragment() {
                     "70~" -> userAgeValue = 70
                 }
                 editor.putInt("userAge", userAgeValue)
+                hashTagString = ""
                 for (next in hashTag) {
                     hashTagString += "$next,"
                 }
                 hashTagString = hashTagString.substring(0..hashTagString.length-2) // Split으로 parsing하여 사용
-                Log.d(TAG, hashTagString)
+                Log.d(TAG, "hashTagString: " + hashTagString)
                 editor.putString("hashTags",hashTagString)
                 editor.commit()
 
@@ -105,6 +106,8 @@ class SetTagFragment : Fragment() {
 
     private fun requestSignUp() {
         setTagLoadingUi.visibility = View.VISIBLE
+
+        Log.d(TAG, "hashTag: ${hashTag}")
 
         httpCall?.signUp(userAgeValue,
                         (activity as SetProfileActivity).userName,

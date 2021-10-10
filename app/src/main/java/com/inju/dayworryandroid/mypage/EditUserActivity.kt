@@ -78,7 +78,7 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
     private var userAge: String = ""
     private var hashTagString: String = ""
     private var profileImage: String = ""
-    private var defaultImage: String = "http://15.165.183.122/default_01.jpg"
+    private var defaultImage: String = "https://hago-bucket.s3.ap-northeast-2.amazonaws.com/default01.png"
     private var userName: String = ""
     private var originUserName: String = ""
 
@@ -150,6 +150,7 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
                         "60~69" -> userAgeValue = 60
                         "70~" -> userAgeValue = 70
                     }
+                    hashTagString = ""
                     for (next in hashTag) {
                         hashTagString += "$next,"
                     }
@@ -181,6 +182,7 @@ class EditUserActivity : AppCompatActivity(), CoroutineScope {
                 "60~69" -> userAgeValue = 60
                 "70~" -> userAgeValue = 70
             }
+            hashTagString = ""
             for (next in hashTag) {
                 hashTagString += "$next,"
             }

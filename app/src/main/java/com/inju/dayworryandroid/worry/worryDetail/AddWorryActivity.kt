@@ -109,6 +109,9 @@ class AddWorryActivity : AppCompatActivity(), CoroutineScope {
         selectImage.visibility = View.GONE
         photoClearImage.visibility = View.GONE
 
+        selectPictureImage.visibility = View.GONE
+        cameraImage.visibility = View.GONE
+
         setViewModel()
         setUpClickListener()
         observeViewModel()

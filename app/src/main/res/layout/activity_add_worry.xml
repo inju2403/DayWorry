@@ -233,8 +233,10 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/contentEditLayout"
         android:layout_width="match_parent"
-        android:layout_height="168dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="16dp"
         android:background="@color/mainNavyColor"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tagLayout">
@@ -246,12 +248,12 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
-            android:ems="10"
-            android:textColorHint="@color/whiteColor"
-            android:hint="고민은 여기에 적어주세요."
-            android:textSize="16sp"
             android:background="@color/mainNavyColor"
+            android:ems="10"
+            android:hint="고민은 여기에 적어주세요."
             android:textColor="@color/superLiteGreyColor"
+            android:textColorHint="@color/whiteColor"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
